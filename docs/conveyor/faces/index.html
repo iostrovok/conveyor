@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#375EAB">
+
+  <title>faces - Go Documentation Server</title>
+
+<link type="text/css" rel="stylesheet" href="../../lib/godoc/style.css">
+
+<script>window.initFuncs = [];</script>
+<script src="../../lib/godoc/jquery.js" defer></script>
+
+
+
+<script>var goVersion = "go1.15.1";</script>
+<script src="../../lib/godoc/godocs.js" defer></script>
+</head>
+<body>
+
+<div id='lowframe' style="position: fixed; bottom: 0; left: 0; height: 0; width: 100%; border-top: thin solid grey; background-color: white; overflow: auto;">
+...
+</div><!-- #lowframe -->
+
+<div id="topbar" class="wide"><div class="container">
+<div class="top-heading" id="heading-wide"><a href="http://127.0.0.1:6060/pkg/">Go Documentation Server</a></div>
+<div class="top-heading" id="heading-narrow"><a href="http://127.0.0.1:6060/pkg/">GoDoc</a></div>
+<a href="index.html#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>
+<form method="GET" action="http://127.0.0.1:6060/search">
+<div id="menu">
+
+<span class="search-box"><input type="search" id="search" name="q" placeholder="Search" aria-label="Search" required><button type="submit"><span><!-- magnifying glass: --><svg width="24" height="24" viewBox="0 0 24 24"><title>submit search</title><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M0 0h24v24H0z" fill="none"/></svg></span></button></span>
+</div>
+</form>
+
+</div></div>
+
+
+
+<div id="page" class="wide">
+<div class="container">
+
+
+  <h1>
+    Package faces
+    <span class="text-muted"></span>
+  </h1>
+
+
+
+
+
+
+
+<div id="nav"></div>
+
+
+<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+	<script>
+	document.ANALYSIS_DATA = null;
+	document.CALLGRAPH = null;
+	</script>
+
+	
+		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "github.com/iostrovok/conveyor/faces"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="index.html#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="index.html#pkg-index" class="indexLink">Index</a></dd>
+			
+			
+				<dd><a href="index.html#pkg-subdirectories">Subdirectories</a></dd>
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				
+				
+			</div>
+		</div>
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+				<dd><a href="index.html#pkg-constants">Constants</a></dd>
+			
+			
+			
+			
+				
+				<dd><a href="index.html#ChanType">type ChanType</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#GiveBirth">type GiveBirth</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#IChan">type IChan</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#IConveyor">type IConveyor</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#IHandler">type IHandler</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#IItem">type IItem</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#IManager">type IManager</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#ITrace">type ITrace</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#IWorker">type IWorker</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#IWorkersCounter">type IWorkersCounter</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#MainCh">type MainCh</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#ManagerType">type ManagerType</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#Name">type Name</a></dd>
+				
+				
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+
+		
+			<h3>Package files</h3>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/chans.go">chans.go</a>
+			
+				<a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/conveyor.go">conveyor.go</a>
+			
+				<a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/handler.go">handler.go</a>
+			
+				<a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/interfaces.go">interfaces.go</a>
+			
+				<a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/item.go">item.go</a>
+			
+				<a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/manager.go">manager.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		
+
+		
+			<h2 id="pkg-constants">Constants</h2>
+			
+				
+				<pre>const (
+    <span id="ChanStdGo">ChanStdGo</span>        = <a href="index.html#ChanType">ChanType</a>(<a href="../../../protobuf/go/nodes/index.html">nodes</a>.<a href="../protobuf/go/nodes/index.html#ChanType_CHAN_STD_GO">ChanType_CHAN_STD_GO</a>)
+    <span id="ChanStack">ChanStack</span>        = <a href="index.html#ChanType">ChanType</a>(<a href="../../../protobuf/go/nodes/index.html">nodes</a>.<a href="../protobuf/go/nodes/index.html#ChanType_CHAN_STACK">ChanType_CHAN_STACK</a>)
+    <span id="ChaPriorityQueue">ChaPriorityQueue</span> = <a href="index.html#ChanType">ChanType</a>(<a href="../../../protobuf/go/nodes/index.html">nodes</a>.<a href="../protobuf/go/nodes/index.html#ChanType_CHAN_PRIORITY_QUEUE">ChanType_CHAN_PRIORITY_QUEUE</a>)
+)</pre>
+			
+		
+		
+		
+		
+			
+			
+			<h2 id="ChanType">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/chans.go?s=145:173#L3">ChanType</a>
+				<a class="permalink" href="index.html#ChanType">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type ChanType <a href="../../../protobuf/go/nodes/index.html">nodes</a>.<a href="../protobuf/go/nodes/index.html#ChanType">ChanType</a></pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="GiveBirth">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/handler.go?s=138:187#L2">GiveBirth</a>
+				<a class="permalink" href="index.html#GiveBirth">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+GiveBirth return new handler. Name sis string which was passed with AddHandler(...)
+</p>
+
+			<pre>type GiveBirth func(name <a href="index.html#Name">Name</a>) (<a href="index.html#IHandler">IHandler</a>, <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>)</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="IChan">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/chans.go?s=364:522#L11">IChan</a>
+				<a class="permalink" href="index.html#IChan">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type IChan interface {
+    <span class="comment">// Return</span>
+    ChanIn() <a href="index.html#MainCh">MainCh</a>
+    ChanOut() <a href="index.html#MainCh">MainCh</a>
+    Push(<a href="index.html#IItem">IItem</a>)
+
+    Close()
+    IsActive() <a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a>
+    Count() <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>
+    Len() <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>
+    Info() *<a href="../../../protobuf/go/nodes/index.html">nodes</a>.<a href="../protobuf/go/nodes/index.html#ChanData">ChanData</a>
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="IConveyor">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/conveyor.go?s=111:1508#L4">IConveyor</a>
+				<a class="permalink" href="index.html#IConveyor">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type IConveyor interface {
+    Start(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>
+    Stop()
+    WaitAndStop()
+
+    <span class="comment">// simple pushing</span>
+    Run(data interface{})
+    RunCtx(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, data interface{})
+    RunTrace(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, tr <a href="index.html#ITrace">ITrace</a>, data interface{})
+
+    RunPriority(data interface{}, priority <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)
+    RunPriorityCtx(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, data interface{}, priority <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)
+    RunPriorityTrace(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, tr <a href="index.html#ITrace">ITrace</a>, data interface{}, priority <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)
+
+    RunRes(data interface{}, priority <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>) (interface{}, <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>)
+    RunResCtx(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, data interface{}, priority <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>) (interface{}, <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>)
+    RunResTrace(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, tr <a href="index.html#ITrace">ITrace</a>, data interface{}, priority <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>) (interface{}, <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>)
+
+    SetDefaultPriority(defaultPriority <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)
+    GetDefaultPriority() <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>
+
+    SetName(name <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>) <a href="index.html#IConveyor">IConveyor</a>
+    GetName() <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>
+
+    SetWorkersCounter(wc <a href="index.html#IWorkersCounter">IWorkersCounter</a>) <a href="index.html#IConveyor">IConveyor</a>
+    AddHandler(manageName <a href="index.html#Name">Name</a>, minCount, maxCount <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>, handler <a href="index.html#GiveBirth">GiveBirth</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>
+    AddErrorHandler(manageName <a href="index.html#Name">Name</a>, minCount, maxCount <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>, handler <a href="index.html#GiveBirth">GiveBirth</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>
+    AddFinalHandler(manageName <a href="index.html#Name">Name</a>, minCount, maxCount <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>, handler <a href="index.html#GiveBirth">GiveBirth</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>
+    Statistic() *<a href="../../../protobuf/go/nodes/index.html">nodes</a>.<a href="../protobuf/go/nodes/index.html#SlaveNodeInfoRequest">SlaveNodeInfoRequest</a>
+    SetTracer(tr <a href="index.html#ITrace">ITrace</a>) <a href="index.html#IConveyor">IConveyor</a>
+
+    <span class="comment">// The period between metric evaluations.</span>
+    <span class="comment">// By default 10 second</span>
+    MetricPeriod(duration <a href="http://127.0.0.1:6060/pkg/time/">time</a>.<a href="http://127.0.0.1:6060/pkg/time/#Duration">Duration</a>) <a href="index.html#IConveyor">IConveyor</a>
+
+    <span class="comment">// Master node is single node for control the conveyor</span>
+    SetMasterNode(addr <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>, masterNodePeriod <a href="http://127.0.0.1:6060/pkg/time/">time</a>.<a href="http://127.0.0.1:6060/pkg/time/#Duration">Duration</a>)
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="IHandler">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/handler.go?s=189:513#L4">IHandler</a>
+				<a class="permalink" href="index.html#IHandler">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type IHandler interface {
+    <span class="comment">// The Start() function is called one time for each handler right after it&#39;s created with GiveBirth().</span>
+    Start(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>
+
+    <span class="comment">// The Run() function is called for processing single item.</span>
+    Run(item <a href="index.html#IItem">IItem</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>
+
+    <span class="comment">// The Stop() function is called before destruction of handler.</span>
+    Stop()
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="IItem">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/item.go?s=51:709#L1">IItem</a>
+				<a class="permalink" href="index.html#IItem">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type IItem interface {
+    GetID() <a href="http://127.0.0.1:6060/pkg/builtin/#int64">int64</a>
+    SetID(id <a href="http://127.0.0.1:6060/pkg/builtin/#int64">int64</a>) <a href="index.html#IItem">IItem</a>
+
+    Get() (data interface{})
+    Set(data interface{}) <a href="index.html#IItem">IItem</a>
+
+    GetContext() <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>
+
+    AddError(err <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>)
+    GetError() <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>
+    CleanError()
+
+    SetSkipToName(label <a href="index.html#Name">Name</a>)
+    GetSkipToName() <a href="index.html#Name">Name</a>
+    CleanSkipToName()
+
+    LogTraceFinishTime(format <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>, a ...interface{})
+    LogTrace(format <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>, a ...interface{})
+
+    Start() <a href="index.html#IItem">IItem</a>
+    Finish()
+
+    <span class="comment">// &gt;&gt;&gt;&gt;&gt;&gt;&gt; Priority Queue Supports</span>
+    GetPriority() <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>
+    SetPriority(priority <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>) <a href="index.html#IItem">IItem</a>
+
+    GetHandlerError() <a href="index.html#Name">Name</a>
+    SetHandlerError(handlerNameWithError <a href="index.html#Name">Name</a>) <a href="index.html#IItem">IItem</a>
+
+    GetLastHandler() <a href="index.html#Name">Name</a>
+    SetLastHandler(handlerName <a href="index.html#Name">Name</a>) <a href="index.html#IItem">IItem</a>
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="IManager">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/manager.go?s=393:962#L19">IManager</a>
+				<a class="permalink" href="index.html#IManager">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type IManager interface {
+    SetHandler(handler <a href="index.html#GiveBirth">GiveBirth</a>) <a href="index.html#IManager">IManager</a>
+
+    Start(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>
+    Stop()
+
+    SetWorkersCounter(wc <a href="index.html#IWorkersCounter">IWorkersCounter</a>) <a href="index.html#IManager">IManager</a>
+    SetChanIn(in <a href="index.html#IChan">IChan</a>) <a href="index.html#IManager">IManager</a>
+    SetChanOut(out <a href="index.html#IChan">IChan</a>) <a href="index.html#IManager">IManager</a>
+    SetChanErr(errCh <a href="index.html#IChan">IChan</a>) <a href="index.html#IManager">IManager</a>
+
+    GetNextManager() <a href="index.html#IManager">IManager</a>
+    SetNextManager(next <a href="index.html#IManager">IManager</a>) <a href="index.html#IManager">IManager</a>
+
+    GetPrevManager() <a href="index.html#IManager">IManager</a>
+    SetPrevManager(previous <a href="index.html#IManager">IManager</a>) <a href="index.html#IManager">IManager</a>
+
+    SetIsLast(isLast <a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a>) <a href="index.html#IManager">IManager</a>
+    IsLast() <a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a>
+
+    SetWaitGroup(wg *<a href="http://127.0.0.1:6060/pkg/sync/">sync</a>.<a href="http://127.0.0.1:6060/pkg/sync/#WaitGroup">WaitGroup</a>) <a href="index.html#IManager">IManager</a>
+
+    MetricPeriod(duration <a href="http://127.0.0.1:6060/pkg/time/">time</a>.<a href="http://127.0.0.1:6060/pkg/time/#Duration">Duration</a>) <a href="index.html#IManager">IManager</a>
+
+    Statistic() *<a href="../../../protobuf/go/nodes/index.html">nodes</a>.<a href="../protobuf/go/nodes/index.html#ManagerData">ManagerData</a>
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="ITrace">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/interfaces.go?s=91:542#L1">ITrace</a>
+				<a class="permalink" href="index.html#ITrace">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type ITrace interface {
+    <span class="comment">// LazyPrintf evaluates its arguments with fmt.Sprintf each time the</span>
+    <span class="comment">// /debug/requests page is rendered. Any memory referenced by a will be</span>
+    <span class="comment">// pinned until the trace is finished and later discarded.</span>
+    LazyPrintf(format <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>, a ...interface{})
+
+    <span class="comment">// SetError declares that this trace resulted in an error.</span>
+    SetError()
+
+    <span class="comment">// Flush will call at the end on cycle</span>
+    Flush()
+
+    <span class="comment">// Flush will call at the end on cycle</span>
+    ForceFlush()
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="IWorker">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/manager.go?s=964:1103#L46">IWorker</a>
+				<a class="permalink" href="index.html#IWorker">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type IWorker interface {
+    Start(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>
+    Stop()
+    SetBorderCond(typ <a href="index.html#ManagerType">ManagerType</a>, isLast <a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a>)
+    Name() <a href="index.html#Name">Name</a>
+    ID() <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="IWorkersCounter">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/manager.go?s=297:391#L15">IWorkersCounter</a>
+				<a class="permalink" href="index.html#IWorkersCounter">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type IWorkersCounter interface {
+    Check(mc *<a href="../../../../../protobuf/go/nodes/index.html">nodes</a>.<a href="../protobuf/go/nodes/index.html#ManagerData">ManagerData</a>) (*<a href="../protobuf/go/nodes/index.html">nodes</a>.<a href="../protobuf/go/nodes/index.html#ManagerAction">ManagerAction</a>, <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>)
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="MainCh">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/chans.go?s=122:144#L2">MainCh</a>
+				<a class="permalink" href="index.html#MainCh">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type MainCh chan <a href="index.html#IItem">IItem</a></pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="ManagerType">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/manager.go?s=119:142#L5">ManagerType</a>
+				<a class="permalink" href="index.html#ManagerType">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type ManagerType <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a></pre>
+
+			
+				
+				<pre>const (
+    <span id="WorkerManagerType">WorkerManagerType</span> <a href="index.html#ManagerType">ManagerType</a> = &#34;worker&#34;
+    <span id="ErrorManagerType">ErrorManagerType</span>  <a href="index.html#ManagerType">ManagerType</a> = &#34;error&#34;
+    <span id="FinalManagerType">FinalManagerType</span>  <a href="index.html#ManagerType">ManagerType</a> = &#34;final&#34;
+)</pre>
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="Name">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/manager.go?s=279:295#L13">Name</a>
+				<a class="permalink" href="index.html#Name">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type Name <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a></pre>
+
+			
+				
+				<pre>const <span id="EmptySkipName">EmptySkipName</span> <a href="index.html#Name">Name</a> = &#34;_$#github.com-iostrovok-conveyor&#34;</pre>
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+	
+
+	
+
+
+
+
+
+	
+	
+		<h2 id="pkg-subdirectories">Subdirectories</h2>
+	
+	<div class="pkg-dir">
+		<table>
+			<tr>
+				<th class="pkg-name">Name</th>
+				<th class="pkg-synopsis">Synopsis</th>
+			</tr>
+
+			
+			<tr>
+				<td colspan="2"><a href="../../conveyor.html">..</a></td>
+			</tr>
+			
+
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 0px;">
+						<a href="mmock/index.html">mmock</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						Package mmock is a generated GoMock package.
+					</td>
+				</tr>
+			
+		</table>
+	</div>
+
+
+
+<div id="footer">
+Build version go1.15.1.<br>
+Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
+the content of this page is licensed under the
+Creative Commons Attribution 3.0 License,
+and code is licensed under a <a href="http://127.0.0.1:6060/LICENSE">BSD license</a>.<br>
+<a href="http://127.0.0.1:6060/doc/tos.html">Terms of Service</a> |
+<a href="http://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
+</div>
+
+</div><!-- .container -->
+</div><!-- #page -->
+</body>
+</html>

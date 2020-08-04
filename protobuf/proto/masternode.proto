@@ -1,0 +1,106 @@
+syntax = "proto3";
+option go_package = "go/nodes";
+
+package nodes;
+
+
+import "google/protobuf/timestamp.proto";
+
+/**
+ * Master node servers
+ */
+service MasterNode {
+    // rpc UpdateNodeInfo sends info about current details of slave node to master node
+    rpc UpdateNodeInfo (SlaveNodeInfoRequest) returns (SimpleResult);
+}
+
+/**
+ * enum Action is a rule of conduct the managers
+ */
+enum Action {
+    NOTHING = 0;
+    UP = 1;
+    DOWN = 2;
+}
+
+/**
+ * enum Type is a type of ruling objects
+ */
+enum Type {
+    TYPE_UNKNOWN = 0;
+    TYPE_WORKER = 1;
+    TYPE_CHANNEL = 2;
+    TYPE_MANAGER = 3;
+    TYPE_NODE = 4;
+    TYPE_CLUSTER = 5;
+}
+
+
+message ManagerAction {
+    Type Type = 1 [json_name = "type"];
+    Action Action = 2 [json_name = "action"];
+    int32 Delta = 3 [json_name = "number"];
+}
+
+/**
+ * To be or not to be
+ */
+message SimpleResult {
+    bool OK = 1 [json_name = "ok"];
+}
+
+/**
+ * enum ChanType  is a type of channel
+ */
+enum ChanType {
+    CHAN_UNKNOWN = 0; // when channel is not is existed
+    CHAN_STD_GO = 1; // core go library channel aka make(chan <type>, length)
+    CHAN_STACK = 2; //
+    CHAN_PRIORITY_QUEUE = 3; //
+}
+
+/**
+ * message ChanData contents the information about single channel
+ */
+message ChanData {
+    bool IsExisted = 1 [json_name = "IsExisted"]; // last manager has false for out channel
+    ChanType Type = 2 [json_name = "Type"]; //  type of channel. last manager has UNKNOWN for out channel
+    uint32 Length = 3 [json_name = "Length"]; // length of channel
+    uint32 NumberInCh = 4 [json_name = "NumberInCh"]; // number of items in channel right now
+    // number of workers which are serving the channel right now. Usually it equals the WorkersData.Number
+    uint32 NumberOfWorkers = 5 [json_name = "NumberOfWorkers"];
+}
+
+/**
+ * message WorkersData contents the information about workers for single manager
+ */
+message WorkersData {
+    uint32 Min = 1 [json_name = "Min"]; // available minimum of number of workers
+    uint32 Max = 2 [json_name = "Max"]; // available maximum of number of workers
+    uint32 Number = 3 [json_name = "Number"]; // total number of workers right now
+    uint32 Active = 4 [json_name = "Active"]; // number of workers these are active right now
+}
+
+/**
+ * message ManagerData contents the information about single manager
+ */
+message ManagerData {
+    string Name = 1 [json_name = "Name"];
+    string ID = 2 [json_name = "ID"];
+    google.protobuf.Timestamp Created = 3 [json_name = "Created"]; // time of getting into
+    uint64 Delta = 4 [json_name = "Delta"]; // number of microseconds from last getting into
+    WorkersData Workers = 5 [json_name = "Workers"];
+    repeated ChanData ChanBefore = 6 [json_name = "ChanBefore"];
+    repeated ChanData ChanAfter = 7 [json_name = "ChanAfter"];
+}
+
+/**
+ * SlaveNodeInfoRequest is a request with slave node data to master node
+ */
+message SlaveNodeInfoRequest {
+    string ClusterID = 1 [json_name = "ClusterID"]; // unique name of cluster. No specific info
+    string NodeID = 2 [json_name = "NodeID"]; // unique name of node. No specific info
+    repeated ManagerData ManagerData = 3 [json_name = "ManagerData"]; //
+    repeated ManagerData FinalManagerData = 4 [json_name = "FinalManagerData"]; //
+    repeated ManagerData ErrorManagerData = 5 [json_name = "ErrorManagerData"]; //
+}

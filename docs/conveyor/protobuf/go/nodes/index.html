@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#375EAB">
+
+  <title>nodes - Go Documentation Server</title>
+
+<link type="text/css" rel="stylesheet" href="../../../../lib/godoc/style.css">
+
+<script>window.initFuncs = [];</script>
+<script src="../../../../lib/godoc/jquery.js" defer></script>
+
+
+
+<script>var goVersion = "go1.15.1";</script>
+<script src="../../../../lib/godoc/godocs.js" defer></script>
+</head>
+<body>
+
+<div id='lowframe' style="position: fixed; bottom: 0; left: 0; height: 0; width: 100%; border-top: thin solid grey; background-color: white; overflow: auto;">
+...
+</div><!-- #lowframe -->
+
+<div id="topbar" class="wide"><div class="container">
+<div class="top-heading" id="heading-wide"><a href="http://127.0.0.1:6060/pkg/">Go Documentation Server</a></div>
+<div class="top-heading" id="heading-narrow"><a href="http://127.0.0.1:6060/pkg/">GoDoc</a></div>
+<a href="index.html#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>
+<form method="GET" action="http://127.0.0.1:6060/search">
+<div id="menu">
+
+<span class="search-box"><input type="search" id="search" name="q" placeholder="Search" aria-label="Search" required><button type="submit"><span><!-- magnifying glass: --><svg width="24" height="24" viewBox="0 0 24 24"><title>submit search</title><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M0 0h24v24H0z" fill="none"/></svg></span></button></span>
+</div>
+</form>
+
+</div></div>
+
+
+
+<div id="page" class="wide">
+<div class="container">
+
+
+  <h1>
+    Package nodes
+    <span class="text-muted"></span>
+  </h1>
+
+
+
+
+
+
+
+<div id="nav"></div>
+
+
+<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+	<script>
+	document.ANALYSIS_DATA = null;
+	document.CALLGRAPH = null;
+	</script>
+
+	
+		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "github.com/iostrovok/conveyor/protobuf/go/nodes"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="index.html#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="index.html#pkg-index" class="indexLink">Index</a></dd>
+			
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				
+				
+			</div>
+		</div>
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+			
+				<dd><a href="index.html#pkg-variables">Variables</a></dd>
+			
+			
+				
+				<dd><a href="index.html#RegisterMasterNodeServer">func RegisterMasterNodeServer(s *grpc.Server, srv MasterNodeServer)</a></dd>
+			
+			
+				
+				<dd><a href="index.html#Action">type Action</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Action.Descriptor">func (Action) Descriptor() protoreflect.EnumDescriptor</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Action.Enum">func (x Action) Enum() *Action</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Action.EnumDescriptor">func (Action) EnumDescriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Action.Number">func (x Action) Number() protoreflect.EnumNumber</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Action.String">func (x Action) String() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Action.Type">func (Action) Type() protoreflect.EnumType</a></dd>
+				
+			
+				
+				<dd><a href="index.html#ChanData">type ChanData</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ChanData.Descriptor">func (*ChanData) Descriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ChanData.GetIsExisted">func (x *ChanData) GetIsExisted() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ChanData.GetLength">func (x *ChanData) GetLength() uint32</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ChanData.GetNumberInCh">func (x *ChanData) GetNumberInCh() uint32</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ChanData.GetNumberOfWorkers">func (x *ChanData) GetNumberOfWorkers() uint32</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ChanData.GetType">func (x *ChanData) GetType() ChanType</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ChanData.ProtoMessage">func (*ChanData) ProtoMessage()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ChanData.ProtoReflect">func (x *ChanData) ProtoReflect() protoreflect.Message</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ChanData.Reset">func (x *ChanData) Reset()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ChanData.String">func (x *ChanData) String() string</a></dd>
+				
+			
+				
+				<dd><a href="index.html#ChanType">type ChanType</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ChanType.Descriptor">func (ChanType) Descriptor() protoreflect.EnumDescriptor</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ChanType.Enum">func (x ChanType) Enum() *ChanType</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ChanType.EnumDescriptor">func (ChanType) EnumDescriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ChanType.Number">func (x ChanType) Number() protoreflect.EnumNumber</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ChanType.String">func (x ChanType) String() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ChanType.Type">func (ChanType) Type() protoreflect.EnumType</a></dd>
+				
+			
+				
+				<dd><a href="index.html#ManagerAction">type ManagerAction</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ManagerAction.Descriptor">func (*ManagerAction) Descriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ManagerAction.GetAction">func (x *ManagerAction) GetAction() Action</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ManagerAction.GetDelta">func (x *ManagerAction) GetDelta() int32</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ManagerAction.GetType">func (x *ManagerAction) GetType() Type</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ManagerAction.ProtoMessage">func (*ManagerAction) ProtoMessage()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ManagerAction.ProtoReflect">func (x *ManagerAction) ProtoReflect() protoreflect.Message</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ManagerAction.Reset">func (x *ManagerAction) Reset()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ManagerAction.String">func (x *ManagerAction) String() string</a></dd>
+				
+			
+				
+				<dd><a href="index.html#ManagerData">type ManagerData</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ManagerData.Descriptor">func (*ManagerData) Descriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ManagerData.GetChanAfter">func (x *ManagerData) GetChanAfter() []*ChanData</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ManagerData.GetChanBefore">func (x *ManagerData) GetChanBefore() []*ChanData</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ManagerData.GetCreated">func (x *ManagerData) GetCreated() *timestamp.Timestamp</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ManagerData.GetDelta">func (x *ManagerData) GetDelta() uint64</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ManagerData.GetID">func (x *ManagerData) GetID() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ManagerData.GetName">func (x *ManagerData) GetName() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ManagerData.GetWorkers">func (x *ManagerData) GetWorkers() *WorkersData</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ManagerData.ProtoMessage">func (*ManagerData) ProtoMessage()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ManagerData.ProtoReflect">func (x *ManagerData) ProtoReflect() protoreflect.Message</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ManagerData.Reset">func (x *ManagerData) Reset()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ManagerData.String">func (x *ManagerData) String() string</a></dd>
+				
+			
+				
+				<dd><a href="index.html#MasterNodeClient">type MasterNodeClient</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NewMasterNodeClient">func NewMasterNodeClient(cc grpc.ClientConnInterface) MasterNodeClient</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#MasterNodeServer">type MasterNodeServer</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#SimpleResult">type SimpleResult</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SimpleResult.Descriptor">func (*SimpleResult) Descriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SimpleResult.GetOK">func (x *SimpleResult) GetOK() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SimpleResult.ProtoMessage">func (*SimpleResult) ProtoMessage()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SimpleResult.ProtoReflect">func (x *SimpleResult) ProtoReflect() protoreflect.Message</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SimpleResult.Reset">func (x *SimpleResult) Reset()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SimpleResult.String">func (x *SimpleResult) String() string</a></dd>
+				
+			
+				
+				<dd><a href="index.html#SlaveNodeInfoRequest">type SlaveNodeInfoRequest</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SlaveNodeInfoRequest.Descriptor">func (*SlaveNodeInfoRequest) Descriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SlaveNodeInfoRequest.GetClusterID">func (x *SlaveNodeInfoRequest) GetClusterID() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SlaveNodeInfoRequest.GetErrorManagerData">func (x *SlaveNodeInfoRequest) GetErrorManagerData() []*ManagerData</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SlaveNodeInfoRequest.GetFinalManagerData">func (x *SlaveNodeInfoRequest) GetFinalManagerData() []*ManagerData</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SlaveNodeInfoRequest.GetManagerData">func (x *SlaveNodeInfoRequest) GetManagerData() []*ManagerData</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SlaveNodeInfoRequest.GetNodeID">func (x *SlaveNodeInfoRequest) GetNodeID() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SlaveNodeInfoRequest.ProtoMessage">func (*SlaveNodeInfoRequest) ProtoMessage()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SlaveNodeInfoRequest.ProtoReflect">func (x *SlaveNodeInfoRequest) ProtoReflect() protoreflect.Message</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SlaveNodeInfoRequest.Reset">func (x *SlaveNodeInfoRequest) Reset()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SlaveNodeInfoRequest.String">func (x *SlaveNodeInfoRequest) String() string</a></dd>
+				
+			
+				
+				<dd><a href="index.html#Type">type Type</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Type.Descriptor">func (Type) Descriptor() protoreflect.EnumDescriptor</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Type.Enum">func (x Type) Enum() *Type</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Type.EnumDescriptor">func (Type) EnumDescriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Type.Number">func (x Type) Number() protoreflect.EnumNumber</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Type.String">func (x Type) String() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Type.Type">func (Type) Type() protoreflect.EnumType</a></dd>
+				
+			
+				
+				<dd><a href="index.html#UnimplementedMasterNodeServer">type UnimplementedMasterNodeServer</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#UnimplementedMasterNodeServer.UpdateNodeInfo">func (*UnimplementedMasterNodeServer) UpdateNodeInfo(context.Context, *SlaveNodeInfoRequest) (*SimpleResult, error)</a></dd>
+				
+			
+				
+				<dd><a href="index.html#WorkersData">type WorkersData</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#WorkersData.Descriptor">func (*WorkersData) Descriptor() ([]byte, []int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#WorkersData.GetActive">func (x *WorkersData) GetActive() uint32</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#WorkersData.GetMax">func (x *WorkersData) GetMax() uint32</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#WorkersData.GetMin">func (x *WorkersData) GetMin() uint32</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#WorkersData.GetNumber">func (x *WorkersData) GetNumber() uint32</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#WorkersData.ProtoMessage">func (*WorkersData) ProtoMessage()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#WorkersData.ProtoReflect">func (x *WorkersData) ProtoReflect() protoreflect.Message</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#WorkersData.Reset">func (x *WorkersData) Reset()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#WorkersData.String">func (x *WorkersData) String() string</a></dd>
+				
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+
+		
+			<h3>Package files</h3>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go">masternode.pb.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		
+
+		
+		
+			<h2 id="pkg-variables">Variables</h2>
+			
+				<p>
+Enum value maps for Action.
+</p>
+
+				<pre>var (
+    <span id="Action_name">Action_name</span> = map[<a href="http://127.0.0.1:6060/pkg/builtin/#int32">int32</a>]<a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>{
+        0: &#34;NOTHING&#34;,
+        1: &#34;UP&#34;,
+        2: &#34;DOWN&#34;,
+    }
+    <span id="Action_value">Action_value</span> = map[<a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>]<a href="http://127.0.0.1:6060/pkg/builtin/#int32">int32</a>{
+        &#34;NOTHING&#34;: 0,
+        &#34;UP&#34;:      1,
+        &#34;DOWN&#34;:    2,
+    }
+)</pre>
+			
+				<p>
+Enum value maps for Type.
+</p>
+
+				<pre>var (
+    <span id="Type_name">Type_name</span> = map[<a href="http://127.0.0.1:6060/pkg/builtin/#int32">int32</a>]<a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>{
+        0: &#34;TYPE_UNKNOWN&#34;,
+        1: &#34;TYPE_WORKER&#34;,
+        2: &#34;TYPE_CHANNEL&#34;,
+        3: &#34;TYPE_MANAGER&#34;,
+        4: &#34;TYPE_NODE&#34;,
+        5: &#34;TYPE_CLUSTER&#34;,
+    }
+    <span id="Type_value">Type_value</span> = map[<a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>]<a href="http://127.0.0.1:6060/pkg/builtin/#int32">int32</a>{
+        &#34;TYPE_UNKNOWN&#34;: 0,
+        &#34;TYPE_WORKER&#34;:  1,
+        &#34;TYPE_CHANNEL&#34;: 2,
+        &#34;TYPE_MANAGER&#34;: 3,
+        &#34;TYPE_NODE&#34;:    4,
+        &#34;TYPE_CLUSTER&#34;: 5,
+    }
+)</pre>
+			
+				<p>
+Enum value maps for ChanType.
+</p>
+
+				<pre>var (
+    <span id="ChanType_name">ChanType_name</span> = map[<a href="http://127.0.0.1:6060/pkg/builtin/#int32">int32</a>]<a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>{
+        0: &#34;CHAN_UNKNOWN&#34;,
+        1: &#34;CHAN_STD_GO&#34;,
+        2: &#34;CHAN_STACK&#34;,
+        3: &#34;CHAN_PRIORITY_QUEUE&#34;,
+    }
+    <span id="ChanType_value">ChanType_value</span> = map[<a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>]<a href="http://127.0.0.1:6060/pkg/builtin/#int32">int32</a>{
+        &#34;CHAN_UNKNOWN&#34;:        0,
+        &#34;CHAN_STD_GO&#34;:         1,
+        &#34;CHAN_STACK&#34;:          2,
+        &#34;CHAN_PRIORITY_QUEUE&#34;: 3,
+    }
+)</pre>
+			
+				
+				<pre>var <span id="File_protobuf_proto_masternode_proto">File_protobuf_proto_masternode_proto</span> <a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/#FileDescriptor">FileDescriptor</a></pre>
+			
+		
+		
+			
+			
+			<h2 id="RegisterMasterNodeServer">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=32193:32260#L917">RegisterMasterNodeServer</a>
+				<a class="permalink" href="index.html#RegisterMasterNodeServer">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func RegisterMasterNodeServer(s *<a href="http://127.0.0.1:6060/pkg/google.golang.org/grpc/">grpc</a>.<a href="http://127.0.0.1:6060/pkg/google.golang.org/grpc/#Server">Server</a>, srv <a href="index.html#MasterNodeServer">MasterNodeServer</a>)</pre>
+			
+			
+			
+
+		
+		
+			
+			
+			<h2 id="Action">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=1031:1048#L25">Action</a>
+				<a class="permalink" href="index.html#Action">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+*
+enum Action is a rule of conduct the managers
+</p>
+
+			<pre>type Action <a href="http://127.0.0.1:6060/pkg/builtin/#int32">int32</a></pre>
+
+			
+				
+				<pre>const (
+    <span id="Action_NOTHING">Action_NOTHING</span> <a href="index.html#Action">Action</a> = 0
+    <span id="Action_UP">Action_UP</span>      <a href="index.html#Action">Action</a> = 1
+    <span id="Action_DOWN">Action_DOWN</span>    <a href="index.html#Action">Action</a> = 2
+)</pre>
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="Action.Descriptor">func (Action) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=1529:1583#L57">Descriptor</a>
+					<a class="permalink" href="index.html#Action.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (<a href="index.html#Action">Action</a>) Descriptor() <a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/#EnumDescriptor">EnumDescriptor</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Action.Enum">func (Action) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=1343:1373#L47">Enum</a>
+					<a class="permalink" href="index.html#Action.Enum">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x <a href="index.html#Action">Action</a>) Enum() *<a href="index.html#Action">Action</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Action.EnumDescriptor">func (Action) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=1902:1948#L70">EnumDescriptor</a>
+					<a class="permalink" href="index.html#Action.EnumDescriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (<a href="index.html#Action">Action</a>) EnumDescriptor() ([]<a href="http://127.0.0.1:6060/pkg/builtin/#byte">byte</a>, []<a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)</pre>
+				<p>
+Deprecated: Use Action.Descriptor instead.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Action.Number">func (Action) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=1767:1815#L65">Number</a>
+					<a class="permalink" href="index.html#Action.Number">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x <a href="index.html#Action">Action</a>) Number() <a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/#EnumNumber">EnumNumber</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Action.String">func (Action) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=1415:1446#L53">String</a>
+					<a class="permalink" href="index.html#Action.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x <a href="index.html#Action">Action</a>) String() <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Action.Type">func (Action) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=1660:1702#L61">Type</a>
+					<a class="permalink" href="index.html#Action.Type">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (<a href="index.html#Action">Action</a>) Type() <a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/#EnumType">EnumType</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="ChanData">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=7549:8490#L302">ChanData</a>
+				<a class="permalink" href="index.html#ChanData">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+*
+message ChanData contents the information about single channel
+</p>
+
+			<pre>type ChanData struct {
+<span id="ChanData.IsExisted"></span>    IsExisted  <a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a>     `protobuf:&#34;varint,1,opt,name=IsExisted,proto3&#34; json:&#34;IsExisted,omitempty&#34;`           <span class="comment">// last manager has false for out channel</span>
+<span id="ChanData.Type"></span>    Type       <a href="index.html#ChanType">ChanType</a> `protobuf:&#34;varint,2,opt,name=Type,proto3,enum=nodes.ChanType&#34; json:&#34;Type,omitempty&#34;` <span class="comment">//  type of channel. last manager has UNKNOWN for out channel</span>
+<span id="ChanData.Length"></span>    Length     <a href="http://127.0.0.1:6060/pkg/builtin/#uint32">uint32</a>   `protobuf:&#34;varint,3,opt,name=Length,proto3&#34; json:&#34;Length,omitempty&#34;`                 <span class="comment">// length of channel</span>
+<span id="ChanData.NumberInCh"></span>    NumberInCh <a href="http://127.0.0.1:6060/pkg/builtin/#uint32">uint32</a>   `protobuf:&#34;varint,4,opt,name=NumberInCh,proto3&#34; json:&#34;NumberInCh,omitempty&#34;`         <span class="comment">// number of items in channel right now</span>
+    <span class="comment">// number of workers which are serving the channel right now. Usually it equals the WorkersData.Number</span>
+<span id="ChanData.NumberOfWorkers"></span>    NumberOfWorkers <a href="http://127.0.0.1:6060/pkg/builtin/#uint32">uint32</a> `protobuf:&#34;varint,5,opt,name=NumberOfWorkers,proto3&#34; json:&#34;NumberOfWorkers,omitempty&#34;`
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="ChanData.Descriptor">func (*ChanData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=9212:9257#L343">Descriptor</a>
+					<a class="permalink" href="index.html#ChanData.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="index.html#ChanData">ChanData</a>) Descriptor() ([]<a href="http://127.0.0.1:6060/pkg/builtin/#byte">byte</a>, []<a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)</pre>
+				<p>
+Deprecated: Use ChanData.ProtoReflect.Descriptor instead.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="ChanData.GetIsExisted">func (*ChanData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=9332:9370#L347">GetIsExisted</a>
+					<a class="permalink" href="index.html#ChanData.GetIsExisted">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ChanData">ChanData</a>) GetIsExisted() <a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ChanData.GetLength">func (*ChanData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=9536:9573#L361">GetLength</a>
+					<a class="permalink" href="index.html#ChanData.GetLength">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ChanData">ChanData</a>) GetLength() <a href="http://127.0.0.1:6060/pkg/builtin/#uint32">uint32</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ChanData.GetNumberInCh">func (*ChanData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=9625:9666#L368">GetNumberInCh</a>
+					<a class="permalink" href="index.html#ChanData.GetNumberInCh">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ChanData">ChanData</a>) GetNumberInCh() <a href="http://127.0.0.1:6060/pkg/builtin/#uint32">uint32</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ChanData.GetNumberOfWorkers">func (*ChanData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=9722:9768#L375">GetNumberOfWorkers</a>
+					<a class="permalink" href="index.html#ChanData.GetNumberOfWorkers">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ChanData">ChanData</a>) GetNumberOfWorkers() <a href="http://127.0.0.1:6060/pkg/builtin/#uint32">uint32</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ChanData.GetType">func (*ChanData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=9429:9466#L354">GetType</a>
+					<a class="permalink" href="index.html#ChanData.GetType">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ChanData">ChanData</a>) GetType() <a href="index.html#ChanType">ChanType</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ChanData.ProtoMessage">func (*ChanData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=8794:8825#L328">ProtoMessage</a>
+					<a class="permalink" href="index.html#ChanData.ProtoMessage">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="index.html#ChanData">ChanData</a>) ProtoMessage()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ChanData.ProtoReflect">func (*ChanData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=8830:8884#L330">ProtoReflect</a>
+					<a class="permalink" href="index.html#ChanData.ProtoReflect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ChanData">ChanData</a>) ProtoReflect() <a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ChanData.Reset">func (*ChanData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=8492:8518#L315">Reset</a>
+					<a class="permalink" href="index.html#ChanData.Reset">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ChanData">ChanData</a>) Reset()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ChanData.String">func (*ChanData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=8715:8749#L324">String</a>
+					<a class="permalink" href="index.html#ChanData.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ChanData">ChanData</a>) String() <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="ChanType">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=3324:3343#L136">ChanType</a>
+				<a class="permalink" href="index.html#ChanType">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+*
+enum ChanType  is a type of channel
+</p>
+
+			<pre>type ChanType <a href="http://127.0.0.1:6060/pkg/builtin/#int32">int32</a></pre>
+
+			
+				
+				<pre>const (
+    <span id="ChanType_CHAN_UNKNOWN">ChanType_CHAN_UNKNOWN</span>        <a href="index.html#ChanType">ChanType</a> = 0 <span class="comment">// when channel is not is existed</span>
+    <span id="ChanType_CHAN_STD_GO">ChanType_CHAN_STD_GO</span>         <a href="index.html#ChanType">ChanType</a> = 1 <span class="comment">// core go library channel aka make(chan &lt;type&gt;, length)</span>
+    <span id="ChanType_CHAN_STACK">ChanType_CHAN_STACK</span>          <a href="index.html#ChanType">ChanType</a> = 2 <span class="comment">//</span>
+    <span id="ChanType_CHAN_PRIORITY_QUEUE">ChanType_CHAN_PRIORITY_QUEUE</span> <a href="index.html#ChanType">ChanType</a> = 3 <span class="comment">//</span>
+)</pre>
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="ChanType.Descriptor">func (ChanType) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=4138:4194#L171">Descriptor</a>
+					<a class="permalink" href="index.html#ChanType.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (<a href="index.html#ChanType">ChanType</a>) Descriptor() <a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/#EnumDescriptor">EnumDescriptor</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ChanType.Enum">func (ChanType) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=3944:3978#L161">Enum</a>
+					<a class="permalink" href="index.html#ChanType.Enum">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x <a href="index.html#ChanType">ChanType</a>) Enum() *<a href="index.html#ChanType">ChanType</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ChanType.EnumDescriptor">func (ChanType) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=4519:4567#L184">EnumDescriptor</a>
+					<a class="permalink" href="index.html#ChanType.EnumDescriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (<a href="index.html#ChanType">ChanType</a>) EnumDescriptor() ([]<a href="http://127.0.0.1:6060/pkg/builtin/#byte">byte</a>, []<a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)</pre>
+				<p>
+Deprecated: Use ChanType.Descriptor instead.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="ChanType.Number">func (ChanType) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=4380:4430#L179">Number</a>
+					<a class="permalink" href="index.html#ChanType.Number">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x <a href="index.html#ChanType">ChanType</a>) Number() <a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/#EnumNumber">EnumNumber</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ChanType.String">func (ChanType) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=4022:4055#L167">String</a>
+					<a class="permalink" href="index.html#ChanType.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x <a href="index.html#ChanType">ChanType</a>) String() <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ChanType.Type">func (ChanType) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=4271:4315#L175">Type</a>
+					<a class="permalink" href="index.html#ChanType.Type">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (<a href="index.html#ChanType">ChanType</a>) Type() <a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/#EnumType">EnumType</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="ManagerAction">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=4642:5098#L188">ManagerAction</a>
+				<a class="permalink" href="index.html#ManagerAction">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type ManagerAction struct {
+<span id="ManagerAction.Type"></span>    Type   <a href="index.html#Type">Type</a>   `protobuf:&#34;varint,1,opt,name=Type,json=type,proto3,enum=nodes.Type&#34; json:&#34;Type,omitempty&#34;`
+<span id="ManagerAction.Action"></span>    Action <a href="index.html#Action">Action</a> `protobuf:&#34;varint,2,opt,name=Action,json=action,proto3,enum=nodes.Action&#34; json:&#34;Action,omitempty&#34;`
+<span id="ManagerAction.Delta"></span>    Delta  <a href="http://127.0.0.1:6060/pkg/builtin/#int32">int32</a>  `protobuf:&#34;varint,3,opt,name=Delta,json=number,proto3&#34; json:&#34;Delta,omitempty&#34;`
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="ManagerAction.Descriptor">func (*ManagerAction) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=5850:5900#L226">Descriptor</a>
+					<a class="permalink" href="index.html#ManagerAction.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="index.html#ManagerAction">ManagerAction</a>) Descriptor() ([]<a href="http://127.0.0.1:6060/pkg/builtin/#byte">byte</a>, []<a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)</pre>
+				<p>
+Deprecated: Use ManagerAction.ProtoReflect.Descriptor instead.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="ManagerAction.GetAction">func (*ManagerAction) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=6079:6121#L237">GetAction</a>
+					<a class="permalink" href="index.html#ManagerAction.GetAction">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ManagerAction">ManagerAction</a>) GetAction() <a href="index.html#Action">Action</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ManagerAction.GetDelta">func (*ManagerAction) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=6186:6226#L244">GetDelta</a>
+					<a class="permalink" href="index.html#ManagerAction.GetDelta">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ManagerAction">ManagerAction</a>) GetDelta() <a href="http://127.0.0.1:6060/pkg/builtin/#int32">int32</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ManagerAction.GetType">func (*ManagerAction) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=5975:6013#L230">GetType</a>
+					<a class="permalink" href="index.html#ManagerAction.GetType">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ManagerAction">ManagerAction</a>) GetType() <a href="index.html#Type">Type</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ManagerAction.ProtoMessage">func (*ManagerAction) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=5417:5453#L211">ProtoMessage</a>
+					<a class="permalink" href="index.html#ManagerAction.ProtoMessage">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="index.html#ManagerAction">ManagerAction</a>) ProtoMessage()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ManagerAction.ProtoReflect">func (*ManagerAction) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=5458:5517#L213">ProtoReflect</a>
+					<a class="permalink" href="index.html#ManagerAction.ProtoReflect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ManagerAction">ManagerAction</a>) ProtoReflect() <a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ManagerAction.Reset">func (*ManagerAction) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=5100:5131#L198">Reset</a>
+					<a class="permalink" href="index.html#ManagerAction.Reset">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ManagerAction">ManagerAction</a>) Reset()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ManagerAction.String">func (*ManagerAction) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=5333:5372#L207">String</a>
+					<a class="permalink" href="index.html#ManagerAction.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ManagerAction">ManagerAction</a>) String() <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="ManagerData">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=11851:12779#L457">ManagerData</a>
+				<a class="permalink" href="index.html#ManagerData">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+*
+message ManagerData contents the information about single manager
+</p>
+
+			<pre>type ManagerData struct {
+<span id="ManagerData.Name"></span>    Name       <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>               `protobuf:&#34;bytes,1,opt,name=Name,proto3&#34; json:&#34;Name,omitempty&#34;`
+<span id="ManagerData.ID"></span>    ID         <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>               `protobuf:&#34;bytes,2,opt,name=ID,proto3&#34; json:&#34;ID,omitempty&#34;`
+<span id="ManagerData.Created"></span>    Created    *<a href="http://127.0.0.1:6060/pkg/github.com/golang/protobuf/ptypes/timestamp/">timestamp</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/protobuf/ptypes/timestamp/#Timestamp">Timestamp</a> `protobuf:&#34;bytes,3,opt,name=Created,proto3&#34; json:&#34;Created,omitempty&#34;` <span class="comment">// time of getting into</span>
+<span id="ManagerData.Delta"></span>    Delta      <a href="http://127.0.0.1:6060/pkg/builtin/#uint64">uint64</a>               `protobuf:&#34;varint,4,opt,name=Delta,proto3&#34; json:&#34;Delta,omitempty&#34;`    <span class="comment">// number of microseconds from last getting into</span>
+<span id="ManagerData.Workers"></span>    Workers    *<a href="index.html#WorkersData">WorkersData</a>         `protobuf:&#34;bytes,5,opt,name=Workers,proto3&#34; json:&#34;Workers,omitempty&#34;`
+<span id="ManagerData.ChanBefore"></span>    ChanBefore []*<a href="index.html#ChanData">ChanData</a>          `protobuf:&#34;bytes,6,rep,name=ChanBefore,proto3&#34; json:&#34;ChanBefore,omitempty&#34;`
+<span id="ManagerData.ChanAfter"></span>    ChanAfter  []*<a href="index.html#ChanData">ChanData</a>          `protobuf:&#34;bytes,7,rep,name=ChanAfter,proto3&#34; json:&#34;ChanAfter,omitempty&#34;`
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="ManagerData.Descriptor">func (*ManagerData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=13519:13567#L499">Descriptor</a>
+					<a class="permalink" href="index.html#ManagerData.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="index.html#ManagerData">ManagerData</a>) Descriptor() ([]<a href="http://127.0.0.1:6060/pkg/builtin/#byte">byte</a>, []<a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)</pre>
+				<p>
+Deprecated: Use ManagerData.ProtoReflect.Descriptor instead.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="ManagerData.GetChanAfter">func (*ManagerData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=14225:14273#L545">GetChanAfter</a>
+					<a class="permalink" href="index.html#ManagerData.GetChanAfter">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ManagerData">ManagerData</a>) GetChanAfter() []*<a href="index.html#ChanData">ChanData</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ManagerData.GetChanBefore">func (*ManagerData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=14118:14167#L538">GetChanBefore</a>
+					<a class="permalink" href="index.html#ManagerData.GetChanBefore">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ManagerData">ManagerData</a>) GetChanBefore() []*<a href="index.html#ChanData">ChanData</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ManagerData.GetCreated">func (*ManagerData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=13816:13871#L517">GetCreated</a>
+					<a class="permalink" href="index.html#ManagerData.GetCreated">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ManagerData">ManagerData</a>) GetCreated() *<a href="http://127.0.0.1:6060/pkg/github.com/golang/protobuf/ptypes/timestamp/">timestamp</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/protobuf/ptypes/timestamp/#Timestamp">Timestamp</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ManagerData.GetDelta">func (*ManagerData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=13926:13965#L524">GetDelta</a>
+					<a class="permalink" href="index.html#ManagerData.GetDelta">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ManagerData">ManagerData</a>) GetDelta() <a href="http://127.0.0.1:6060/pkg/builtin/#uint64">uint64</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ManagerData.GetID">func (*ManagerData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=13731:13767#L510">GetID</a>
+					<a class="permalink" href="index.html#ManagerData.GetID">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ManagerData">ManagerData</a>) GetID() <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ManagerData.GetName">func (*ManagerData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=13642:13680#L503">GetName</a>
+					<a class="permalink" href="index.html#ManagerData.GetName">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ManagerData">ManagerData</a>) GetName() <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ManagerData.GetWorkers">func (*ManagerData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=14016:14063#L531">GetWorkers</a>
+					<a class="permalink" href="index.html#ManagerData.GetWorkers">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ManagerData">ManagerData</a>) GetWorkers() *<a href="index.html#WorkersData">WorkersData</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ManagerData.ProtoMessage">func (*ManagerData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=13092:13126#L484">ProtoMessage</a>
+					<a class="permalink" href="index.html#ManagerData.ProtoMessage">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="index.html#ManagerData">ManagerData</a>) ProtoMessage()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ManagerData.ProtoReflect">func (*ManagerData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=13131:13188#L486">ProtoReflect</a>
+					<a class="permalink" href="index.html#ManagerData.ProtoReflect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ManagerData">ManagerData</a>) ProtoReflect() <a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ManagerData.Reset">func (*ManagerData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=12781:12810#L471">Reset</a>
+					<a class="permalink" href="index.html#ManagerData.Reset">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ManagerData">ManagerData</a>) Reset()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="ManagerData.String">func (*ManagerData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=13010:13047#L480">String</a>
+					<a class="permalink" href="index.html#ManagerData.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#ManagerData">ManagerData</a>) String() <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="MasterNodeClient">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=30876:31107#L881">MasterNodeClient</a>
+				<a class="permalink" href="index.html#MasterNodeClient">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+MasterNodeClient is the client API for MasterNode service.
+</p>
+<p>
+For semantics around ctx use and closing/ending streaming RPCs, please refer to <a href="https://godoc.org/google.golang.org/grpc#ClientConn.NewStream">https://godoc.org/google.golang.org/grpc#ClientConn.NewStream</a>.
+</p>
+
+			<pre>type MasterNodeClient interface {
+    <span class="comment">// rpc UpdateNodeInfo sends info about current details of slave node to master node</span>
+    UpdateNodeInfo(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, in *<a href="index.html#SlaveNodeInfoRequest">SlaveNodeInfoRequest</a>, opts ...<a href="http://127.0.0.1:6060/pkg/google.golang.org/grpc/">grpc</a>.<a href="http://127.0.0.1:6060/pkg/google.golang.org/grpc/#CallOption">CallOption</a>) (*<a href="index.html#SimpleResult">SimpleResult</a>, <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>)
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="NewMasterNodeClient">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=31172:31242#L890">NewMasterNodeClient</a>
+					<a class="permalink" href="index.html#NewMasterNodeClient">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewMasterNodeClient(cc <a href="http://127.0.0.1:6060/pkg/google.golang.org/grpc/">grpc</a>.<a href="http://127.0.0.1:6060/pkg/google.golang.org/grpc/#ClientConnInterface">ClientConnInterface</a>) <a href="index.html#MasterNodeClient">MasterNodeClient</a></pre>
+				
+				
+				
+			
+
+			
+		
+			
+			
+			<h2 id="MasterNodeServer">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=31642:31841#L904">MasterNodeServer</a>
+				<a class="permalink" href="index.html#MasterNodeServer">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+MasterNodeServer is the server API for MasterNode service.
+</p>
+
+			<pre>type MasterNodeServer interface {
+    <span class="comment">// rpc UpdateNodeInfo sends info about current details of slave node to master node</span>
+    UpdateNodeInfo(<a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, *<a href="index.html#SlaveNodeInfoRequest">SlaveNodeInfoRequest</a>) (*<a href="index.html#SimpleResult">SimpleResult</a>, <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>)
+}</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="SimpleResult">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=6303:6522#L253">SimpleResult</a>
+				<a class="permalink" href="index.html#SimpleResult">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+*
+To be or not to be
+</p>
+
+			<pre>type SimpleResult struct {
+<span id="SimpleResult.OK"></span>    OK <a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a> `protobuf:&#34;varint,1,opt,name=OK,json=ok,proto3&#34; json:&#34;OK,omitempty&#34;`
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="SimpleResult.Descriptor">func (*SimpleResult) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=7268:7317#L289">Descriptor</a>
+					<a class="permalink" href="index.html#SimpleResult.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="index.html#SimpleResult">SimpleResult</a>) Descriptor() ([]<a href="http://127.0.0.1:6060/pkg/builtin/#byte">byte</a>, []<a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)</pre>
+				<p>
+Deprecated: Use SimpleResult.ProtoReflect.Descriptor instead.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="SimpleResult.GetOK">func (*SimpleResult) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=7392:7427#L293">GetOK</a>
+					<a class="permalink" href="index.html#SimpleResult.GetOK">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#SimpleResult">SimpleResult</a>) GetOK() <a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="SimpleResult.ProtoMessage">func (*SimpleResult) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=6838:6873#L274">ProtoMessage</a>
+					<a class="permalink" href="index.html#SimpleResult.ProtoMessage">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="index.html#SimpleResult">SimpleResult</a>) ProtoMessage()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="SimpleResult.ProtoReflect">func (*SimpleResult) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=6878:6936#L276">ProtoReflect</a>
+					<a class="permalink" href="index.html#SimpleResult.ProtoReflect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#SimpleResult">SimpleResult</a>) ProtoReflect() <a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="SimpleResult.Reset">func (*SimpleResult) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=6524:6554#L261">Reset</a>
+					<a class="permalink" href="index.html#SimpleResult.Reset">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#SimpleResult">SimpleResult</a>) Reset()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="SimpleResult.String">func (*SimpleResult) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=6755:6793#L270">String</a>
+					<a class="permalink" href="index.html#SimpleResult.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#SimpleResult">SimpleResult</a>) String() <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="SlaveNodeInfoRequest">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=14407:15255#L554">SlaveNodeInfoRequest</a>
+				<a class="permalink" href="index.html#SlaveNodeInfoRequest">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+*
+SlaveNodeInfoRequest is a request with slave node data to master node
+</p>
+
+			<pre>type SlaveNodeInfoRequest struct {
+<span id="SlaveNodeInfoRequest.ClusterID"></span>    ClusterID        <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>         `protobuf:&#34;bytes,1,opt,name=ClusterID,proto3&#34; json:&#34;ClusterID,omitempty&#34;`               <span class="comment">// unique name of cluster. No specific info</span>
+<span id="SlaveNodeInfoRequest.NodeID"></span>    NodeID           <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>         `protobuf:&#34;bytes,2,opt,name=NodeID,proto3&#34; json:&#34;NodeID,omitempty&#34;`                     <span class="comment">// unique name of node. No specific info</span>
+<span id="SlaveNodeInfoRequest.ManagerData"></span>    ManagerData      []*<a href="index.html#ManagerData">ManagerData</a> `protobuf:&#34;bytes,3,rep,name=ManagerData,proto3&#34; json:&#34;ManagerData,omitempty&#34;`           <span class="comment">//</span>
+<span id="SlaveNodeInfoRequest.FinalManagerData"></span>    FinalManagerData []*<a href="index.html#ManagerData">ManagerData</a> `protobuf:&#34;bytes,4,rep,name=FinalManagerData,proto3&#34; json:&#34;FinalManagerData,omitempty&#34;` <span class="comment">//</span>
+<span id="SlaveNodeInfoRequest.ErrorManagerData"></span>    ErrorManagerData []*<a href="index.html#ManagerData">ManagerData</a> `protobuf:&#34;bytes,5,rep,name=ErrorManagerData,proto3&#34; json:&#34;ErrorManagerData,omitempty&#34;` <span class="comment">//</span>
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="SlaveNodeInfoRequest.Descriptor">func (*SlaveNodeInfoRequest) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=16049:16106#L594">Descriptor</a>
+					<a class="permalink" href="index.html#SlaveNodeInfoRequest.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="index.html#SlaveNodeInfoRequest">SlaveNodeInfoRequest</a>) Descriptor() ([]<a href="http://127.0.0.1:6060/pkg/builtin/#byte">byte</a>, []<a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)</pre>
+				<p>
+Deprecated: Use SlaveNodeInfoRequest.ProtoReflect.Descriptor instead.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="SlaveNodeInfoRequest.GetClusterID">func (*SlaveNodeInfoRequest) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=16181:16233#L598">GetClusterID</a>
+					<a class="permalink" href="index.html#SlaveNodeInfoRequest.GetClusterID">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#SlaveNodeInfoRequest">SlaveNodeInfoRequest</a>) GetClusterID() <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="SlaveNodeInfoRequest.GetErrorManagerData">func (*SlaveNodeInfoRequest) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=16643:16710#L626">GetErrorManagerData</a>
+					<a class="permalink" href="index.html#SlaveNodeInfoRequest.GetErrorManagerData">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#SlaveNodeInfoRequest">SlaveNodeInfoRequest</a>) GetErrorManagerData() []*<a href="index.html#ManagerData">ManagerData</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="SlaveNodeInfoRequest.GetFinalManagerData">func (*SlaveNodeInfoRequest) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=16512:16579#L619">GetFinalManagerData</a>
+					<a class="permalink" href="index.html#SlaveNodeInfoRequest.GetFinalManagerData">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#SlaveNodeInfoRequest">SlaveNodeInfoRequest</a>) GetFinalManagerData() []*<a href="index.html#ManagerData">ManagerData</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="SlaveNodeInfoRequest.GetManagerData">func (*SlaveNodeInfoRequest) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=16391:16453#L612">GetManagerData</a>
+					<a class="permalink" href="index.html#SlaveNodeInfoRequest.GetManagerData">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#SlaveNodeInfoRequest">SlaveNodeInfoRequest</a>) GetManagerData() []*<a href="index.html#ManagerData">ManagerData</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="SlaveNodeInfoRequest.GetNodeID">func (*SlaveNodeInfoRequest) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=16289:16338#L605">GetNodeID</a>
+					<a class="permalink" href="index.html#SlaveNodeInfoRequest.GetNodeID">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#SlaveNodeInfoRequest">SlaveNodeInfoRequest</a>) GetNodeID() <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="SlaveNodeInfoRequest.ProtoMessage">func (*SlaveNodeInfoRequest) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=15595:15638#L579">ProtoMessage</a>
+					<a class="permalink" href="index.html#SlaveNodeInfoRequest.ProtoMessage">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="index.html#SlaveNodeInfoRequest">SlaveNodeInfoRequest</a>) ProtoMessage()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="SlaveNodeInfoRequest.ProtoReflect">func (*SlaveNodeInfoRequest) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=15643:15709#L581">ProtoReflect</a>
+					<a class="permalink" href="index.html#SlaveNodeInfoRequest.ProtoReflect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#SlaveNodeInfoRequest">SlaveNodeInfoRequest</a>) ProtoReflect() <a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="SlaveNodeInfoRequest.Reset">func (*SlaveNodeInfoRequest) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=15257:15295#L566">Reset</a>
+					<a class="permalink" href="index.html#SlaveNodeInfoRequest.Reset">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#SlaveNodeInfoRequest">SlaveNodeInfoRequest</a>) Reset()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="SlaveNodeInfoRequest.String">func (*SlaveNodeInfoRequest) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=15504:15550#L575">String</a>
+					<a class="permalink" href="index.html#SlaveNodeInfoRequest.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#SlaveNodeInfoRequest">SlaveNodeInfoRequest</a>) String() <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="Type">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=2068:2083#L76">Type</a>
+				<a class="permalink" href="index.html#Type">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+*
+enum Type is a type of ruling objects
+</p>
+
+			<pre>type Type <a href="http://127.0.0.1:6060/pkg/builtin/#int32">int32</a></pre>
+
+			
+				
+				<pre>const (
+    <span id="Type_TYPE_UNKNOWN">Type_TYPE_UNKNOWN</span> <a href="index.html#Type">Type</a> = 0
+    <span id="Type_TYPE_WORKER">Type_TYPE_WORKER</span>  <a href="index.html#Type">Type</a> = 1
+    <span id="Type_TYPE_CHANNEL">Type_TYPE_CHANNEL</span> <a href="index.html#Type">Type</a> = 2
+    <span id="Type_TYPE_MANAGER">Type_TYPE_MANAGER</span> <a href="index.html#Type">Type</a> = 3
+    <span id="Type_TYPE_NODE">Type_TYPE_NODE</span>    <a href="index.html#Type">Type</a> = 4
+    <span id="Type_TYPE_CLUSTER">Type_TYPE_CLUSTER</span> <a href="index.html#Type">Type</a> = 5
+)</pre>
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="Type.Descriptor">func (Type) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=2797:2849#L117">Descriptor</a>
+					<a class="permalink" href="index.html#Type.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (<a href="index.html#Type">Type</a>) Descriptor() <a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/#EnumDescriptor">EnumDescriptor</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Type.Enum">func (Type) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=2619:2645#L107">Enum</a>
+					<a class="permalink" href="index.html#Type.Enum">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x <a href="index.html#Type">Type</a>) Enum() *<a href="index.html#Type">Type</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Type.EnumDescriptor">func (Type) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=3162:3206#L130">EnumDescriptor</a>
+					<a class="permalink" href="index.html#Type.EnumDescriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (<a href="index.html#Type">Type</a>) EnumDescriptor() ([]<a href="http://127.0.0.1:6060/pkg/builtin/#byte">byte</a>, []<a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)</pre>
+				<p>
+Deprecated: Use Type.Descriptor instead.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Type.Number">func (Type) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=3031:3077#L125">Number</a>
+					<a class="permalink" href="index.html#Type.Number">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x <a href="index.html#Type">Type</a>) Number() <a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/#EnumNumber">EnumNumber</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Type.String">func (Type) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=2685:2714#L113">String</a>
+					<a class="permalink" href="index.html#Type.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x <a href="index.html#Type">Type</a>) String() <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Type.Type">func (Type) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=2926:2966#L121">Type</a>
+					<a class="permalink" href="index.html#Type.Type">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (<a href="index.html#Type">Type</a>) Type() <a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/#EnumType">EnumType</a></pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="UnimplementedMasterNodeServer">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=31936:31981#L910">UnimplementedMasterNodeServer</a>
+				<a class="permalink" href="index.html#UnimplementedMasterNodeServer">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+UnimplementedMasterNodeServer can be embedded to have forward compatible implementations.
+</p>
+
+			<pre>type UnimplementedMasterNodeServer struct {
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="UnimplementedMasterNodeServer.UpdateNodeInfo">func (*UnimplementedMasterNodeServer) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=31983:32098#L913">UpdateNodeInfo</a>
+					<a class="permalink" href="index.html#UnimplementedMasterNodeServer.UpdateNodeInfo">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="index.html#UnimplementedMasterNodeServer">UnimplementedMasterNodeServer</a>) UpdateNodeInfo(<a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, *<a href="index.html#SlaveNodeInfoRequest">SlaveNodeInfoRequest</a>) (*<a href="index.html#SimpleResult">SimpleResult</a>, <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="WorkersData">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=9914:10559#L384">WorkersData</a>
+				<a class="permalink" href="index.html#WorkersData">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+*
+message WorkersData contents the information about workers for single manager
+</p>
+
+			<pre>type WorkersData struct {
+<span id="WorkersData.Min"></span>    Min    <a href="http://127.0.0.1:6060/pkg/builtin/#uint32">uint32</a> `protobuf:&#34;varint,1,opt,name=Min,proto3&#34; json:&#34;Min,omitempty&#34;`       <span class="comment">// available minimum of number of workers</span>
+<span id="WorkersData.Max"></span>    Max    <a href="http://127.0.0.1:6060/pkg/builtin/#uint32">uint32</a> `protobuf:&#34;varint,2,opt,name=Max,proto3&#34; json:&#34;Max,omitempty&#34;`       <span class="comment">// available maximum of number of workers</span>
+<span id="WorkersData.Number"></span>    Number <a href="http://127.0.0.1:6060/pkg/builtin/#uint32">uint32</a> `protobuf:&#34;varint,3,opt,name=Number,proto3&#34; json:&#34;Number,omitempty&#34;` <span class="comment">// total number of workers right now</span>
+<span id="WorkersData.Active"></span>    Active <a href="http://127.0.0.1:6060/pkg/builtin/#uint32">uint32</a> `protobuf:&#34;varint,4,opt,name=Active,proto3&#34; json:&#34;Active,omitempty&#34;` <span class="comment">// number of workers these are active right now</span>
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="WorkersData.Descriptor">func (*WorkersData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=11299:11347#L423">Descriptor</a>
+					<a class="permalink" href="index.html#WorkersData.Descriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="index.html#WorkersData">WorkersData</a>) Descriptor() ([]<a href="http://127.0.0.1:6060/pkg/builtin/#byte">byte</a>, []<a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)</pre>
+				<p>
+Deprecated: Use WorkersData.ProtoReflect.Descriptor instead.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="WorkersData.GetActive">func (*WorkersData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=11686:11726#L448">GetActive</a>
+					<a class="permalink" href="index.html#WorkersData.GetActive">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#WorkersData">WorkersData</a>) GetActive() <a href="http://127.0.0.1:6060/pkg/builtin/#uint32">uint32</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="WorkersData.GetMax">func (*WorkersData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=11508:11545#L434">GetMax</a>
+					<a class="permalink" href="index.html#WorkersData.GetMax">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#WorkersData">WorkersData</a>) GetMax() <a href="http://127.0.0.1:6060/pkg/builtin/#uint32">uint32</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="WorkersData.GetMin">func (*WorkersData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=11422:11459#L427">GetMin</a>
+					<a class="permalink" href="index.html#WorkersData.GetMin">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#WorkersData">WorkersData</a>) GetMin() <a href="http://127.0.0.1:6060/pkg/builtin/#uint32">uint32</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="WorkersData.GetNumber">func (*WorkersData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=11594:11634#L441">GetNumber</a>
+					<a class="permalink" href="index.html#WorkersData.GetNumber">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#WorkersData">WorkersData</a>) GetNumber() <a href="http://127.0.0.1:6060/pkg/builtin/#uint32">uint32</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="WorkersData.ProtoMessage">func (*WorkersData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=10872:10906#L408">ProtoMessage</a>
+					<a class="permalink" href="index.html#WorkersData.ProtoMessage">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (*<a href="index.html#WorkersData">WorkersData</a>) ProtoMessage()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="WorkersData.ProtoReflect">func (*WorkersData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=10911:10968#L410">ProtoReflect</a>
+					<a class="permalink" href="index.html#WorkersData.ProtoReflect">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#WorkersData">WorkersData</a>) ProtoReflect() <a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/">protoreflect</a>.<a href="http://127.0.0.1:6060/pkg/google.golang.org/protobuf/reflect/protoreflect/#Message">Message</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="WorkersData.Reset">func (*WorkersData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=10561:10590#L395">Reset</a>
+					<a class="permalink" href="index.html#WorkersData.Reset">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#WorkersData">WorkersData</a>) Reset()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="WorkersData.String">func (*WorkersData) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/protobuf/go/nodes/masternode.pb.go?s=10790:10827#L404">String</a>
+					<a class="permalink" href="index.html#WorkersData.String">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (x *<a href="index.html#WorkersData">WorkersData</a>) String() <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+		
+	
+
+	
+
+
+
+
+
+
+
+<div id="footer">
+Build version go1.15.1.<br>
+Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
+the content of this page is licensed under the
+Creative Commons Attribution 3.0 License,
+and code is licensed under a <a href="http://127.0.0.1:6060/LICENSE">BSD license</a>.<br>
+<a href="http://127.0.0.1:6060/doc/tos.html">Terms of Service</a> |
+<a href="http://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
+</div>
+
+</div><!-- .container -->
+</div><!-- #page -->
+</body>
+</html>

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#375EAB">
+
+  <title>workers - Go Documentation Server</title>
+
+<link type="text/css" rel="stylesheet" href="../../lib/godoc/style.css">
+
+<script>window.initFuncs = [];</script>
+<script src="../../lib/godoc/jquery.js" defer></script>
+
+
+
+<script>var goVersion = "go1.15.1";</script>
+<script src="../../lib/godoc/godocs.js" defer></script>
+</head>
+<body>
+
+<div id='lowframe' style="position: fixed; bottom: 0; left: 0; height: 0; width: 100%; border-top: thin solid grey; background-color: white; overflow: auto;">
+...
+</div><!-- #lowframe -->
+
+<div id="topbar" class="wide"><div class="container">
+<div class="top-heading" id="heading-wide"><a href="http://127.0.0.1:6060/pkg/">Go Documentation Server</a></div>
+<div class="top-heading" id="heading-narrow"><a href="http://127.0.0.1:6060/pkg/">GoDoc</a></div>
+<a href="index.html#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>
+<form method="GET" action="http://127.0.0.1:6060/search">
+<div id="menu">
+
+<span class="search-box"><input type="search" id="search" name="q" placeholder="Search" aria-label="Search" required><button type="submit"><span><!-- magnifying glass: --><svg width="24" height="24" viewBox="0 0 24 24"><title>submit search</title><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M0 0h24v24H0z" fill="none"/></svg></span></button></span>
+</div>
+</form>
+
+</div></div>
+
+
+
+<div id="page" class="wide">
+<div class="container">
+
+
+  <h1>
+    Package workers
+    <span class="text-muted"></span>
+  </h1>
+
+
+
+
+
+
+
+<div id="nav"></div>
+
+
+<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+	<script>
+	document.ANALYSIS_DATA = null;
+	document.CALLGRAPH = null;
+	</script>
+
+	
+		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "github.com/iostrovok/conveyor/workers"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="index.html#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="index.html#pkg-index" class="indexLink">Index</a></dd>
+			
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				<p>
+Internal package. Package realizes the IManager interface.
+</p>
+<p>
+Internal package. Package realizes the IWorker interface.
+</p>
+
+				
+			</div>
+		</div>
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+			
+			
+				
+				<dd><a href="index.html#NewManager">func NewManager(name faces.Name, typ faces.ManagerType, lengthChannel, minCount, maxCount int, tr faces.ITrace) faces.IManager</a></dd>
+			
+				
+				<dd><a href="index.html#NewWorker">func NewWorker(id string, name faces.Name, in, out, errCh faces.IChan, giveBirth faces.GiveBirth, wg *sync.WaitGroup, tr faces.ITrace, activeWorkers *int32) (faces.IWorker, error)</a></dd>
+			
+			
+				
+				<dd><a href="index.html#Manager">type Manager</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Manager.GetNextManager">func (m *Manager) GetNextManager() faces.IManager</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Manager.GetPrevManager">func (m *Manager) GetPrevManager() faces.IManager</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Manager.IsLast">func (m *Manager) IsLast() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Manager.MetricPeriod">func (m *Manager) MetricPeriod(duration time.Duration) faces.IManager</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Manager.SetChanErr">func (m *Manager) SetChanErr(errCh faces.IChan) faces.IManager</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Manager.SetChanIn">func (m *Manager) SetChanIn(in faces.IChan) faces.IManager</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Manager.SetChanOut">func (m *Manager) SetChanOut(out faces.IChan) faces.IManager</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Manager.SetHandler">func (m *Manager) SetHandler(handler faces.GiveBirth) faces.IManager</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Manager.SetIsLast">func (m *Manager) SetIsLast(isLast bool) faces.IManager</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Manager.SetNextManager">func (m *Manager) SetNextManager(next faces.IManager) faces.IManager</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Manager.SetPrevManager">func (m *Manager) SetPrevManager(previous faces.IManager) faces.IManager</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Manager.SetWaitGroup">func (m *Manager) SetWaitGroup(wg *sync.WaitGroup) faces.IManager</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Manager.SetWorkersCounter">func (m *Manager) SetWorkersCounter(wc faces.IWorkersCounter) faces.IManager</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Manager.Start">func (m *Manager) Start(ctx context.Context) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Manager.Statistic">func (m *Manager) Statistic() *nodes.ManagerData</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Manager.Stop">func (m *Manager) Stop()</a></dd>
+				
+			
+				
+				<dd><a href="index.html#Worker">type Worker</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Worker.ID">func (w *Worker) ID() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Worker.IsLast">func (w *Worker) IsLast() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Worker.Name">func (w *Worker) Name() faces.Name</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Worker.SetBorderCond">func (w *Worker) SetBorderCond(typ faces.ManagerType, isLast bool)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Worker.Start">func (w *Worker) Start(ctx context.Context) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Worker.Stop">func (w *Worker) Stop()</a></dd>
+				
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+
+		
+			<h3>Package files</h3>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/manager.go">manager.go</a>
+			
+				<a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/worker.go">worker.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		
+
+		
+		
+		
+			
+			
+			<h2 id="NewManager">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/manager.go?s=1049:1175#L49">NewManager</a>
+				<a class="permalink" href="index.html#NewManager">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func NewManager(name <a href="../../../../../../../../../faces/index.html">faces</a>.<a href="../faces/index.html#Name">Name</a>, typ <a href="../faces/index.html">faces</a>.<a href="../faces/index.html#ManagerType">ManagerType</a>, lengthChannel, minCount, maxCount <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>, tr <a href="../faces/index.html">faces</a>.<a href="../faces/index.html#ITrace">ITrace</a>) <a href="../faces/index.html">faces</a>.<a href="../faces/index.html#IManager">IManager</a></pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="NewWorker">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/worker.go?s=545:725#L33">NewWorker</a>
+				<a class="permalink" href="index.html#NewWorker">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func NewWorker(id <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>, name <a href="../../../../../../../faces/index.html">faces</a>.<a href="../faces/index.html#Name">Name</a>, in, out, errCh <a href="../faces/index.html">faces</a>.<a href="../faces/index.html#IChan">IChan</a>, giveBirth <a href="../faces/index.html">faces</a>.<a href="../faces/index.html#GiveBirth">GiveBirth</a>,
+    wg *<a href="http://127.0.0.1:6060/pkg/sync/">sync</a>.<a href="http://127.0.0.1:6060/pkg/sync/#WaitGroup">WaitGroup</a>, tr <a href="../../../../../faces/index.html">faces</a>.<a href="../faces/index.html#ITrace">ITrace</a>, activeWorkers *<a href="http://127.0.0.1:6060/pkg/builtin/#int32">int32</a>) (<a href="../faces/index.html">faces</a>.<a href="../faces/index.html#IWorker">IWorker</a>, <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+		
+			
+			
+			<h2 id="Manager">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/manager.go?s=300:919#L13">Manager</a>
+				<a class="permalink" href="index.html#Manager">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type Manager struct {
+    <a href="http://127.0.0.1:6060/pkg/sync/">sync</a>.<a href="http://127.0.0.1:6060/pkg/sync/#RWMutex">RWMutex</a>
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="Manager.GetNextManager">func (*Manager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/manager.go?s=2457:2506#L103">GetNextManager</a>
+					<a class="permalink" href="index.html#Manager.GetNextManager">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#Manager">Manager</a>) GetNextManager() <a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#IManager">IManager</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Manager.GetPrevManager">func (*Manager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/manager.go?s=2626:2675#L112">GetPrevManager</a>
+					<a class="permalink" href="index.html#Manager.GetPrevManager">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#Manager">Manager</a>) GetPrevManager() <a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#IManager">IManager</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Manager.IsLast">func (*Manager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/manager.go?s=3058:3089#L137">IsLast</a>
+					<a class="permalink" href="index.html#Manager.IsLast">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#Manager">Manager</a>) IsLast() <a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Manager.MetricPeriod">func (*Manager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/manager.go?s=3178:3247#L143">MetricPeriod</a>
+					<a class="permalink" href="index.html#Manager.MetricPeriod">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#Manager">Manager</a>) MetricPeriod(duration <a href="http://127.0.0.1:6060/pkg/time/">time</a>.<a href="http://127.0.0.1:6060/pkg/time/#Duration">Duration</a>) <a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#IManager">IManager</a></pre>
+				<p>
+The period between metric evaluations.
+By default 10 second
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Manager.SetChanErr">func (*Manager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/manager.go?s=3577:3639#L163">SetChanErr</a>
+					<a class="permalink" href="index.html#Manager.SetChanErr">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#Manager">Manager</a>) SetChanErr(errCh <a href="../../../../../faces/index.html">faces</a>.<a href="../faces/index.html#IChan">IChan</a>) <a href="../faces/index.html">faces</a>.<a href="../faces/index.html#IManager">IManager</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Manager.SetChanIn">func (*Manager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/manager.go?s=3403:3461#L153">SetChanIn</a>
+					<a class="permalink" href="index.html#Manager.SetChanIn">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#Manager">Manager</a>) SetChanIn(in <a href="../../../../../faces/index.html">faces</a>.<a href="../faces/index.html#IChan">IChan</a>) <a href="../faces/index.html">faces</a>.<a href="../faces/index.html#IManager">IManager</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Manager.SetChanOut">func (*Manager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/manager.go?s=3488:3548#L158">SetChanOut</a>
+					<a class="permalink" href="index.html#Manager.SetChanOut">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#Manager">Manager</a>) SetChanOut(out <a href="../../../../../faces/index.html">faces</a>.<a href="../faces/index.html#IChan">IChan</a>) <a href="../faces/index.html">faces</a>.<a href="../faces/index.html#IManager">IManager</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Manager.SetHandler">func (*Manager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/manager.go?s=3298:3366#L148">SetHandler</a>
+					<a class="permalink" href="index.html#Manager.SetHandler">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#Manager">Manager</a>) SetHandler(handler <a href="../../../../../faces/index.html">faces</a>.<a href="../faces/index.html#GiveBirth">GiveBirth</a>) <a href="../faces/index.html">faces</a>.<a href="../faces/index.html#IManager">IManager</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Manager.SetIsLast">func (*Manager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/manager.go?s=2922:2977#L127">SetIsLast</a>
+					<a class="permalink" href="index.html#Manager.SetIsLast">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#Manager">Manager</a>) SetIsLast(isLast <a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a>) <a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#IManager">IManager</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Manager.SetNextManager">func (*Manager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/manager.go?s=2527:2595#L107">SetNextManager</a>
+					<a class="permalink" href="index.html#Manager.SetNextManager">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#Manager">Manager</a>) SetNextManager(next <a href="../../../../../faces/index.html">faces</a>.<a href="../faces/index.html#IManager">IManager</a>) <a href="../faces/index.html">faces</a>.<a href="../faces/index.html#IManager">IManager</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Manager.SetPrevManager">func (*Manager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/manager.go?s=2700:2772#L116">SetPrevManager</a>
+					<a class="permalink" href="index.html#Manager.SetPrevManager">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#Manager">Manager</a>) SetPrevManager(previous <a href="../../../../../faces/index.html">faces</a>.<a href="../faces/index.html#IManager">IManager</a>) <a href="../faces/index.html">faces</a>.<a href="../faces/index.html#IManager">IManager</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Manager.SetWaitGroup">func (*Manager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/manager.go?s=2349:2414#L98">SetWaitGroup</a>
+					<a class="permalink" href="index.html#Manager.SetWaitGroup">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#Manager">Manager</a>) SetWaitGroup(wg *<a href="http://127.0.0.1:6060/pkg/sync/">sync</a>.<a href="http://127.0.0.1:6060/pkg/sync/#WaitGroup">WaitGroup</a>) <a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#IManager">IManager</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Manager.SetWorkersCounter">func (*Manager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/manager.go?s=2234:2310#L93">SetWorkersCounter</a>
+					<a class="permalink" href="index.html#Manager.SetWorkersCounter">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#Manager">Manager</a>) SetWorkersCounter(wc <a href="../../../../../faces/index.html">faces</a>.<a href="../faces/index.html#IWorkersCounter">IWorkersCounter</a>) <a href="../faces/index.html">faces</a>.<a href="../faces/index.html#IManager">IManager</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Manager.Start">func (*Manager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/manager.go?s=4066:4116#L198">Start</a>
+					<a class="permalink" href="index.html#Manager.Start">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#Manager">Manager</a>) Start(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Manager.Statistic">func (*Manager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/manager.go?s=1615:1663#L65">Statistic</a>
+					<a class="permalink" href="index.html#Manager.Statistic">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#Manager">Manager</a>) Statistic() *<a href="../../../protobuf/go/nodes/index.html">nodes</a>.<a href="../protobuf/go/nodes/index.html#ManagerData">ManagerData</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Manager.Stop">func (*Manager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/manager.go?s=3672:3696#L168">Stop</a>
+					<a class="permalink" href="index.html#Manager.Stop">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#Manager">Manager</a>) Stop()</pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="Worker">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/worker.go?s=198:543#L10">Worker</a>
+				<a class="permalink" href="index.html#Worker">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type Worker struct {
+    <a href="http://127.0.0.1:6060/pkg/sync/">sync</a>.<a href="http://127.0.0.1:6060/pkg/sync/#RWMutex">RWMutex</a>
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="Worker.ID">func (*Worker) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/worker.go?s=1368:1396#L76">ID</a>
+					<a class="permalink" href="index.html#Worker.ID">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (w *<a href="index.html#Worker">Worker</a>) ID() <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Worker.IsLast">func (*Worker) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/worker.go?s=1229:1259#L65">IsLast</a>
+					<a class="permalink" href="index.html#Worker.IsLast">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (w *<a href="index.html#Worker">Worker</a>) IsLast() <a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Worker.Name">func (*Worker) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/worker.go?s=1313:1347#L72">Name</a>
+					<a class="permalink" href="index.html#Worker.Name">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (w *<a href="index.html#Worker">Worker</a>) Name() <a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#Name">Name</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Worker.SetBorderCond">func (*Worker) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/worker.go?s=1096:1162#L57">SetBorderCond</a>
+					<a class="permalink" href="index.html#Worker.SetBorderCond">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (w *<a href="index.html#Worker">Worker</a>) SetBorderCond(typ <a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#ManagerType">ManagerType</a>, isLast <a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Worker.Start">func (*Worker) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/worker.go?s=1615:1664#L92">Start</a>
+					<a class="permalink" href="index.html#Worker.Start">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (w *<a href="index.html#Worker">Worker</a>) Start(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Worker.Stop">func (*Worker) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workers/worker.go?s=1415:1438#L80">Stop</a>
+					<a class="permalink" href="index.html#Worker.Stop">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (w *<a href="index.html#Worker">Worker</a>) Stop()</pre>
+				
+				
+				
+				
+			
+		
+	
+
+	
+
+
+
+
+
+
+
+<div id="footer">
+Build version go1.15.1.<br>
+Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
+the content of this page is licensed under the
+Creative Commons Attribution 3.0 License,
+and code is licensed under a <a href="http://127.0.0.1:6060/LICENSE">BSD license</a>.<br>
+<a href="http://127.0.0.1:6060/doc/tos.html">Terms of Service</a> |
+<a href="http://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
+</div>
+
+</div><!-- .container -->
+</div><!-- #page -->
+</body>
+</html>

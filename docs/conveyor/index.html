@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#375EAB">
+
+  <title>conveyor - Go Documentation Server</title>
+
+<link type="text/css" rel="stylesheet" href="../lib/godoc/style.css">
+
+<script>window.initFuncs = [];</script>
+<script src="../lib/godoc/jquery.js" defer></script>
+
+
+
+<script>var goVersion = "go1.15.1";</script>
+<script src="../lib/godoc/godocs.js" defer></script>
+</head>
+<body>
+
+<div id='lowframe' style="position: fixed; bottom: 0; left: 0; height: 0; width: 100%; border-top: thin solid grey; background-color: white; overflow: auto;">
+...
+</div><!-- #lowframe -->
+
+<div id="topbar" class="wide"><div class="container">
+<div class="top-heading" id="heading-wide"><a href="http://127.0.0.1:6060/pkg/">Go Documentation Server</a></div>
+<div class="top-heading" id="heading-narrow"><a href="http://127.0.0.1:6060/pkg/">GoDoc</a></div>
+<a href="index.html#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>
+<form method="GET" action="http://127.0.0.1:6060/search">
+<div id="menu">
+
+<span class="search-box"><input type="search" id="search" name="q" placeholder="Search" aria-label="Search" required><button type="submit"><span><!-- magnifying glass: --><svg width="24" height="24" viewBox="0 0 24 24"><title>submit search</title><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M0 0h24v24H0z" fill="none"/></svg></span></button></span>
+</div>
+</form>
+
+</div></div>
+
+
+
+<div id="page" class="wide">
+<div class="container">
+
+
+  <h1>
+    Package conveyor
+    <span class="text-muted"></span>
+  </h1>
+
+
+
+
+
+
+
+<div id="nav"></div>
+
+
+<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+	<script>
+	document.ANALYSIS_DATA = null;
+	document.CALLGRAPH = null;
+	</script>
+
+	
+		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "github.com/iostrovok/conveyor"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="index.html#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="index.html#pkg-index" class="indexLink">Index</a></dd>
+			
+			
+				<dd><a href="index.html#pkg-subdirectories">Subdirectories</a></dd>
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				
+				
+			</div>
+		</div>
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+			
+			
+				
+				<dd><a href="index.html#New">func New(lengthChannel int, chanType faces.ChanType, name string) faces.IConveyor</a></dd>
+			
+			
+				
+				<dd><a href="index.html#Conveyor">type Conveyor</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.AddErrorHandler">func (c *Conveyor) AddErrorHandler(manageName faces.Name, minCount, maxCount int, handler faces.GiveBirth) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.AddFinalHandler">func (c *Conveyor) AddFinalHandler(name faces.Name, minCount, maxCount int, handler faces.GiveBirth) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.AddHandler">func (c *Conveyor) AddHandler(name faces.Name, minCount, maxCount int, handler faces.GiveBirth) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.GetDefaultPriority">func (c *Conveyor) GetDefaultPriority() int</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.GetName">func (c *Conveyor) GetName() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.MetricPeriod">func (c *Conveyor) MetricPeriod(duration time.Duration) faces.IConveyor</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.Run">func (c *Conveyor) Run(data interface{})</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.RunCtx">func (c *Conveyor) RunCtx(ctx context.Context, data interface{})</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.RunPriority">func (c *Conveyor) RunPriority(data interface{}, priority int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.RunPriorityCtx">func (c *Conveyor) RunPriorityCtx(ctx context.Context, data interface{}, priority int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.RunPriorityTrace">func (c *Conveyor) RunPriorityTrace(ctx context.Context, tr faces.ITrace, data interface{}, priority int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.RunRes">func (c *Conveyor) RunRes(data interface{}, priority int) (interface{}, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.RunResCtx">func (c *Conveyor) RunResCtx(ctx context.Context, data interface{}, priority int) (interface{}, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.RunResTrace">func (c *Conveyor) RunResTrace(ctx context.Context, tr faces.ITrace, data interface{}, priority int) (interface{}, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.RunTrace">func (c *Conveyor) RunTrace(ctx context.Context, tr faces.ITrace, data interface{})</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.SetDefaultPriority">func (c *Conveyor) SetDefaultPriority(defaultPriority int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.SetMasterNode">func (c *Conveyor) SetMasterNode(addr string, masterNodePeriod time.Duration)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.SetName">func (c *Conveyor) SetName(name string) faces.IConveyor</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.SetTracer">func (c *Conveyor) SetTracer(tr faces.ITrace) faces.IConveyor</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.SetWorkersCounter">func (c *Conveyor) SetWorkersCounter(wc faces.IWorkersCounter) faces.IConveyor</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.Start">func (c *Conveyor) Start(ctx context.Context) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.Statistic">func (c *Conveyor) Statistic() *nodes.SlaveNodeInfoRequest</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.Stop">func (c *Conveyor) Stop()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.WaitAndStop">func (c *Conveyor) WaitAndStop()</a></dd>
+				
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+
+		
+			<h3>Package files</h3>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go">conveyor.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		
+
+		
+		
+		
+			
+			
+			<h2 id="New">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=1572:1653#L65">New</a>
+				<a class="permalink" href="index.html#New">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func New(lengthChannel <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>, chanType <a href="faces/index.html">faces</a>.<a href="faces/index.html#ChanType">ChanType</a>, name <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>) <a href="faces/index.html">faces</a>.<a href="faces/index.html#IConveyor">IConveyor</a></pre>
+			
+			
+			
+
+		
+		
+			
+			
+			<h2 id="Conveyor">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=628:664#L20">Conveyor</a>
+				<a class="permalink" href="index.html#Conveyor">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type Conveyor struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="Conveyor.AddErrorHandler">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=14893:15005#L552">AddErrorHandler</a>
+					<a class="permalink" href="index.html#Conveyor.AddErrorHandler">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) AddErrorHandler(manageName <a href="faces/index.html">faces</a>.<a href="faces/index.html#Name">Name</a>, minCount, maxCount <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>, handler <a href="faces/index.html">faces</a>.<a href="faces/index.html#GiveBirth">GiveBirth</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a></pre>
+				<p>
+AddErrorHandler adds custom error handler for processing the errors which were returned with work handler.
+Multiple custom error handlers are allowed.
+If custom error handler returned error the conveyor logs the error but doesn&#39;t process.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.AddFinalHandler">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=11832:11938#L457">AddFinalHandler</a>
+					<a class="permalink" href="index.html#Conveyor.AddFinalHandler">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) AddFinalHandler(name <a href="faces/index.html">faces</a>.<a href="faces/index.html#Name">Name</a>, minCount, maxCount <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>, handler <a href="faces/index.html">faces</a>.<a href="faces/index.html#GiveBirth">GiveBirth</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a></pre>
+				<p>
+AddFinalHandler adds customer final handler as the latest handler from all.
+Only single customer final handler is allow.
+If custom final handler returned error the conveyor doesn&#39;t process and log it.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.AddHandler">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=13658:13759#L512">AddHandler</a>
+					<a class="permalink" href="index.html#Conveyor.AddHandler">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) AddHandler(name <a href="faces/index.html">faces</a>.<a href="faces/index.html#Name">Name</a>, minCount, maxCount <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>, handler <a href="faces/index.html">faces</a>.<a href="faces/index.html#GiveBirth">GiveBirth</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a></pre>
+				<p>
+addSystemFinalHandler adds customer handler.
+Parameter name should be unique.
+minCount should be less or equal the maxCount.
+</p>
+<p>
+The order of adding handlers are important. The handlers are called in the same order as they were added.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.GetDefaultPriority">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=5443:5486#L177">GetDefaultPriority</a>
+					<a class="permalink" href="index.html#Conveyor.GetDefaultPriority">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) GetDefaultPriority() <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a></pre>
+				<p>
+GetDefaultPriority returns the default priority of items.
+It makes sense if priority queue is used.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.GetName">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=7805:7840#L271">GetName</a>
+					<a class="permalink" href="index.html#Conveyor.GetName">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) GetName() <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a></pre>
+				<p>
+GetName is a simple getter for name property
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.MetricPeriod">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=8424:8495#L303">MetricPeriod</a>
+					<a class="permalink" href="index.html#Conveyor.MetricPeriod">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) MetricPeriod(duration <a href="http://127.0.0.1:6060/pkg/time/">time</a>.<a href="http://127.0.0.1:6060/pkg/time/#Duration">Duration</a>) <a href="faces/index.html">faces</a>.<a href="faces/index.html#IConveyor">IConveyor</a></pre>
+				<p>
+MetricPeriod sets up the period between metric evaluations.
+By default 10 second
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.Run">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=2655:2695#L106">Run</a>
+					<a class="permalink" href="index.html#Conveyor.Run">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) Run(data interface{})</pre>
+				<p>
+Run creates the new item over interface and sends to conveyor.
+If priority queue is used the default priority will be set up.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.RunCtx">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=2887:2951#L112">RunCtx</a>
+					<a class="permalink" href="index.html#Conveyor.RunCtx">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) RunCtx(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, data interface{})</pre>
+				<p>
+RunCtx is a variety of Run with context
+If priority queue is used the default priority will be set up.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.RunPriority">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=3327:3389#L123">RunPriority</a>
+					<a class="permalink" href="index.html#Conveyor.RunPriority">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) RunPriority(data interface{}, priority <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)</pre>
+				<p>
+RunPriority is a variety of Run with priority
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.RunPriorityCtx">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=3517:3603#L128">RunPriorityCtx</a>
+					<a class="permalink" href="index.html#Conveyor.RunPriorityCtx">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) RunPriorityCtx(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, data interface{}, priority <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)</pre>
+				<p>
+RunPriorityCtx is a variety of RunPriority with context
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.RunPriorityTrace">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=3718:3823#L133">RunPriorityTrace</a>
+					<a class="permalink" href="index.html#Conveyor.RunPriorityTrace">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) RunPriorityTrace(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, tr <a href="faces/index.html">faces</a>.<a href="faces/index.html#ITrace">ITrace</a>, data interface{}, priority <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)</pre>
+				<p>
+RunPriorityTrace is a variety of RunPriorityCtx with tracer
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.RunRes">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=4048:4126#L139">RunRes</a>
+					<a class="permalink" href="index.html#Conveyor.RunRes">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) RunRes(data interface{}, priority <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>) (interface{}, <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+RunRes creates the new item over interface and sends to conveyor and returns result.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.RunResCtx">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=4239:4341#L144">RunResCtx</a>
+					<a class="permalink" href="index.html#Conveyor.RunResCtx">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) RunResCtx(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, data interface{}, priority <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>) (interface{}, <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+RunResCtx is a variety of RunRes with context
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.RunResTrace">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=4470:4591#L149">RunResTrace</a>
+					<a class="permalink" href="index.html#Conveyor.RunResTrace">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) RunResTrace(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, tr <a href="faces/index.html">faces</a>.<a href="faces/index.html#ITrace">ITrace</a>, data interface{}, priority <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>) (interface{}, <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+RunResTrace is a variety of RunPriorityCtx with tracer
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.RunTrace">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=3130:3213#L118">RunTrace</a>
+					<a class="permalink" href="index.html#Conveyor.RunTrace">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) RunTrace(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, tr <a href="faces/index.html">faces</a>.<a href="faces/index.html#ITrace">ITrace</a>, data interface{})</pre>
+				<p>
+RunTrace is a variety of RunCtx with tracer
+If priority queue is used the default priority will be set up.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.SetDefaultPriority">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=5231:5289#L171">SetDefaultPriority</a>
+					<a class="permalink" href="index.html#Conveyor.SetDefaultPriority">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) SetDefaultPriority(defaultPriority <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)</pre>
+				<p>
+SetDefaultPriority sets the priority of items.
+</p>
+<p>
+It makes sense if priority queue is used.
+If priority is not set up it equals the 0 (defaultPriority constant)
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.SetMasterNode">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=5710:5787#L184">SetMasterNode</a>
+					<a class="permalink" href="index.html#Conveyor.SetMasterNode">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) SetMasterNode(addr <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>, masterNodePeriod <a href="http://127.0.0.1:6060/pkg/time/">time</a>.<a href="http://127.0.0.1:6060/pkg/time/#Duration">Duration</a>)</pre>
+				<p>
+SetMasterNode sets the internet address  master node.
+Master node allow to get information online about current conveyor
+see more information github.com/iostrovok/conveyormaster
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.SetName">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=7666:7721#L265">SetName</a>
+					<a class="permalink" href="index.html#Conveyor.SetName">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) SetName(name <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>) <a href="faces/index.html">faces</a>.<a href="faces/index.html#IConveyor">IConveyor</a></pre>
+				<p>
+SetName is a simple setter for name property
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.SetTracer">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=8179:8240#L289">SetTracer</a>
+					<a class="permalink" href="index.html#Conveyor.SetTracer">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) SetTracer(tr <a href="faces/index.html">faces</a>.<a href="faces/index.html#ITrace">ITrace</a>) <a href="faces/index.html">faces</a>.<a href="faces/index.html#IConveyor">IConveyor</a></pre>
+				<p>
+SetTracer sets up the tracer with ITrace interface
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.SetWorkersCounter">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=7496:7574#L259">SetWorkersCounter</a>
+					<a class="permalink" href="index.html#Conveyor.SetWorkersCounter">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) SetWorkersCounter(wc <a href="faces/index.html">faces</a>.<a href="faces/index.html#IWorkersCounter">IWorkersCounter</a>) <a href="faces/index.html">faces</a>.<a href="faces/index.html#IConveyor">IConveyor</a></pre>
+				<p>
+SetWorkersCounter sets up the tracer with IWorkersCounter interface
+WorkersCounter rules the number of current worked handlers.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.Start">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=8964:9015#L334">Start</a>
+					<a class="permalink" href="index.html#Conveyor.Start">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) Start(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a></pre>
+				<p>
+Start starts the conveyor
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.Statistic">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=15975:16033#L589">Statistic</a>
+					<a class="permalink" href="index.html#Conveyor.Statistic">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) Statistic() *<a href="protobuf/go/nodes/index.html">nodes</a>.<a href="protobuf/go/nodes/index.html#SlaveNodeInfoRequest">SlaveNodeInfoRequest</a></pre>
+				<p>
+Statistic returns the information about current stage of conveyor.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.Stop">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=10508:10533#L394">Stop</a>
+					<a class="permalink" href="index.html#Conveyor.Stop">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) Stop()</pre>
+				<p>
+Stop stops the conveyor.
+Processing of items will be  interrupted.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.WaitAndStop">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=10860:10892#L416">WaitAndStop</a>
+					<a class="permalink" href="index.html#Conveyor.WaitAndStop">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) WaitAndStop()</pre>
+				<p>
+WaitAndStop waits while all handler are finished and exits.
+Processing of items will not be interrupted.
+</p>
+
+				
+				
+				
+			
+		
+	
+
+	
+
+
+
+
+
+	
+	
+		<h2 id="pkg-subdirectories">Subdirectories</h2>
+	
+	<div class="pkg-dir">
+		<table>
+			<tr>
+				<th class="pkg-name">Name</th>
+				<th class="pkg-synopsis">Synopsis</th>
+			</tr>
+
+			
+			<tr>
+				<td colspan="2"><a href="index.html">..</a></td>
+			</tr>
+			
+
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 0px;">
+						<a href="console/index.html">console</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						Just for fun - simple script which grabs documentation from &#34;godoc&#34; local server
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 0px;">
+						<a href="example/index.html">example</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 20px;">
+						<a href="example/priorityqueue/index.html">priorityqueue</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 20px;">
+						<a href="example/simple/index.html">simple</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 20px;">
+						<a href="example/stack/index.html">stack</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 0px;">
+						<a href="faces/index.html">faces</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 20px;">
+						<a href="faces/mmock/index.html">mmock</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						Package mmock is a generated GoMock package.
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 0px;">
+						<a href="internalmanager/index.html">internalmanager</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						Internal package.
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 0px;">
+						<a href="item/index.html">item</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						Package realizes the IItem interface.
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 0px;">
+						<a href="protobuf/index.html">protobuf</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 20px;">
+						<a href="protobuf/go/index.html">go</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 40px;">
+						<a href="protobuf/go/nodes/index.html">nodes</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 0px;">
+						<a href="queues/index.html">queues</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						Package supports the IChan interface and provides 3 simples realization of them.
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 20px;">
+						<a href="queues/priorityqueue/index.html">priorityqueue</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						The package support the priority queue for using them in conveyor.
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 20px;">
+						<a href="queues/stack/index.html">stack</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						The package support the stack queue LIFO (or FILO) for using them in conveyor.
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 20px;">
+						<a href="queues/std/index.html">std</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						The package support queue with standard GO-channels for using them in conveyor.
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 0px;">
+						<a href="slavenode/index.html">slavenode</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						The package support the slave mode and sends statistic to master node.
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 0px;">
+						<a href="tracer/index.html">tracer</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						Package supports the simple realization of ITrace.
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 0px;">
+						<a href="workers/index.html">workers</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						Internal package.
+					</td>
+				</tr>
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 0px;">
+						<a href="workerscounter/index.html">workerscounter</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						WorkersCounter rules the number of current worked handlers.
+					</td>
+				</tr>
+			
+		</table>
+	</div>
+
+
+
+<div id="footer">
+Build version go1.15.1.<br>
+Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
+the content of this page is licensed under the
+Creative Commons Attribution 3.0 License,
+and code is licensed under a <a href="http://127.0.0.1:6060/LICENSE">BSD license</a>.<br>
+<a href="http://127.0.0.1:6060/doc/tos.html">Terms of Service</a> |
+<a href="http://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
+</div>
+
+</div><!-- .container -->
+</div><!-- #page -->
+</body>
+</html>
