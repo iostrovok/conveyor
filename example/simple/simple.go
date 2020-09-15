@@ -180,7 +180,7 @@ func main() {
 	myMaster.SetTracer(tracer.NewTrace()).MetricPeriod(3 * time.Second)
 
 	// do we want to remote control? make it here
-	//myMaster.SetMasterNode("127.0.0.1:5101", 2*time.Second)
+	myMaster.SetMasterNode("127.0.0.1:5101", 2*time.Second)
 
 	// optional method to trace process.
 	go func() {

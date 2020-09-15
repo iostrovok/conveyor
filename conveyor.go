@@ -74,7 +74,10 @@ type data struct {
 
 func New(lengthChannel int, chanType faces.ChanType, name string) faces.IConveyor {
 	c := &Conveyor{}
+	return c.Init(lengthChannel, chanType, name)
+}
 
+func (c *Conveyor) Init(lengthChannel int, chanType faces.ChanType, name string) faces.IConveyor {
 	if name == "" {
 		name = uuid.New().String()
 	}
