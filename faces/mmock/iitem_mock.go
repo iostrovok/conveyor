@@ -46,6 +46,18 @@ func (mr *MockIItemMockRecorder) AddError(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddError", reflect.TypeOf((*MockIItem)(nil).AddError), arg0)
 }
 
+// Cancel mocks base method
+func (m *MockIItem) Cancel() {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "Cancel")
+}
+
+// Cancel indicates an expected call of Cancel
+func (mr *MockIItemMockRecorder) Cancel() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Cancel", reflect.TypeOf((*MockIItem)(nil).Cancel))
+}
+
 // CleanError mocks base method
 func (m *MockIItem) CleanError() {
 	m.ctrl.T.Helper()
@@ -56,18 +68,6 @@ func (m *MockIItem) CleanError() {
 func (mr *MockIItemMockRecorder) CleanError() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CleanError", reflect.TypeOf((*MockIItem)(nil).CleanError))
-}
-
-// CleanSkipToName mocks base method
-func (m *MockIItem) CleanSkipToName() {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "CleanSkipToName")
-}
-
-// CleanSkipToName indicates an expected call of CleanSkipToName
-func (mr *MockIItemMockRecorder) CleanSkipToName() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CleanSkipToName", reflect.TypeOf((*MockIItem)(nil).CleanSkipToName))
 }
 
 // Finish mocks base method
@@ -226,6 +226,21 @@ func (mr *MockIItemMockRecorder) LogTraceFinishTime(arg0 interface{}, arg1 ...in
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{arg0}, arg1...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LogTraceFinishTime", reflect.TypeOf((*MockIItem)(nil).LogTraceFinishTime), varargs...)
+}
+
+// NeedToSkip mocks base method
+func (m *MockIItem) NeedToSkip(arg0 faces.IWorker) (bool, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NeedToSkip", arg0)
+	ret0, _ := ret[0].(bool)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// NeedToSkip indicates an expected call of NeedToSkip
+func (mr *MockIItemMockRecorder) NeedToSkip(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NeedToSkip", reflect.TypeOf((*MockIItem)(nil).NeedToSkip), arg0)
 }
 
 // Set mocks base method

@@ -5,6 +5,7 @@ package item
 
 import (
 	"context"
+	"errors"
 	"time"
 
 	"github.com/iostrovok/conveyor/faces"
@@ -18,7 +19,8 @@ type Data struct {
 	id     int64
 	data   interface{}
 	ctx    context.Context
-	trace  faces.ITrace
+	cancel context.CancelFunc
+	tracer faces.ITrace
 	err    error
 	isDone bool
 
@@ -32,18 +34,22 @@ type Data struct {
 	priority             int
 }
 
-func NewItem(ctx context.Context, tr faces.ITrace) faces.IItem {
+func New(ctx context.Context, tr faces.ITrace) faces.IItem {
 	item := &Item{}
 	item.Init(ctx, tr)
 	return item
 }
 
-func (i *Item) Init(ctx context.Context, tr faces.ITrace) faces.IItem {
+func (i *Item) Init(ctxIn context.Context, tr faces.ITrace) faces.IItem {
+
+	ctx, cancel := context.WithCancel(ctxIn)
+
 	i.data = &Data{
 		data:           make([]interface{}, 0),
 		ctx:            ctx,
+		cancel:         cancel,
 		skipToName:     faces.EmptySkipName,
-		trace:          tr,
+		tracer:         tr,
 		startTime:      time.Now(),
 		localStartTime: time.Now(),
 	}
@@ -70,9 +76,9 @@ func (i *Item) Set(data interface{}) faces.IItem {
 
 func (i *Item) AddError(err error) {
 	i.data.err = err
-	if err != nil && i.data.trace != nil {
-		i.data.trace.SetError()
-		i.data.trace.LazyPrintf("%s", err.Error())
+	if err != nil && i.data.tracer != nil {
+		i.data.tracer.SetError()
+		i.data.tracer.LazyPrintf("%s", err.Error())
 	}
 }
 
@@ -88,70 +94,117 @@ func (i *Item) GetContext() context.Context {
 	return i.data.ctx
 }
 
-func (i *Item) SetSkipToName(name faces.Name) {
-	i.data.skipToName = name
-}
-
-func (i *Item) GetSkipToName() faces.Name {
-	return i.data.skipToName
-}
-
-func (i *Item) CleanSkipToName() {
-	i.data.skipToName = faces.EmptySkipName
-}
-
+// LogTrace pushes message to tracer
 func (i *Item) LogTrace(format string, a ...interface{}) {
-	if i.data.trace != nil {
-		i.data.trace.LazyPrintf(format, a...)
+	if i.data.tracer != nil {
+		i.data.tracer.LazyPrintf(format, a...)
 	}
 }
 
+// Finish writes tracer for item and flush the tracer
 func (i *Item) Finish() {
-	i.CleanSkipToName()
-	if i.data.trace != nil {
-		i.data.trace.LazyPrintf(time.Now().Sub(i.data.startTime).String() + " : total")
-		i.data.trace.Flush()
+	if i.data.tracer != nil {
+		i.data.tracer.LazyPrintf(time.Now().Sub(i.data.startTime).String() + " : total")
+		i.data.tracer.Flush()
 	}
 }
 
+// Start restarts the timers for measuring the periods for each stage of process and whole process.
 func (i *Item) Start() faces.IItem {
-	if i.data.trace != nil {
+	if i.data.tracer != nil {
 		i.data.startTime = time.Now()
 		i.data.localStartTime = time.Now()
 	}
 	return i
 }
 
+// Cancel emergency breaks the processing by global context
+func (i *Item) Cancel() {
+	if i.data.cancel != nil {
+		i.data.cancel()
+	}
+}
+
+// LogTraceFinishTime adds the message and during of period from last call of item.LogTraceFinishTime or item.Start to tracer
 func (i *Item) LogTraceFinishTime(format string, a ...interface{}) {
-	if i.data.trace != nil {
-		i.data.trace.LazyPrintf(time.Now().Sub(i.data.localStartTime).String()+" : "+format, a...)
+	if i.data.tracer != nil {
+		i.data.tracer.LazyPrintf(time.Now().Sub(i.data.localStartTime).String()+" : "+format, a...)
 		i.data.localStartTime = time.Now()
 	}
 }
 
+// GetPriority returns priority for item
 func (i *Item) GetPriority() int {
 	return i.data.priority
 }
 
+// SetPriority sets priority for item if priority queue is used
 func (i *Item) SetPriority(priority int) faces.IItem {
 	i.data.priority = priority
 	return i
 }
 
+// GetHandlerError returns the error which got within processing of the item
 func (i *Item) GetHandlerError() faces.Name {
 	return i.data.handlerNameWithError
 }
 
+// SetHandlerError sets the error which got within processing of the item
 func (i *Item) SetHandlerError(handlerNameWithError faces.Name) faces.IItem {
 	i.data.handlerNameWithError = handlerNameWithError
 	return i
 }
 
+// GetLastHandler returns the last handler name which processed the item
 func (i *Item) GetLastHandler() faces.Name {
 	return i.data.lastHandler
 }
 
+// SetHandlerError set the last handler name which processed the item
 func (i *Item) SetLastHandler(handlerName faces.Name) faces.IItem {
 	i.data.lastHandler = handlerName
 	return i
+}
+
+// SetSkipToName sets the handler name. Conveyor skips all handlers until that.
+// When conveyor reaches that name is set up as EmptySkipName
+// If conveyor finishes and name is not found item gets error.
+func (i *Item) SetSkipToName(name faces.Name) {
+	i.data.skipToName = name
+}
+
+// GetSkipToName returns handler name which was set up with SetSkipToName and is not yet processed.
+func (i *Item) GetSkipToName() faces.Name {
+	return i.data.skipToName
+}
+
+// NeedToSkip checks should be handler skipped or not
+func (i *Item) NeedToSkip(worker faces.IWorker) (bool, error) {
+	name, typ, isLast := worker.GetBorderCond()
+
+	// never skip system handlers
+	if typ != faces.WorkerManagerType {
+		i.data.skipToName = faces.EmptySkipName
+		return false, nil
+	}
+
+	if i.data.skipToName == faces.EmptySkipName || i.data.skipToName == faces.SkipAll {
+		// processing has been not requested
+		return false, nil
+	}
+
+	if i.data.skipToName == name {
+		// Attention, last station. skipName is found! processing...
+		i.data.skipToName = faces.EmptySkipName
+		return false, nil
+	}
+
+	if isLast && typ == faces.WorkerManagerType {
+		// no more handlers after that. Fix error.
+		return false, errors.New("it is the last handler: skipped name [" +
+			string(i.data.skipToName) +
+			"] can't be processed")
+	}
+
+	return true, nil
 }

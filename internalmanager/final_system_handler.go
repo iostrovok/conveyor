@@ -1,5 +1,5 @@
 /*
-	Internal package. Package provides a handler for supporting online processing.
+	Internal package. Package provides a handler for support online processing.
 */
 package internalmanager
 
@@ -15,15 +15,48 @@ type oneResult struct {
 	ctx context.Context
 }
 
+type Map struct {
+	sync.RWMutex
+	data map[int64]*oneResult
+}
+
+func (m *Map) LoadAndDelete(id int64) (*oneResult, bool) {
+	m.Lock()
+	defer m.Unlock()
+	out, find := m.data[id]
+	if find {
+		delete(m.data, id)
+	}
+	return out, find
+}
+
+func (m *Map) Store(id int64, res *oneResult) {
+	m.Lock()
+	defer m.Unlock()
+	m.data[id] = res
+}
+
+func (m *Map) Range(f func(key int64, res *oneResult) bool) {
+	m.Lock()
+	defer m.Unlock()
+	for k, v := range m.data {
+		if !f(k, v) {
+			return
+		}
+	}
+}
+
 // global vars
-var allResults *sync.Map
+var allResults *Map
 var mx *sync.RWMutex
 
 type OnwFinalHandler struct{}
 
 func init() {
 	mx = new(sync.RWMutex)
-	allResults = &sync.Map{}
+	allResults = &Map{
+		data: map[int64]*oneResult{},
+	}
 }
 
 func Init() faces.GiveBirth {
@@ -53,15 +86,16 @@ func (m *OnwFinalHandler) Stop() {
 	mx.Lock()
 	defer mx.Unlock()
 
-	closeFunc := func(key, value interface{}) bool {
-		res := value.(*oneResult)
+	closeFunc := func(key int64, res *oneResult) bool {
 		close(res.ch)
 		res.ch = nil
 		return true
 	}
 
 	allResults.Range(closeFunc)
-	allResults = &sync.Map{}
+	allResults = &Map{
+		data: map[int64]*oneResult{},
+	}
 }
 
 func runOne(res *oneResult, item faces.IItem) {
@@ -80,7 +114,7 @@ func (m *OnwFinalHandler) Run(item faces.IItem) error {
 
 	id := item.GetID()
 	if value, loaded := allResults.LoadAndDelete(id); loaded {
-		go runOne(value.(*oneResult), item)
+		go runOne(value, item)
 	}
 
 	return nil

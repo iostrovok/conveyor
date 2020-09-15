@@ -122,6 +122,20 @@
 				
 			
 				
+				<dd><a href="index.html#EmptyHandler">type EmptyHandler</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#EmptyHandler.Run">func (m *EmptyHandler) Run(_ IItem) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#EmptyHandler.Start">func (m *EmptyHandler) Start(_ context.Context) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#EmptyHandler.Stop">func (m *EmptyHandler) Stop()</a></dd>
+				
+			
+				
 				<dd><a href="index.html#GiveBirth">type GiveBirth</a></dd>
 				
 				
@@ -196,6 +210,8 @@
 			
 				<a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/conveyor.go">conveyor.go</a>
 			
+				<a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/emptyhandler.go">emptyhandler.go</a>
+			
 				<a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/handler.go">handler.go</a>
 			
 				<a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/interfaces.go">interfaces.go</a>
@@ -250,19 +266,112 @@
 		
 			
 			
-			<h2 id="GiveBirth">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/handler.go?s=138:187#L2">GiveBirth</a>
+			<h2 id="EmptyHandler">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/emptyhandler.go?s=429:455#L16">EmptyHandler</a>
+				<a class="permalink" href="index.html#EmptyHandler">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+EmptyHandler realizes the empty handler which do nothing.
+It is useful for replace empty Start and Stop methods by inherited objects.
+</p>
+<p>
+Example:
+</p>
+<pre>type MySimpleHandler struct {
+   EmptyHandler
+}
+
+func Handler(_ faces.Name) (faces.IHandler, error) {
+	return &amp;MySimpleHandler{}, nil
+}
+
+func (m *MySimpleHandler) Run(item faces.IItem) error {s
+	// do something here
+	return nil
+}
+</pre>
+
+			<pre>type EmptyHandler struct{}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="EmptyHandler.Run">func (*EmptyHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/emptyhandler.go?s=741:782#L31">Run</a>
+					<a class="permalink" href="index.html#EmptyHandler.Run">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#EmptyHandler">EmptyHandler</a>) Run(_ <a href="index.html#IItem">IItem</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a></pre>
+				<p>
+Run does nothing
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="EmptyHandler.Start">func (*EmptyHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/emptyhandler.go?s=580:633#L23">Start</a>
+					<a class="permalink" href="index.html#EmptyHandler.Start">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#EmptyHandler">EmptyHandler</a>) Start(_ <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a></pre>
+				<p>
+Start does nothing
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="EmptyHandler.Stop">func (*EmptyHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/emptyhandler.go?s=672:701#L28">Stop</a>
+					<a class="permalink" href="index.html#EmptyHandler.Stop">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#EmptyHandler">EmptyHandler</a>) Stop()</pre>
+				<p>
+Stop does nothing
+</p>
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="GiveBirth">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/handler.go?s=129:177#L1">GiveBirth</a>
 				<a class="permalink" href="index.html#GiveBirth">&#xb6;</a>
 				
 				
 			</h2>
 			<p>
-GiveBirth return new handler. Name sis string which was passed with AddHandler(...)
+GiveBirth return new handler. Type Name is string which was passed with AddHandler(...)
 </p>
 
 			<pre>type GiveBirth func(name <a href="index.html#Name">Name</a>) (<a href="index.html#IHandler">IHandler</a>, <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>)</pre>
 
 			
 
+			
+				
+				<pre>var <span id="MakeEmptyHandler">MakeEmptyHandler</span> <a href="index.html#GiveBirth">GiveBirth</a> = func(name <a href="index.html#Name">Name</a>) (<a href="index.html#IHandler">IHandler</a>, <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>) {
+    return &amp;<a href="index.html#EmptyHandler">EmptyHandler</a>{}, <a href="http://127.0.0.1:6060/pkg/builtin/#nil">nil</a>
+}</pre>
 			
 
 			
@@ -308,7 +417,7 @@ GiveBirth return new handler. Name sis string which was passed with AddHandler(.
 		
 			
 			
-			<h2 id="IConveyor">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/conveyor.go?s=111:1508#L4">IConveyor</a>
+			<h2 id="IConveyor">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/conveyor.go?s=111:1532#L4">IConveyor</a>
 				<a class="permalink" href="index.html#IConveyor">&#xb6;</a>
 				
 				
@@ -351,6 +460,8 @@ GiveBirth return new handler. Name sis string which was passed with AddHandler(.
 
     <span class="comment">// Master node is single node for control the conveyor</span>
     SetMasterNode(addr <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>, masterNodePeriod <a href="http://127.0.0.1:6060/pkg/time/">time</a>.<a href="http://127.0.0.1:6060/pkg/time/#Duration">Duration</a>)
+
+    DefaultPriority() <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>
 }</pre>
 
 			
@@ -367,20 +478,20 @@ GiveBirth return new handler. Name sis string which was passed with AddHandler(.
 		
 			
 			
-			<h2 id="IHandler">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/handler.go?s=189:513#L4">IHandler</a>
+			<h2 id="IHandler">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/handler.go?s=179:491#L1">IHandler</a>
 				<a class="permalink" href="index.html#IHandler">&#xb6;</a>
 				
 				
 			</h2>
 			
 			<pre>type IHandler interface {
-    <span class="comment">// The Start() function is called one time for each handler right after it&#39;s created with GiveBirth().</span>
+    <span class="comment">// Start() function is called one time for each handler right after it&#39;s created with GiveBirth().</span>
     Start(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>
 
-    <span class="comment">// The Run() function is called for processing single item.</span>
+    <span class="comment">// Run() function is called for processing single item.</span>
     Run(item <a href="index.html#IItem">IItem</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>
 
-    <span class="comment">// The Stop() function is called before destruction of handler.</span>
+    <span class="comment">// Stop() function is called before destruction of handler.</span>
     Stop()
 }</pre>
 
@@ -398,7 +509,7 @@ GiveBirth return new handler. Name sis string which was passed with AddHandler(.
 		
 			
 			
-			<h2 id="IItem">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/item.go?s=51:709#L1">IItem</a>
+			<h2 id="IItem">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/item.go?s=51:742#L1">IItem</a>
 				<a class="permalink" href="index.html#IItem">&#xb6;</a>
 				
 				
@@ -419,23 +530,24 @@ GiveBirth return new handler. Name sis string which was passed with AddHandler(.
 
     SetSkipToName(label <a href="index.html#Name">Name</a>)
     GetSkipToName() <a href="index.html#Name">Name</a>
-    CleanSkipToName()
+    NeedToSkip(worker <a href="index.html#IWorker">IWorker</a>) (<a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a>, <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>)
 
     LogTraceFinishTime(format <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>, a ...interface{})
     LogTrace(format <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>, a ...interface{})
 
     Start() <a href="index.html#IItem">IItem</a>
+    Cancel()
     Finish()
 
     <span class="comment">// &gt;&gt;&gt;&gt;&gt;&gt;&gt; Priority Queue Supports</span>
     GetPriority() <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>
     SetPriority(priority <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>) <a href="index.html#IItem">IItem</a>
 
-    GetHandlerError() <a href="index.html#Name">Name</a>
     SetHandlerError(handlerNameWithError <a href="index.html#Name">Name</a>) <a href="index.html#IItem">IItem</a>
+    GetHandlerError() <a href="index.html#Name">Name</a>
 
-    GetLastHandler() <a href="index.html#Name">Name</a>
     SetLastHandler(handlerName <a href="index.html#Name">Name</a>) <a href="index.html#IItem">IItem</a>
+    GetLastHandler() <a href="index.html#Name">Name</a>
 }</pre>
 
 			
@@ -499,7 +611,7 @@ GiveBirth return new handler. Name sis string which was passed with AddHandler(.
 		
 			
 			
-			<h2 id="ITrace">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/interfaces.go?s=91:542#L1">ITrace</a>
+			<h2 id="ITrace">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/interfaces.go?s=112:563#L1">ITrace</a>
 				<a class="permalink" href="index.html#ITrace">&#xb6;</a>
 				
 				
@@ -535,7 +647,7 @@ GiveBirth return new handler. Name sis string which was passed with AddHandler(.
 		
 			
 			
-			<h2 id="IWorker">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/manager.go?s=964:1103#L46">IWorker</a>
+			<h2 id="IWorker">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/manager.go?s=964:1148#L46">IWorker</a>
 				<a class="permalink" href="index.html#IWorker">&#xb6;</a>
 				
 				
@@ -544,7 +656,10 @@ GiveBirth return new handler. Name sis string which was passed with AddHandler(.
 			<pre>type IWorker interface {
     Start(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>
     Stop()
+
     SetBorderCond(typ <a href="index.html#ManagerType">ManagerType</a>, isLast <a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a>)
+    GetBorderCond() (<a href="index.html#Name">Name</a>, <a href="index.html#ManagerType">ManagerType</a>, <a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a>)
+
     Name() <a href="index.html#Name">Name</a>
     ID() <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>
 }</pre>
@@ -648,7 +763,10 @@ GiveBirth return new handler. Name sis string which was passed with AddHandler(.
 
 			
 				
-				<pre>const <span id="EmptySkipName">EmptySkipName</span> <a href="index.html#Name">Name</a> = &#34;_$#github.com-iostrovok-conveyor&#34;</pre>
+				<pre>const <span id="EmptySkipName">EmptySkipName</span> <a href="index.html#Name">Name</a> = &#34;&#34;</pre>
+			
+				
+				<pre>const <span id="SkipAll">SkipAll</span> <a href="index.html#Name">Name</a> = &#34;###SKIP_EVERYTHING_BY_THE_END&#34;</pre>
 			
 
 			

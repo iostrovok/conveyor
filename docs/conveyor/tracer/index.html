@@ -96,9 +96,6 @@
 				<p>
 Package supports the simple realization of ITrace.
 </p>
-<p>
-Thanks the &#34;golang.org/x/net/trace&#34; for idea.
-</p>
 
 				
 			</div>
@@ -164,7 +161,7 @@ Thanks the &#34;golang.org/x/net/trace&#34; for idea.
 		
 			
 			
-			<h2 id="NewTrace">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/tracer/log.go?s=277:305#L14">NewTrace</a>
+			<h2 id="NewTrace">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/tracer/log.go?s=229:257#L12">NewTrace</a>
 				<a class="permalink" href="index.html#NewTrace">&#xb6;</a>
 				
 				
@@ -178,7 +175,7 @@ Thanks the &#34;golang.org/x/net/trace&#34; for idea.
 		
 			
 			
-			<h2 id="Trace">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/tracer/log.go?s=207:275#L7">Trace</a>
+			<h2 id="Trace">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/tracer/log.go?s=159:227#L5">Trace</a>
 				<a class="permalink" href="index.html#Trace">&#xb6;</a>
 				
 				
@@ -202,49 +199,61 @@ Thanks the &#34;golang.org/x/net/trace&#34; for idea.
 
 			
 				
-				<h3 id="Trace.Flush">func (*Trace) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/tracer/log.go?s=546:569#L30">Flush</a>
+				<h3 id="Trace.Flush">func (*Trace) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/tracer/log.go?s=623:646#L31">Flush</a>
 					<a class="permalink" href="index.html#Trace.Flush">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func (t *<a href="index.html#Trace">Trace</a>) Flush()</pre>
-				
+				<p>
+Flush calls ForceFlush as goroutine.
+</p>
+
 				
 				
 				
 			
 				
-				<h3 id="Trace.ForceFlush">func (*Trace) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/tracer/log.go?s=594:622#L34">ForceFlush</a>
+				<h3 id="Trace.ForceFlush">func (*Trace) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/tracer/log.go?s=708:736#L36">ForceFlush</a>
 					<a class="permalink" href="index.html#Trace.ForceFlush">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func (t *<a href="index.html#Trace">Trace</a>) ForceFlush()</pre>
-				
+				<p>
+ForceFlush prints collected data.
+</p>
+
 				
 				
 				
 			
 				
-				<h3 id="Trace.LazyPrintf">func (*Trace) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/tracer/log.go?s=357:416#L20">LazyPrintf</a>
+				<h3 id="Trace.LazyPrintf">func (*Trace) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/tracer/log.go?s=344:403#L19">LazyPrintf</a>
 					<a class="permalink" href="index.html#Trace.LazyPrintf">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func (t *<a href="index.html#Trace">Trace</a>) LazyPrintf(format <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>, a ...interface{})</pre>
-				
+				<p>
+LazyPrintf add data for output.
+</p>
+
 				
 				
 				
 			
 				
-				<h3 id="Trace.SetError">func (*Trace) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/tracer/log.go?s=496:522#L26">SetError</a>
+				<h3 id="Trace.SetError">func (*Trace) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/tracer/log.go?s=533:559#L26">SetError</a>
 					<a class="permalink" href="index.html#Trace.SetError">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func (t *<a href="index.html#Trace">Trace</a>) SetError()</pre>
-				
+				<p>
+SetError sets that output has prefix &#34;ERROR: &#34;
+</p>
+
 				
 				
 				

@@ -56,7 +56,10 @@ type IManager interface {
 type IWorker interface {
 	Start(ctx context.Context) error
 	Stop()
+
 	SetBorderCond(typ ManagerType, isLast bool)
+	GetBorderCond() (Name, ManagerType, bool)
+
 	Name() Name
 	ID() string
 }

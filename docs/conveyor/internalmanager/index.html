@@ -94,10 +94,7 @@
 			<div class="expanded">
 				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
 				<p>
-Internal package. Package supports the empty IChan interface.
-</p>
-<p>
-Internal package. Package provides a handler for supporting online processing.
+Internal package. Package provides a handler for support online processing.
 </p>
 
 				
@@ -116,8 +113,6 @@ Internal package. Package provides a handler for supporting online processing.
 			<dl>
 			
 			
-				<dd><a href="index.html#pkg-variables">Variables</a></dd>
-			
 			
 				
 				<dd><a href="index.html#AddId">func AddId(id int64, ctx context.Context) chan faces.IItem</a></dd>
@@ -125,20 +120,6 @@ Internal package. Package provides a handler for supporting online processing.
 				
 				<dd><a href="index.html#Init">func Init() faces.GiveBirth</a></dd>
 			
-			
-				
-				<dd><a href="index.html#EmptyHandler">type EmptyHandler</a></dd>
-				
-				
-					
-					<dd>&nbsp; &nbsp; <a href="index.html#EmptyHandler.Run">func (m *EmptyHandler) Run(item faces.IItem) error</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="index.html#EmptyHandler.Start">func (m *EmptyHandler) Start(ctx context.Context) error</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="index.html#EmptyHandler.Stop">func (m *EmptyHandler) Stop()</a></dd>
-				
 			
 				
 				<dd><a href="index.html#OnwFinalHandler">type OnwFinalHandler</a></dd>
@@ -165,8 +146,6 @@ Internal package. Package provides a handler for supporting online processing.
 			<p>
 			<span style="font-size:90%">
 			
-				<a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/empty.go">empty.go</a>
-			
 				<a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go">final_system_handler.go</a>
 			
 			</span>
@@ -179,18 +158,10 @@ Internal package. Package provides a handler for supporting online processing.
 
 		
 		
-			<h2 id="pkg-variables">Variables</h2>
-			
-				
-				<pre>var <span id="MakeEmptyHandler">MakeEmptyHandler</span> <a href="../../../../../../../faces/index.html">faces</a>.<a href="../faces/index.html#GiveBirth">GiveBirth</a> = func(name <a href="../faces/index.html">faces</a>.<a href="../faces/index.html#Name">Name</a>) (<a href="../faces/index.html">faces</a>.<a href="../faces/index.html#IHandler">IHandler</a>, <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>) {
-    return &amp;<a href="index.html#EmptyHandler">EmptyHandler</a>{}, <a href="http://127.0.0.1:6060/pkg/builtin/#nil">nil</a>
-}</pre>
-			
-		
 		
 			
 			
-			<h2 id="AddId">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=537:595#L25">AddId</a>
+			<h2 id="AddId">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=534:592#L25">AddId</a>
 				<a class="permalink" href="index.html#AddId">&#xb6;</a>
 				
 				
@@ -203,7 +174,7 @@ Internal package. Package provides a handler for supporting online processing.
 		
 			
 			
-			<h2 id="Init">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=412:439#L19">Init</a>
+			<h2 id="Init">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=409:436#L19">Init</a>
 				<a class="permalink" href="index.html#Init">&#xb6;</a>
 				
 				
@@ -217,66 +188,7 @@ Internal package. Package provides a handler for supporting online processing.
 		
 			
 			
-			<h2 id="EmptyHandler">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/empty.go?s=157:183#L2">EmptyHandler</a>
-				<a class="permalink" href="index.html#EmptyHandler">&#xb6;</a>
-				
-				
-			</h2>
-			
-			<pre>type EmptyHandler struct{}
-</pre>
-
-			
-
-			
-
-			
-			
-			
-
-			
-
-			
-				
-				<h3 id="EmptyHandler.Run">func (*EmptyHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/empty.go?s=425:475#L13">Run</a>
-					<a class="permalink" href="index.html#EmptyHandler.Run">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (m *<a href="index.html#EmptyHandler">EmptyHandler</a>) Run(item <a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#IItem">IItem</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a></pre>
-				
-				
-				
-				
-			
-				
-				<h3 id="EmptyHandler.Start">func (*EmptyHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/empty.go?s=304:359#L8">Start</a>
-					<a class="permalink" href="index.html#EmptyHandler.Start">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (m *<a href="index.html#EmptyHandler">EmptyHandler</a>) Start(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a></pre>
-				
-				
-				
-				
-			
-				
-				<h3 id="EmptyHandler.Stop">func (*EmptyHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/empty.go?s=376:405#L11">Stop</a>
-					<a class="permalink" href="index.html#EmptyHandler.Stop">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (m *<a href="index.html#EmptyHandler">EmptyHandler</a>) Stop()</pre>
-				
-				
-				
-				
-			
-		
-			
-			
-			<h2 id="OnwFinalHandler">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=314:343#L12">OnwFinalHandler</a>
+			<h2 id="OnwFinalHandler">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=311:340#L12">OnwFinalHandler</a>
 				<a class="permalink" href="index.html#OnwFinalHandler">&#xb6;</a>
 				
 				
@@ -297,7 +209,7 @@ Internal package. Package provides a handler for supporting online processing.
 
 			
 				
-				<h3 id="OnwFinalHandler.Run">func (*OnwFinalHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=1291:1344#L69">Run</a>
+				<h3 id="OnwFinalHandler.Run">func (*OnwFinalHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=1288:1341#L69">Run</a>
 					<a class="permalink" href="index.html#OnwFinalHandler.Run">&#xb6;</a>
 					
 					
@@ -309,7 +221,7 @@ Internal package. Package provides a handler for supporting online processing.
 				
 			
 				
-				<h3 id="OnwFinalHandler.Start">func (*OnwFinalHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=744:800#L38">Start</a>
+				<h3 id="OnwFinalHandler.Start">func (*OnwFinalHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=741:797#L38">Start</a>
 					<a class="permalink" href="index.html#OnwFinalHandler.Start">&#xb6;</a>
 					
 					
@@ -321,7 +233,7 @@ Internal package. Package provides a handler for supporting online processing.
 				
 			
 				
-				<h3 id="OnwFinalHandler.Stop">func (*OnwFinalHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=818:850#L42">Stop</a>
+				<h3 id="OnwFinalHandler.Stop">func (*OnwFinalHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=815:847#L42">Stop</a>
 					<a class="permalink" href="index.html#OnwFinalHandler.Stop">&#xb6;</a>
 					
 					

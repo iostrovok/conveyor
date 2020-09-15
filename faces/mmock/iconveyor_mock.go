@@ -78,6 +78,20 @@ func (mr *MockIConveyorMockRecorder) AddHandler(arg0, arg1, arg2, arg3 interface
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddHandler", reflect.TypeOf((*MockIConveyor)(nil).AddHandler), arg0, arg1, arg2, arg3)
 }
 
+// DefaultPriority mocks base method
+func (m *MockIConveyor) DefaultPriority() int {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DefaultPriority")
+	ret0, _ := ret[0].(int)
+	return ret0
+}
+
+// DefaultPriority indicates an expected call of DefaultPriority
+func (mr *MockIConveyorMockRecorder) DefaultPriority() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DefaultPriority", reflect.TypeOf((*MockIConveyor)(nil).DefaultPriority))
+}
+
 // GetDefaultPriority mocks base method
 func (m *MockIConveyor) GetDefaultPriority() int {
 	m.ctrl.T.Helper()

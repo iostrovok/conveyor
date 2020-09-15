@@ -2,15 +2,10 @@
 	Package supports the IChan interface and provides 3 simples realization of them.
 
 	- standard GO channel FIFO, the fastest realization
-	- priority queue
+	- priority queues
 	- stack, LIFO
-
 */
 package queues
-
-/*
-	....
-*/
 
 import (
 	"github.com/iostrovok/conveyor/faces"

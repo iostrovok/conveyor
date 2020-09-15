@@ -72,24 +72,24 @@ type data struct {
 	uniqNames       []faces.Name
 }
 
-func New(lengthChannel int, chanType faces.ChanType, name string) faces.IConveyor {
+func New(chanLen int, chanType faces.ChanType, name string) faces.IConveyor {
 	c := &Conveyor{}
-	return c.Init(lengthChannel, chanType, name)
+	return c.Init(chanLen, chanType, name)
 }
 
-func (c *Conveyor) Init(lengthChannel int, chanType faces.ChanType, name string) faces.IConveyor {
+func (c *Conveyor) Init(chanLen int, chanType faces.ChanType, name string) faces.IConveyor {
 	if name == "" {
 		name = uuid.New().String()
 	}
 
-	if lengthChannel < 1 {
-		lengthChannel = 1
+	if chanLen < 1 {
+		chanLen = 1
 	}
 
 	c.data = &data{
 		clusterID:            name + "-" + strconv.FormatInt(time.Now().Unix(), 10),
 		name:                 name,
-		lengthChannel:        lengthChannel,
+		lengthChannel:        chanLen,
 		chanType:             chanType,
 		workerGroup:          &sync.WaitGroup{},
 		errorGroup:           &sync.WaitGroup{},
@@ -105,9 +105,9 @@ func (c *Conveyor) Init(lengthChannel int, chanType faces.ChanType, name string)
 		defaultPriority: defaultPriority,
 	}
 
-	c.data.outCh = queues.New(lengthChannel, chanType)
-	c.data.inCh = queues.New(lengthChannel, chanType)
-	c.data.errCh = queues.New(lengthChannel, chanType)
+	c.data.outCh = queues.New(chanLen, chanType)
+	c.data.inCh = queues.New(chanLen, chanType)
+	c.data.errCh = queues.New(chanLen, chanType)
 
 	c.addSystemFinalHandler()
 
@@ -144,7 +144,7 @@ func (c *Conveyor) RunPriorityCtx(ctx context.Context, data interface{}, priorit
 
 // RunPriorityTrace is a variety of RunPriorityCtx with tracer
 func (c *Conveyor) RunPriorityTrace(ctx context.Context, tr faces.ITrace, data interface{}, priority int) {
-	c.data.inCh.ChanIn() <- item.NewItem(ctx, tr).SetPriority(priority).
+	c.data.inCh.ChanIn() <- item.New(ctx, tr).SetPriority(priority).
 		Set(data).SetID(atomic.AddInt64(c.data.itemID, 1)).Start()
 }
 
@@ -162,7 +162,7 @@ func (c *Conveyor) RunResCtx(ctx context.Context, data interface{}, priority int
 func (c *Conveyor) RunResTrace(ctx context.Context, tr faces.ITrace, data interface{}, priority int) (interface{}, error) {
 	id := atomic.AddInt64(c.data.itemID, 1)
 	ch := internalmanager.AddId(id, ctx)
-	c.data.inCh.ChanIn() <- item.NewItem(ctx, tr).SetPriority(priority).Set(data).SetID(id).Start()
+	c.data.inCh.ChanIn() <- item.New(ctx, tr).SetPriority(priority).Set(data).SetID(id).Start()
 	select {
 	case <-ctx.Done():
 		return nil, errors.New("context is canceled")
@@ -183,6 +183,10 @@ func (c *Conveyor) RunResTrace(ctx context.Context, tr faces.ITrace, data interf
 // If priority is not set up it equals the 0 (defaultPriority constant)
 func (c *Conveyor) SetDefaultPriority(defaultPriority int) {
 	c.data.defaultPriority = defaultPriority
+}
+
+func (c *Conveyor) DefaultPriority() int {
+	return c.data.defaultPriority
 }
 
 // GetDefaultPriority returns the default priority of items.
@@ -352,11 +356,11 @@ func (c *Conveyor) Start(ctx context.Context) error {
 
 	// adds default error manager if it's necessary
 	if c.data.firstErrorManager == nil {
-		c.AddErrorHandler(defaultErrorName, 1, 2, internalmanager.MakeEmptyHandler)
+		c.AddErrorHandler(defaultErrorName, 1, 2, faces.MakeEmptyHandler)
 	}
 
 	if c.data.userFinalManager == nil {
-		c.AddFinalHandler(defaultFinalName, 1, 2, internalmanager.MakeEmptyHandler)
+		c.AddFinalHandler(defaultFinalName, 1, 2, faces.MakeEmptyHandler)
 	}
 
 	c.data.Lock()
@@ -517,9 +521,9 @@ func (c *Conveyor) addSystemFinalHandler() {
 		SetChanIn(c.data.outCh)
 }
 
-// addSystemFinalHandler adds customer handler.
+// AddHandler adds customer handler.
 // Parameter name should be unique.
-// minCount should be less or equal the maxCount.
+// minCount should be less or equal the maxCount and great than zero.
 //
 // The order of adding handlers are important. The handlers are called in the same order as they were added.
 func (c *Conveyor) AddHandler(name faces.Name, minCount, maxCount int, handler faces.GiveBirth) error {
@@ -598,6 +602,16 @@ func (c *Conveyor) AddErrorHandler(manageName faces.Name, minCount, maxCount int
 	return nil
 }
 
+func managerStatistic(managers ...faces.IManager) []*nodes.ManagerData {
+	out := make([]*nodes.ManagerData, 0)
+	for _, manager := range managers {
+		if manager != nil {
+			out = append(out, manager.Statistic())
+		}
+	}
+	return out
+}
+
 // Statistic returns the information about current stage of conveyor.
 func (c *Conveyor) Statistic() *nodes.SlaveNodeInfoRequest {
 	c.data.RLock()
@@ -607,10 +621,10 @@ func (c *Conveyor) Statistic() *nodes.SlaveNodeInfoRequest {
 		ClusterID:        c.data.clusterID,
 		NodeID:           c.data.name,
 		ErrorManagerData: []*nodes.ManagerData{},
-		FinalManagerData: []*nodes.ManagerData{
-			c.data.systemFinalManager.Statistic(),
-			c.data.userFinalManager.Statistic(),
-		},
+		FinalManagerData: managerStatistic(
+			c.data.systemFinalManager,
+			c.data.userFinalManager,
+		),
 		ManagerData: []*nodes.ManagerData{},
 	}
 

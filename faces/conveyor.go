@@ -48,4 +48,6 @@ type IConveyor interface {
 
 	// Master node is single node for control the conveyor
 	SetMasterNode(addr string, masterNodePeriod time.Duration)
+
+	DefaultPriority() int
 }

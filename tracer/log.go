@@ -1,7 +1,5 @@
 /*
 	Package supports the simple realization of ITrace.
-
-	Thanks the "golang.org/x/net/trace" for idea.
 */
 package tracer
 
@@ -27,20 +25,24 @@ func NewTrace() faces.ITrace {
 	}
 }
 
+// LazyPrintf add data for output.
 func (t *Trace) LazyPrintf(format string, a ...interface{}) {
 	t.Lock()
 	t.Unlock()
 	t.data = append(t.data, fmt.Sprintf(format, a...))
 }
 
+// SetError sets that output has prefix "ERROR: "
 func (t *Trace) SetError() {
 	t.isError = true
 }
 
+// Flush calls ForceFlush as goroutine.
 func (t *Trace) Flush() {
 	go t.ForceFlush()
 }
 
+// ForceFlush prints collected data.
 func (t *Trace) ForceFlush() {
 
 	out := ""

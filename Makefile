@@ -36,10 +36,16 @@ test-workers:
 	@echo "Run race test for workers"
 	cd $(LOCDIR)/workers && $(DIR) $(GODEBUG) go test -cover -race ./
 
+test-item:
+	@echo "======================================================================"
+	@echo "Run race test for item"
+	cd $(LOCDIR)/item && $(DIR) $(GODEBUG) go test -cover -race ./
+
 test-stack:
 	@echo "======================================================================"
 	@echo "Run race test for queues/stack"
 	cd $(LOCDIR)/queues/stack && $(DIR) $(GODEBUG) go test -cover -race ./
+
 
 tests-priorityqueue:
 	@echo "======================================================================"

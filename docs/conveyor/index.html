@@ -114,7 +114,7 @@
 			
 			
 				
-				<dd><a href="index.html#New">func New(lengthChannel int, chanType faces.ChanType, name string) faces.IConveyor</a></dd>
+				<dd><a href="index.html#New">func New(chanLen int, chanType faces.ChanType, name string) faces.IConveyor</a></dd>
 			
 			
 				
@@ -131,10 +131,16 @@
 					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.AddHandler">func (c *Conveyor) AddHandler(name faces.Name, minCount, maxCount int, handler faces.GiveBirth) error</a></dd>
 				
 					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.DefaultPriority">func (c *Conveyor) DefaultPriority() int</a></dd>
+				
+					
 					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.GetDefaultPriority">func (c *Conveyor) GetDefaultPriority() int</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.GetName">func (c *Conveyor) GetName() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.Init">func (c *Conveyor) Init(chanLen int, chanType faces.ChanType, name string) faces.IConveyor</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#Conveyor.MetricPeriod">func (c *Conveyor) MetricPeriod(duration time.Duration) faces.IConveyor</a></dd>
@@ -220,12 +226,12 @@
 		
 			
 			
-			<h2 id="New">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=1572:1653#L65">New</a>
+			<h2 id="New">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=1572:1647#L65">New</a>
 				<a class="permalink" href="index.html#New">&#xb6;</a>
 				
 				
 			</h2>
-			<pre>func New(lengthChannel <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>, chanType <a href="faces/index.html">faces</a>.<a href="faces/index.html#ChanType">ChanType</a>, name <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>) <a href="faces/index.html">faces</a>.<a href="faces/index.html#IConveyor">IConveyor</a></pre>
+			<pre>func New(chanLen <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>, chanType <a href="faces/index.html">faces</a>.<a href="faces/index.html#ChanType">ChanType</a>, name <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>) <a href="faces/index.html">faces</a>.<a href="faces/index.html#IConveyor">IConveyor</a></pre>
 			
 			
 			
@@ -257,7 +263,7 @@
 
 			
 				
-				<h3 id="Conveyor.AddErrorHandler">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=14893:15005#L552">AddErrorHandler</a>
+				<h3 id="Conveyor.AddErrorHandler">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=15044:15156#L559">AddErrorHandler</a>
 					<a class="permalink" href="index.html#Conveyor.AddErrorHandler">&#xb6;</a>
 					
 					
@@ -274,7 +280,7 @@ If custom error handler returned error the conveyor logs the error but doesn&#39
 				
 			
 				
-				<h3 id="Conveyor.AddFinalHandler">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=11832:11938#L457">AddFinalHandler</a>
+				<h3 id="Conveyor.AddFinalHandler">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=11974:12080#L464">AddFinalHandler</a>
 					<a class="permalink" href="index.html#Conveyor.AddFinalHandler">&#xb6;</a>
 					
 					
@@ -291,16 +297,16 @@ If custom final handler returned error the conveyor doesn&#39;t process and log 
 				
 			
 				
-				<h3 id="Conveyor.AddHandler">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=13658:13759#L512">AddHandler</a>
+				<h3 id="Conveyor.AddHandler">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=13809:13910#L519">AddHandler</a>
 					<a class="permalink" href="index.html#Conveyor.AddHandler">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) AddHandler(name <a href="faces/index.html">faces</a>.<a href="faces/index.html#Name">Name</a>, minCount, maxCount <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>, handler <a href="faces/index.html">faces</a>.<a href="faces/index.html#GiveBirth">GiveBirth</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a></pre>
 				<p>
-addSystemFinalHandler adds customer handler.
+AddHandler adds customer handler.
 Parameter name should be unique.
-minCount should be less or equal the maxCount.
+minCount should be less or equal the maxCount and great than zero.
 </p>
 <p>
 The order of adding handlers are important. The handlers are called in the same order as they were added.
@@ -311,7 +317,19 @@ The order of adding handlers are important. The handlers are called in the same 
 				
 			
 				
-				<h3 id="Conveyor.GetDefaultPriority">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=5443:5486#L177">GetDefaultPriority</a>
+				<h3 id="Conveyor.DefaultPriority">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=5422:5462#L178">DefaultPriority</a>
+					<a class="permalink" href="index.html#Conveyor.DefaultPriority">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) DefaultPriority() <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.GetDefaultPriority">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=5605:5648#L184">GetDefaultPriority</a>
 					<a class="permalink" href="index.html#Conveyor.GetDefaultPriority">&#xb6;</a>
 					
 					
@@ -327,7 +345,7 @@ It makes sense if priority queue is used.
 				
 			
 				
-				<h3 id="Conveyor.GetName">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=7805:7840#L271">GetName</a>
+				<h3 id="Conveyor.GetName">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=7967:8002#L278">GetName</a>
 					<a class="permalink" href="index.html#Conveyor.GetName">&#xb6;</a>
 					
 					
@@ -342,7 +360,19 @@ GetName is a simple getter for name property
 				
 			
 				
-				<h3 id="Conveyor.MetricPeriod">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=8424:8495#L303">MetricPeriod</a>
+				<h3 id="Conveyor.Init">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=1711:1801#L70">Init</a>
+					<a class="permalink" href="index.html#Conveyor.Init">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#Conveyor">Conveyor</a>) Init(chanLen <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>, chanType <a href="faces/index.html">faces</a>.<a href="faces/index.html#ChanType">ChanType</a>, name <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>) <a href="faces/index.html">faces</a>.<a href="faces/index.html#IConveyor">IConveyor</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Conveyor.MetricPeriod">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=8586:8657#L310">MetricPeriod</a>
 					<a class="permalink" href="index.html#Conveyor.MetricPeriod">&#xb6;</a>
 					
 					
@@ -358,7 +388,7 @@ By default 10 second
 				
 			
 				
-				<h3 id="Conveyor.Run">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=2655:2695#L106">Run</a>
+				<h3 id="Conveyor.Run">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=2748:2788#L109">Run</a>
 					<a class="permalink" href="index.html#Conveyor.Run">&#xb6;</a>
 					
 					
@@ -374,7 +404,7 @@ If priority queue is used the default priority will be set up.
 				
 			
 				
-				<h3 id="Conveyor.RunCtx">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=2887:2951#L112">RunCtx</a>
+				<h3 id="Conveyor.RunCtx">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=2980:3044#L115">RunCtx</a>
 					<a class="permalink" href="index.html#Conveyor.RunCtx">&#xb6;</a>
 					
 					
@@ -390,7 +420,7 @@ If priority queue is used the default priority will be set up.
 				
 			
 				
-				<h3 id="Conveyor.RunPriority">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=3327:3389#L123">RunPriority</a>
+				<h3 id="Conveyor.RunPriority">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=3420:3482#L126">RunPriority</a>
 					<a class="permalink" href="index.html#Conveyor.RunPriority">&#xb6;</a>
 					
 					
@@ -405,7 +435,7 @@ RunPriority is a variety of Run with priority
 				
 			
 				
-				<h3 id="Conveyor.RunPriorityCtx">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=3517:3603#L128">RunPriorityCtx</a>
+				<h3 id="Conveyor.RunPriorityCtx">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=3610:3696#L131">RunPriorityCtx</a>
 					<a class="permalink" href="index.html#Conveyor.RunPriorityCtx">&#xb6;</a>
 					
 					
@@ -420,7 +450,7 @@ RunPriorityCtx is a variety of RunPriority with context
 				
 			
 				
-				<h3 id="Conveyor.RunPriorityTrace">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=3718:3823#L133">RunPriorityTrace</a>
+				<h3 id="Conveyor.RunPriorityTrace">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=3811:3916#L136">RunPriorityTrace</a>
 					<a class="permalink" href="index.html#Conveyor.RunPriorityTrace">&#xb6;</a>
 					
 					
@@ -435,7 +465,7 @@ RunPriorityTrace is a variety of RunPriorityCtx with tracer
 				
 			
 				
-				<h3 id="Conveyor.RunRes">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=4048:4126#L139">RunRes</a>
+				<h3 id="Conveyor.RunRes">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=4137:4215#L142">RunRes</a>
 					<a class="permalink" href="index.html#Conveyor.RunRes">&#xb6;</a>
 					
 					
@@ -450,7 +480,7 @@ RunRes creates the new item over interface and sends to conveyor and returns res
 				
 			
 				
-				<h3 id="Conveyor.RunResCtx">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=4239:4341#L144">RunResCtx</a>
+				<h3 id="Conveyor.RunResCtx">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=4328:4430#L147">RunResCtx</a>
 					<a class="permalink" href="index.html#Conveyor.RunResCtx">&#xb6;</a>
 					
 					
@@ -465,7 +495,7 @@ RunResCtx is a variety of RunRes with context
 				
 			
 				
-				<h3 id="Conveyor.RunResTrace">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=4470:4591#L149">RunResTrace</a>
+				<h3 id="Conveyor.RunResTrace">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=4559:4680#L152">RunResTrace</a>
 					<a class="permalink" href="index.html#Conveyor.RunResTrace">&#xb6;</a>
 					
 					
@@ -480,7 +510,7 @@ RunResTrace is a variety of RunPriorityCtx with tracer
 				
 			
 				
-				<h3 id="Conveyor.RunTrace">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=3130:3213#L118">RunTrace</a>
+				<h3 id="Conveyor.RunTrace">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=3223:3306#L121">RunTrace</a>
 					<a class="permalink" href="index.html#Conveyor.RunTrace">&#xb6;</a>
 					
 					
@@ -496,7 +526,7 @@ If priority queue is used the default priority will be set up.
 				
 			
 				
-				<h3 id="Conveyor.SetDefaultPriority">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=5231:5289#L171">SetDefaultPriority</a>
+				<h3 id="Conveyor.SetDefaultPriority">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=5316:5374#L174">SetDefaultPriority</a>
 					<a class="permalink" href="index.html#Conveyor.SetDefaultPriority">&#xb6;</a>
 					
 					
@@ -515,7 +545,7 @@ If priority is not set up it equals the 0 (defaultPriority constant)
 				
 			
 				
-				<h3 id="Conveyor.SetMasterNode">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=5710:5787#L184">SetMasterNode</a>
+				<h3 id="Conveyor.SetMasterNode">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=5872:5949#L191">SetMasterNode</a>
 					<a class="permalink" href="index.html#Conveyor.SetMasterNode">&#xb6;</a>
 					
 					
@@ -532,7 +562,7 @@ see more information github.com/iostrovok/conveyormaster
 				
 			
 				
-				<h3 id="Conveyor.SetName">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=7666:7721#L265">SetName</a>
+				<h3 id="Conveyor.SetName">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=7828:7883#L272">SetName</a>
 					<a class="permalink" href="index.html#Conveyor.SetName">&#xb6;</a>
 					
 					
@@ -547,7 +577,7 @@ SetName is a simple setter for name property
 				
 			
 				
-				<h3 id="Conveyor.SetTracer">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=8179:8240#L289">SetTracer</a>
+				<h3 id="Conveyor.SetTracer">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=8341:8402#L296">SetTracer</a>
 					<a class="permalink" href="index.html#Conveyor.SetTracer">&#xb6;</a>
 					
 					
@@ -562,7 +592,7 @@ SetTracer sets up the tracer with ITrace interface
 				
 			
 				
-				<h3 id="Conveyor.SetWorkersCounter">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=7496:7574#L259">SetWorkersCounter</a>
+				<h3 id="Conveyor.SetWorkersCounter">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=7658:7736#L266">SetWorkersCounter</a>
 					<a class="permalink" href="index.html#Conveyor.SetWorkersCounter">&#xb6;</a>
 					
 					
@@ -578,7 +608,7 @@ WorkersCounter rules the number of current worked handlers.
 				
 			
 				
-				<h3 id="Conveyor.Start">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=8964:9015#L334">Start</a>
+				<h3 id="Conveyor.Start">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=9126:9177#L341">Start</a>
 					<a class="permalink" href="index.html#Conveyor.Start">&#xb6;</a>
 					
 					
@@ -593,7 +623,7 @@ Start starts the conveyor
 				
 			
 				
-				<h3 id="Conveyor.Statistic">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=15975:16033#L589">Statistic</a>
+				<h3 id="Conveyor.Statistic">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=16359:16417#L606">Statistic</a>
 					<a class="permalink" href="index.html#Conveyor.Statistic">&#xb6;</a>
 					
 					
@@ -608,7 +638,7 @@ Statistic returns the information about current stage of conveyor.
 				
 			
 				
-				<h3 id="Conveyor.Stop">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=10508:10533#L394">Stop</a>
+				<h3 id="Conveyor.Stop">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=10650:10675#L401">Stop</a>
 					<a class="permalink" href="index.html#Conveyor.Stop">&#xb6;</a>
 					
 					
@@ -624,7 +654,7 @@ Processing of items will be  interrupted.
 				
 			
 				
-				<h3 id="Conveyor.WaitAndStop">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=10860:10892#L416">WaitAndStop</a>
+				<h3 id="Conveyor.WaitAndStop">func (*Conveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/conveyor.go?s=11002:11034#L423">WaitAndStop</a>
 					<a class="permalink" href="index.html#Conveyor.WaitAndStop">&#xb6;</a>
 					
 					
@@ -691,7 +721,7 @@ Processing of items will not be interrupted.
 				<tr>
 				
 					<td class="pkg-name" style="padding-left: 20px;">
-						<a href="example/priorityqueue/index.html">priorityqueue</a>
+						<a href="example/quickstart/index.html">quickstart</a>
 					</td>
 				
 					<td class="pkg-synopsis">
@@ -703,17 +733,6 @@ Processing of items will not be interrupted.
 				
 					<td class="pkg-name" style="padding-left: 20px;">
 						<a href="example/simple/index.html">simple</a>
-					</td>
-				
-					<td class="pkg-synopsis">
-						
-					</td>
-				</tr>
-			
-				<tr>
-				
-					<td class="pkg-name" style="padding-left: 20px;">
-						<a href="example/stack/index.html">stack</a>
 					</td>
 				
 					<td class="pkg-synopsis">

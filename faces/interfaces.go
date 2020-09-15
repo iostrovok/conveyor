@@ -4,7 +4,8 @@ package faces
 	....
 */
 
-const EmptySkipName Name = "_$#github.com-iostrovok-conveyor"
+const EmptySkipName Name = ""
+const SkipAll Name = "###SKIP_EVERYTHING_BY_THE_END"
 
 type ITrace interface {
 	// LazyPrintf evaluates its arguments with fmt.Sprintf each time the

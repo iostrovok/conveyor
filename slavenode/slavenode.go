@@ -15,7 +15,7 @@ import (
 )
 
 // Max Size of message for Lambda client
-const MaxMsgSize = 10 * 1024 * 1024 // max message size 10 MB
+const maxMsgSize = 10 * 1024 * 1024 // max message size 10 MB
 
 func dialOption() []grpc.DialOption {
 
@@ -47,8 +47,8 @@ func dialOption() []grpc.DialOption {
 		grpc.WithKeepaliveParams(kp),
 		grpc.WithDefaultCallOptions(
 			grpc.WaitForReady(false),
-			grpc.MaxCallRecvMsgSize(MaxMsgSize),
-			grpc.MaxCallSendMsgSize(MaxMsgSize),
+			grpc.MaxCallRecvMsgSize(maxMsgSize),
+			grpc.MaxCallSendMsgSize(maxMsgSize),
 		),
 	}
 

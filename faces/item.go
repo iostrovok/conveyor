@@ -23,12 +23,13 @@ type IItem interface {
 
 	SetSkipToName(label Name)
 	GetSkipToName() Name
-	CleanSkipToName()
+	NeedToSkip(worker IWorker) (bool, error)
 
 	LogTraceFinishTime(format string, a ...interface{})
 	LogTrace(format string, a ...interface{})
 
 	Start() IItem
+	Cancel()
 	Finish()
 
 	// >>>>>>> Priority Queue Supports
@@ -36,9 +37,9 @@ type IItem interface {
 	SetPriority(priority int) IItem
 	// <<<<<<< Priority Queue Support
 
-	GetHandlerError() Name
 	SetHandlerError(handlerNameWithError Name) IItem
+	GetHandlerError() Name
 
-	GetLastHandler() Name
 	SetLastHandler(handlerName Name) IItem
+	GetLastHandler() Name
 }

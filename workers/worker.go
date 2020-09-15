@@ -72,10 +72,11 @@ func (w *Worker) SetBorderCond(typ faces.ManagerType, isLast bool) {
 	w.typ = typ
 }
 
-func (w *Worker) IsLast() bool {
-	w.RLock()
-	defer w.RUnlock()
+func (w *Worker) GetBorderCond() (faces.Name, faces.ManagerType, bool) {
+	return w.name, w.typ, w.isLast
+}
 
+func (w *Worker) IsLast() bool {
 	return w.isLast
 }
 
@@ -149,23 +150,24 @@ func (w *Worker) process(ctx context.Context, item faces.IItem) {
 	item.SetLastHandler(w.name)
 
 	// check that item should be skipped
+	find, err := item.NeedToSkip(w)
 
-	if needToSkip(w.typ, w.name, item) {
+	if err != nil {
+		//
+		// no more handlers after that. Fix error.
+		logError(w.name, err, item)
+		pushToNotNilChan(w.errCh, item)
+		return
+	}
+
+	if find {
 		// needed handler is not  found
-		if w.isLast && w.typ == faces.WorkerManagerType {
-			// no more handlers after that. Fix error.
-			err := errors.New("it is the last handler: skipped name [" + string(item.GetSkipToName()) + "] can't be processed")
-			logError(w.name, err, item)
-			pushToNotNilChan(w.errCh, item)
-		} else {
-			pushToNotNilChan(w.out, item)
-		}
-
+		pushToNotNilChan(w.out, item)
 		return
 	}
 
 	// main action
-	err := w.run(ctx, item)
+	err = w.run(ctx, item)
 	logError(w.name, err, item)
 	w.debriefingOfFlight(err, item)
 }
@@ -188,15 +190,20 @@ func (w *Worker) run(ctx context.Context, item faces.IItem) error {
 	internalErr := make(chan error, 1)
 	go doit(internalErr, w.handler, item)
 
+	var err error
 	select {
 	case <-ctx.Done():
 		w.globalStop = true
-		return errors.New(w.id + " processing is stopped by global context")
+		item.Cancel()
+		err = errors.New(w.id + " processing is stopped by global context")
 	case <-item.GetContext().Done():
-		return errors.New(w.id + " processing is stopped by context")
-	case err := <-internalErr:
-		return err
+		// TODO it's not obviously, customer handler should check it.
+		err = errors.New(w.id + " processing is stopped by item context")
+	case err = <-internalErr:
+		/* nothing */
 	}
+
+	return err
 }
 
 // logError fix log/debug/trace
@@ -233,27 +240,4 @@ func pushToNotNilChan(ch faces.IChan, item faces.IItem) {
 	if ch != nil {
 		ch.Push(item)
 	}
-}
-
-func needToSkip(typ faces.ManagerType, name faces.Name, item faces.IItem) bool {
-
-	// never skip system handlers
-	if typ != faces.WorkerManagerType {
-		item.CleanSkipToName()
-		return false
-	}
-
-	skipName := item.GetSkipToName()
-	if skipName == faces.EmptySkipName {
-		// skipping has not requested
-		return false
-	}
-
-	if skipName == name {
-		// Attention, last station! processing...
-		item.CleanSkipToName()
-		return false
-	}
-
-	return true
 }

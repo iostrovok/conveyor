@@ -34,6 +34,22 @@ func (m *MockIWorker) EXPECT() *MockIWorkerMockRecorder {
 	return m.recorder
 }
 
+// GetBorderCond mocks base method
+func (m *MockIWorker) GetBorderCond() (faces.Name, faces.ManagerType, bool) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetBorderCond")
+	ret0, _ := ret[0].(faces.Name)
+	ret1, _ := ret[1].(faces.ManagerType)
+	ret2, _ := ret[2].(bool)
+	return ret0, ret1, ret2
+}
+
+// GetBorderCond indicates an expected call of GetBorderCond
+func (mr *MockIWorkerMockRecorder) GetBorderCond() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBorderCond", reflect.TypeOf((*MockIWorker)(nil).GetBorderCond))
+}
+
 // ID mocks base method
 func (m *MockIWorker) ID() string {
 	m.ctrl.T.Helper()

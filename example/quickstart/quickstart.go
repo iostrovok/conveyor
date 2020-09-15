@@ -1,39 +1,3 @@
-# Conveyor
-
-The support of the multi-concurrent design patterns.
-
-Common Conveyor schema:
-
-![alt text](https://github.com/iostrovok/conveyor/blob/master/images/conveyor_schema.jpg?raw=true "Common Conveyor Schema")
-
-[![Godoc](http://img.shields.io/badge/godoc-reference-blue.svg?style=flat)](docs/conveyor/index.html)
-
-
-## Installation
-
-conveyor requires a Go version with [Modules](https://github.com/golang/go/wiki/Modules) support and
-uses import versioning. So please make sure to initialize a Go module before installing conveyor:
-
-```shell
-go mod init github.com/my/repo
-go get github.com/iostrovok/conveyor
-```
-
-Import:
-
-```go
-import (
-	"github.com/iostrovok/conveyor"
-	"github.com/iostrovok/conveyor/faces"
-)
-```
-
-## Quickstart
-
-See example/quickstart
-
-```go
-
 package main
 
 import (
@@ -45,6 +9,7 @@ import (
 	"github.com/iostrovok/conveyor/faces"
 )
 
+// >>>>>>>>>>>>>>>>>>>> simple worker handler START
 type MySimpleHandler struct {
 	faces.EmptyHandler
 	name faces.Name
@@ -58,6 +23,8 @@ func (m *MySimpleHandler) Run(item faces.IItem) error {
 	fmt.Printf("MySimpleHandler %s => %d]: %s\n", m.name, item.GetID(), item.Get().(string))
 	return nil
 }
+
+// <<<<<<<<<<<<<<<<<<<< simple worked handler. END
 
 func main() {
 	// create new conveyor
@@ -74,12 +41,9 @@ func main() {
 	}
 
 	for i := 0; i < 100; i++ {
-        // process our string-item
 		myMaster.Run(fmt.Sprintf("item: %d", i+1))
 	}
 
 	// wait while conveyor is working
 	myMaster.WaitAndStop()
 }
-
-```
