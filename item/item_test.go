@@ -55,6 +55,11 @@ func (s *testSuite) TestNeedToSkip(c *C) {
 	checkResult(c, item, MockIWorkerMocker(c.T(), NameOne, faces.WorkerManagerType, false), false, nil)
 }
 
+func (s *testSuite) TestNillContex(c *C) {
+	item := New(nil, nil)
+	c.Assert(item, NotNil)
+}
+
 func checkResult(c *C, item faces.IItem, w faces.IWorker, needSkip bool, errIn error) {
 	skip, err := item.NeedToSkip(w)
 

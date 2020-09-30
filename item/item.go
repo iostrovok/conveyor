@@ -35,12 +35,18 @@ type Data struct {
 }
 
 func New(ctx context.Context, tr faces.ITrace) faces.IItem {
+
 	item := &Item{}
 	item.Init(ctx, tr)
 	return item
 }
 
 func (i *Item) Init(ctxIn context.Context, tr faces.ITrace) faces.IItem {
+
+	// sometime it happens
+	if ctxIn == nil {
+		ctxIn = context.Background()
+	}
 
 	ctx, cancel := context.WithCancel(ctxIn)
 
