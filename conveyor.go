@@ -59,7 +59,8 @@ type data struct {
 	metricPeriodDuration time.Duration
 	workersCounter       faces.IWorkersCounter
 
-	tracer faces.ITrace
+	tracer               faces.ITrace
+	tracerPeriodDuration time.Duration
 
 	stopContext   context.Context
 	cancelContext context.CancelFunc
@@ -303,13 +304,14 @@ func (c *Conveyor) logTrace(format string, a ...interface{}) faces.IConveyor {
 }
 
 // SetTracer sets up the tracer with ITrace interface
-func (c *Conveyor) SetTracer(tr faces.ITrace) faces.IConveyor {
+func (c *Conveyor) SetTracer(tr faces.ITrace, duration time.Duration) faces.IConveyor {
 
 	c.data.Lock()
 	defer c.data.Unlock()
 
 	if tr != nil {
 		c.data.tracer = tr
+		c.data.tracerPeriodDuration = duration
 	}
 
 	return c
@@ -394,7 +396,7 @@ func (c *Conveyor) Start(ctx context.Context) error {
 				select {
 				case <-ctx.Done():
 					return
-				case <-time.After(5 * time.Second):
+				case <-time.After(c.data.tracerPeriodDuration):
 					if c.data.tracer != nil {
 						c.data.tracer.Flush()
 					}

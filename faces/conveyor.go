@@ -40,7 +40,7 @@ type IConveyor interface {
 	AddErrorHandler(manageName Name, minCount, maxCount int, handler GiveBirth) error
 	AddFinalHandler(manageName Name, minCount, maxCount int, handler GiveBirth) error
 	Statistic() *nodes.SlaveNodeInfoRequest
-	SetTracer(tr ITrace) IConveyor
+	SetTracer(tr ITrace, duration time.Duration) IConveyor
 
 	// The period between metric evaluations.
 	// By default 10 second
