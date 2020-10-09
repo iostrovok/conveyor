@@ -46,29 +46,33 @@ test-stack:
 	@echo "Run race test for queues/stack"
 	cd $(LOCDIR)/queues/stack && $(DIR) $(GODEBUG) go test -cover -race ./
 
+test-std:
+	@echo "======================================================================"
+	@echo "Run race test for queues/std"
+	cd $(LOCDIR)/queues/std && $(DIR) $(GODEBUG) go test -cover -race ./
 
 tests-priorityqueue:
 	@echo "======================================================================"
 	@echo "Run race test for queues/priorityqueue"
 	cd $(LOCDIR)/queues/priorityqueue && $(DIR) $(GODEBUG) go test -cover -race ./
 
-test: test-stack test-workers
+test: test-std test-stack tests-priorityqueue test-workers
 	@echo "======================================================================"
 	@echo "----"
-	@echo "Run race test for ./src/..."
-	cd $(LOCDIR)/src/ && $(DIR) $(GODEBUG) go test --check.format=teamcity -cover -race ./
+	@echo "Run race test for ./item/..."
+	cd $(LOCDIR)/item/ && $(DIR) $(GODEBUG) go test -cover -race ./
 	@echo "----"
 	@echo "Run race test for ./slavenode/..."
-	cd $(LOCDIR)/slavenode/ && $(DIR) $(GODEBUG) go test --check.format=teamcity -cover -race ./
+	cd $(LOCDIR)/slavenode/ && $(DIR) $(GODEBUG) go test -cover -race ./
 	@echo "----"
 	@echo "Run race test for ./faces/..."
-	cd $(LOCDIR)/faces/ && $(DIR) $(GODEBUG) go test --check.format=teamcity -cover -race ./
+	cd $(LOCDIR)/faces/ && $(DIR) $(GODEBUG) go test -cover -race ./
 	@echo "----"
 	@echo "Run race test for ./tracer/..."
-	cd $(LOCDIR)/tracer/ && $(DIR) $(GODEBUG) go test --check.format=teamcity -cover -race ./
+	cd $(LOCDIR)/tracer/ && $(DIR) $(GODEBUG) go test -cover -race ./
 	@echo "----"
 	@echo "Run race test for ./"
-	cd $(LOCDIR)/ && $(DIR) $(GODEBUG) go test --check.format=teamcity -cover -race ./
+	cd $(LOCDIR)/ && $(DIR) $(GODEBUG) go test -cover -race ./
 
 lint:
 	@echo "======================================================================"

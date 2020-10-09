@@ -202,7 +202,7 @@ func (c *Conveyor) SetMasterNode(addr string, masterNodePeriod time.Duration) {
 	c.data.masterNodeAddress = addr
 	c.data.masterNodePeriod = masterNodePeriod
 	if c.data.masterNodePeriod == 0 {
-		c.data.masterNodePeriod = 2 * time.Second
+		c.data.masterNodePeriod = 60 * time.Second
 	}
 }
 
@@ -252,7 +252,7 @@ func (c *Conveyor) runMasterNode() {
 
 		for {
 			select {
-			case <-time.After(time.Duration(2) * c.data.masterNodePeriod):
+			case <-time.After(c.data.masterNodePeriod):
 				sn, err := slavenode.New(c.data.masterNodeAddress)
 				if err == nil {
 					c.data.Lock()

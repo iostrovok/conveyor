@@ -91,7 +91,7 @@ func (s *testSuite) TestInTheSameTime(c *C) {
 
 	c.Assert(total, Equals, lastId)
 	c.Logf("success: %d, total: %d\n", success, total)
-	c.Assert(float32(success) > 0.95*float32(total), Equals, true)
+	c.Assert(float32(success) >= 0.90*float32(total), Equals, true)
 }
 
 func readTestData(st *Stack) (int, int) {
