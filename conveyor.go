@@ -330,7 +330,7 @@ func (c *Conveyor) MetricPeriod(duration time.Duration) faces.IConveyor {
 		if mg == nil {
 			break
 		}
-		mg = mg.MetricPeriod(duration)
+		mg = mg.MetricPeriod(duration).GetNextManager()
 	}
 
 	return c
