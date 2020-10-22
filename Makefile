@@ -125,7 +125,7 @@ mock-gen:
 install: clean deps install-proto mod
 
 install-proto:
-	build@mkdir -p $(GOBIN)
+	@mkdir -p $(GOBIN)
 	wget https://github.com/protocolbuffers/protobuf/releases/download/v$(PROTO_VERSION)/$(PROTO_ZIP)
 	unzip -o $(PROTO_ZIP)
 	rm $(PROTO_ZIP)
