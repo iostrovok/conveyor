@@ -8,6 +8,7 @@ import (
 
 	"github.com/iostrovok/conveyor"
 	"github.com/iostrovok/conveyor/faces"
+	"github.com/iostrovok/conveyor/input"
 	"github.com/iostrovok/conveyor/tracer"
 )
 
@@ -177,10 +178,10 @@ func main() {
 	myMaster := conveyor.New(20, faces.ChanStack, "my-app")
 
 	// set up default tracer and period for collected metric to with tracer
-	myMaster.SetTracer(tracer.NewTrace()).MetricPeriod(3 * time.Second)
+	myMaster.SetTracer(tracer.NewTrace(), time.Second*5).MetricPeriod(3 * time.Second)
 
 	// do we want to remote control? make it here
-	myMaster.SetMasterNode("127.0.0.1:5101", 2*time.Second)
+	//myMaster.SetMasterNode("127.0.0.1:5101", 2*time.Second)
 
 	// optional method to trace process.
 	go func() {
@@ -225,16 +226,23 @@ func main() {
 	for i := 0; i < total; i++ {
 		tr := tracer.NewTrace()
 		tr.LazyPrintf("item N %d", i)
-		myMaster.RunPriority(
-			&MyMessage{msg: fmt.Sprintf("item: %d", i)}, i,
-		)
+
+		item := input.New().Trace(tr).
+			Data(&MyMessage{msg: fmt.Sprintf("item: %d", i)}).
+			Priority(i)
+
+		myMaster.Run(item)
 	}
 
 	for i := total; i < totalOnline+total; i++ {
+
 		// process one message "online" with reading result
-		res, err := myMaster.RunRes(
-			&MyMessage{msg: fmt.Sprintf("online item: %d", 100)}, 100,
-		)
+
+		item := input.New().
+			Data(&MyMessage{msg: fmt.Sprintf("online item: %d", 100)}).
+			Priority(100)
+
+		res, err := myMaster.RunRes(item)
 		fmt.Printf("\nProccesed online: Result: %+v, Error: %+v\n", res, err)
 	}
 

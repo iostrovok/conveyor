@@ -7,6 +7,7 @@ import (
 
 	"github.com/iostrovok/conveyor"
 	"github.com/iostrovok/conveyor/faces"
+	"github.com/iostrovok/conveyor/input"
 )
 
 // >>>>>>>>>>>>>>>>>>>> simple worker handler START
@@ -41,7 +42,8 @@ func main() {
 	}
 
 	for i := 0; i < 100; i++ {
-		myMaster.Run(fmt.Sprintf("item: %d", i+1))
+		item := input.New().Data(fmt.Sprintf("item: %d", i+1))
+		myMaster.Run(item)
 	}
 
 	// wait while conveyor is working

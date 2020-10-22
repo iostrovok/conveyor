@@ -117,53 +117,56 @@ func (c *Conveyor) Init(chanLen int, chanType faces.ChanType, name string) faces
 
 // Run creates the new item over interface and sends to conveyor.
 // If priority queue is used the default priority will be set up.
-func (c *Conveyor) Run(data interface{}) {
-	c.RunPriorityTrace(context.Background(), nil, data, c.data.defaultPriority)
+func (c *Conveyor) Run(i faces.IInput) {
+	ctx, tr, val, priorityRef, skipToName := i.Values()
+
+	if ctx == nil {
+		ctx = context.Background()
+	}
+
+	priority := c.data.defaultPriority
+	if priorityRef != nil {
+		priority = *priorityRef
+	}
+
+	it := item.New(ctx, tr).
+		SetPriority(priority).
+		Set(val).
+		SetID(atomic.AddInt64(c.data.itemID, 1))
+
+	if skipToName != "" {
+		it.SetSkipToName(skipToName)
+	}
+
+	c.data.inCh.ChanIn() <- it.Start()
 }
 
-// RunCtx is a variety of Run with context
-// If priority queue is used the default priority will be set up.
-func (c *Conveyor) RunCtx(ctx context.Context, data interface{}) {
-	c.RunPriorityTrace(ctx, nil, data, c.data.defaultPriority)
-}
+// RunRes creates the new item over interface, sends to conveyor and returns result.
+func (c *Conveyor) RunRes(i faces.IInput) (interface{}, error) {
+	ctx, tr, val, priorityRef, skipToName := i.Values()
 
-// RunTrace is a variety of RunCtx with tracer
-// If priority queue is used the default priority will be set up.
-func (c *Conveyor) RunTrace(ctx context.Context, tr faces.ITrace, data interface{}) {
-	c.RunPriorityTrace(ctx, tr, data, c.data.defaultPriority)
-}
+	if ctx == nil {
+		ctx = context.Background()
+	}
 
-// RunPriority is a variety of Run with priority
-func (c *Conveyor) RunPriority(data interface{}, priority int) {
-	c.RunPriorityTrace(context.Background(), nil, data, priority)
-}
+	priority := c.data.defaultPriority
+	if priorityRef != nil {
+		priority = *priorityRef
+	}
 
-// RunPriorityCtx is a variety of RunPriority with context
-func (c *Conveyor) RunPriorityCtx(ctx context.Context, data interface{}, priority int) {
-	c.RunPriorityTrace(ctx, nil, data, priority)
-}
-
-// RunPriorityTrace is a variety of RunPriorityCtx with tracer
-func (c *Conveyor) RunPriorityTrace(ctx context.Context, tr faces.ITrace, data interface{}, priority int) {
-	c.data.inCh.ChanIn() <- item.New(ctx, tr).SetPriority(priority).
-		Set(data).SetID(atomic.AddInt64(c.data.itemID, 1)).Start()
-}
-
-// RunRes creates the new item over interface and sends to conveyor and returns result.
-func (c *Conveyor) RunRes(data interface{}, priority int) (interface{}, error) {
-	return c.RunResCtx(context.Background(), data, priority)
-}
-
-// RunResCtx is a variety of RunRes with context
-func (c *Conveyor) RunResCtx(ctx context.Context, data interface{}, priority int) (interface{}, error) {
-	return c.RunResTrace(context.Background(), nil, data, priority)
-}
-
-// RunResTrace is a variety of RunPriorityCtx with tracer
-func (c *Conveyor) RunResTrace(ctx context.Context, tr faces.ITrace, data interface{}, priority int) (interface{}, error) {
 	id := atomic.AddInt64(c.data.itemID, 1)
 	ch := internalmanager.AddId(id, ctx)
-	c.data.inCh.ChanIn() <- item.New(ctx, tr).SetPriority(priority).Set(data).SetID(id).Start()
+
+	it := item.New(ctx, tr).
+		SetPriority(priority).
+		Set(val).
+		SetID(id)
+
+	if skipToName != "" {
+		it.SetSkipToName(skipToName)
+	}
+
+	c.data.inCh.ChanIn() <- it.Start()
 	select {
 	case <-ctx.Done():
 		return nil, errors.New("context is canceled")

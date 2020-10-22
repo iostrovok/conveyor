@@ -50,7 +50,7 @@ func (m *Map) Range(f func(key int64, res *oneResult) bool) {
 var allResults *Map
 var mx *sync.RWMutex
 
-type OnwFinalHandler struct{}
+type SystemFinalHandler struct{}
 
 func init() {
 	mx = new(sync.RWMutex)
@@ -61,7 +61,7 @@ func init() {
 
 func Init() faces.GiveBirth {
 	return func(name faces.Name) (faces.IHandler, error) {
-		return &OnwFinalHandler{}, nil
+		return &SystemFinalHandler{}, nil
 	}
 }
 
@@ -78,11 +78,11 @@ func AddId(id int64, ctx context.Context) chan faces.IItem {
 	return res.ch
 }
 
-func (m *OnwFinalHandler) Start(_ context.Context) error {
+func (m *SystemFinalHandler) Start(_ context.Context) error {
 	return nil
 }
 
-func (m *OnwFinalHandler) Stop() {
+func (m *SystemFinalHandler) Stop() {
 	mx.Lock()
 	defer mx.Unlock()
 
@@ -110,7 +110,7 @@ func runOne(res *oneResult, item faces.IItem) {
 	res.ch = nil
 }
 
-func (m *OnwFinalHandler) Run(item faces.IItem) error {
+func (m *SystemFinalHandler) Run(item faces.IItem) error {
 
 	id := item.GetID()
 	if value, loaded := allResults.LoadAndDelete(id); loaded {

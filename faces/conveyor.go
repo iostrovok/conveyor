@@ -11,23 +11,25 @@ import (
 	....
 */
 
+type IInput interface {
+	Context(ctx context.Context) IInput // by default the context.Background()
+	Trace(tr ITrace) IInput             // nil is by default
+	Data(data interface{}) IInput       // nil is by default
+	Priority(priority int) IInput       // by default is IConveyor.DefaultPriority()
+	SkipToName(name Name) IInput     // by default is ""
+
+	// return all data above
+	Values() (ctx context.Context, tr ITrace, data interface{}, priority *int, name Name)
+}
+
 type IConveyor interface {
 	Start(ctx context.Context) error
 	Stop()
 	WaitAndStop()
 
 	// simple pushing
-	Run(data interface{})
-	RunCtx(ctx context.Context, data interface{})
-	RunTrace(ctx context.Context, tr ITrace, data interface{})
-
-	RunPriority(data interface{}, priority int)
-	RunPriorityCtx(ctx context.Context, data interface{}, priority int)
-	RunPriorityTrace(ctx context.Context, tr ITrace, data interface{}, priority int)
-
-	RunRes(data interface{}, priority int) (interface{}, error)
-	RunResCtx(ctx context.Context, data interface{}, priority int) (interface{}, error)
-	RunResTrace(ctx context.Context, tr ITrace, data interface{}, priority int) (interface{}, error)
+	Run(IInput)
+	RunRes(IInput) (interface{}, error)
 
 	SetDefaultPriority(defaultPriority int)
 	GetDefaultPriority() int

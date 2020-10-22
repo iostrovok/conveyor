@@ -25,6 +25,7 @@ Import:
 import (
 	"github.com/iostrovok/conveyor"
 	"github.com/iostrovok/conveyor/faces"
+	"github.com/iostrovok/conveyor/input"
 )
 ```
 
@@ -43,6 +44,7 @@ import (
 
 	"github.com/iostrovok/conveyor"
 	"github.com/iostrovok/conveyor/faces"
+	"github.com/iostrovok/conveyor/input"
 )
 
 type MySimpleHandler struct {
@@ -75,7 +77,8 @@ func main() {
 
 	for i := 0; i < 100; i++ {
         // process our string-item
-		myMaster.Run(fmt.Sprintf("item: %d", i+1))
+		item := input.New().Data(fmt.Sprintf("item: %d", i+1))
+		myMaster.Run(item)
 	}
 
 	// wait while conveyor is working
