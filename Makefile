@@ -114,6 +114,7 @@ clean-cache:
 mock-gen:
 	$(LOADENV) ./bin/mockgen -package mmock github.com/iostrovok/conveyor/faces IConveyor > ./faces/mmock/iconveyor_mock.go
 	$(LOADENV) ./bin/mockgen -package mmock github.com/iostrovok/conveyor/faces IChan > ./faces/mmock/ichan_mock.go
+	$(LOADENV) ./bin/mockgen -package mmock github.com/iostrovok/conveyor/faces IInput> ./faces/mmock/iinput_mock.go
 	$(LOADENV) ./bin/mockgen -package mmock github.com/iostrovok/conveyor/faces IItem > ./faces/mmock/iitem_mock.go
 	$(LOADENV) ./bin/mockgen -package mmock github.com/iostrovok/conveyor/faces IManager > ./faces/mmock/imanager_mock.go
 	$(LOADENV) ./bin/mockgen -package mmock github.com/iostrovok/conveyor/faces IWorker > ./faces/mmock/iworker_mock.go

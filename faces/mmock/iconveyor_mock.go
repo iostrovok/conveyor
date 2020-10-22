@@ -135,7 +135,7 @@ func (mr *MockIConveyorMockRecorder) MetricPeriod(arg0 interface{}) *gomock.Call
 }
 
 // Run mocks base method
-func (m *MockIConveyor) Run(arg0 interface{}) {
+func (m *MockIConveyor) Run(arg0 faces.IInput) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "Run", arg0)
 }
@@ -146,109 +146,19 @@ func (mr *MockIConveyorMockRecorder) Run(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Run", reflect.TypeOf((*MockIConveyor)(nil).Run), arg0)
 }
 
-// RunCtx mocks base method
-func (m *MockIConveyor) RunCtx(arg0 context.Context, arg1 interface{}) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "RunCtx", arg0, arg1)
-}
-
-// RunCtx indicates an expected call of RunCtx
-func (mr *MockIConveyorMockRecorder) RunCtx(arg0, arg1 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RunCtx", reflect.TypeOf((*MockIConveyor)(nil).RunCtx), arg0, arg1)
-}
-
-// RunPriority mocks base method
-func (m *MockIConveyor) RunPriority(arg0 interface{}, arg1 int) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "RunPriority", arg0, arg1)
-}
-
-// RunPriority indicates an expected call of RunPriority
-func (mr *MockIConveyorMockRecorder) RunPriority(arg0, arg1 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RunPriority", reflect.TypeOf((*MockIConveyor)(nil).RunPriority), arg0, arg1)
-}
-
-// RunPriorityCtx mocks base method
-func (m *MockIConveyor) RunPriorityCtx(arg0 context.Context, arg1 interface{}, arg2 int) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "RunPriorityCtx", arg0, arg1, arg2)
-}
-
-// RunPriorityCtx indicates an expected call of RunPriorityCtx
-func (mr *MockIConveyorMockRecorder) RunPriorityCtx(arg0, arg1, arg2 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RunPriorityCtx", reflect.TypeOf((*MockIConveyor)(nil).RunPriorityCtx), arg0, arg1, arg2)
-}
-
-// RunPriorityTrace mocks base method
-func (m *MockIConveyor) RunPriorityTrace(arg0 context.Context, arg1 faces.ITrace, arg2 interface{}, arg3 int) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "RunPriorityTrace", arg0, arg1, arg2, arg3)
-}
-
-// RunPriorityTrace indicates an expected call of RunPriorityTrace
-func (mr *MockIConveyorMockRecorder) RunPriorityTrace(arg0, arg1, arg2, arg3 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RunPriorityTrace", reflect.TypeOf((*MockIConveyor)(nil).RunPriorityTrace), arg0, arg1, arg2, arg3)
-}
-
 // RunRes mocks base method
-func (m *MockIConveyor) RunRes(arg0 interface{}, arg1 int) (interface{}, error) {
+func (m *MockIConveyor) RunRes(arg0 faces.IInput) (interface{}, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "RunRes", arg0, arg1)
+	ret := m.ctrl.Call(m, "RunRes", arg0)
 	ret0, _ := ret[0].(interface{})
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // RunRes indicates an expected call of RunRes
-func (mr *MockIConveyorMockRecorder) RunRes(arg0, arg1 interface{}) *gomock.Call {
+func (mr *MockIConveyorMockRecorder) RunRes(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RunRes", reflect.TypeOf((*MockIConveyor)(nil).RunRes), arg0, arg1)
-}
-
-// RunResCtx mocks base method
-func (m *MockIConveyor) RunResCtx(arg0 context.Context, arg1 interface{}, arg2 int) (interface{}, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "RunResCtx", arg0, arg1, arg2)
-	ret0, _ := ret[0].(interface{})
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// RunResCtx indicates an expected call of RunResCtx
-func (mr *MockIConveyorMockRecorder) RunResCtx(arg0, arg1, arg2 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RunResCtx", reflect.TypeOf((*MockIConveyor)(nil).RunResCtx), arg0, arg1, arg2)
-}
-
-// RunResTrace mocks base method
-func (m *MockIConveyor) RunResTrace(arg0 context.Context, arg1 faces.ITrace, arg2 interface{}, arg3 int) (interface{}, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "RunResTrace", arg0, arg1, arg2, arg3)
-	ret0, _ := ret[0].(interface{})
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// RunResTrace indicates an expected call of RunResTrace
-func (mr *MockIConveyorMockRecorder) RunResTrace(arg0, arg1, arg2, arg3 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RunResTrace", reflect.TypeOf((*MockIConveyor)(nil).RunResTrace), arg0, arg1, arg2, arg3)
-}
-
-// RunTrace mocks base method
-func (m *MockIConveyor) RunTrace(arg0 context.Context, arg1 faces.ITrace, arg2 interface{}) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "RunTrace", arg0, arg1, arg2)
-}
-
-// RunTrace indicates an expected call of RunTrace
-func (mr *MockIConveyorMockRecorder) RunTrace(arg0, arg1, arg2 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RunTrace", reflect.TypeOf((*MockIConveyor)(nil).RunTrace), arg0, arg1, arg2)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RunRes", reflect.TypeOf((*MockIConveyor)(nil).RunRes), arg0)
 }
 
 // SetDefaultPriority mocks base method
@@ -290,17 +200,17 @@ func (mr *MockIConveyorMockRecorder) SetName(arg0 interface{}) *gomock.Call {
 }
 
 // SetTracer mocks base method
-func (m *MockIConveyor) SetTracer(arg0 faces.ITrace) faces.IConveyor {
+func (m *MockIConveyor) SetTracer(arg0 faces.ITrace, arg1 time.Duration) faces.IConveyor {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetTracer", arg0)
+	ret := m.ctrl.Call(m, "SetTracer", arg0, arg1)
 	ret0, _ := ret[0].(faces.IConveyor)
 	return ret0
 }
 
 // SetTracer indicates an expected call of SetTracer
-func (mr *MockIConveyorMockRecorder) SetTracer(arg0 interface{}) *gomock.Call {
+func (mr *MockIConveyorMockRecorder) SetTracer(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTracer", reflect.TypeOf((*MockIConveyor)(nil).SetTracer), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTracer", reflect.TypeOf((*MockIConveyor)(nil).SetTracer), arg0, arg1)
 }
 
 // SetWorkersCounter mocks base method
