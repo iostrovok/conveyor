@@ -29,6 +29,7 @@ type Data struct {
 
 	lastHandler faces.Name
 	skipToName  faces.Name
+	skipNames   []faces.Name
 
 	handlerNameWithError faces.Name
 	priority             int
@@ -58,6 +59,7 @@ func (i *Item) Init(ctxIn context.Context, tr faces.ITrace) faces.IItem {
 		tracer:         tr,
 		startTime:      time.Now(),
 		localStartTime: time.Now(),
+		skipNames:      make([]faces.Name, 0),
 	}
 	return i
 }
@@ -172,6 +174,14 @@ func (i *Item) SetLastHandler(handlerName faces.Name) faces.IItem {
 	return i
 }
 
+// PushedToChannel it should be redefined
+func (i *Item) PushedToChannel(_ faces.Name) {
+}
+
+// ReceivedFromChannel it should be redefined
+func (i *Item) ReceivedFromChannel() {
+}
+
 // SetSkipToName sets the handler name. Conveyor skips all handlers until that.
 // When conveyor reaches that name is set up as EmptySkipName
 // If conveyor finishes and name is not found item gets error.
@@ -184,6 +194,16 @@ func (i *Item) GetSkipToName() faces.Name {
 	return i.data.skipToName
 }
 
+// SetSkipNames sets the handler names. Conveyor skips all these handlers.
+func (i *Item) SetSkipNames(names ...faces.Name) {
+	i.data.skipNames = append(i.data.skipNames, names...)
+}
+
+// GetSkipNames returns handler name which was set up with SetSkipNames.
+func (i *Item) GetSkipNames() []faces.Name {
+	return i.data.skipNames
+}
+
 // NeedToSkip checks should be handler skipped or not
 func (i *Item) NeedToSkip(worker faces.IWorker) (bool, error) {
 	name, typ, isLast := worker.GetBorderCond()
@@ -192,6 +212,13 @@ func (i *Item) NeedToSkip(worker faces.IWorker) (bool, error) {
 	if typ != faces.WorkerManagerType {
 		i.data.skipToName = faces.EmptySkipName
 		return false, nil
+	}
+
+	// check personal skipping
+	for _, skip := range i.data.skipNames {
+		if skip == name {
+			return true, nil
+		}
 	}
 
 	if i.data.skipToName == faces.EmptySkipName || i.data.skipToName == faces.SkipAll {

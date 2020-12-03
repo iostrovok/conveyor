@@ -21,8 +21,10 @@ type IItem interface {
 	GetError() error
 	CleanError()
 
+	SetSkipNames(label ...Name)
 	SetSkipToName(label Name)
 	GetSkipToName() Name
+	GetSkipNames() []Name
 	NeedToSkip(worker IWorker) (bool, error)
 
 	LogTraceFinishTime(format string, a ...interface{})
@@ -31,6 +33,9 @@ type IItem interface {
 	Start() IItem
 	Cancel()
 	Finish()
+
+	PushedToChannel(label Name)
+	ReceivedFromChannel()
 
 	// >>>>>>> Priority Queue Supports
 	GetPriority() int

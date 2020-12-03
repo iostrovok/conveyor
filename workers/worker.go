@@ -136,7 +136,11 @@ func (w *Worker) Start(ctx context.Context) error {
 				}
 				item.LogTraceFinishTime("[%s] time in chan", w.name)
 
+				item.ReceivedFromChannel()
 				w.process(ctx, item)
+				if !w.isLast && w.typ != faces.FinalManagerType {
+					item.PushedToChannel(w.name)
+				}
 			}
 		}
 	}()

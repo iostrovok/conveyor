@@ -166,7 +166,10 @@ func (c *Conveyor) RunRes(i faces.IInput) (interface{}, error) {
 		it.SetSkipToName(skipToName)
 	}
 
+	// marker before pushing to first channel
+	it.PushedToChannel(c.data.firstWorkerManager.Name())
 	c.data.inCh.ChanIn() <- it.Start()
+
 	select {
 	case <-ctx.Done():
 		return nil, errors.New("context is canceled")
