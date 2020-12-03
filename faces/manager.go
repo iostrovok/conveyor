@@ -51,6 +51,8 @@ type IManager interface {
 	MetricPeriod(duration time.Duration) IManager
 
 	Statistic() *nodes.ManagerData
+
+	Name() Name
 }
 
 type IWorker interface {

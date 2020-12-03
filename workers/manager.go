@@ -100,6 +100,10 @@ func (m *Manager) Statistic() *nodes.ManagerData {
 	return out
 }
 
+func (m *Manager) Name() faces.Name {
+	return m.name
+}
+
 func (m *Manager) SetWorkersCounter(wc faces.IWorkersCounter) faces.IManager {
 	m.workersCounter = wc
 	return m
