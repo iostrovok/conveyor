@@ -48,3 +48,7 @@ func (i *Input) SkipToName(name faces.Name) faces.IInput {
 func (i *Input) Values() (context.Context, faces.ITrace, interface{}, *int, faces.Name) {
 	return i.ctx, i.tracer, i.data, i.priority, i.name
 }
+
+func (i *Input) Ctx() context.Context {
+	return i.ctx
+}

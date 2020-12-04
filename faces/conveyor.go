@@ -16,10 +16,11 @@ type IInput interface {
 	Trace(tr ITrace) IInput             // nil is by default
 	Data(data interface{}) IInput       // nil is by default
 	Priority(priority int) IInput       // by default is IConveyor.DefaultPriority()
-	SkipToName(name Name) IInput     // by default is ""
+	SkipToName(name Name) IInput        // by default is ""
 
 	// return all data above
 	Values() (ctx context.Context, tr ITrace, data interface{}, priority *int, name Name)
+	Ctx() context.Context
 }
 
 type IConveyor interface {

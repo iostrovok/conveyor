@@ -10,10 +10,11 @@ import (
 
 type IItem interface {
 	GetID() int64
-	SetID(id int64) IItem
+	SetID(id int64)
 
 	Get() (data interface{})
-	Set(data interface{}) IItem
+	Set(data interface{})
+	CheckData()
 
 	GetContext() context.Context
 
@@ -30,7 +31,7 @@ type IItem interface {
 	LogTraceFinishTime(format string, a ...interface{})
 	LogTrace(format string, a ...interface{})
 
-	Start() IItem
+	Start()
 	Cancel()
 	Finish()
 
@@ -39,12 +40,12 @@ type IItem interface {
 
 	// >>>>>>> Priority Queue Supports
 	GetPriority() int
-	SetPriority(priority int) IItem
+	SetPriority(priority int)
 	// <<<<<<< Priority Queue Support
 
-	SetHandlerError(handlerNameWithError Name) IItem
+	SetHandlerError(handlerNameWithError Name)
 	GetHandlerError() Name
 
-	SetLastHandler(handlerName Name) IItem
+	SetLastHandler(handlerName Name)
 	GetLastHandler() Name
 }

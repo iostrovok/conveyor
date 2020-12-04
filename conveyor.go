@@ -115,9 +115,8 @@ func (c *Conveyor) Init(chanLen int, chanType faces.ChanType, name string) faces
 	return c
 }
 
-// Run creates the new item over interface and sends to conveyor.
-// If priority queue is used the default priority will be set up.
-func (c *Conveyor) Run(i faces.IInput) {
+// getItemFrommInput excavator IItem or create new
+func (c *Conveyor) getItemFrommInput(i faces.IInput) faces.IItem {
 	ctx, tr, val, priorityRef, skipToName := i.Values()
 
 	if ctx == nil {
@@ -129,46 +128,44 @@ func (c *Conveyor) Run(i faces.IInput) {
 		priority = *priorityRef
 	}
 
-	it := item.New(ctx, tr).
-		SetPriority(priority).
-		Set(val).
-		SetID(atomic.AddInt64(c.data.itemID, 1))
+	var it faces.IItem
+	if v, ok := val.(faces.IItem); ok {
+		it = v
+		it.CheckData()
+	} else {
+		it = item.New(ctx, tr)
+	}
 
+	it.SetPriority(priority)
+	it.Set(val)
+	it.SetID(atomic.AddInt64(c.data.itemID, 1))
 	if skipToName != "" {
 		it.SetSkipToName(skipToName)
 	}
 
-	c.data.inCh.ChanIn() <- it.Start()
+	return it
+}
+
+// Run creates the new item over interface and sends to conveyor.
+// If priority queue is used the default priority will be set up.
+func (c *Conveyor) Run(i faces.IInput) {
+	it := c.getItemFrommInput(i)
+	it.Start()
+	c.data.inCh.ChanIn() <- it
 }
 
 // RunRes creates the new item over interface, sends to conveyor and returns result.
 func (c *Conveyor) RunRes(i faces.IInput) (interface{}, error) {
-	ctx, tr, val, priorityRef, skipToName := i.Values()
 
-	if ctx == nil {
-		ctx = context.Background()
-	}
+	it := c.getItemFrommInput(i)
+	ctx := it.GetContext()
 
-	priority := c.data.defaultPriority
-	if priorityRef != nil {
-		priority = *priorityRef
-	}
-
-	id := atomic.AddInt64(c.data.itemID, 1)
-	ch := internalmanager.AddId(id, ctx)
-
-	it := item.New(ctx, tr).
-		SetPriority(priority).
-		Set(val).
-		SetID(id)
-
-	if skipToName != "" {
-		it.SetSkipToName(skipToName)
-	}
+	ch := internalmanager.AddId(it.GetID(), ctx)
 
 	// marker before pushing to first channel
 	it.PushedToChannel(c.data.firstWorkerManager.Name())
-	c.data.inCh.ChanIn() <- it.Start()
+	it.Start()
+	c.data.inCh.ChanIn() <- it
 
 	select {
 	case <-ctx.Done():

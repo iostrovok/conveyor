@@ -6,12 +6,15 @@ package item
 import (
 	"context"
 	"errors"
+	"sync"
 	"time"
 
 	"github.com/iostrovok/conveyor/faces"
 )
 
 type Item struct {
+	sync.Mutex
+
 	data *Data
 }
 
@@ -44,6 +47,17 @@ func New(ctx context.Context, tr faces.ITrace) faces.IItem {
 
 func (i *Item) Init(ctxIn context.Context, tr faces.ITrace) faces.IItem {
 
+	if i.data != nil {
+		return i
+	}
+
+	i.Lock()
+	defer i.Unlock()
+
+	if i.data != nil {
+		return i
+	}
+
 	// sometime it happens
 	if ctxIn == nil {
 		ctxIn = context.Background()
@@ -64,22 +78,24 @@ func (i *Item) Init(ctxIn context.Context, tr faces.ITrace) faces.IItem {
 	return i
 }
 
+func (i *Item) CheckData() {
+	i.Init(nil, nil)
+}
+
 func (i *Item) GetID() int64 {
 	return i.data.id
 }
 
-func (i *Item) SetID(id int64) faces.IItem {
+func (i *Item) SetID(id int64) {
 	i.data.id = id
-	return i
 }
 
 func (i *Item) Get() interface{} {
 	return i.data.data
 }
 
-func (i *Item) Set(data interface{}) faces.IItem {
+func (i *Item) Set(data interface{}) {
 	i.data.data = data
-	return i
 }
 
 func (i *Item) AddError(err error) {
@@ -118,12 +134,11 @@ func (i *Item) Finish() {
 }
 
 // Start restarts the timers for measuring the periods for each stage of process and whole process.
-func (i *Item) Start() faces.IItem {
+func (i *Item) Start() {
 	if i.data.tracer != nil {
 		i.data.startTime = time.Now()
 		i.data.localStartTime = time.Now()
 	}
-	return i
 }
 
 // Cancel emergency breaks the processing by global context
@@ -147,9 +162,8 @@ func (i *Item) GetPriority() int {
 }
 
 // SetPriority sets priority for item if priority queue is used
-func (i *Item) SetPriority(priority int) faces.IItem {
+func (i *Item) SetPriority(priority int) {
 	i.data.priority = priority
-	return i
 }
 
 // GetHandlerError returns the error which got within processing of the item
@@ -158,9 +172,8 @@ func (i *Item) GetHandlerError() faces.Name {
 }
 
 // SetHandlerError sets the error which got within processing of the item
-func (i *Item) SetHandlerError(handlerNameWithError faces.Name) faces.IItem {
+func (i *Item) SetHandlerError(handlerNameWithError faces.Name) {
 	i.data.handlerNameWithError = handlerNameWithError
-	return i
 }
 
 // GetLastHandler returns the last handler name which processed the item
@@ -169,9 +182,8 @@ func (i *Item) GetLastHandler() faces.Name {
 }
 
 // SetHandlerError set the last handler name which processed the item
-func (i *Item) SetLastHandler(handlerName faces.Name) faces.IItem {
+func (i *Item) SetLastHandler(handlerName faces.Name) {
 	i.data.lastHandler = handlerName
-	return i
 }
 
 // PushedToChannel it should be redefined
