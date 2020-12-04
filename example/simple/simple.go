@@ -9,6 +9,7 @@ import (
 	"github.com/iostrovok/conveyor"
 	"github.com/iostrovok/conveyor/faces"
 	"github.com/iostrovok/conveyor/input"
+	"github.com/iostrovok/conveyor/item"
 	"github.com/iostrovok/conveyor/tracer"
 )
 
@@ -25,8 +26,17 @@ const (
 )
 
 type MyMessage struct {
+	item.Item
+
 	msg string
 	id  int
+}
+
+func (m *MyMessage) PushedToChannel(label faces.Name) {
+	fmt.Printf("\n\nPushedToChannel %s!!!!!!!!\n\n", string(label)+"channel")
+}
+func (m *MyMessage) ReceivedFromChannel() {
+	fmt.Printf("\n\nReceivedFromChannel !!!!!!!!\n\n")
 }
 
 // >>>>>>>>>>>>>>>>>>>> simple final handler. START
