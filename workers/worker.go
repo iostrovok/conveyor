@@ -30,8 +30,9 @@ type Worker struct {
 	stopCh     chan struct{}
 	wg         *sync.WaitGroup
 
-	isLast bool
-	typ    faces.ManagerType
+	isLast          bool
+	typ             faces.ManagerType
+	nextManagerName faces.Name
 
 	giveBirth faces.GiveBirth
 	handler   faces.IHandler
@@ -64,11 +65,12 @@ func NewWorker(id string, name faces.Name, in, out, errCh faces.IChan, giveBirth
 	}, nil
 }
 
-func (w *Worker) SetBorderCond(typ faces.ManagerType, isLast bool) {
+func (w *Worker) SetBorderCond(typ faces.ManagerType, isLast bool, nextManagerName faces.Name) {
 	w.Lock()
 	defer w.Unlock()
 
 	w.isLast = isLast
+	w.nextManagerName = nextManagerName
 	w.typ = typ
 }
 
@@ -134,13 +136,10 @@ func (w *Worker) Start(ctx context.Context) error {
 					w.logTrace("%s channel in is close", w.id)
 					return
 				}
-				item.LogTraceFinishTime("[%s] time in chan", w.name)
-
 				item.ReceivedFromChannel()
+				item.BeforeProcess(w.name)
+				item.LogTraceFinishTime("[%s] time in chan", w.name)
 				w.process(ctx, item)
-				if !w.isLast && w.typ != faces.FinalManagerType {
-					item.PushedToChannel(w.name)
-				}
 			}
 		}
 	}()
@@ -160,19 +159,26 @@ func (w *Worker) process(ctx context.Context, item faces.IItem) {
 		//
 		// no more handlers after that. Fix error.
 		logError(w.name, err, item)
+		item.AfterProcess(w.name, err)
+		if !w.isLast && w.typ != faces.FinalManagerType {
+			item.PushedToChannel(faces.ErrorName)
+		}
 		pushToNotNilChan(w.errCh, item)
-		return
 	}
 
 	if find {
+		item.AfterProcess(w.name, err)
 		// needed handler is not  found
+		if !w.isLast && w.typ != faces.FinalManagerType {
+			item.PushedToChannel(w.nextManagerName)
+		}
 		pushToNotNilChan(w.out, item)
-		return
 	}
 
 	// main action
 	err = w.run(ctx, item)
 	logError(w.name, err, item)
+	item.AfterProcess(w.name, err)
 	w.debriefingOfFlight(err, item)
 }
 
@@ -227,14 +233,18 @@ func (w *Worker) debriefingOfFlight(err error, item faces.IItem) {
 	switch w.typ {
 	case faces.FinalManagerType:
 		if !w.isLast {
+			item.PushedToChannel(w.nextManagerName)
 			pushToNotNilChan(w.out, item)
 		}
 	case faces.ErrorManagerType:
+		item.PushedToChannel(faces.ErrorName)
 		pushToNotNilChan(w.out, item)
 	default: //  faces.WorkerManagerType
 		if err == nil {
+			item.PushedToChannel(w.nextManagerName)
 			pushToNotNilChan(w.out, item)
 		} else {
+			item.PushedToChannel(faces.ErrorName)
 			pushToNotNilChan(w.errCh, item)
 		}
 	}

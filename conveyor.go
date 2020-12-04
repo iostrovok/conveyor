@@ -150,6 +150,8 @@ func (c *Conveyor) getItemFrommInput(i faces.IInput) faces.IItem {
 // If priority queue is used the default priority will be set up.
 func (c *Conveyor) Run(i faces.IInput) {
 	it := c.getItemFrommInput(i)
+	// marker before pushing to first channel
+	it.PushedToChannel(c.data.firstWorkerManager.Name())
 	it.Start()
 	c.data.inCh.ChanIn() <- it
 }

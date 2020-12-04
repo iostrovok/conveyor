@@ -194,6 +194,14 @@ func (i *Item) PushedToChannel(_ faces.Name) {
 func (i *Item) ReceivedFromChannel() {
 }
 
+// BeforeProcess it should be redefined
+func (i *Item) BeforeProcess(_ faces.Name) {
+}
+
+// AfterProcess it should be redefined
+func (i *Item) AfterProcess(_ faces.Name, _ error) {
+}
+
 // SetSkipToName sets the handler name. Conveyor skips all handlers until that.
 // When conveyor reaches that name is set up as EmptySkipName
 // If conveyor finishes and name is not found item gets error.
