@@ -48,6 +48,20 @@ func (mr *MockIInputMockRecorder) Context(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockIInput)(nil).Context), arg0)
 }
 
+// Ctx mocks base method
+func (m *MockIInput) Ctx() context.Context {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Ctx")
+	ret0, _ := ret[0].(context.Context)
+	return ret0
+}
+
+// Ctx indicates an expected call of Ctx
+func (mr *MockIInputMockRecorder) Ctx() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Ctx", reflect.TypeOf((*MockIInput)(nil).Ctx))
+}
+
 // Data mocks base method
 func (m *MockIInput) Data(arg0 interface{}) faces.IInput {
 	m.ctrl.T.Helper()

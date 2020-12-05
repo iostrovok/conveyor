@@ -46,6 +46,30 @@ func (mr *MockIItemMockRecorder) AddError(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddError", reflect.TypeOf((*MockIItem)(nil).AddError), arg0)
 }
 
+// AfterProcess mocks base method
+func (m *MockIItem) AfterProcess(arg0 faces.Name, arg1 error) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "AfterProcess", arg0, arg1)
+}
+
+// AfterProcess indicates an expected call of AfterProcess
+func (mr *MockIItemMockRecorder) AfterProcess(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AfterProcess", reflect.TypeOf((*MockIItem)(nil).AfterProcess), arg0, arg1)
+}
+
+// BeforeProcess mocks base method
+func (m *MockIItem) BeforeProcess(arg0 faces.Name) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "BeforeProcess", arg0)
+}
+
+// BeforeProcess indicates an expected call of BeforeProcess
+func (mr *MockIItemMockRecorder) BeforeProcess(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "BeforeProcess", reflect.TypeOf((*MockIItem)(nil).BeforeProcess), arg0)
+}
+
 // Cancel mocks base method
 func (m *MockIItem) Cancel() {
 	m.ctrl.T.Helper()
@@ -56,6 +80,18 @@ func (m *MockIItem) Cancel() {
 func (mr *MockIItemMockRecorder) Cancel() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Cancel", reflect.TypeOf((*MockIItem)(nil).Cancel))
+}
+
+// CheckData mocks base method
+func (m *MockIItem) CheckData() {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "CheckData")
+}
+
+// CheckData indicates an expected call of CheckData
+func (mr *MockIItemMockRecorder) CheckData() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CheckData", reflect.TypeOf((*MockIItem)(nil).CheckData))
 }
 
 // CleanError mocks base method
@@ -180,6 +216,20 @@ func (mr *MockIItemMockRecorder) GetPriority() *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPriority", reflect.TypeOf((*MockIItem)(nil).GetPriority))
 }
 
+// GetSkipNames mocks base method
+func (m *MockIItem) GetSkipNames() []faces.Name {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetSkipNames")
+	ret0, _ := ret[0].([]faces.Name)
+	return ret0
+}
+
+// GetSkipNames indicates an expected call of GetSkipNames
+func (mr *MockIItemMockRecorder) GetSkipNames() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSkipNames", reflect.TypeOf((*MockIItem)(nil).GetSkipNames))
+}
+
 // GetSkipToName mocks base method
 func (m *MockIItem) GetSkipToName() faces.Name {
 	m.ctrl.T.Helper()
@@ -243,12 +293,34 @@ func (mr *MockIItemMockRecorder) NeedToSkip(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NeedToSkip", reflect.TypeOf((*MockIItem)(nil).NeedToSkip), arg0)
 }
 
-// Set mocks base method
-func (m *MockIItem) Set(arg0 interface{}) faces.IItem {
+// PushedToChannel mocks base method
+func (m *MockIItem) PushedToChannel(arg0 faces.Name) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Set", arg0)
-	ret0, _ := ret[0].(faces.IItem)
-	return ret0
+	m.ctrl.Call(m, "PushedToChannel", arg0)
+}
+
+// PushedToChannel indicates an expected call of PushedToChannel
+func (mr *MockIItemMockRecorder) PushedToChannel(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PushedToChannel", reflect.TypeOf((*MockIItem)(nil).PushedToChannel), arg0)
+}
+
+// ReceivedFromChannel mocks base method
+func (m *MockIItem) ReceivedFromChannel() {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "ReceivedFromChannel")
+}
+
+// ReceivedFromChannel indicates an expected call of ReceivedFromChannel
+func (mr *MockIItemMockRecorder) ReceivedFromChannel() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReceivedFromChannel", reflect.TypeOf((*MockIItem)(nil).ReceivedFromChannel))
+}
+
+// Set mocks base method
+func (m *MockIItem) Set(arg0 interface{}) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "Set", arg0)
 }
 
 // Set indicates an expected call of Set
@@ -258,11 +330,9 @@ func (mr *MockIItemMockRecorder) Set(arg0 interface{}) *gomock.Call {
 }
 
 // SetHandlerError mocks base method
-func (m *MockIItem) SetHandlerError(arg0 faces.Name) faces.IItem {
+func (m *MockIItem) SetHandlerError(arg0 faces.Name) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetHandlerError", arg0)
-	ret0, _ := ret[0].(faces.IItem)
-	return ret0
+	m.ctrl.Call(m, "SetHandlerError", arg0)
 }
 
 // SetHandlerError indicates an expected call of SetHandlerError
@@ -272,11 +342,9 @@ func (mr *MockIItemMockRecorder) SetHandlerError(arg0 interface{}) *gomock.Call 
 }
 
 // SetID mocks base method
-func (m *MockIItem) SetID(arg0 int64) faces.IItem {
+func (m *MockIItem) SetID(arg0 int64) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetID", arg0)
-	ret0, _ := ret[0].(faces.IItem)
-	return ret0
+	m.ctrl.Call(m, "SetID", arg0)
 }
 
 // SetID indicates an expected call of SetID
@@ -286,11 +354,9 @@ func (mr *MockIItemMockRecorder) SetID(arg0 interface{}) *gomock.Call {
 }
 
 // SetLastHandler mocks base method
-func (m *MockIItem) SetLastHandler(arg0 faces.Name) faces.IItem {
+func (m *MockIItem) SetLastHandler(arg0 faces.Name) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetLastHandler", arg0)
-	ret0, _ := ret[0].(faces.IItem)
-	return ret0
+	m.ctrl.Call(m, "SetLastHandler", arg0)
 }
 
 // SetLastHandler indicates an expected call of SetLastHandler
@@ -300,17 +366,31 @@ func (mr *MockIItemMockRecorder) SetLastHandler(arg0 interface{}) *gomock.Call {
 }
 
 // SetPriority mocks base method
-func (m *MockIItem) SetPriority(arg0 int) faces.IItem {
+func (m *MockIItem) SetPriority(arg0 int) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetPriority", arg0)
-	ret0, _ := ret[0].(faces.IItem)
-	return ret0
+	m.ctrl.Call(m, "SetPriority", arg0)
 }
 
 // SetPriority indicates an expected call of SetPriority
 func (mr *MockIItemMockRecorder) SetPriority(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetPriority", reflect.TypeOf((*MockIItem)(nil).SetPriority), arg0)
+}
+
+// SetSkipNames mocks base method
+func (m *MockIItem) SetSkipNames(arg0 ...faces.Name) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{}
+	for _, a := range arg0 {
+		varargs = append(varargs, a)
+	}
+	m.ctrl.Call(m, "SetSkipNames", varargs...)
+}
+
+// SetSkipNames indicates an expected call of SetSkipNames
+func (mr *MockIItemMockRecorder) SetSkipNames(arg0 ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetSkipNames", reflect.TypeOf((*MockIItem)(nil).SetSkipNames), arg0...)
 }
 
 // SetSkipToName mocks base method
@@ -326,11 +406,9 @@ func (mr *MockIItemMockRecorder) SetSkipToName(arg0 interface{}) *gomock.Call {
 }
 
 // Start mocks base method
-func (m *MockIItem) Start() faces.IItem {
+func (m *MockIItem) Start() {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Start")
-	ret0, _ := ret[0].(faces.IItem)
-	return ret0
+	m.ctrl.Call(m, "Start")
 }
 
 // Start indicates an expected call of Start

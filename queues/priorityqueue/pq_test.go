@@ -31,11 +31,16 @@ func (s *testSuite) TestFindPosition(c *C) {
 	ctx := context.Background()
 
 	a := make([]faces.IItem, 10)
-	a[0] = item.New(ctx, nil).SetPriority(10)
-	a[1] = item.New(ctx, nil).SetPriority(15)
-	a[2] = item.New(ctx, nil).SetPriority(16)
-	a[3] = item.New(ctx, nil).SetPriority(17)
-	a[4] = item.New(ctx, nil).SetPriority(20)
+	a[0] = item.New(ctx, nil)
+	a[0].SetPriority(10)
+	a[1] = item.New(ctx, nil)
+	a[1].SetPriority(15)
+	a[2] = item.New(ctx, nil)
+	a[2].SetPriority(16)
+	a[3] = item.New(ctx, nil)
+	a[3].SetPriority(17)
+	a[4] = item.New(ctx, nil)
+	a[4].SetPriority(20)
 
 	c.Assert(findPosition(a, 10, 5), Equals, 0)
 	c.Assert(findPosition(a, 11, 5), Equals, 1)
@@ -51,12 +56,18 @@ func (s *testSuite) TestInsertToBody(c *C) {
 	ctx := context.Background()
 
 	array := make([]faces.IItem, 10)
-	a0 := item.New(ctx, nil).SetPriority(10)
-	a1 := item.New(ctx, nil).SetPriority(13)
-	a2 := item.New(ctx, nil).SetPriority(15)
-	a3 := item.New(ctx, nil).SetPriority(15)
-	a4 := item.New(ctx, nil).SetPriority(13)
-	a5 := item.New(ctx, nil).SetPriority(12)
+	a0 := item.New(ctx, nil)
+	a0.SetPriority(10)
+	a1 := item.New(ctx, nil)
+	a1.SetPriority(13)
+	a2 := item.New(ctx, nil)
+	a2.SetPriority(15)
+	a3 := item.New(ctx, nil)
+	a3.SetPriority(15)
+	a4 := item.New(ctx, nil)
+	a4.SetPriority(13)
+	a5 := item.New(ctx, nil)
+	a5.SetPriority(12)
 
 	InsertToBody(&array, a0, 0)
 	InsertToBody(&array, a1, 1)
@@ -83,7 +94,8 @@ func (s *testSuite) TestInsertToBody2(c *C) {
 
 	array := make([]faces.IItem, 100)
 	for i, p := range prs {
-		a0 := item.New(ctx, nil).SetPriority(p)
+		a0 := item.New(ctx, nil)
+		a0.SetPriority(p)
 		InsertToBody(&array, a0, i)
 	}
 
@@ -104,7 +116,8 @@ func (s *testSuite) TestInsertToBodyLong(c *C) {
 	for i := 0; i < count; i++ {
 		p := rand.Intn(20)
 		prs[i] = p
-		a0 := item.New(ctx, nil).SetPriority(p)
+		a0 := item.New(ctx, nil)
+		a0.SetPriority(p)
 		InsertToBody(&array, a0, i)
 	}
 
@@ -122,7 +135,9 @@ func (s *testSuite) TestStepBystep(c *C) {
 	lastId := 200
 	st := Init(lastId+10, context.Background())
 	for i := 0; i < lastId; i++ {
-		st.ChanIn() <- item.New(context.Background(), nil).SetID(int64(i))
+		it := item.New(context.Background(), nil)
+		it.SetID(int64(i))
+		st.ChanIn() <- it
 	}
 
 	success, total := readTestData(st)
@@ -142,7 +157,9 @@ func (s *testSuite) TestInTheSameTime(c *C) {
 	go func() {
 		defer wg.Done()
 		for i := 0; i < lastId; i++ {
-			st.ChanIn() <- item.New(context.Background(), nil).SetID(int64(i))
+			it := item.New(context.Background(), nil)
+			it.SetID(int64(i))
+			st.ChanIn() <- it
 			time.Sleep(time.Duration(rand.Intn(5)) * time.Millisecond)
 		}
 

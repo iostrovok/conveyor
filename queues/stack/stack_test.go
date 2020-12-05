@@ -30,7 +30,9 @@ func (s *testSuite) TestStepBystep(c *C) {
 	lastId := 100
 	st := Init(lastId+10, context.Background())
 	for i := 0; i < lastId; i++ {
-		st.ChanIn() <- item.New(context.Background(), nil).SetID(int64(i))
+		it := item.New(context.Background(), nil)
+		it.SetID(int64(i))
+		st.ChanIn() <- it
 	}
 
 	success, total := readTestData(st)
@@ -50,7 +52,9 @@ func (s *testSuite) TestInTheSameTime(c *C) {
 	go func() {
 		defer wg.Done()
 		for i := 0; i < lastId; i++ {
-			st.ChanIn() <- item.New(context.Background(), nil).SetID(int64(i))
+			it := item.New(context.Background(), nil)
+			it.SetID(int64(i))
+			st.ChanIn() <- it
 			time.Sleep(time.Duration(rand.Intn(5)) * time.Millisecond)
 		}
 
