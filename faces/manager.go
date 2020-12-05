@@ -22,6 +22,11 @@ const (
 
 type Name string
 
+const (
+	UnknownName Name = "unknown"
+	ErrorName Name = "error"
+)
+
 type IWorkersCounter interface {
 	Check(mc *nodes.ManagerData) (*nodes.ManagerAction, error)
 }
@@ -59,7 +64,7 @@ type IWorker interface {
 	Start(ctx context.Context) error
 	Stop()
 
-	SetBorderCond(typ ManagerType, isLast bool)
+	SetBorderCond(typ ManagerType, isLast bool, nextManagerName Name)
 	GetBorderCond() (Name, ManagerType, bool)
 
 	Name() Name

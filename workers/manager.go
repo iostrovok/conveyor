@@ -133,8 +133,13 @@ func (m *Manager) SetPrevManager(previous faces.IManager) faces.IManager {
 }
 
 func (m *Manager) setDataToWorkers() {
+	nextManagerName := faces.UnknownName
+	if m.next != nil {
+		nextManagerName = m.next.Name()
+	}
+
 	for _, w := range m.workers {
-		w.SetBorderCond(m.typ, m.isLast)
+		w.SetBorderCond(m.typ, m.isLast, nextManagerName)
 	}
 }
 
@@ -337,7 +342,11 @@ func (m *Manager) addOneWorker() error {
 		return err
 	}
 
-	w.SetBorderCond(m.typ, m.isLast)
+	nextManagerName := faces.UnknownName
+	if m.next != nil {
+		nextManagerName = m.next.Name()
+	}
+	w.SetBorderCond(m.typ, m.isLast, nextManagerName)
 	m.workers = append(m.workers, w)
 	return w.Start(m.ctx)
 }

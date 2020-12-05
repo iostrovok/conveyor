@@ -37,6 +37,8 @@ type IItem interface {
 
 	PushedToChannel(label Name)
 	ReceivedFromChannel()
+	BeforeProcess(label Name)
+	AfterProcess(label Name, err error)
 
 	// >>>>>>> Priority Queue Supports
 	GetPriority() int
