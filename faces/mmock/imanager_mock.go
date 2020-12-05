@@ -93,6 +93,20 @@ func (mr *MockIManagerMockRecorder) MetricPeriod(arg0 interface{}) *gomock.Call 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "MetricPeriod", reflect.TypeOf((*MockIManager)(nil).MetricPeriod), arg0)
 }
 
+// Name mocks base method
+func (m *MockIManager) Name() faces.Name {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Name")
+	ret0, _ := ret[0].(faces.Name)
+	return ret0
+}
+
+// Name indicates an expected call of Name
+func (mr *MockIManagerMockRecorder) Name() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Name", reflect.TypeOf((*MockIManager)(nil).Name))
+}
+
 // SetChanErr mocks base method
 func (m *MockIManager) SetChanErr(arg0 faces.IChan) faces.IManager {
 	m.ctrl.T.Helper()

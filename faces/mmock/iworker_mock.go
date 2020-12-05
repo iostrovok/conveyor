@@ -79,15 +79,15 @@ func (mr *MockIWorkerMockRecorder) Name() *gomock.Call {
 }
 
 // SetBorderCond mocks base method
-func (m *MockIWorker) SetBorderCond(arg0 faces.ManagerType, arg1 bool) {
+func (m *MockIWorker) SetBorderCond(arg0 faces.ManagerType, arg1 bool, arg2 faces.Name) {
 	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetBorderCond", arg0, arg1)
+	m.ctrl.Call(m, "SetBorderCond", arg0, arg1, arg2)
 }
 
 // SetBorderCond indicates an expected call of SetBorderCond
-func (mr *MockIWorkerMockRecorder) SetBorderCond(arg0, arg1 interface{}) *gomock.Call {
+func (mr *MockIWorkerMockRecorder) SetBorderCond(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetBorderCond", reflect.TypeOf((*MockIWorker)(nil).SetBorderCond), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetBorderCond", reflect.TypeOf((*MockIWorker)(nil).SetBorderCond), arg0, arg1, arg2)
 }
 
 // Start mocks base method
