@@ -20,5 +20,5 @@ type IHandler interface {
 	TickerDuration() time.Duration
 
 	// Stop() function is called before destruction of handler.
-	Stop()
+	Stop(ctx context.Context)
 }

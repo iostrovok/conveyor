@@ -52,7 +52,7 @@ func NewFinalHandler(_ faces.Name) (faces.IHandler, error) {
 }
 
 func (m *FinalHandler) Start(_ context.Context) error { return nil }
-func (m *FinalHandler) Stop() {
+func (m *FinalHandler) Stop(_ context.Context) {
 	fmt.Printf("final handler: total proceesed %d from %d + 5\n", m.total, total)
 }
 
@@ -85,8 +85,7 @@ func NewErrHandler(name faces.Name) (faces.IHandler, error) {
 	}, nil
 }
 
-func (m *ErrHandler) Start(_ context.Context) error { return nil }
-func (m *ErrHandler) Stop()                         { /* nothing */ }
+
 func (m *ErrHandler) Run(item faces.IItem) error {
 	msg := item.Get().(*MyMessage)
 	fmt.Printf("ErrHandler => %d]: %d ==> %s\n", item.GetID(), msg.id, msg.msg)
@@ -158,7 +157,7 @@ func Fourth(name faces.Name) (faces.IHandler, error) {
 }
 
 // does nothing
-func (m *MySimpleHandler) TickerRun(ctx context.Context) {
+func (m *MySimpleHandler) TickerRun(_ context.Context) {
 	fmt.Printf("MySimpleHandler: TickerRun: %s!\n", m.name)
 }
 
@@ -167,11 +166,11 @@ func (m *MySimpleHandler) TickerDuration() time.Duration {
 	return time.Second * 1
 }
 
-func (m *MySimpleHandler) Start(ctx context.Context) error {
+func (m *MySimpleHandler) Start(_ context.Context) error {
 	return nil
 }
 
-func (m *MySimpleHandler) Stop() { /* nothing */ }
+func (m *MySimpleHandler) Stop(_ context.Context) { /* nothing */ }
 
 func (m *MySimpleHandler) Run(item faces.IItem) error {
 

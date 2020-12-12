@@ -84,7 +84,7 @@ func (m *SystemFinalHandler) Start(_ context.Context) error {
 	return nil
 }
 
-func (m *SystemFinalHandler) Stop() {
+func (m *SystemFinalHandler) Stop(_ context.Context) {
 	mx.Lock()
 	defer mx.Unlock()
 

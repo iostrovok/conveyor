@@ -121,7 +121,7 @@ func (w *Worker) Start(ctx context.Context) error {
 		w.isStarted = true
 		defer func() {
 			ticker.Stop()
-			w.handler.Stop()
+			w.handler.Stop(ctx)
 			w.isStarted = false
 			w.wg.Done()
 		}()

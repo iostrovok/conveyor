@@ -36,7 +36,7 @@ func (m *EmptyHandler) Start(_ context.Context) error {
 }
 
 // Stop does nothing
-func (m *EmptyHandler) Stop() { /* nothing */ }
+func (m *EmptyHandler) Stop(_ context.Context) { /* nothing */ }
 
 // Run does nothing
 func (m *EmptyHandler) Run(_ IItem) error {
