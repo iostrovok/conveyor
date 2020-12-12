@@ -50,7 +50,9 @@ func (m *Map) Range(f func(key int64, res *oneResult) bool) {
 var allResults *Map
 var mx *sync.RWMutex
 
-type SystemFinalHandler struct{}
+type SystemFinalHandler struct {
+	faces.EmptyHandler // defines unused methods
+}
 
 func init() {
 	mx = new(sync.RWMutex)

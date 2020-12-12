@@ -33,15 +33,17 @@ type MyMessage struct {
 }
 
 func (m *MyMessage) PushedToChannel(label faces.Name) {
-	fmt.Printf("\n\nPushedToChannel %s!!!!!!!!\n\n", string(label)+"channel")
+	//fmt.Printf("\n\nPushedToChannel %s!!!!!!!!\n\n", string(label)+"channel")
 }
 func (m *MyMessage) ReceivedFromChannel() {
-	fmt.Printf("\n\nReceivedFromChannel !!!!!!!!\n\n")
+	//fmt.Printf("\n\nReceivedFromChannel !!!!!!!!\n\n")
 }
 
 // >>>>>>>>>>>>>>>>>>>> simple final handler. START
 
 type FinalHandler struct {
+	faces.EmptyHandler
+
 	total int
 }
 
@@ -72,6 +74,8 @@ func (m *FinalHandler) Run(item faces.IItem) error {
 // >>>>>>>>>>>>>>>>>>>> simple error handler. START
 
 type ErrHandler struct {
+	faces.EmptyHandler
+
 	name faces.Name
 }
 
@@ -102,6 +106,8 @@ func (m *ErrHandler) Run(item faces.IItem) error {
 	3) First handler may send item direct to fourth handler.
 */
 type MySimpleHandler struct {
+	faces.EmptyHandler
+
 	counter     int
 	sleepSecond int
 	id          string
@@ -149,6 +155,16 @@ func Fourth(name faces.Name) (faces.IHandler, error) {
 		counter:     0,
 		sleepSecond: 1,
 	}, nil
+}
+
+// does nothing
+func (m *MySimpleHandler) TickerRun(ctx context.Context) {
+	fmt.Printf("MySimpleHandler: TickerRun: %s!\n", m.name)
+}
+
+// return 1 second
+func (m *MySimpleHandler) TickerDuration() time.Duration {
+	return time.Second * 1
 }
 
 func (m *MySimpleHandler) Start(ctx context.Context) error {

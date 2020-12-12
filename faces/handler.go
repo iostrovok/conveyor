@@ -2,6 +2,7 @@ package faces
 
 import (
 	"context"
+	"time"
 )
 
 // GiveBirth return new handler. Type Name is string which was passed with AddHandler(...)
@@ -13,6 +14,10 @@ type IHandler interface {
 
 	// Run() function is called for processing single item.
 	Run(item IItem) error
+
+	// TickerRun() function is called for processing by timer (ticker).
+	TickerRun(ctx context.Context) // error is not processing
+	TickerDuration() time.Duration
 
 	// Stop() function is called before destruction of handler.
 	Stop()

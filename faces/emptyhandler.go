@@ -2,6 +2,7 @@ package faces
 
 import (
 	"context"
+	"time"
 )
 
 /*
@@ -40,4 +41,12 @@ func (m *EmptyHandler) Stop() { /* nothing */ }
 // Run does nothing
 func (m *EmptyHandler) Run(_ IItem) error {
 	return nil
+}
+
+// does nothing
+func (m *EmptyHandler) TickerRun(ctx context.Context) { /* nothing */ }
+
+// return 0
+func (m *EmptyHandler) TickerDuration() time.Duration {
+	return time.Duration(0)
 }

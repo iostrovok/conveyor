@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"sync"
 	"sync/atomic"
+	"time"
 
 	"github.com/iostrovok/conveyor/faces"
 )
@@ -110,8 +111,16 @@ func (w *Worker) Start(ctx context.Context) error {
 
 	w.wg.Add(1)
 	go func() {
+
+		dur := w.handler.TickerDuration()
+		if dur == time.Duration(0) {
+			dur = time.Hour * 24 * 355 * 100 // 100 years by default
+		}
+		ticker := time.NewTicker(dur)
+
 		w.isStarted = true
 		defer func() {
+			ticker.Stop()
 			w.handler.Stop()
 			w.isStarted = false
 			w.wg.Done()
@@ -131,6 +140,9 @@ func (w *Worker) Start(ctx context.Context) error {
 			case <-w.stopCh:
 				w.logTrace("%s is stopped by message", w.id)
 				return
+			case <-ticker.C:
+				w.logTrace("%s ticker is running", w.id)
+				w.handler.TickerRun(ctx)
 			case item, ok := <-w.in.ChanOut():
 				if !ok {
 					w.logTrace("%s channel in is close", w.id)
