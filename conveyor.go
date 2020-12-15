@@ -171,7 +171,7 @@ func (c *Conveyor) RunRes(i faces.IInput) (interface{}, error) {
 
 	select {
 	case <-ctx.Done():
-		return nil, errors.New("context is canceled")
+		return nil, errors.New("context is canceled in RunRes")
 	case item, ok := <-ch:
 		if !ok || item == nil {
 			return nil, errors.New("unexpected error: result channel is closed")

@@ -23,6 +23,7 @@ type Map struct {
 func (m *Map) LoadAndDelete(id int64) (*oneResult, bool) {
 	m.Lock()
 	defer m.Unlock()
+
 	out, find := m.data[id]
 	if find {
 		delete(m.data, id)
@@ -33,12 +34,14 @@ func (m *Map) LoadAndDelete(id int64) (*oneResult, bool) {
 func (m *Map) Store(id int64, res *oneResult) {
 	m.Lock()
 	defer m.Unlock()
+
 	m.data[id] = res
 }
 
 func (m *Map) Range(f func(key int64, res *oneResult) bool) {
 	m.Lock()
 	defer m.Unlock()
+
 	for k, v := range m.data {
 		if !f(k, v) {
 			return
@@ -68,8 +71,9 @@ func Init() faces.GiveBirth {
 }
 
 func AddId(id int64, ctx context.Context) chan faces.IItem {
-	mx.Lock()
-	defer mx.Unlock()
+	if ctx == nil {
+		ctx = context.Background()
+	}
 
 	res := &oneResult{
 		ch:  make(chan faces.IItem, 1),
@@ -85,9 +89,6 @@ func (m *SystemFinalHandler) Start(_ context.Context) error {
 }
 
 func (m *SystemFinalHandler) Stop(_ context.Context) {
-	mx.Lock()
-	defer mx.Unlock()
-
 	closeFunc := func(key int64, res *oneResult) bool {
 		close(res.ch)
 		res.ch = nil
