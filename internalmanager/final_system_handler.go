@@ -6,6 +6,7 @@ package internalmanager
 import (
 	"context"
 	"sync"
+	"time"
 
 	"github.com/iostrovok/conveyor/faces"
 )
@@ -51,14 +52,12 @@ func (m *Map) Range(f func(key int64, res *oneResult) bool) {
 
 // global vars
 var allResults *Map
-var mx *sync.RWMutex
 
 type SystemFinalHandler struct {
 	faces.EmptyHandler // defines unused methods
 }
 
 func init() {
-	mx = new(sync.RWMutex)
 	allResults = &Map{
 		data: map[int64]*oneResult{},
 	}
@@ -75,13 +74,14 @@ func AddId(id int64, ctx context.Context) chan faces.IItem {
 		ctx = context.Background()
 	}
 
+	ch := make(chan faces.IItem, 2)
 	res := &oneResult{
-		ch:  make(chan faces.IItem, 1),
+		ch:  ch,
 		ctx: ctx,
 	}
 
 	allResults.Store(id, res)
-	return res.ch
+	return ch
 }
 
 func (m *SystemFinalHandler) Start(_ context.Context) error {
@@ -105,6 +105,7 @@ func runOne(res *oneResult, item faces.IItem) {
 	select {
 	case res.ch <- item: /* nothing */
 	case <-res.ctx.Done(): /* nothing */
+	case <-time.After(60 * time.Second): /* nothing */
 	default: /* nothing */
 	}
 

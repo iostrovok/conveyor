@@ -2,7 +2,6 @@ package conveyor
 
 import (
 	"context"
-	"errors"
 	"log"
 	"strconv"
 	"sync"
@@ -10,6 +9,8 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	"github.com/pkg/errors"
+
 
 	"github.com/iostrovok/conveyor/faces"
 	"github.com/iostrovok/conveyor/internalmanager"

@@ -5,11 +5,11 @@ package workers
 
 import (
 	"context"
-	"errors"
-	"fmt"
 	"sync"
 	"sync/atomic"
 	"time"
+
+	"github.com/pkg/errors"
 
 	"github.com/iostrovok/conveyor/faces"
 )
@@ -197,7 +197,7 @@ func (w *Worker) process(ctx context.Context, item faces.IItem) {
 func doit(internalErr chan error, handler faces.IHandler, item faces.IItem) {
 	defer func() {
 		if e := recover(); e != nil {
-			internalErr <- fmt.Errorf("%+v", e)
+			internalErr <- errors.Errorf("%+v", e)
 		}
 	}()
 

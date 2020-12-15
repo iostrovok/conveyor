@@ -5,6 +5,7 @@ package input
 
 import (
 	"context"
+
 	"github.com/iostrovok/conveyor/faces"
 )
 

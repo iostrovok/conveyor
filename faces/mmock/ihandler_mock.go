@@ -9,6 +9,7 @@ import (
 	gomock "github.com/golang/mock/gomock"
 	faces "github.com/iostrovok/conveyor/faces"
 	reflect "reflect"
+	time "time"
 )
 
 // MockIHandler is a mock of IHandler interface
@@ -63,13 +64,39 @@ func (mr *MockIHandlerMockRecorder) Start(arg0 interface{}) *gomock.Call {
 }
 
 // Stop mocks base method
-func (m *MockIHandler) Stop() {
+func (m *MockIHandler) Stop(arg0 context.Context) {
 	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "Stop")
+	m.ctrl.Call(m, "Stop", arg0)
 }
 
 // Stop indicates an expected call of Stop
-func (mr *MockIHandlerMockRecorder) Stop() *gomock.Call {
+func (mr *MockIHandlerMockRecorder) Stop(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Stop", reflect.TypeOf((*MockIHandler)(nil).Stop))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Stop", reflect.TypeOf((*MockIHandler)(nil).Stop), arg0)
+}
+
+// TickerDuration mocks base method
+func (m *MockIHandler) TickerDuration() time.Duration {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "TickerDuration")
+	ret0, _ := ret[0].(time.Duration)
+	return ret0
+}
+
+// TickerDuration indicates an expected call of TickerDuration
+func (mr *MockIHandlerMockRecorder) TickerDuration() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TickerDuration", reflect.TypeOf((*MockIHandler)(nil).TickerDuration))
+}
+
+// TickerRun mocks base method
+func (m *MockIHandler) TickerRun(arg0 context.Context) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "TickerRun", arg0)
+}
+
+// TickerRun indicates an expected call of TickerRun
+func (mr *MockIHandlerMockRecorder) TickerRun(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TickerRun", reflect.TypeOf((*MockIHandler)(nil).TickerRun), arg0)
 }
