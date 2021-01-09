@@ -176,15 +176,17 @@ func (w *Worker) process(ctx context.Context, item faces.IItem) {
 			item.PushedToChannel(faces.ErrorName)
 		}
 		pushToNotNilChan(w.errCh, item)
+		return
 	}
 
 	if find {
 		item.AfterProcess(w.name, err)
-		// needed handler is not  found
+		// needed handler is not found
 		if !w.isLast && w.typ != faces.FinalManagerType {
 			item.PushedToChannel(w.nextManagerName)
 		}
 		pushToNotNilChan(w.out, item)
+		return
 	}
 
 	// main action
