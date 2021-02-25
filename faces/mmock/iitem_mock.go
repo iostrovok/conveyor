@@ -244,6 +244,20 @@ func (mr *MockIItemMockRecorder) GetSkipToName() *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSkipToName", reflect.TypeOf((*MockIItem)(nil).GetSkipToName))
 }
 
+// GetTestHandlerSuffix mocks base method
+func (m *MockIItem) GetTestHandlerSuffix() string {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTestHandlerSuffix")
+	ret0, _ := ret[0].(string)
+	return ret0
+}
+
+// GetTestHandlerSuffix indicates an expected call of GetTestHandlerSuffix
+func (mr *MockIItemMockRecorder) GetTestHandlerSuffix() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTestHandlerSuffix", reflect.TypeOf((*MockIItem)(nil).GetTestHandlerSuffix))
+}
+
 // LogTrace mocks base method
 func (m *MockIItem) LogTrace(arg0 string, arg1 ...interface{}) {
 	m.ctrl.T.Helper()
@@ -365,6 +379,18 @@ func (mr *MockIItemMockRecorder) SetLastHandler(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetLastHandler", reflect.TypeOf((*MockIItem)(nil).SetLastHandler), arg0)
 }
 
+// SetLock mocks base method
+func (m *MockIItem) SetLock() {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "SetLock")
+}
+
+// SetLock indicates an expected call of SetLock
+func (mr *MockIItemMockRecorder) SetLock() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetLock", reflect.TypeOf((*MockIItem)(nil).SetLock))
+}
+
 // SetPriority mocks base method
 func (m *MockIItem) SetPriority(arg0 int) {
 	m.ctrl.T.Helper()
@@ -403,6 +429,30 @@ func (m *MockIItem) SetSkipToName(arg0 faces.Name) {
 func (mr *MockIItemMockRecorder) SetSkipToName(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetSkipToName", reflect.TypeOf((*MockIItem)(nil).SetSkipToName), arg0)
+}
+
+// SetTestHandlerSuffix mocks base method
+func (m *MockIItem) SetTestHandlerSuffix(arg0 string) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "SetTestHandlerSuffix", arg0)
+}
+
+// SetTestHandlerSuffix indicates an expected call of SetTestHandlerSuffix
+func (mr *MockIItemMockRecorder) SetTestHandlerSuffix(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTestHandlerSuffix", reflect.TypeOf((*MockIItem)(nil).SetTestHandlerSuffix), arg0)
+}
+
+// SetUnlock mocks base method
+func (m *MockIItem) SetUnlock() {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "SetUnlock")
+}
+
+// SetUnlock indicates an expected call of SetUnlock
+func (mr *MockIItemMockRecorder) SetUnlock() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetUnlock", reflect.TypeOf((*MockIItem)(nil).SetUnlock))
 }
 
 // Start mocks base method

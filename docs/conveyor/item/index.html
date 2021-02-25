@@ -14,7 +14,7 @@
 
 
 
-<script>var goVersion = "go1.15.1";</script>
+<script>var goVersion = "go1.15.2";</script>
 <script src="../../lib/godoc/godocs.js" defer></script>
 </head>
 <body>
@@ -131,7 +131,16 @@ Package realizes the IItem interface.
 					<dd>&nbsp; &nbsp; <a href="index.html#Item.AddError">func (i *Item) AddError(err error)</a></dd>
 				
 					
+					<dd>&nbsp; &nbsp; <a href="index.html#Item.AfterProcess">func (i *Item) AfterProcess(_ faces.Name, _ error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Item.BeforeProcess">func (i *Item) BeforeProcess(_ faces.Name)</a></dd>
+				
+					
 					<dd>&nbsp; &nbsp; <a href="index.html#Item.Cancel">func (i *Item) Cancel()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Item.CheckData">func (i *Item) CheckData()</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#Item.CleanError">func (i *Item) CleanError()</a></dd>
@@ -161,7 +170,13 @@ Package realizes the IItem interface.
 					<dd>&nbsp; &nbsp; <a href="index.html#Item.GetPriority">func (i *Item) GetPriority() int</a></dd>
 				
 					
+					<dd>&nbsp; &nbsp; <a href="index.html#Item.GetSkipNames">func (i *Item) GetSkipNames() []faces.Name</a></dd>
+				
+					
 					<dd>&nbsp; &nbsp; <a href="index.html#Item.GetSkipToName">func (i *Item) GetSkipToName() faces.Name</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Item.GetTestHandlerSuffix">func (i *Item) GetTestHandlerSuffix() string</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#Item.Init">func (i *Item) Init(ctxIn context.Context, tr faces.ITrace) faces.IItem</a></dd>
@@ -176,25 +191,43 @@ Package realizes the IItem interface.
 					<dd>&nbsp; &nbsp; <a href="index.html#Item.NeedToSkip">func (i *Item) NeedToSkip(worker faces.IWorker) (bool, error)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#Item.Set">func (i *Item) Set(data interface{}) faces.IItem</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#Item.PushedToChannel">func (i *Item) PushedToChannel(_ faces.Name)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#Item.SetHandlerError">func (i *Item) SetHandlerError(handlerNameWithError faces.Name) faces.IItem</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#Item.ReceivedFromChannel">func (i *Item) ReceivedFromChannel()</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#Item.SetID">func (i *Item) SetID(id int64) faces.IItem</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#Item.Set">func (i *Item) Set(data interface{})</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#Item.SetLastHandler">func (i *Item) SetLastHandler(handlerName faces.Name) faces.IItem</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#Item.SetHandlerError">func (i *Item) SetHandlerError(handlerNameWithError faces.Name)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#Item.SetPriority">func (i *Item) SetPriority(priority int) faces.IItem</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#Item.SetID">func (i *Item) SetID(id int64)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Item.SetLastHandler">func (i *Item) SetLastHandler(handlerName faces.Name)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Item.SetLock">func (i *Item) SetLock()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Item.SetPriority">func (i *Item) SetPriority(priority int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Item.SetSkipNames">func (i *Item) SetSkipNames(names ...faces.Name)</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#Item.SetSkipToName">func (i *Item) SetSkipToName(name faces.Name)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#Item.Start">func (i *Item) Start() faces.IItem</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#Item.SetTestHandlerSuffix">func (i *Item) SetTestHandlerSuffix(suffix string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Item.SetUnlock">func (i *Item) SetUnlock()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#Item.Start">func (i *Item) Start()</a></dd>
 				
 			
 			
@@ -223,7 +256,7 @@ Package realizes the IItem interface.
 		
 			
 			
-			<h2 id="New">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=491:549#L27">New</a>
+			<h2 id="New">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=560:618#L33">New</a>
 				<a class="permalink" href="index.html#New">&#xb6;</a>
 				
 				
@@ -237,7 +270,7 @@ Package realizes the IItem interface.
 		
 			
 			
-			<h2 id="Data">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=174:489#L8">Data</a>
+			<h2 id="Data">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=197:558#L11">Data</a>
 				<a class="permalink" href="index.html#Data">&#xb6;</a>
 				
 				
@@ -262,13 +295,14 @@ Package realizes the IItem interface.
 		
 			
 			
-			<h2 id="Item">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=140:172#L4">Item</a>
+			<h2 id="Item">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=148:195#L5">Item</a>
 				<a class="permalink" href="index.html#Item">&#xb6;</a>
 				
 				
 			</h2>
 			
 			<pre>type Item struct {
+    <a href="http://127.0.0.1:6060/pkg/sync/">sync</a>.<a href="http://127.0.0.1:6060/pkg/sync/#RWMutex">RWMutex</a>
     <span class="comment">// contains filtered or unexported fields</span>
 }
 </pre>
@@ -285,7 +319,7 @@ Package realizes the IItem interface.
 
 			
 				
-				<h3 id="Item.AddError">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=1236:1270#L67">AddError</a>
+				<h3 id="Item.AddError">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=1956:1990#L127">AddError</a>
 					<a class="permalink" href="index.html#Item.AddError">&#xb6;</a>
 					
 					
@@ -297,7 +331,37 @@ Package realizes the IItem interface.
 				
 			
 				
-				<h3 id="Item.Cancel">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=2285:2308#L112">Cancel</a>
+				<h3 id="Item.AfterProcess">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=5080:5130#L273">AfterProcess</a>
+					<a class="permalink" href="index.html#Item.AfterProcess">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (i *<a href="index.html#Item">Item</a>) AfterProcess(_ <a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#Name">Name</a>, _ <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+AfterProcess it should be redefined
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Item.BeforeProcess">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=4993:5035#L269">BeforeProcess</a>
+					<a class="permalink" href="index.html#Item.BeforeProcess">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (i *<a href="index.html#Item">Item</a>) BeforeProcess(_ <a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#Name">Name</a>)</pre>
+				<p>
+BeforeProcess it should be redefined
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Item.Cancel">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=3190:3213#L192">Cancel</a>
 					<a class="permalink" href="index.html#Item.Cancel">&#xb6;</a>
 					
 					
@@ -312,7 +376,19 @@ Cancel emergency breaks the processing by global context
 				
 			
 				
-				<h3 id="Item.CleanError">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=1467:1494#L79">CleanError</a>
+				<h3 id="Item.CheckData">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=1562:1588#L95">CheckData</a>
+					<a class="permalink" href="index.html#Item.CheckData">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (i *<a href="index.html#Item">Item</a>) CheckData()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Item.CleanError">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=2247:2274#L145">CleanError</a>
 					<a class="permalink" href="index.html#Item.CleanError">&#xb6;</a>
 					
 					
@@ -324,7 +400,7 @@ Cancel emergency breaks the processing by global context
 				
 			
 				
-				<h3 id="Item.Finish">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=1810:1833#L95">Finish</a>
+				<h3 id="Item.Finish">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=2679:2702#L170">Finish</a>
 					<a class="permalink" href="index.html#Item.Finish">&#xb6;</a>
 					
 					
@@ -339,7 +415,7 @@ Finish writes tracer for item and flush the tracer
 				
 			
 				
-				<h3 id="Item.Get">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=1094:1126#L58">Get</a>
+				<h3 id="Item.Get">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=1776:1808#L113">Get</a>
 					<a class="permalink" href="index.html#Item.Get">&#xb6;</a>
 					
 					
@@ -351,7 +427,7 @@ Finish writes tracer for item and flush the tracer
 				
 			
 				
-				<h3 id="Item.GetContext">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=1518:1561#L83">GetContext</a>
+				<h3 id="Item.GetContext">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=2327:2370#L152">GetContext</a>
 					<a class="permalink" href="index.html#Item.GetContext">&#xb6;</a>
 					
 					
@@ -363,7 +439,7 @@ Finish writes tracer for item and flush the tracer
 				
 			
 				
-				<h3 id="Item.GetError">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=1411:1442#L75">GetError</a>
+				<h3 id="Item.GetError">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=2160:2191#L138">GetError</a>
 					<a class="permalink" href="index.html#Item.GetError">&#xb6;</a>
 					
 					
@@ -375,7 +451,7 @@ Finish writes tracer for item and flush the tracer
 				
 			
 				
-				<h3 id="Item.GetHandlerError">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=3061:3104#L138">GetHandlerError</a>
+				<h3 id="Item.GetHandlerError">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=4062:4105#L229">GetHandlerError</a>
 					<a class="permalink" href="index.html#Item.GetHandlerError">&#xb6;</a>
 					
 					
@@ -390,7 +466,7 @@ GetHandlerError returns the error which got within processing of the item
 				
 			
 				
-				<h3 id="Item.GetID">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=968:996#L49">GetID</a>
+				<h3 id="Item.GetID">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=1612:1640#L99">GetID</a>
 					<a class="permalink" href="index.html#Item.GetID">&#xb6;</a>
 					
 					
@@ -402,7 +478,7 @@ GetHandlerError returns the error which got within processing of the item
 				
 			
 				
-				<h3 id="Item.GetLastHandler">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=3436:3478#L149">GetLastHandler</a>
+				<h3 id="Item.GetLastHandler">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=4475:4517#L245">GetLastHandler</a>
 					<a class="permalink" href="index.html#Item.GetLastHandler">&#xb6;</a>
 					
 					
@@ -417,7 +493,7 @@ GetLastHandler returns the last handler name which processed the item
 				
 			
 				
-				<h3 id="Item.GetPriority">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=2762:2794#L127">GetPriority</a>
+				<h3 id="Item.GetPriority">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=3725:3757#L213">GetPriority</a>
 					<a class="permalink" href="index.html#Item.GetPriority">&#xb6;</a>
 					
 					
@@ -432,7 +508,22 @@ GetPriority returns priority for item
 				
 			
 				
-				<h3 id="Item.GetSkipToName">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=4078:4119#L167">GetSkipToName</a>
+				<h3 id="Item.GetSkipNames">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=5937:5979#L303">GetSkipNames</a>
+					<a class="permalink" href="index.html#Item.GetSkipNames">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (i *<a href="index.html#Item">Item</a>) GetSkipNames() []<a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#Name">Name</a></pre>
+				<p>
+GetSkipNames returns handler name which was set up with SetSkipNames.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Item.GetSkipToName">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=5547:5588#L287">GetSkipToName</a>
 					<a class="permalink" href="index.html#Item.GetSkipToName">&#xb6;</a>
 					
 					
@@ -447,7 +538,19 @@ GetSkipToName returns handler name which was set up with SetSkipToName and is no
 				
 			
 				
-				<h3 id="Item.Init">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=605:676#L33">Init</a>
+				<h3 id="Item.GetTestHandlerSuffix">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=1340:1384#L81">GetTestHandlerSuffix</a>
+					<a class="permalink" href="index.html#Item.GetTestHandlerSuffix">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (i *<a href="index.html#Item">Item</a>) GetTestHandlerSuffix() <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Item.Init">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=759:830#L48">Init</a>
 					<a class="permalink" href="index.html#Item.Init">&#xb6;</a>
 					
 					
@@ -459,7 +562,7 @@ GetSkipToName returns handler name which was set up with SetSkipToName and is no
 				
 			
 				
-				<h3 id="Item.LogTrace">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=1623:1679#L88">LogTrace</a>
+				<h3 id="Item.LogTrace">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=2463:2519#L160">LogTrace</a>
 					<a class="permalink" href="index.html#Item.LogTrace">&#xb6;</a>
 					
 					
@@ -474,7 +577,7 @@ LogTrace pushes message to tracer
 				
 			
 				
-				<h3 id="Item.LogTraceFinishTime">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=2488:2554#L119">LogTraceFinishTime</a>
+				<h3 id="Item.LogTraceFinishTime">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=3422:3488#L202">LogTraceFinishTime</a>
 					<a class="permalink" href="index.html#Item.LogTraceFinishTime">&#xb6;</a>
 					
 					
@@ -489,7 +592,7 @@ LogTraceFinishTime adds the message and during of period from last call of item.
 				
 			
 				
-				<h3 id="Item.NeedToSkip">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=4205:4266#L172">NeedToSkip</a>
+				<h3 id="Item.NeedToSkip">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=6095:6156#L311">NeedToSkip</a>
 					<a class="permalink" href="index.html#Item.NeedToSkip">&#xb6;</a>
 					
 					
@@ -504,24 +607,54 @@ NeedToSkip checks should be handler skipped or not
 				
 			
 				
-				<h3 id="Item.Set">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=1152:1200#L62">Set</a>
+				<h3 id="Item.PushedToChannel">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=4815:4859#L261">PushedToChannel</a>
+					<a class="permalink" href="index.html#Item.PushedToChannel">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (i *<a href="index.html#Item">Item</a>) PushedToChannel(_ <a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#Name">Name</a>)</pre>
+				<p>
+PushedToChannel it should be redefined
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Item.ReceivedFromChannel">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=4911:4947#L265">ReceivedFromChannel</a>
+					<a class="permalink" href="index.html#Item.ReceivedFromChannel">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (i *<a href="index.html#Item">Item</a>) ReceivedFromChannel()</pre>
+				<p>
+ReceivedFromChannel it should be redefined
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Item.Set">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=1865:1901#L120">Set</a>
 					<a class="permalink" href="index.html#Item.Set">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (i *<a href="index.html#Item">Item</a>) Set(data interface{}) <a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#IItem">IItem</a></pre>
+				<pre>func (i *<a href="index.html#Item">Item</a>) Set(data interface{})</pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="Item.SetHandlerError">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=3220:3295#L143">SetHandlerError</a>
+				<h3 id="Item.SetHandlerError">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=4252:4315#L237">SetHandlerError</a>
 					<a class="permalink" href="index.html#Item.SetHandlerError">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (i *<a href="index.html#Item">Item</a>) SetHandlerError(handlerNameWithError <a href="../../../../../faces/index.html">faces</a>.<a href="../faces/index.html#Name">Name</a>) <a href="../faces/index.html">faces</a>.<a href="../faces/index.html#IItem">IItem</a></pre>
+				<pre>func (i *<a href="index.html#Item">Item</a>) SetHandlerError(handlerNameWithError <a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#Name">Name</a>)</pre>
 				<p>
 SetHandlerError sets the error which got within processing of the item
 </p>
@@ -531,24 +664,24 @@ SetHandlerError sets the error which got within processing of the item
 				
 			
 				
-				<h3 id="Item.SetID">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=1020:1062#L53">SetID</a>
+				<h3 id="Item.SetID">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=1695:1725#L106">SetID</a>
 					<a class="permalink" href="index.html#Item.SetID">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (i *<a href="index.html#Item">Item</a>) SetID(id <a href="http://127.0.0.1:6060/pkg/builtin/#int64">int64</a>) <a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#IItem">IItem</a></pre>
+				<pre>func (i *<a href="index.html#Item">Item</a>) SetID(id <a href="http://127.0.0.1:6060/pkg/builtin/#int64">int64</a>)</pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="Item.SetLastHandler">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=3581:3646#L154">SetLastHandler</a>
+				<h3 id="Item.SetLastHandler">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=4651:4704#L253">SetLastHandler</a>
 					<a class="permalink" href="index.html#Item.SetLastHandler">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (i *<a href="index.html#Item">Item</a>) SetLastHandler(handlerName <a href="../../../../../faces/index.html">faces</a>.<a href="../faces/index.html#Name">Name</a>) <a href="../faces/index.html">faces</a>.<a href="../faces/index.html#IItem">IItem</a></pre>
+				<pre>func (i *<a href="index.html#Item">Item</a>) SetLastHandler(handlerName <a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#Name">Name</a>)</pre>
 				<p>
 SetHandlerError set the last handler name which processed the item
 </p>
@@ -558,12 +691,24 @@ SetHandlerError set the last handler name which processed the item
 				
 			
 				
-				<h3 id="Item.SetPriority">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=2888:2940#L132">SetPriority</a>
+				<h3 id="Item.SetLock">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=675:699#L40">SetLock</a>
+					<a class="permalink" href="index.html#Item.SetLock">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (i *<a href="index.html#Item">Item</a>) SetLock()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Item.SetPriority">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=3882:3922#L221">SetPriority</a>
 					<a class="permalink" href="index.html#Item.SetPriority">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (i *<a href="index.html#Item">Item</a>) SetPriority(priority <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>) <a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#IItem">IItem</a></pre>
+				<pre>func (i *<a href="index.html#Item">Item</a>) SetPriority(priority <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)</pre>
 				<p>
 SetPriority sets priority for item if priority queue is used
 </p>
@@ -573,7 +718,22 @@ SetPriority sets priority for item if priority queue is used
 				
 			
 				
-				<h3 id="Item.SetSkipToName">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=3901:3946#L162">SetSkipToName</a>
+				<h3 id="Item.SetSkipNames">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=5726:5774#L295">SetSkipNames</a>
+					<a class="permalink" href="index.html#Item.SetSkipNames">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (i *<a href="index.html#Item">Item</a>) SetSkipNames(names ...<a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#Name">Name</a>)</pre>
+				<p>
+SetSkipNames sets the handler names. Conveyor skips all these handlers.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Item.SetSkipToName">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=5341:5386#L279">SetSkipToName</a>
 					<a class="permalink" href="index.html#Item.SetSkipToName">&#xb6;</a>
 					
 					
@@ -590,12 +750,36 @@ If conveyor finishes and name is not found item gets error.
 				
 			
 				
-				<h3 id="Item.Start">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=2076:2110#L103">Start</a>
+				<h3 id="Item.SetTestHandlerSuffix">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=1447:1497#L88">SetTestHandlerSuffix</a>
+					<a class="permalink" href="index.html#Item.SetTestHandlerSuffix">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (i *<a href="index.html#Item">Item</a>) SetTestHandlerSuffix(suffix <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>)</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Item.SetUnlock">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=715:741#L44">SetUnlock</a>
+					<a class="permalink" href="index.html#Item.SetUnlock">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (i *<a href="index.html#Item">Item</a>) SetUnlock()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Item.Start">func (*Item) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/item/item.go?s=2974:2996#L181">Start</a>
 					<a class="permalink" href="index.html#Item.Start">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (i *<a href="index.html#Item">Item</a>) Start() <a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#IItem">IItem</a></pre>
+				<pre>func (i *<a href="index.html#Item">Item</a>) Start()</pre>
 				<p>
 Start restarts the timers for measuring the periods for each stage of process and whole process.
 </p>
@@ -616,7 +800,7 @@ Start restarts the timers for measuring the periods for each stage of process an
 
 
 <div id="footer">
-Build version go1.15.1.<br>
+Build version go1.15.2.<br>
 Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
 the content of this page is licensed under the
 Creative Commons Attribution 3.0 License,
