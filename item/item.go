@@ -36,6 +36,8 @@ type Data struct {
 
 	handlerNameWithError faces.Name
 	priority             int
+
+	testSuffix string
 }
 
 func New(ctx context.Context, tr faces.ITrace) faces.IItem {
@@ -76,6 +78,14 @@ func (i *Item) Init(ctxIn context.Context, tr faces.ITrace) faces.IItem {
 		skipNames:      make([]faces.Name, 0),
 	}
 	return i
+}
+
+func (i *Item) GetTestHandlerSuffix() string {
+	return i.data.testSuffix
+}
+
+func (i *Item) SetTestHandlerSuffix(suffix string) {
+	i.data.testSuffix = suffix
 }
 
 func (i *Item) CheckData() {

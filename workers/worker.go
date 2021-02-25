@@ -5,10 +5,12 @@ package workers
 
 import (
 	"context"
+	"reflect"
 	"sync"
 	"sync/atomic"
 	"time"
 
+	"github.com/iostrovok/check"
 	"github.com/pkg/errors"
 
 	"github.com/iostrovok/conveyor/faces"
@@ -40,6 +42,10 @@ type Worker struct {
 	tracer    faces.ITrace
 
 	activeWorkers *int32
+
+	// need to use in test mode
+	testMode   bool
+	testObject *check.C
 }
 
 func NewWorker(id string, name faces.Name, in, out, errCh faces.IChan, giveBirth faces.GiveBirth,
@@ -73,6 +79,11 @@ func (w *Worker) SetBorderCond(typ faces.ManagerType, isLast bool, nextManagerNa
 	w.isLast = isLast
 	w.nextManagerName = nextManagerName
 	w.typ = typ
+}
+
+func (w *Worker) SetTestMode(mode bool, testObject *check.C) {
+	w.testMode = mode
+	w.testObject = testObject
 }
 
 func (w *Worker) GetBorderCond() (faces.Name, faces.ManagerType, bool) {
@@ -206,13 +217,52 @@ func doit(internalErr chan error, handler faces.IHandler, item faces.IItem) {
 	internalErr <- handler.Run(item)
 }
 
+func doitWithTest(internalErr chan error, handler interface{}, item faces.IItem, testObject *check.C) {
+	defer func() {
+		if e := recover(); e != nil {
+			internalErr <- errors.Errorf("%+v", e)
+		}
+	}()
+
+	values := []reflect.Value{reflect.ValueOf(item), reflect.ValueOf(testObject)}
+
+	suffix := item.GetTestHandlerSuffix()
+	st := reflect.TypeOf(handler)
+	if _, ok := st.MethodByName("RunTest_" + suffix); ok {
+		values := reflect.ValueOf(handler).MethodByName("RunTest_" + suffix).Call(values)
+		var err error
+		if !values[0].IsNil() {
+			err = values[0].Interface().(error)
+		}
+		internalErr <- err
+		return
+	}
+
+	if _, ok := st.MethodByName("RunTest"); ok {
+		values := reflect.ValueOf(handler).MethodByName("RunTest").Call(values)
+		var err error
+		if !values[0].IsNil() {
+			err = values[0].Interface().(error)
+		}
+		internalErr <- err
+		return
+	}
+
+	internalErr <- handler.(faces.IHandler).Run(item)
+}
+
 func (w *Worker) run(ctx context.Context, item faces.IItem) error {
 
 	atomic.AddInt32(w.activeWorkers, 1)
 	defer atomic.AddInt32(w.activeWorkers, -1)
 
 	internalErr := make(chan error, 1)
-	go doit(internalErr, w.handler, item)
+
+	if w.testMode {
+		go doitWithTest(internalErr, w.handler, item, w.testObject)
+	} else {
+		go doit(internalErr, w.handler, item)
+	}
 
 	var err error
 	select {
