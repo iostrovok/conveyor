@@ -82,6 +82,9 @@ func (w *Worker) SetBorderCond(typ faces.ManagerType, isLast bool, nextManagerNa
 }
 
 func (w *Worker) SetTestMode(mode bool, testObject *check.C) {
+	w.Lock()
+	defer w.Unlock()
+
 	w.testMode = mode
 	w.testObject = testObject
 }
@@ -282,6 +285,7 @@ func (w *Worker) run(ctx context.Context, item faces.IItem) error {
 
 // logError fix log/debug/trace
 func logError(name faces.Name, err error, item faces.IItem) {
+
 	if err == nil {
 		item.LogTraceFinishTime("[%s] success", name)
 		return

@@ -16,7 +16,10 @@ type IItem interface {
 	Set(data interface{})
 	CheckData()
 
+	// processing functions
 	GetContext() context.Context
+	SetLock()
+	SetUnlock()
 
 	AddError(err error)
 	GetError() error

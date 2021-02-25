@@ -162,9 +162,7 @@ func (c *Conveyor) RunTest(i faces.IInput, suffix string) {
 	it := c.getItemFrommInput(i)
 
 	// set test suffix
-	if c.data.testMode {
-		it.SetTestHandlerSuffix(suffix)
-	}
+	it.SetTestHandlerSuffix(suffix)
 
 	// marker before pushing to first channel
 	it.PushedToChannel(c.data.firstWorkerManager.Name())
@@ -185,10 +183,9 @@ func (c *Conveyor) Run(i faces.IInput) {
 // RunRes creates the new item over interface, sends to conveyor and returns result.
 func (c *Conveyor) RunResTest(i faces.IInput, suffix string) (interface{}, error) {
 	it := c.getItemFrommInput(i)
+
 	// set test suffix
-	if c.data.testMode {
-		it.SetTestHandlerSuffix(suffix)
-	}
+	it.SetTestHandlerSuffix(suffix)
 
 	return c._runRes(it)
 }
