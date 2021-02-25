@@ -14,7 +14,7 @@
 
 
 
-<script>var goVersion = "go1.15.1";</script>
+<script>var goVersion = "go1.15.2";</script>
 <script src="../../lib/godoc/godocs.js" defer></script>
 </head>
 <body>
@@ -122,17 +122,31 @@ Internal package. Package provides a handler for support online processing.
 			
 			
 				
-				<dd><a href="index.html#OnwFinalHandler">type OnwFinalHandler</a></dd>
+				<dd><a href="index.html#Map">type Map</a></dd>
 				
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#OnwFinalHandler.Run">func (m *OnwFinalHandler) Run(item faces.IItem) error</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#Map.LoadAndDelete">func (m *Map) LoadAndDelete(id int64) (*oneResult, bool)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#OnwFinalHandler.Start">func (m *OnwFinalHandler) Start(_ context.Context) error</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#Map.Range">func (m *Map) Range(f func(key int64, res *oneResult) bool)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#OnwFinalHandler.Stop">func (m *OnwFinalHandler) Stop()</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#Map.Store">func (m *Map) Store(id int64, res *oneResult)</a></dd>
+				
+			
+				
+				<dd><a href="index.html#SystemFinalHandler">type SystemFinalHandler</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SystemFinalHandler.Run">func (m *SystemFinalHandler) Run(item faces.IItem) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SystemFinalHandler.Start">func (m *SystemFinalHandler) Start(_ context.Context) error</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#SystemFinalHandler.Stop">func (m *SystemFinalHandler) Stop(_ context.Context)</a></dd>
 				
 			
 			
@@ -161,7 +175,7 @@ Internal package. Package provides a handler for support online processing.
 		
 			
 			
-			<h2 id="AddId">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=534:592#L25">AddId</a>
+			<h2 id="AddId">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=1059:1117#L62">AddId</a>
 				<a class="permalink" href="index.html#AddId">&#xb6;</a>
 				
 				
@@ -174,7 +188,7 @@ Internal package. Package provides a handler for support online processing.
 		
 			
 			
-			<h2 id="Init">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=409:436#L19">Init</a>
+			<h2 id="Init">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=931:958#L56">Init</a>
 				<a class="permalink" href="index.html#Init">&#xb6;</a>
 				
 				
@@ -188,13 +202,16 @@ Internal package. Package provides a handler for support online processing.
 		
 			
 			
-			<h2 id="OnwFinalHandler">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=311:340#L12">OnwFinalHandler</a>
-				<a class="permalink" href="index.html#OnwFinalHandler">&#xb6;</a>
+			<h2 id="Map">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=257:317#L9">Map</a>
+				<a class="permalink" href="index.html#Map">&#xb6;</a>
 				
 				
 			</h2>
 			
-			<pre>type OnwFinalHandler struct{}
+			<pre>type Map struct {
+    <a href="http://127.0.0.1:6060/pkg/sync/">sync</a>.<a href="http://127.0.0.1:6060/pkg/sync/#RWMutex">RWMutex</a>
+    <span class="comment">// contains filtered or unexported fields</span>
+}
 </pre>
 
 			
@@ -209,36 +226,97 @@ Internal package. Package provides a handler for support online processing.
 
 			
 				
-				<h3 id="OnwFinalHandler.Run">func (*OnwFinalHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=1288:1341#L69">Run</a>
-					<a class="permalink" href="index.html#OnwFinalHandler.Run">&#xb6;</a>
+				<h3 id="Map.LoadAndDelete">func (*Map) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=319:375#L14">LoadAndDelete</a>
+					<a class="permalink" href="index.html#Map.LoadAndDelete">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (m *<a href="index.html#OnwFinalHandler">OnwFinalHandler</a>) Run(item <a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#IItem">IItem</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a></pre>
+				<pre>func (m *<a href="index.html#Map">Map</a>) LoadAndDelete(id <a href="http://127.0.0.1:6060/pkg/builtin/#int64">int64</a>) (*oneResult, <a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a>)</pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="OnwFinalHandler.Start">func (*OnwFinalHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=741:797#L38">Start</a>
-					<a class="permalink" href="index.html#OnwFinalHandler.Start">&#xb6;</a>
+				<h3 id="Map.Range">func (*Map) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=586:645#L32">Range</a>
+					<a class="permalink" href="index.html#Map.Range">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (m *<a href="index.html#OnwFinalHandler">OnwFinalHandler</a>) Start(_ <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a></pre>
+				<pre>func (m *<a href="index.html#Map">Map</a>) Range(f func(key <a href="http://127.0.0.1:6060/pkg/builtin/#int64">int64</a>, res *oneResult) <a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a>)</pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="OnwFinalHandler.Stop">func (*OnwFinalHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=815:847#L42">Stop</a>
-					<a class="permalink" href="index.html#OnwFinalHandler.Stop">&#xb6;</a>
+				<h3 id="Map.Store">func (*Map) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=488:533#L25">Store</a>
+					<a class="permalink" href="index.html#Map.Store">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (m *<a href="index.html#OnwFinalHandler">OnwFinalHandler</a>) Stop()</pre>
+				<pre>func (m *<a href="index.html#Map">Map</a>) Store(id <a href="http://127.0.0.1:6060/pkg/builtin/#int64">int64</a>, res *oneResult)</pre>
+				
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="SystemFinalHandler">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=777:857#L46">SystemFinalHandler</a>
+				<a class="permalink" href="index.html#SystemFinalHandler">&#xb6;</a>
+				
+				
+			</h2>
+			
+			<pre>type SystemFinalHandler struct {
+    <a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#EmptyHandler">EmptyHandler</a> <span class="comment">// defines unused methods</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="SystemFinalHandler.Run">func (*SystemFinalHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=1886:1942#L107">Run</a>
+					<a class="permalink" href="index.html#SystemFinalHandler.Run">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#SystemFinalHandler">SystemFinalHandler</a>) Run(item <a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#IItem">IItem</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="SystemFinalHandler.Start">func (*SystemFinalHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=1291:1350#L77">Start</a>
+					<a class="permalink" href="index.html#SystemFinalHandler.Start">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#SystemFinalHandler">SystemFinalHandler</a>) Start(_ <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="SystemFinalHandler.Stop">func (*SystemFinalHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/internalmanager/final_system_handler.go?s=1368:1420#L81">Stop</a>
+					<a class="permalink" href="index.html#SystemFinalHandler.Stop">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#SystemFinalHandler">SystemFinalHandler</a>) Stop(_ <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>)</pre>
 				
 				
 				
@@ -256,7 +334,7 @@ Internal package. Package provides a handler for support online processing.
 
 
 <div id="footer">
-Build version go1.15.1.<br>
+Build version go1.15.2.<br>
 Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
 the content of this page is licensed under the
 Creative Commons Attribution 3.0 License,

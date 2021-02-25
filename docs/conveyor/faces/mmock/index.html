@@ -14,7 +14,7 @@
 
 
 
-<script>var goVersion = "go1.15.1";</script>
+<script>var goVersion = "go1.15.2";</script>
 <script src="../../../lib/godoc/godocs.js" defer></script>
 </head>
 <body>
@@ -94,6 +94,9 @@
 			<div class="expanded">
 				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
 				<p>
+Package mmock is a generated GoMock package.
+</p>
+<p>
 Package mmock is a generated GoMock package.
 </p>
 <p>
@@ -226,31 +229,10 @@ Package mmock is a generated GoMock package.
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyor.MetricPeriod">func (m *MockIConveyor) MetricPeriod(arg0 time.Duration) faces.IConveyor</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyor.Run">func (m *MockIConveyor) Run(arg0 interface{})</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyor.Run">func (m *MockIConveyor) Run(arg0 faces.IInput)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyor.RunCtx">func (m *MockIConveyor) RunCtx(arg0 context.Context, arg1 interface{})</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyor.RunPriority">func (m *MockIConveyor) RunPriority(arg0 interface{}, arg1 int)</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyor.RunPriorityCtx">func (m *MockIConveyor) RunPriorityCtx(arg0 context.Context, arg1 interface{}, arg2 int)</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyor.RunPriorityTrace">func (m *MockIConveyor) RunPriorityTrace(arg0 context.Context, arg1 faces.ITrace, arg2 interface{}, arg3 int)</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyor.RunRes">func (m *MockIConveyor) RunRes(arg0 interface{}, arg1 int) (interface{}, error)</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyor.RunResCtx">func (m *MockIConveyor) RunResCtx(arg0 context.Context, arg1 interface{}, arg2 int) (interface{}, error)</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyor.RunResTrace">func (m *MockIConveyor) RunResTrace(arg0 context.Context, arg1 faces.ITrace, arg2 interface{}, arg3 int) (interface{}, error)</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyor.RunTrace">func (m *MockIConveyor) RunTrace(arg0 context.Context, arg1 faces.ITrace, arg2 interface{})</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyor.RunRes">func (m *MockIConveyor) RunRes(arg0 faces.IInput) (interface{}, error)</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyor.SetDefaultPriority">func (m *MockIConveyor) SetDefaultPriority(arg0 int)</a></dd>
@@ -262,7 +244,7 @@ Package mmock is a generated GoMock package.
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyor.SetName">func (m *MockIConveyor) SetName(arg0 string) faces.IConveyor</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyor.SetTracer">func (m *MockIConveyor) SetTracer(arg0 faces.ITrace) faces.IConveyor</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyor.SetTracer">func (m *MockIConveyor) SetTracer(arg0 faces.ITrace, arg1 time.Duration) faces.IConveyor</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyor.SetWorkersCounter">func (m *MockIConveyor) SetWorkersCounter(arg0 faces.IWorkersCounter) faces.IConveyor</a></dd>
@@ -309,28 +291,7 @@ Package mmock is a generated GoMock package.
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyorMockRecorder.Run">func (mr *MockIConveyorMockRecorder) Run(arg0 interface{}) *gomock.Call</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyorMockRecorder.RunCtx">func (mr *MockIConveyorMockRecorder) RunCtx(arg0, arg1 interface{}) *gomock.Call</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyorMockRecorder.RunPriority">func (mr *MockIConveyorMockRecorder) RunPriority(arg0, arg1 interface{}) *gomock.Call</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyorMockRecorder.RunPriorityCtx">func (mr *MockIConveyorMockRecorder) RunPriorityCtx(arg0, arg1, arg2 interface{}) *gomock.Call</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyorMockRecorder.RunPriorityTrace">func (mr *MockIConveyorMockRecorder) RunPriorityTrace(arg0, arg1, arg2, arg3 interface{}) *gomock.Call</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyorMockRecorder.RunRes">func (mr *MockIConveyorMockRecorder) RunRes(arg0, arg1 interface{}) *gomock.Call</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyorMockRecorder.RunResCtx">func (mr *MockIConveyorMockRecorder) RunResCtx(arg0, arg1, arg2 interface{}) *gomock.Call</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyorMockRecorder.RunResTrace">func (mr *MockIConveyorMockRecorder) RunResTrace(arg0, arg1, arg2, arg3 interface{}) *gomock.Call</a></dd>
-				
-					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyorMockRecorder.RunTrace">func (mr *MockIConveyorMockRecorder) RunTrace(arg0, arg1, arg2 interface{}) *gomock.Call</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyorMockRecorder.RunRes">func (mr *MockIConveyorMockRecorder) RunRes(arg0 interface{}) *gomock.Call</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyorMockRecorder.SetDefaultPriority">func (mr *MockIConveyorMockRecorder) SetDefaultPriority(arg0 interface{}) *gomock.Call</a></dd>
@@ -342,7 +303,7 @@ Package mmock is a generated GoMock package.
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyorMockRecorder.SetName">func (mr *MockIConveyorMockRecorder) SetName(arg0 interface{}) *gomock.Call</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyorMockRecorder.SetTracer">func (mr *MockIConveyorMockRecorder) SetTracer(arg0 interface{}) *gomock.Call</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyorMockRecorder.SetTracer">func (mr *MockIConveyorMockRecorder) SetTracer(arg0, arg1 interface{}) *gomock.Call</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIConveyorMockRecorder.SetWorkersCounter">func (mr *MockIConveyorMockRecorder) SetWorkersCounter(arg0 interface{}) *gomock.Call</a></dd>
@@ -377,7 +338,13 @@ Package mmock is a generated GoMock package.
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIHandler.Start">func (m *MockIHandler) Start(arg0 context.Context) error</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIHandler.Stop">func (m *MockIHandler) Stop()</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIHandler.Stop">func (m *MockIHandler) Stop(arg0 context.Context)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIHandler.TickerDuration">func (m *MockIHandler) TickerDuration() time.Duration</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIHandler.TickerRun">func (m *MockIHandler) TickerRun(arg0 context.Context)</a></dd>
 				
 			
 				
@@ -391,7 +358,71 @@ Package mmock is a generated GoMock package.
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIHandlerMockRecorder.Start">func (mr *MockIHandlerMockRecorder) Start(arg0 interface{}) *gomock.Call</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIHandlerMockRecorder.Stop">func (mr *MockIHandlerMockRecorder) Stop() *gomock.Call</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIHandlerMockRecorder.Stop">func (mr *MockIHandlerMockRecorder) Stop(arg0 interface{}) *gomock.Call</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIHandlerMockRecorder.TickerDuration">func (mr *MockIHandlerMockRecorder) TickerDuration() *gomock.Call</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIHandlerMockRecorder.TickerRun">func (mr *MockIHandlerMockRecorder) TickerRun(arg0 interface{}) *gomock.Call</a></dd>
+				
+			
+				
+				<dd><a href="index.html#MockIInput">type MockIInput</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NewMockIInput">func NewMockIInput(ctrl *gomock.Controller) *MockIInput</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIInput.Context">func (m *MockIInput) Context(arg0 context.Context) faces.IInput</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIInput.Ctx">func (m *MockIInput) Ctx() context.Context</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIInput.Data">func (m *MockIInput) Data(arg0 interface{}) faces.IInput</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIInput.EXPECT">func (m *MockIInput) EXPECT() *MockIInputMockRecorder</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIInput.Priority">func (m *MockIInput) Priority(arg0 int) faces.IInput</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIInput.SkipToName">func (m *MockIInput) SkipToName(arg0 faces.Name) faces.IInput</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIInput.Trace">func (m *MockIInput) Trace(arg0 faces.ITrace) faces.IInput</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIInput.Values">func (m *MockIInput) Values() (context.Context, faces.ITrace, interface{}, *int, faces.Name)</a></dd>
+				
+			
+				
+				<dd><a href="index.html#MockIInputMockRecorder">type MockIInputMockRecorder</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIInputMockRecorder.Context">func (mr *MockIInputMockRecorder) Context(arg0 interface{}) *gomock.Call</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIInputMockRecorder.Ctx">func (mr *MockIInputMockRecorder) Ctx() *gomock.Call</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIInputMockRecorder.Data">func (mr *MockIInputMockRecorder) Data(arg0 interface{}) *gomock.Call</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIInputMockRecorder.Priority">func (mr *MockIInputMockRecorder) Priority(arg0 interface{}) *gomock.Call</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIInputMockRecorder.SkipToName">func (mr *MockIInputMockRecorder) SkipToName(arg0 interface{}) *gomock.Call</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIInputMockRecorder.Trace">func (mr *MockIInputMockRecorder) Trace(arg0 interface{}) *gomock.Call</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIInputMockRecorder.Values">func (mr *MockIInputMockRecorder) Values() *gomock.Call</a></dd>
 				
 			
 				
@@ -405,7 +436,16 @@ Package mmock is a generated GoMock package.
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.AddError">func (m *MockIItem) AddError(arg0 error)</a></dd>
 				
 					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.AfterProcess">func (m *MockIItem) AfterProcess(arg0 faces.Name, arg1 error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.BeforeProcess">func (m *MockIItem) BeforeProcess(arg0 faces.Name)</a></dd>
+				
+					
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.Cancel">func (m *MockIItem) Cancel()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.CheckData">func (m *MockIItem) CheckData()</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.CleanError">func (m *MockIItem) CleanError()</a></dd>
@@ -438,6 +478,9 @@ Package mmock is a generated GoMock package.
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.GetPriority">func (m *MockIItem) GetPriority() int</a></dd>
 				
 					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.GetSkipNames">func (m *MockIItem) GetSkipNames() []faces.Name</a></dd>
+				
+					
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.GetSkipToName">func (m *MockIItem) GetSkipToName() faces.Name</a></dd>
 				
 					
@@ -450,25 +493,34 @@ Package mmock is a generated GoMock package.
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.NeedToSkip">func (m *MockIItem) NeedToSkip(arg0 faces.IWorker) (bool, error)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.Set">func (m *MockIItem) Set(arg0 interface{}) faces.IItem</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.PushedToChannel">func (m *MockIItem) PushedToChannel(arg0 faces.Name)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.SetHandlerError">func (m *MockIItem) SetHandlerError(arg0 faces.Name) faces.IItem</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.ReceivedFromChannel">func (m *MockIItem) ReceivedFromChannel()</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.SetID">func (m *MockIItem) SetID(arg0 int64) faces.IItem</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.Set">func (m *MockIItem) Set(arg0 interface{})</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.SetLastHandler">func (m *MockIItem) SetLastHandler(arg0 faces.Name) faces.IItem</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.SetHandlerError">func (m *MockIItem) SetHandlerError(arg0 faces.Name)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.SetPriority">func (m *MockIItem) SetPriority(arg0 int) faces.IItem</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.SetID">func (m *MockIItem) SetID(arg0 int64)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.SetLastHandler">func (m *MockIItem) SetLastHandler(arg0 faces.Name)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.SetPriority">func (m *MockIItem) SetPriority(arg0 int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.SetSkipNames">func (m *MockIItem) SetSkipNames(arg0 ...faces.Name)</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.SetSkipToName">func (m *MockIItem) SetSkipToName(arg0 faces.Name)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.Start">func (m *MockIItem) Start() faces.IItem</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIItem.Start">func (m *MockIItem) Start()</a></dd>
 				
 			
 				
@@ -479,7 +531,16 @@ Package mmock is a generated GoMock package.
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIItemMockRecorder.AddError">func (mr *MockIItemMockRecorder) AddError(arg0 interface{}) *gomock.Call</a></dd>
 				
 					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIItemMockRecorder.AfterProcess">func (mr *MockIItemMockRecorder) AfterProcess(arg0, arg1 interface{}) *gomock.Call</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIItemMockRecorder.BeforeProcess">func (mr *MockIItemMockRecorder) BeforeProcess(arg0 interface{}) *gomock.Call</a></dd>
+				
+					
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIItemMockRecorder.Cancel">func (mr *MockIItemMockRecorder) Cancel() *gomock.Call</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIItemMockRecorder.CheckData">func (mr *MockIItemMockRecorder) CheckData() *gomock.Call</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIItemMockRecorder.CleanError">func (mr *MockIItemMockRecorder) CleanError() *gomock.Call</a></dd>
@@ -509,6 +570,9 @@ Package mmock is a generated GoMock package.
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIItemMockRecorder.GetPriority">func (mr *MockIItemMockRecorder) GetPriority() *gomock.Call</a></dd>
 				
 					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIItemMockRecorder.GetSkipNames">func (mr *MockIItemMockRecorder) GetSkipNames() *gomock.Call</a></dd>
+				
+					
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIItemMockRecorder.GetSkipToName">func (mr *MockIItemMockRecorder) GetSkipToName() *gomock.Call</a></dd>
 				
 					
@@ -519,6 +583,12 @@ Package mmock is a generated GoMock package.
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIItemMockRecorder.NeedToSkip">func (mr *MockIItemMockRecorder) NeedToSkip(arg0 interface{}) *gomock.Call</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIItemMockRecorder.PushedToChannel">func (mr *MockIItemMockRecorder) PushedToChannel(arg0 interface{}) *gomock.Call</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIItemMockRecorder.ReceivedFromChannel">func (mr *MockIItemMockRecorder) ReceivedFromChannel() *gomock.Call</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIItemMockRecorder.Set">func (mr *MockIItemMockRecorder) Set(arg0 interface{}) *gomock.Call</a></dd>
@@ -534,6 +604,9 @@ Package mmock is a generated GoMock package.
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIItemMockRecorder.SetPriority">func (mr *MockIItemMockRecorder) SetPriority(arg0 interface{}) *gomock.Call</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIItemMockRecorder.SetSkipNames">func (mr *MockIItemMockRecorder) SetSkipNames(arg0 ...interface{}) *gomock.Call</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIItemMockRecorder.SetSkipToName">func (mr *MockIItemMockRecorder) SetSkipToName(arg0 interface{}) *gomock.Call</a></dd>
@@ -563,6 +636,9 @@ Package mmock is a generated GoMock package.
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIManager.MetricPeriod">func (m *MockIManager) MetricPeriod(arg0 time.Duration) faces.IManager</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIManager.Name">func (m *MockIManager) Name() faces.Name</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIManager.SetChanErr">func (m *MockIManager) SetChanErr(arg0 faces.IChan) faces.IManager</a></dd>
@@ -616,6 +692,9 @@ Package mmock is a generated GoMock package.
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIManagerMockRecorder.MetricPeriod">func (mr *MockIManagerMockRecorder) MetricPeriod(arg0 interface{}) *gomock.Call</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIManagerMockRecorder.Name">func (mr *MockIManagerMockRecorder) Name() *gomock.Call</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIManagerMockRecorder.SetChanErr">func (mr *MockIManagerMockRecorder) SetChanErr(arg0 interface{}) *gomock.Call</a></dd>
@@ -674,7 +753,7 @@ Package mmock is a generated GoMock package.
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIWorker.Name">func (m *MockIWorker) Name() faces.Name</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIWorker.SetBorderCond">func (m *MockIWorker) SetBorderCond(arg0 faces.ManagerType, arg1 bool)</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIWorker.SetBorderCond">func (m *MockIWorker) SetBorderCond(arg0 faces.ManagerType, arg1 bool, arg2 faces.Name)</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIWorker.Start">func (m *MockIWorker) Start(arg0 context.Context) error</a></dd>
@@ -697,7 +776,7 @@ Package mmock is a generated GoMock package.
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIWorkerMockRecorder.Name">func (mr *MockIWorkerMockRecorder) Name() *gomock.Call</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#MockIWorkerMockRecorder.SetBorderCond">func (mr *MockIWorkerMockRecorder) SetBorderCond(arg0, arg1 interface{}) *gomock.Call</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#MockIWorkerMockRecorder.SetBorderCond">func (mr *MockIWorkerMockRecorder) SetBorderCond(arg0, arg1, arg2 interface{}) *gomock.Call</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#MockIWorkerMockRecorder.Start">func (mr *MockIWorkerMockRecorder) Start(arg0 interface{}) *gomock.Call</a></dd>
@@ -722,6 +801,8 @@ Package mmock is a generated GoMock package.
 				<a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go">iconveyor_mock.go</a>
 			
 				<a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go">ihandler_mock.go</a>
+			
+				<a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iinput_mock.go">iinput_mock.go</a>
 			
 				<a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go">iitem_mock.go</a>
 			
@@ -1228,12 +1309,12 @@ MetricPeriod mocks base method
 				
 			
 				
-				<h3 id="MockIConveyor.Run">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=4803:4848#L128">Run</a>
+				<h3 id="MockIConveyor.Run">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=4803:4849#L128">Run</a>
 					<a class="permalink" href="index.html#MockIConveyor.Run">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (m *<a href="index.html#MockIConveyor">MockIConveyor</a>) Run(arg0 interface{})</pre>
+				<pre>func (m *<a href="index.html#MockIConveyor">MockIConveyor</a>) Run(arg0 <a href="../../../../../index.html">faces</a>.<a href="../index.html#IInput">IInput</a>)</pre>
 				<p>
 Run mocks base method
 </p>
@@ -1243,72 +1324,12 @@ Run mocks base method
 				
 			
 				
-				<h3 id="MockIConveyor.RunCtx">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=5184:5254#L140">RunCtx</a>
-					<a class="permalink" href="index.html#MockIConveyor.RunCtx">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (m *<a href="index.html#MockIConveyor">MockIConveyor</a>) RunCtx(arg0 <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, arg1 interface{})</pre>
-				<p>
-RunCtx mocks base method
-</p>
-
-				
-				
-				
-			
-				
-				<h3 id="MockIConveyor.RunPriority">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=5631:5694#L152">RunPriority</a>
-					<a class="permalink" href="index.html#MockIConveyor.RunPriority">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (m *<a href="index.html#MockIConveyor">MockIConveyor</a>) RunPriority(arg0 interface{}, arg1 <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)</pre>
-				<p>
-RunPriority mocks base method
-</p>
-
-				
-				
-				
-			
-				
-				<h3 id="MockIConveyor.RunPriorityCtx">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=6104:6192#L164">RunPriorityCtx</a>
-					<a class="permalink" href="index.html#MockIConveyor.RunPriorityCtx">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (m *<a href="index.html#MockIConveyor">MockIConveyor</a>) RunPriorityCtx(arg0 <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, arg1 interface{}, arg2 <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)</pre>
-				<p>
-RunPriorityCtx mocks base method
-</p>
-
-				
-				
-				
-			
-				
-				<h3 id="MockIConveyor.RunPriorityTrace">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=6640:6749#L176">RunPriorityTrace</a>
-					<a class="permalink" href="index.html#MockIConveyor.RunPriorityTrace">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (m *<a href="index.html#MockIConveyor">MockIConveyor</a>) RunPriorityTrace(arg0 <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, arg1 <a href="../../../../../index.html">faces</a>.<a href="../index.html#ITrace">ITrace</a>, arg2 interface{}, arg3 <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)</pre>
-				<p>
-RunPriorityTrace mocks base method
-</p>
-
-				
-				
-				
-			
-				
-				<h3 id="MockIConveyor.RunRes">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=7217:7296#L188">RunRes</a>
+				<h3 id="MockIConveyor.RunRes">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=5185:5255#L140">RunRes</a>
 					<a class="permalink" href="index.html#MockIConveyor.RunRes">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (m *<a href="index.html#MockIConveyor">MockIConveyor</a>) RunRes(arg0 interface{}, arg1 <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>) (interface{}, <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>)</pre>
+				<pre>func (m *<a href="index.html#MockIConveyor">MockIConveyor</a>) RunRes(arg0 <a href="../../../../../index.html">faces</a>.<a href="../index.html#IInput">IInput</a>) (interface{}, <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>)</pre>
 				<p>
 RunRes mocks base method
 </p>
@@ -1318,52 +1339,7 @@ RunRes mocks base method
 				
 			
 				
-				<h3 id="MockIConveyor.RunResCtx">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=7757:7861#L203">RunResCtx</a>
-					<a class="permalink" href="index.html#MockIConveyor.RunResCtx">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (m *<a href="index.html#MockIConveyor">MockIConveyor</a>) RunResCtx(arg0 <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, arg1 interface{}, arg2 <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>) (interface{}, <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>)</pre>
-				<p>
-RunResCtx mocks base method
-</p>
-
-				
-				
-				
-			
-				
-				<h3 id="MockIConveyor.RunResTrace">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=8360:8485#L218">RunResTrace</a>
-					<a class="permalink" href="index.html#MockIConveyor.RunResTrace">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (m *<a href="index.html#MockIConveyor">MockIConveyor</a>) RunResTrace(arg0 <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, arg1 <a href="../../../../../index.html">faces</a>.<a href="../index.html#ITrace">ITrace</a>, arg2 interface{}, arg3 <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>) (interface{}, <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>)</pre>
-				<p>
-RunResTrace mocks base method
-</p>
-
-				
-				
-				
-			
-				
-				<h3 id="MockIConveyor.RunTrace">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=9011:9102#L233">RunTrace</a>
-					<a class="permalink" href="index.html#MockIConveyor.RunTrace">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (m *<a href="index.html#MockIConveyor">MockIConveyor</a>) RunTrace(arg0 <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, arg1 <a href="../../../../../index.html">faces</a>.<a href="../index.html#ITrace">ITrace</a>, arg2 interface{})</pre>
-				<p>
-RunTrace mocks base method
-</p>
-
-				
-				
-				
-			
-				
-				<h3 id="MockIConveyor.SetDefaultPriority">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=9516:9568#L245">SetDefaultPriority</a>
+				<h3 id="MockIConveyor.SetDefaultPriority">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=5707:5759#L155">SetDefaultPriority</a>
 					<a class="permalink" href="index.html#MockIConveyor.SetDefaultPriority">&#xb6;</a>
 					
 					
@@ -1378,7 +1354,7 @@ SetDefaultPriority mocks base method
 				
 			
 				
-				<h3 id="MockIConveyor.SetMasterNode">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=10001:10071#L257">SetMasterNode</a>
+				<h3 id="MockIConveyor.SetMasterNode">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=6192:6262#L167">SetMasterNode</a>
 					<a class="permalink" href="index.html#MockIConveyor.SetMasterNode">&#xb6;</a>
 					
 					
@@ -1393,7 +1369,7 @@ SetMasterNode mocks base method
 				
 			
 				
-				<h3 id="MockIConveyor.SetName">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=10486:10546#L269">SetName</a>
+				<h3 id="MockIConveyor.SetName">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=6677:6737#L179">SetName</a>
 					<a class="permalink" href="index.html#MockIConveyor.SetName">&#xb6;</a>
 					
 					
@@ -1408,12 +1384,12 @@ SetName mocks base method
 				
 			
 				
-				<h3 id="MockIConveyor.SetTracer">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=10966:11034#L283">SetTracer</a>
+				<h3 id="MockIConveyor.SetTracer">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=7157:7245#L193">SetTracer</a>
 					<a class="permalink" href="index.html#MockIConveyor.SetTracer">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (m *<a href="index.html#MockIConveyor">MockIConveyor</a>) SetTracer(arg0 <a href="../../../../../../../../../index.html">faces</a>.<a href="../index.html#ITrace">ITrace</a>) <a href="../index.html">faces</a>.<a href="../index.html#IConveyor">IConveyor</a></pre>
+				<pre>func (m *<a href="index.html#MockIConveyor">MockIConveyor</a>) SetTracer(arg0 <a href="../../../../../../../../../index.html">faces</a>.<a href="../index.html#ITrace">ITrace</a>, arg1 <a href="http://127.0.0.1:6060/pkg/time/">time</a>.<a href="http://127.0.0.1:6060/pkg/time/#Duration">Duration</a>) <a href="../index.html">faces</a>.<a href="../index.html#IConveyor">IConveyor</a></pre>
 				<p>
 SetTracer mocks base method
 </p>
@@ -1423,7 +1399,7 @@ SetTracer mocks base method
 				
 			
 				
-				<h3 id="MockIConveyor.SetWorkersCounter">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=11474:11559#L297">SetWorkersCounter</a>
+				<h3 id="MockIConveyor.SetWorkersCounter">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=7703:7788#L207">SetWorkersCounter</a>
 					<a class="permalink" href="index.html#MockIConveyor.SetWorkersCounter">&#xb6;</a>
 					
 					
@@ -1438,7 +1414,7 @@ SetWorkersCounter mocks base method
 				
 			
 				
-				<h3 id="MockIConveyor.Start">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=12035:12092#L311">Start</a>
+				<h3 id="MockIConveyor.Start">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=8264:8321#L221">Start</a>
 					<a class="permalink" href="index.html#MockIConveyor.Start">&#xb6;</a>
 					
 					
@@ -1453,7 +1429,7 @@ Start mocks base method
 				
 			
 				
-				<h3 id="MockIConveyor.Statistic">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=12490:12553#L325">Statistic</a>
+				<h3 id="MockIConveyor.Statistic">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=8719:8782#L235">Statistic</a>
 					<a class="permalink" href="index.html#MockIConveyor.Statistic">&#xb6;</a>
 					
 					
@@ -1468,7 +1444,7 @@ Statistic mocks base method
 				
 			
 				
-				<h3 id="MockIConveyor.Stop">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=12964:12994#L339">Stop</a>
+				<h3 id="MockIConveyor.Stop">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=9193:9223#L249">Stop</a>
 					<a class="permalink" href="index.html#MockIConveyor.Stop">&#xb6;</a>
 					
 					
@@ -1483,7 +1459,7 @@ Stop mocks base method
 				
 			
 				
-				<h3 id="MockIConveyor.WaitAndStop">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=13313:13350#L351">WaitAndStop</a>
+				<h3 id="MockIConveyor.WaitAndStop">func (*MockIConveyor) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=9542:9579#L261">WaitAndStop</a>
 					<a class="permalink" href="index.html#MockIConveyor.WaitAndStop">&#xb6;</a>
 					
 					
@@ -1631,7 +1607,7 @@ MetricPeriod indicates an expected call of MetricPeriod
 				
 			
 				
-				<h3 id="MockIConveyorMockRecorder.Run">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=4943:5014#L134">Run</a>
+				<h3 id="MockIConveyorMockRecorder.Run">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=4944:5015#L134">Run</a>
 					<a class="permalink" href="index.html#MockIConveyorMockRecorder.Run">&#xb6;</a>
 					
 					
@@ -1646,72 +1622,12 @@ Run indicates an expected call of Run
 				
 			
 				
-				<h3 id="MockIConveyorMockRecorder.RunCtx">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=5364:5444#L146">RunCtx</a>
-					<a class="permalink" href="index.html#MockIConveyorMockRecorder.RunCtx">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (mr *<a href="index.html#MockIConveyorMockRecorder">MockIConveyorMockRecorder</a>) RunCtx(arg0, arg1 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
-				<p>
-RunCtx indicates an expected call of RunCtx
-</p>
-
-				
-				
-				
-			
-				
-				<h3 id="MockIConveyorMockRecorder.RunPriority">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=5819:5904#L158">RunPriority</a>
-					<a class="permalink" href="index.html#MockIConveyorMockRecorder.RunPriority">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (mr *<a href="index.html#MockIConveyorMockRecorder">MockIConveyorMockRecorder</a>) RunPriority(arg0, arg1 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
-				<p>
-RunPriority indicates an expected call of RunPriority
-</p>
-
-				
-				
-				
-			
-				
-				<h3 id="MockIConveyorMockRecorder.RunPriorityCtx">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=6332:6426#L170">RunPriorityCtx</a>
-					<a class="permalink" href="index.html#MockIConveyorMockRecorder.RunPriorityCtx">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (mr *<a href="index.html#MockIConveyorMockRecorder">MockIConveyorMockRecorder</a>) RunPriorityCtx(arg0, arg1, arg2 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
-				<p>
-RunPriorityCtx indicates an expected call of RunPriorityCtx
-</p>
-
-				
-				
-				
-			
-				
-				<h3 id="MockIConveyorMockRecorder.RunPriorityTrace">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=6901:7003#L182">RunPriorityTrace</a>
-					<a class="permalink" href="index.html#MockIConveyorMockRecorder.RunPriorityTrace">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (mr *<a href="index.html#MockIConveyorMockRecorder">MockIConveyorMockRecorder</a>) RunPriorityTrace(arg0, arg1, arg2, arg3 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
-				<p>
-RunPriorityTrace indicates an expected call of RunPriorityTrace
-</p>
-
-				
-				
-				
-			
-				
-				<h3 id="MockIConveyorMockRecorder.RunRes">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=7492:7572#L197">RunRes</a>
+				<h3 id="MockIConveyorMockRecorder.RunRes">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=5445:5519#L149">RunRes</a>
 					<a class="permalink" href="index.html#MockIConveyorMockRecorder.RunRes">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (mr *<a href="index.html#MockIConveyorMockRecorder">MockIConveyorMockRecorder</a>) RunRes(arg0, arg1 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
+				<pre>func (mr *<a href="index.html#MockIConveyorMockRecorder">MockIConveyorMockRecorder</a>) RunRes(arg0 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
 				<p>
 RunRes indicates an expected call of RunRes
 </p>
@@ -1721,52 +1637,7 @@ RunRes indicates an expected call of RunRes
 				
 			
 				
-				<h3 id="MockIConveyorMockRecorder.RunResCtx">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=8072:8161#L212">RunResCtx</a>
-					<a class="permalink" href="index.html#MockIConveyorMockRecorder.RunResCtx">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (mr *<a href="index.html#MockIConveyorMockRecorder">MockIConveyorMockRecorder</a>) RunResCtx(arg0, arg1, arg2 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
-				<p>
-RunResCtx indicates an expected call of RunResCtx
-</p>
-
-				
-				
-				
-			
-				
-				<h3 id="MockIConveyorMockRecorder.RunResTrace">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=8708:8805#L227">RunResTrace</a>
-					<a class="permalink" href="index.html#MockIConveyorMockRecorder.RunResTrace">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (mr *<a href="index.html#MockIConveyorMockRecorder">MockIConveyorMockRecorder</a>) RunResTrace(arg0, arg1, arg2, arg3 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
-				<p>
-RunResTrace indicates an expected call of RunResTrace
-</p>
-
-				
-				
-				
-			
-				
-				<h3 id="MockIConveyorMockRecorder.RunTrace">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=9224:9312#L239">RunTrace</a>
-					<a class="permalink" href="index.html#MockIConveyorMockRecorder.RunTrace">&#xb6;</a>
-					
-					
-				</h3>
-				<pre>func (mr *<a href="index.html#MockIConveyorMockRecorder">MockIConveyorMockRecorder</a>) RunTrace(arg0, arg1, arg2 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
-				<p>
-RunTrace indicates an expected call of RunTrace
-</p>
-
-				
-				
-				
-			
-				
-				<h3 id="MockIConveyorMockRecorder.SetDefaultPriority">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=9708:9794#L251">SetDefaultPriority</a>
+				<h3 id="MockIConveyorMockRecorder.SetDefaultPriority">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=5899:5985#L161">SetDefaultPriority</a>
 					<a class="permalink" href="index.html#MockIConveyorMockRecorder.SetDefaultPriority">&#xb6;</a>
 					
 					
@@ -1781,7 +1652,7 @@ SetDefaultPriority indicates an expected call of SetDefaultPriority
 				
 			
 				
-				<h3 id="MockIConveyorMockRecorder.SetMasterNode">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=10202:10289#L263">SetMasterNode</a>
+				<h3 id="MockIConveyorMockRecorder.SetMasterNode">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=6393:6480#L173">SetMasterNode</a>
 					<a class="permalink" href="index.html#MockIConveyorMockRecorder.SetMasterNode">&#xb6;</a>
 					
 					
@@ -1796,7 +1667,7 @@ SetMasterNode indicates an expected call of SetMasterNode
 				
 			
 				
-				<h3 id="MockIConveyorMockRecorder.SetName">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=10710:10785#L277">SetName</a>
+				<h3 id="MockIConveyorMockRecorder.SetName">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=6901:6976#L187">SetName</a>
 					<a class="permalink" href="index.html#MockIConveyorMockRecorder.SetName">&#xb6;</a>
 					
 					
@@ -1811,12 +1682,12 @@ SetName indicates an expected call of SetName
 				
 			
 				
-				<h3 id="MockIConveyorMockRecorder.SetTracer">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=11204:11281#L291">SetTracer</a>
+				<h3 id="MockIConveyorMockRecorder.SetTracer">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=7421:7504#L201">SetTracer</a>
 					<a class="permalink" href="index.html#MockIConveyorMockRecorder.SetTracer">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (mr *<a href="index.html#MockIConveyorMockRecorder">MockIConveyorMockRecorder</a>) SetTracer(arg0 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
+				<pre>func (mr *<a href="index.html#MockIConveyorMockRecorder">MockIConveyorMockRecorder</a>) SetTracer(arg0, arg1 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
 				<p>
 SetTracer indicates an expected call of SetTracer
 </p>
@@ -1826,7 +1697,7 @@ SetTracer indicates an expected call of SetTracer
 				
 			
 				
-				<h3 id="MockIConveyorMockRecorder.SetWorkersCounter">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=11753:11838#L305">SetWorkersCounter</a>
+				<h3 id="MockIConveyorMockRecorder.SetWorkersCounter">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=7982:8067#L215">SetWorkersCounter</a>
 					<a class="permalink" href="index.html#MockIConveyorMockRecorder.SetWorkersCounter">&#xb6;</a>
 					
 					
@@ -1841,7 +1712,7 @@ SetWorkersCounter indicates an expected call of SetWorkersCounter
 				
 			
 				
-				<h3 id="MockIConveyorMockRecorder.Start">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=12240:12313#L319">Start</a>
+				<h3 id="MockIConveyorMockRecorder.Start">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=8469:8542#L229">Start</a>
 					<a class="permalink" href="index.html#MockIConveyorMockRecorder.Start">&#xb6;</a>
 					
 					
@@ -1856,7 +1727,7 @@ Start indicates an expected call of Start
 				
 			
 				
-				<h3 id="MockIConveyorMockRecorder.Statistic">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=12729:12790#L333">Statistic</a>
+				<h3 id="MockIConveyorMockRecorder.Statistic">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=8958:9019#L243">Statistic</a>
 					<a class="permalink" href="index.html#MockIConveyorMockRecorder.Statistic">&#xb6;</a>
 					
 					
@@ -1871,7 +1742,7 @@ Statistic indicates an expected call of Statistic
 				
 			
 				
-				<h3 id="MockIConveyorMockRecorder.Stop">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=13086:13142#L345">Stop</a>
+				<h3 id="MockIConveyorMockRecorder.Stop">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=9315:9371#L255">Stop</a>
 					<a class="permalink" href="index.html#MockIConveyorMockRecorder.Stop">&#xb6;</a>
 					
 					
@@ -1886,7 +1757,7 @@ Stop indicates an expected call of Stop
 				
 			
 				
-				<h3 id="MockIConveyorMockRecorder.WaitAndStop">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=13463:13526#L357">WaitAndStop</a>
+				<h3 id="MockIConveyorMockRecorder.WaitAndStop">func (*MockIConveyorMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iconveyor_mock.go?s=9692:9755#L267">WaitAndStop</a>
 					<a class="permalink" href="index.html#MockIConveyorMockRecorder.WaitAndStop">&#xb6;</a>
 					
 					
@@ -1903,7 +1774,7 @@ WaitAndStop indicates an expected call of WaitAndStop
 		
 			
 			
-			<h2 id="MockIHandler">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=360:453#L5">MockIHandler</a>
+			<h2 id="MockIHandler">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=373:466#L6">MockIHandler</a>
 				<a class="permalink" href="index.html#MockIHandler">&#xb6;</a>
 				
 				
@@ -1927,7 +1798,7 @@ MockIHandler is a mock of IHandler interface
 
 			
 				
-				<h3 id="NewMockIHandler">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=630:689#L16">NewMockIHandler</a>
+				<h3 id="NewMockIHandler">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=643:702#L17">NewMockIHandler</a>
 					<a class="permalink" href="index.html#NewMockIHandler">&#xb6;</a>
 					
 					
@@ -1943,7 +1814,7 @@ NewMockIHandler creates a new mock instance
 
 			
 				
-				<h3 id="MockIHandler.EXPECT">func (*MockIHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=868:925#L23">EXPECT</a>
+				<h3 id="MockIHandler.EXPECT">func (*MockIHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=881:938#L24">EXPECT</a>
 					<a class="permalink" href="index.html#MockIHandler.EXPECT">&#xb6;</a>
 					
 					
@@ -1958,7 +1829,7 @@ EXPECT returns an object that allows the caller to indicate expected use
 				
 			
 				
-				<h3 id="MockIHandler.Run">func (*MockIHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=975:1025#L28">Run</a>
+				<h3 id="MockIHandler.Run">func (*MockIHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=988:1038#L29">Run</a>
 					<a class="permalink" href="index.html#MockIHandler.Run">&#xb6;</a>
 					
 					
@@ -1973,7 +1844,7 @@ Run mocks base method
 				
 			
 				
-				<h3 id="MockIHandler.Start">func (*MockIHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=1405:1461#L42">Start</a>
+				<h3 id="MockIHandler.Start">func (*MockIHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=1418:1474#L43">Start</a>
 					<a class="permalink" href="index.html#MockIHandler.Start">&#xb6;</a>
 					
 					
@@ -1988,14 +1859,44 @@ Start mocks base method
 				
 			
 				
-				<h3 id="MockIHandler.Stop">func (*MockIHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=1852:1881#L56">Stop</a>
+				<h3 id="MockIHandler.Stop">func (*MockIHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=1865:1914#L57">Stop</a>
 					<a class="permalink" href="index.html#MockIHandler.Stop">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (m *<a href="index.html#MockIHandler">MockIHandler</a>) Stop()</pre>
+				<pre>func (m *<a href="index.html#MockIHandler">MockIHandler</a>) Stop(arg0 <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>)</pre>
 				<p>
 Stop mocks base method
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIHandler.TickerDuration">func (*MockIHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=2262:2315#L69">TickerDuration</a>
+					<a class="permalink" href="index.html#MockIHandler.TickerDuration">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#MockIHandler">MockIHandler</a>) TickerDuration() <a href="http://127.0.0.1:6060/pkg/time/">time</a>.<a href="http://127.0.0.1:6060/pkg/time/#Duration">Duration</a></pre>
+				<p>
+TickerDuration mocks base method
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIHandler.TickerRun">func (*MockIHandler) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=2745:2799#L83">TickerRun</a>
+					<a class="permalink" href="index.html#MockIHandler.TickerRun">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#MockIHandler">MockIHandler</a>) TickerRun(arg0 <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>)</pre>
+				<p>
+TickerRun mocks base method
 </p>
 
 				
@@ -2005,7 +1906,7 @@ Stop mocks base method
 		
 			
 			
-			<h2 id="MockIHandlerMockRecorder">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=521:581#L11">MockIHandlerMockRecorder</a>
+			<h2 id="MockIHandlerMockRecorder">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=534:594#L12">MockIHandlerMockRecorder</a>
 				<a class="permalink" href="index.html#MockIHandlerMockRecorder">&#xb6;</a>
 				
 				
@@ -2031,7 +1932,7 @@ MockIHandlerMockRecorder is the mock recorder for MockIHandler
 
 			
 				
-				<h3 id="MockIHandlerMockRecorder.Run">func (*MockIHandlerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=1167:1237#L36">Run</a>
+				<h3 id="MockIHandlerMockRecorder.Run">func (*MockIHandlerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=1180:1250#L37">Run</a>
 					<a class="permalink" href="index.html#MockIHandlerMockRecorder.Run">&#xb6;</a>
 					
 					
@@ -2046,7 +1947,7 @@ Run indicates an expected call of Run
 				
 			
 				
-				<h3 id="MockIHandlerMockRecorder.Start">func (*MockIHandlerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=1609:1681#L50">Start</a>
+				<h3 id="MockIHandlerMockRecorder.Start">func (*MockIHandlerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=1622:1694#L51">Start</a>
 					<a class="permalink" href="index.html#MockIHandlerMockRecorder.Start">&#xb6;</a>
 					
 					
@@ -2061,14 +1962,339 @@ Start indicates an expected call of Start
 				
 			
 				
-				<h3 id="MockIHandlerMockRecorder.Stop">func (*MockIHandlerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=1973:2028#L62">Stop</a>
+				<h3 id="MockIHandlerMockRecorder.Stop">func (*MockIHandlerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=2012:2083#L63">Stop</a>
 					<a class="permalink" href="index.html#MockIHandlerMockRecorder.Stop">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (mr *<a href="index.html#MockIHandlerMockRecorder">MockIHandlerMockRecorder</a>) Stop() *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
+				<pre>func (mr *<a href="index.html#MockIHandlerMockRecorder">MockIHandlerMockRecorder</a>) Stop(arg0 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
 				<p>
 Stop indicates an expected call of Stop
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIHandlerMockRecorder.TickerDuration">func (*MockIHandlerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=2492:2557#L77">TickerDuration</a>
+					<a class="permalink" href="index.html#MockIHandlerMockRecorder.TickerDuration">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (mr *<a href="index.html#MockIHandlerMockRecorder">MockIHandlerMockRecorder</a>) TickerDuration() *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
+				<p>
+TickerDuration indicates an expected call of TickerDuration
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIHandlerMockRecorder.TickerRun">func (*MockIHandlerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/ihandler_mock.go?s=2912:2988#L89">TickerRun</a>
+					<a class="permalink" href="index.html#MockIHandlerMockRecorder.TickerRun">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (mr *<a href="index.html#MockIHandlerMockRecorder">MockIHandlerMockRecorder</a>) TickerRun(arg0 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
+				<p>
+TickerRun indicates an expected call of TickerRun
+</p>
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="MockIInput">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iinput_mock.go?s=354:443#L5">MockIInput</a>
+				<a class="permalink" href="index.html#MockIInput">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+MockIInput is a mock of IInput interface
+</p>
+
+			<pre>type MockIInput struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="NewMockIInput">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iinput_mock.go?s=610:665#L16">NewMockIInput</a>
+					<a class="permalink" href="index.html#NewMockIInput">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewMockIInput(ctrl *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Controller">Controller</a>) *<a href="index.html#MockIInput">MockIInput</a></pre>
+				<p>
+NewMockIInput creates a new mock instance
+</p>
+
+				
+				
+			
+
+			
+				
+				<h3 id="MockIInput.Context">func (*MockIInput) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iinput_mock.go?s=947:1010#L28">Context</a>
+					<a class="permalink" href="index.html#MockIInput.Context">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#MockIInput">MockIInput</a>) Context(arg0 <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>) <a href="../../../../../index.html">faces</a>.<a href="../index.html#IInput">IInput</a></pre>
+				<p>
+Context mocks base method
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIInput.Ctx">func (*MockIInput) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iinput_mock.go?s=1415:1457#L42">Ctx</a>
+					<a class="permalink" href="index.html#MockIInput.Ctx">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#MockIInput">MockIInput</a>) Ctx() <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a></pre>
+				<p>
+Ctx mocks base method
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIInput.Data">func (*MockIInput) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iinput_mock.go?s=1814:1870#L56">Data</a>
+					<a class="permalink" href="index.html#MockIInput.Data">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#MockIInput">MockIInput</a>) Data(arg0 interface{}) <a href="../../../../../index.html">faces</a>.<a href="../index.html#IInput">IInput</a></pre>
+				<p>
+Data mocks base method
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIInput.EXPECT">func (*MockIInput) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iinput_mock.go?s=840:893#L23">EXPECT</a>
+					<a class="permalink" href="index.html#MockIInput.EXPECT">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#MockIInput">MockIInput</a>) EXPECT() *<a href="index.html#MockIInputMockRecorder">MockIInputMockRecorder</a></pre>
+				<p>
+EXPECT returns an object that allows the caller to indicate expected use
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIInput.Priority">func (*MockIInput) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iinput_mock.go?s=2262:2314#L70">Priority</a>
+					<a class="permalink" href="index.html#MockIInput.Priority">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#MockIInput">MockIInput</a>) Priority(arg0 <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>) <a href="../../../../../index.html">faces</a>.<a href="../index.html#IInput">IInput</a></pre>
+				<p>
+Priority mocks base method
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIInput.SkipToName">func (*MockIInput) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iinput_mock.go?s=2732:2793#L84">SkipToName</a>
+					<a class="permalink" href="index.html#MockIInput.SkipToName">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#MockIInput">MockIInput</a>) SkipToName(arg0 <a href="../../../../../../../../../index.html">faces</a>.<a href="../index.html#Name">Name</a>) <a href="../index.html">faces</a>.<a href="../index.html#IInput">IInput</a></pre>
+				<p>
+SkipToName mocks base method
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIInput.Trace">func (*MockIInput) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iinput_mock.go?s=3218:3276#L98">Trace</a>
+					<a class="permalink" href="index.html#MockIInput.Trace">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#MockIInput">MockIInput</a>) Trace(arg0 <a href="../../../../../../../../../index.html">faces</a>.<a href="../index.html#ITrace">ITrace</a>) <a href="../index.html">faces</a>.<a href="../index.html#IInput">IInput</a></pre>
+				<p>
+Trace mocks base method
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIInput.Values">func (*MockIInput) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iinput_mock.go?s=3672:3764#L112">Values</a>
+					<a class="permalink" href="index.html#MockIInput.Values">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#MockIInput">MockIInput</a>) Values() (<a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, <a href="../../../../../../../../../index.html">faces</a>.<a href="../index.html#ITrace">ITrace</a>, interface{}, *<a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>, <a href="../index.html">faces</a>.<a href="../index.html#Name">Name</a>)</pre>
+				<p>
+Values mocks base method
+</p>
+
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="MockIInputMockRecorder">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iinput_mock.go?s=507:563#L11">MockIInputMockRecorder</a>
+				<a class="permalink" href="index.html#MockIInputMockRecorder">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+MockIInputMockRecorder is the mock recorder for MockIInput
+</p>
+
+			<pre>type MockIInputMockRecorder struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="MockIInputMockRecorder.Context">func (*MockIInputMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iinput_mock.go?s=1171:1243#L36">Context</a>
+					<a class="permalink" href="index.html#MockIInputMockRecorder.Context">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (mr *<a href="index.html#MockIInputMockRecorder">MockIInputMockRecorder</a>) Context(arg0 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
+				<p>
+Context indicates an expected call of Context
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIInputMockRecorder.Ctx">func (*MockIInputMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iinput_mock.go?s=1603:1655#L50">Ctx</a>
+					<a class="permalink" href="index.html#MockIInputMockRecorder.Ctx">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (mr *<a href="index.html#MockIInputMockRecorder">MockIInputMockRecorder</a>) Ctx() *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
+				<p>
+Ctx indicates an expected call of Ctx
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIInputMockRecorder.Data">func (*MockIInputMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iinput_mock.go?s=2022:2091#L64">Data</a>
+					<a class="permalink" href="index.html#MockIInputMockRecorder.Data">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (mr *<a href="index.html#MockIInputMockRecorder">MockIInputMockRecorder</a>) Data(arg0 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
+				<p>
+Data indicates an expected call of Data
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIInputMockRecorder.Priority">func (*MockIInputMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iinput_mock.go?s=2478:2551#L78">Priority</a>
+					<a class="permalink" href="index.html#MockIInputMockRecorder.Priority">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (mr *<a href="index.html#MockIInputMockRecorder">MockIInputMockRecorder</a>) Priority(arg0 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
+				<p>
+Priority indicates an expected call of Priority
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIInputMockRecorder.SkipToName">func (*MockIInputMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iinput_mock.go?s=2963:3038#L92">SkipToName</a>
+					<a class="permalink" href="index.html#MockIInputMockRecorder.SkipToName">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (mr *<a href="index.html#MockIInputMockRecorder">MockIInputMockRecorder</a>) SkipToName(arg0 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
+				<p>
+SkipToName indicates an expected call of SkipToName
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIInputMockRecorder.Trace">func (*MockIInputMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iinput_mock.go?s=3431:3501#L106">Trace</a>
+					<a class="permalink" href="index.html#MockIInputMockRecorder.Trace">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (mr *<a href="index.html#MockIInputMockRecorder">MockIInputMockRecorder</a>) Trace(arg0 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
+				<p>
+Trace indicates an expected call of Trace
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIInputMockRecorder.Values">func (*MockIInputMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iinput_mock.go?s=4068:4123#L124">Values</a>
+					<a class="permalink" href="index.html#MockIInputMockRecorder.Values">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (mr *<a href="index.html#MockIInputMockRecorder">MockIInputMockRecorder</a>) Values() *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
+				<p>
+Values indicates an expected call of Values
 </p>
 
 				
@@ -2133,7 +2359,37 @@ AddError mocks base method
 				
 			
 				
-				<h3 id="MockIItem.Cancel">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=1330:1358#L40">Cancel</a>
+				<h3 id="MockIItem.AfterProcess">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=1336:1397#L40">AfterProcess</a>
+					<a class="permalink" href="index.html#MockIItem.AfterProcess">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#MockIItem">MockIItem</a>) AfterProcess(arg0 <a href="../../../../../index.html">faces</a>.<a href="../index.html#Name">Name</a>, arg1 <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+AfterProcess mocks base method
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIItem.BeforeProcess">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=1804:1854#L52">BeforeProcess</a>
+					<a class="permalink" href="index.html#MockIItem.BeforeProcess">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#MockIItem">MockIItem</a>) BeforeProcess(arg0 <a href="../../../../../index.html">faces</a>.<a href="../index.html#Name">Name</a>)</pre>
+				<p>
+BeforeProcess mocks base method
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIItem.Cancel">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=2242:2270#L64">Cancel</a>
 					<a class="permalink" href="index.html#MockIItem.Cancel">&#xb6;</a>
 					
 					
@@ -2148,7 +2404,22 @@ Cancel mocks base method
 				
 			
 				
-				<h3 id="MockIItem.CleanError">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=1680:1712#L52">CleanError</a>
+				<h3 id="MockIItem.CheckData">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=2591:2622#L76">CheckData</a>
+					<a class="permalink" href="index.html#MockIItem.CheckData">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#MockIItem">MockIItem</a>) CheckData()</pre>
+				<p>
+CheckData mocks base method
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIItem.CleanError">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=2962:2994#L88">CleanError</a>
 					<a class="permalink" href="index.html#MockIItem.CleanError">&#xb6;</a>
 					
 					
@@ -2178,7 +2449,7 @@ EXPECT returns an object that allows the caller to indicate expected use
 				
 			
 				
-				<h3 id="MockIItem.Finish">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=2054:2082#L64">Finish</a>
+				<h3 id="MockIItem.Finish">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=3336:3364#L100">Finish</a>
 					<a class="permalink" href="index.html#MockIItem.Finish">&#xb6;</a>
 					
 					
@@ -2193,7 +2464,7 @@ Finish mocks base method
 				
 			
 				
-				<h3 id="MockIItem.Get">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=2397:2434#L76">Get</a>
+				<h3 id="MockIItem.Get">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=3679:3716#L112">Get</a>
 					<a class="permalink" href="index.html#MockIItem.Get">&#xb6;</a>
 					
 					
@@ -2208,7 +2479,7 @@ Get mocks base method
 				
 			
 				
-				<h3 id="MockIItem.GetContext">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=2791:2839#L90">GetContext</a>
+				<h3 id="MockIItem.GetContext">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=4073:4121#L126">GetContext</a>
 					<a class="permalink" href="index.html#MockIItem.GetContext">&#xb6;</a>
 					
 					
@@ -2223,7 +2494,7 @@ GetContext mocks base method
 				
 			
 				
-				<h3 id="MockIItem.GetError">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=3240:3276#L104">GetError</a>
+				<h3 id="MockIItem.GetError">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=4522:4558#L140">GetError</a>
 					<a class="permalink" href="index.html#MockIItem.GetError">&#xb6;</a>
 					
 					
@@ -2238,7 +2509,7 @@ GetError mocks base method
 				
 			
 				
-				<h3 id="MockIItem.GetHandlerError">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=3662:3710#L118">GetHandlerError</a>
+				<h3 id="MockIItem.GetHandlerError">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=4944:4992#L154">GetHandlerError</a>
 					<a class="permalink" href="index.html#MockIItem.GetHandlerError">&#xb6;</a>
 					
 					
@@ -2253,7 +2524,7 @@ GetHandlerError mocks base method
 				
 			
 				
-				<h3 id="MockIItem.GetID">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=4133:4166#L132">GetID</a>
+				<h3 id="MockIItem.GetID">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=5415:5448#L168">GetID</a>
 					<a class="permalink" href="index.html#MockIItem.GetID">&#xb6;</a>
 					
 					
@@ -2268,7 +2539,7 @@ GetID mocks base method
 				
 			
 				
-				<h3 id="MockIItem.GetLastHandler">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=4533:4580#L146">GetLastHandler</a>
+				<h3 id="MockIItem.GetLastHandler">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=5815:5862#L182">GetLastHandler</a>
 					<a class="permalink" href="index.html#MockIItem.GetLastHandler">&#xb6;</a>
 					
 					
@@ -2283,7 +2554,7 @@ GetLastHandler mocks base method
 				
 			
 				
-				<h3 id="MockIItem.GetPriority">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=5003:5040#L160">GetPriority</a>
+				<h3 id="MockIItem.GetPriority">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=6285:6322#L196">GetPriority</a>
 					<a class="permalink" href="index.html#MockIItem.GetPriority">&#xb6;</a>
 					
 					
@@ -2298,7 +2569,22 @@ GetPriority mocks base method
 				
 			
 				
-				<h3 id="MockIItem.GetSkipToName">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=5440:5486#L174">GetSkipToName</a>
+				<h3 id="MockIItem.GetSkipNames">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=6721:6768#L210">GetSkipNames</a>
+					<a class="permalink" href="index.html#MockIItem.GetSkipNames">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#MockIItem">MockIItem</a>) GetSkipNames() []<a href="../../../../../index.html">faces</a>.<a href="../index.html#Name">Name</a></pre>
+				<p>
+GetSkipNames mocks base method
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIItem.GetSkipToName">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=7183:7229#L224">GetSkipToName</a>
 					<a class="permalink" href="index.html#MockIItem.GetSkipToName">&#xb6;</a>
 					
 					
@@ -2313,7 +2599,7 @@ GetSkipToName mocks base method
 				
 			
 				
-				<h3 id="MockIItem.LogTrace">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=5900:5962#L188">LogTrace</a>
+				<h3 id="MockIItem.LogTrace">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=7643:7705#L238">LogTrace</a>
 					<a class="permalink" href="index.html#MockIItem.LogTrace">&#xb6;</a>
 					
 					
@@ -2328,7 +2614,7 @@ LogTrace mocks base method
 				
 			
 				
-				<h3 id="MockIItem.LogTraceFinishTime">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=6506:6578#L205">LogTraceFinishTime</a>
+				<h3 id="MockIItem.LogTraceFinishTime">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=8249:8321#L255">LogTraceFinishTime</a>
 					<a class="permalink" href="index.html#MockIItem.LogTraceFinishTime">&#xb6;</a>
 					
 					
@@ -2343,7 +2629,7 @@ LogTraceFinishTime mocks base method
 				
 			
 				
-				<h3 id="MockIItem.NeedToSkip">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=7174:7238#L222">NeedToSkip</a>
+				<h3 id="MockIItem.NeedToSkip">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=8917:8981#L272">NeedToSkip</a>
 					<a class="permalink" href="index.html#MockIItem.NeedToSkip">&#xb6;</a>
 					
 					
@@ -2358,12 +2644,42 @@ NeedToSkip mocks base method
 				
 			
 				
-				<h3 id="MockIItem.Set">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=7684:7737#L237">Set</a>
+				<h3 id="MockIItem.PushedToChannel">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=9439:9491#L287">PushedToChannel</a>
+					<a class="permalink" href="index.html#MockIItem.PushedToChannel">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#MockIItem">MockIItem</a>) PushedToChannel(arg0 <a href="../../../../../index.html">faces</a>.<a href="../index.html#Name">Name</a>)</pre>
+				<p>
+PushedToChannel mocks base method
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIItem.ReceivedFromChannel">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=9904:9945#L299">ReceivedFromChannel</a>
+					<a class="permalink" href="index.html#MockIItem.ReceivedFromChannel">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#MockIItem">MockIItem</a>) ReceivedFromChannel()</pre>
+				<p>
+ReceivedFromChannel mocks base method
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIItem.Set">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=10338:10379#L311">Set</a>
 					<a class="permalink" href="index.html#MockIItem.Set">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (m *<a href="index.html#MockIItem">MockIItem</a>) Set(arg0 interface{}) <a href="../../../../../index.html">faces</a>.<a href="../index.html#IItem">IItem</a></pre>
+				<pre>func (m *<a href="index.html#MockIItem">MockIItem</a>) Set(arg0 interface{})</pre>
 				<p>
 Set mocks base method
 </p>
@@ -2373,12 +2689,12 @@ Set mocks base method
 				
 			
 				
-				<h3 id="MockIItem.SetHandlerError">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=8127:8191#L251">SetHandlerError</a>
+				<h3 id="MockIItem.SetHandlerError">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=10716:10768#L323">SetHandlerError</a>
 					<a class="permalink" href="index.html#MockIItem.SetHandlerError">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (m *<a href="index.html#MockIItem">MockIItem</a>) SetHandlerError(arg0 <a href="../../../../../../../../../index.html">faces</a>.<a href="../index.html#Name">Name</a>) <a href="../index.html">faces</a>.<a href="../index.html#IItem">IItem</a></pre>
+				<pre>func (m *<a href="index.html#MockIItem">MockIItem</a>) SetHandlerError(arg0 <a href="../../../../../index.html">faces</a>.<a href="../index.html#Name">Name</a>)</pre>
 				<p>
 SetHandlerError mocks base method
 </p>
@@ -2388,12 +2704,12 @@ SetHandlerError mocks base method
 				
 			
 				
-				<h3 id="MockIItem.SetID">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=8643:8692#L265">SetID</a>
+				<h3 id="MockIItem.SetID">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=11167:11204#L335">SetID</a>
 					<a class="permalink" href="index.html#MockIItem.SetID">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (m *<a href="index.html#MockIItem">MockIItem</a>) SetID(arg0 <a href="http://127.0.0.1:6060/pkg/builtin/#int64">int64</a>) <a href="../../../../../index.html">faces</a>.<a href="../index.html#IItem">IItem</a></pre>
+				<pre>func (m *<a href="index.html#MockIItem">MockIItem</a>) SetID(arg0 <a href="http://127.0.0.1:6060/pkg/builtin/#int64">int64</a>)</pre>
 				<p>
 SetID mocks base method
 </p>
@@ -2403,12 +2719,12 @@ SetID mocks base method
 				
 			
 				
-				<h3 id="MockIItem.SetLastHandler">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=9093:9156#L279">SetLastHandler</a>
+				<h3 id="MockIItem.SetLastHandler">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=11552:11603#L347">SetLastHandler</a>
 					<a class="permalink" href="index.html#MockIItem.SetLastHandler">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (m *<a href="index.html#MockIItem">MockIItem</a>) SetLastHandler(arg0 <a href="../../../../../../../../../index.html">faces</a>.<a href="../index.html#Name">Name</a>) <a href="../index.html">faces</a>.<a href="../index.html#IItem">IItem</a></pre>
+				<pre>func (m *<a href="index.html#MockIItem">MockIItem</a>) SetLastHandler(arg0 <a href="../../../../../index.html">faces</a>.<a href="../index.html#Name">Name</a>)</pre>
 				<p>
 SetLastHandler mocks base method
 </p>
@@ -2418,12 +2734,12 @@ SetLastHandler mocks base method
 				
 			
 				
-				<h3 id="MockIItem.SetPriority">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=9608:9661#L293">SetPriority</a>
+				<h3 id="MockIItem.SetPriority">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=12002:12043#L359">SetPriority</a>
 					<a class="permalink" href="index.html#MockIItem.SetPriority">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (m *<a href="index.html#MockIItem">MockIItem</a>) SetPriority(arg0 <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>) <a href="../../../../../index.html">faces</a>.<a href="../index.html#IItem">IItem</a></pre>
+				<pre>func (m *<a href="index.html#MockIItem">MockIItem</a>) SetPriority(arg0 <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)</pre>
 				<p>
 SetPriority mocks base method
 </p>
@@ -2433,7 +2749,22 @@ SetPriority mocks base method
 				
 			
 				
-				<h3 id="MockIItem.SetSkipToName">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=10097:10147#L307">SetSkipToName</a>
+				<h3 id="MockIItem.SetSkipNames">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=12425:12477#L371">SetSkipNames</a>
+					<a class="permalink" href="index.html#MockIItem.SetSkipNames">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#MockIItem">MockIItem</a>) SetSkipNames(arg0 ...<a href="../../../../../index.html">faces</a>.<a href="../index.html#Name">Name</a>)</pre>
+				<p>
+SetSkipNames mocks base method
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIItem.SetSkipToName">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=12966:13016#L387">SetSkipToName</a>
 					<a class="permalink" href="index.html#MockIItem.SetSkipToName">&#xb6;</a>
 					
 					
@@ -2448,12 +2779,12 @@ SetSkipToName mocks base method
 				
 			
 				
-				<h3 id="MockIItem.Start">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=10534:10573#L319">Start</a>
+				<h3 id="MockIItem.Start">func (*MockIItem) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=13403:13430#L399">Start</a>
 					<a class="permalink" href="index.html#MockIItem.Start">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (m *<a href="index.html#MockIItem">MockIItem</a>) Start() <a href="../../../../../index.html">faces</a>.<a href="../index.html#IItem">IItem</a></pre>
+				<pre>func (m *<a href="index.html#MockIItem">MockIItem</a>) Start()</pre>
 				<p>
 Start mocks base method
 </p>
@@ -2506,7 +2837,37 @@ AddError indicates an expected call of AddError
 				
 			
 				
-				<h3 id="MockIItemMockRecorder.Cancel">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=1456:1510#L46">Cancel</a>
+				<h3 id="MockIItemMockRecorder.AfterProcess">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=1525:1607#L46">AfterProcess</a>
+					<a class="permalink" href="index.html#MockIItemMockRecorder.AfterProcess">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (mr *<a href="index.html#MockIItemMockRecorder">MockIItemMockRecorder</a>) AfterProcess(arg0, arg1 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
+				<p>
+AfterProcess indicates an expected call of AfterProcess
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIItemMockRecorder.BeforeProcess">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=1979:2056#L58">BeforeProcess</a>
+					<a class="permalink" href="index.html#MockIItemMockRecorder.BeforeProcess">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (mr *<a href="index.html#MockIItemMockRecorder">MockIItemMockRecorder</a>) BeforeProcess(arg0 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
+				<p>
+BeforeProcess indicates an expected call of BeforeProcess
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIItemMockRecorder.Cancel">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=2368:2422#L70">Cancel</a>
 					<a class="permalink" href="index.html#MockIItemMockRecorder.Cancel">&#xb6;</a>
 					
 					
@@ -2521,7 +2882,22 @@ Cancel indicates an expected call of Cancel
 				
 			
 				
-				<h3 id="MockIItemMockRecorder.CleanError">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=1822:1880#L58">CleanError</a>
+				<h3 id="MockIItemMockRecorder.CheckData">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=2729:2786#L82">CheckData</a>
+					<a class="permalink" href="index.html#MockIItemMockRecorder.CheckData">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (mr *<a href="index.html#MockIItemMockRecorder">MockIItemMockRecorder</a>) CheckData() *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
+				<p>
+CheckData indicates an expected call of CheckData
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIItemMockRecorder.CleanError">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=3104:3162#L94">CleanError</a>
 					<a class="permalink" href="index.html#MockIItemMockRecorder.CleanError">&#xb6;</a>
 					
 					
@@ -2536,7 +2912,7 @@ CleanError indicates an expected call of CleanError
 				
 			
 				
-				<h3 id="MockIItemMockRecorder.Finish">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=2180:2234#L70">Finish</a>
+				<h3 id="MockIItemMockRecorder.Finish">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=3462:3516#L106">Finish</a>
 					<a class="permalink" href="index.html#MockIItemMockRecorder.Finish">&#xb6;</a>
 					
 					
@@ -2551,7 +2927,7 @@ Finish indicates an expected call of Finish
 				
 			
 				
-				<h3 id="MockIItemMockRecorder.Get">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=2576:2627#L84">Get</a>
+				<h3 id="MockIItemMockRecorder.Get">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=3858:3909#L120">Get</a>
 					<a class="permalink" href="index.html#MockIItemMockRecorder.Get">&#xb6;</a>
 					
 					
@@ -2566,7 +2942,7 @@ Get indicates an expected call of Get
 				
 			
 				
-				<h3 id="MockIItemMockRecorder.GetContext">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=3006:3064#L98">GetContext</a>
+				<h3 id="MockIItemMockRecorder.GetContext">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=4288:4346#L134">GetContext</a>
 					<a class="permalink" href="index.html#MockIItemMockRecorder.GetContext">&#xb6;</a>
 					
 					
@@ -2581,7 +2957,7 @@ GetContext indicates an expected call of GetContext
 				
 			
 				
-				<h3 id="MockIItemMockRecorder.GetError">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=3427:3483#L112">GetError</a>
+				<h3 id="MockIItemMockRecorder.GetError">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=4709:4765#L148">GetError</a>
 					<a class="permalink" href="index.html#MockIItemMockRecorder.GetError">&#xb6;</a>
 					
 					
@@ -2596,7 +2972,7 @@ GetError indicates an expected call of GetError
 				
 			
 				
-				<h3 id="MockIItemMockRecorder.GetHandlerError">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=3887:3950#L126">GetHandlerError</a>
+				<h3 id="MockIItemMockRecorder.GetHandlerError">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=5169:5232#L162">GetHandlerError</a>
 					<a class="permalink" href="index.html#MockIItemMockRecorder.GetHandlerError">&#xb6;</a>
 					
 					
@@ -2611,7 +2987,7 @@ GetHandlerError indicates an expected call of GetHandlerError
 				
 			
 				
-				<h3 id="MockIItemMockRecorder.GetID">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=4308:4361#L140">GetID</a>
+				<h3 id="MockIItemMockRecorder.GetID">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=5590:5643#L176">GetID</a>
 					<a class="permalink" href="index.html#MockIItemMockRecorder.GetID">&#xb6;</a>
 					
 					
@@ -2626,7 +3002,7 @@ GetID indicates an expected call of GetID
 				
 			
 				
-				<h3 id="MockIItemMockRecorder.GetLastHandler">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=4754:4816#L154">GetLastHandler</a>
+				<h3 id="MockIItemMockRecorder.GetLastHandler">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=6036:6098#L190">GetLastHandler</a>
 					<a class="permalink" href="index.html#MockIItemMockRecorder.GetLastHandler">&#xb6;</a>
 					
 					
@@ -2641,7 +3017,7 @@ GetLastHandler indicates an expected call of GetLastHandler
 				
 			
 				
-				<h3 id="MockIItemMockRecorder.GetPriority">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=5198:5257#L168">GetPriority</a>
+				<h3 id="MockIItemMockRecorder.GetPriority">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=6480:6539#L204">GetPriority</a>
 					<a class="permalink" href="index.html#MockIItemMockRecorder.GetPriority">&#xb6;</a>
 					
 					
@@ -2656,7 +3032,22 @@ GetPriority indicates an expected call of GetPriority
 				
 			
 				
-				<h3 id="MockIItemMockRecorder.GetSkipToName">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=5657:5718#L182">GetSkipToName</a>
+				<h3 id="MockIItemMockRecorder.GetSkipNames">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=6938:6998#L218">GetSkipNames</a>
+					<a class="permalink" href="index.html#MockIItemMockRecorder.GetSkipNames">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (mr *<a href="index.html#MockIItemMockRecorder">MockIItemMockRecorder</a>) GetSkipNames() *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
+				<p>
+GetSkipNames indicates an expected call of GetSkipNames
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIItemMockRecorder.GetSkipToName">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=7400:7461#L232">GetSkipToName</a>
 					<a class="permalink" href="index.html#MockIItemMockRecorder.GetSkipToName">&#xb6;</a>
 					
 					
@@ -2671,7 +3062,7 @@ GetSkipToName indicates an expected call of GetSkipToName
 				
 			
 				
-				<h3 id="MockIItemMockRecorder.LogTrace">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=6170:6263#L198">LogTrace</a>
+				<h3 id="MockIItemMockRecorder.LogTrace">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=7913:8006#L248">LogTrace</a>
 					<a class="permalink" href="index.html#MockIItemMockRecorder.LogTrace">&#xb6;</a>
 					
 					
@@ -2686,7 +3077,7 @@ LogTrace indicates an expected call of LogTrace
 				
 			
 				
-				<h3 id="MockIItemMockRecorder.LogTraceFinishTime">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=6816:6919#L215">LogTraceFinishTime</a>
+				<h3 id="MockIItemMockRecorder.LogTraceFinishTime">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=8559:8662#L265">LogTraceFinishTime</a>
 					<a class="permalink" href="index.html#MockIItemMockRecorder.LogTraceFinishTime">&#xb6;</a>
 					
 					
@@ -2701,7 +3092,7 @@ LogTraceFinishTime indicates an expected call of LogTraceFinishTime
 				
 			
 				
-				<h3 id="MockIItemMockRecorder.NeedToSkip">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=7433:7507#L231">NeedToSkip</a>
+				<h3 id="MockIItemMockRecorder.NeedToSkip">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=9176:9250#L281">NeedToSkip</a>
 					<a class="permalink" href="index.html#MockIItemMockRecorder.NeedToSkip">&#xb6;</a>
 					
 					
@@ -2716,7 +3107,37 @@ NeedToSkip indicates an expected call of NeedToSkip
 				
 			
 				
-				<h3 id="MockIItemMockRecorder.Set">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=7885:7952#L245">Set</a>
+				<h3 id="MockIItemMockRecorder.PushedToChannel">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=9622:9701#L293">PushedToChannel</a>
+					<a class="permalink" href="index.html#MockIItemMockRecorder.PushedToChannel">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (mr *<a href="index.html#MockIItemMockRecorder">MockIItemMockRecorder</a>) PushedToChannel(arg0 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
+				<p>
+PushedToChannel indicates an expected call of PushedToChannel
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIItemMockRecorder.ReceivedFromChannel">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=10082:10149#L305">ReceivedFromChannel</a>
+					<a class="permalink" href="index.html#MockIItemMockRecorder.ReceivedFromChannel">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (mr *<a href="index.html#MockIItemMockRecorder">MockIItemMockRecorder</a>) ReceivedFromChannel() *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
+				<p>
+ReceivedFromChannel indicates an expected call of ReceivedFromChannel
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIItemMockRecorder.Set">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=10474:10541#L317">Set</a>
 					<a class="permalink" href="index.html#MockIItemMockRecorder.Set">&#xb6;</a>
 					
 					
@@ -2731,7 +3152,7 @@ Set indicates an expected call of Set
 				
 			
 				
-				<h3 id="MockIItemMockRecorder.SetHandlerError">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=8375:8454#L259">SetHandlerError</a>
+				<h3 id="MockIItemMockRecorder.SetHandlerError">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=10899:10978#L329">SetHandlerError</a>
 					<a class="permalink" href="index.html#MockIItemMockRecorder.SetHandlerError">&#xb6;</a>
 					
 					
@@ -2746,7 +3167,7 @@ SetHandlerError indicates an expected call of SetHandlerError
 				
 			
 				
-				<h3 id="MockIItemMockRecorder.SetID">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=8846:8915#L273">SetID</a>
+				<h3 id="MockIItemMockRecorder.SetID">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=11305:11374#L341">SetID</a>
 					<a class="permalink" href="index.html#MockIItemMockRecorder.SetID">&#xb6;</a>
 					
 					
@@ -2761,7 +3182,7 @@ SetID indicates an expected call of SetID
 				
 			
 				
-				<h3 id="MockIItemMockRecorder.SetLastHandler">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=9337:9415#L287">SetLastHandler</a>
+				<h3 id="MockIItemMockRecorder.SetLastHandler">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=11731:11809#L353">SetLastHandler</a>
 					<a class="permalink" href="index.html#MockIItemMockRecorder.SetLastHandler">&#xb6;</a>
 					
 					
@@ -2776,7 +3197,7 @@ SetLastHandler indicates an expected call of SetLastHandler
 				
 			
 				
-				<h3 id="MockIItemMockRecorder.SetPriority">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=9833:9908#L301">SetPriority</a>
+				<h3 id="MockIItemMockRecorder.SetPriority">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=12162:12237#L365">SetPriority</a>
 					<a class="permalink" href="index.html#MockIItemMockRecorder.SetPriority">&#xb6;</a>
 					
 					
@@ -2791,7 +3212,22 @@ SetPriority indicates an expected call of SetPriority
 				
 			
 				
-				<h3 id="MockIItemMockRecorder.SetSkipToName">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=10272:10349#L313">SetSkipToName</a>
+				<h3 id="MockIItemMockRecorder.SetSkipNames">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=12693:12772#L381">SetSkipNames</a>
+					<a class="permalink" href="index.html#MockIItemMockRecorder.SetSkipNames">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (mr *<a href="index.html#MockIItemMockRecorder">MockIItemMockRecorder</a>) SetSkipNames(arg0 ...interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
+				<p>
+SetSkipNames indicates an expected call of SetSkipNames
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIItemMockRecorder.SetSkipToName">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=13141:13218#L393">SetSkipToName</a>
 					<a class="permalink" href="index.html#MockIItemMockRecorder.SetSkipToName">&#xb6;</a>
 					
 					
@@ -2806,7 +3242,7 @@ SetSkipToName indicates an expected call of SetSkipToName
 				
 			
 				
-				<h3 id="MockIItemMockRecorder.Start">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=10721:10774#L327">Start</a>
+				<h3 id="MockIItemMockRecorder.Start">func (*MockIItemMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iitem_mock.go?s=13525:13578#L405">Start</a>
 					<a class="permalink" href="index.html#MockIItemMockRecorder.Start">&#xb6;</a>
 					
 					
@@ -2938,7 +3374,22 @@ MetricPeriod mocks base method
 				
 			
 				
-				<h3 id="MockIManager.SetChanErr">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=2971:3037#L87">SetChanErr</a>
+				<h3 id="MockIManager.Name">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=2965:3005#L87">Name</a>
+					<a class="permalink" href="index.html#MockIManager.Name">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (m *<a href="index.html#MockIManager">MockIManager</a>) Name() <a href="../../../../../index.html">faces</a>.<a href="../index.html#Name">Name</a></pre>
+				<p>
+Name mocks base method
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIManager.SetChanErr">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=3373:3439#L101">SetChanErr</a>
 					<a class="permalink" href="index.html#MockIManager.SetChanErr">&#xb6;</a>
 					
 					
@@ -2953,7 +3404,7 @@ SetChanErr mocks base method
 				
 			
 				
-				<h3 id="MockIManager.SetChanIn">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=3472:3537#L101">SetChanIn</a>
+				<h3 id="MockIManager.SetChanIn">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=3874:3939#L115">SetChanIn</a>
 					<a class="permalink" href="index.html#MockIManager.SetChanIn">&#xb6;</a>
 					
 					
@@ -2968,7 +3419,7 @@ SetChanIn mocks base method
 				
 			
 				
-				<h3 id="MockIManager.SetChanOut">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=3967:4033#L115">SetChanOut</a>
+				<h3 id="MockIManager.SetChanOut">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=4369:4435#L129">SetChanOut</a>
 					<a class="permalink" href="index.html#MockIManager.SetChanOut">&#xb6;</a>
 					
 					
@@ -2983,7 +3434,7 @@ SetChanOut mocks base method
 				
 			
 				
-				<h3 id="MockIManager.SetHandler">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=4469:4539#L129">SetHandler</a>
+				<h3 id="MockIManager.SetHandler">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=4871:4941#L143">SetHandler</a>
 					<a class="permalink" href="index.html#MockIManager.SetHandler">&#xb6;</a>
 					
 					
@@ -2998,7 +3449,7 @@ SetHandler mocks base method
 				
 			
 				
-				<h3 id="MockIManager.SetIsLast">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=4974:5032#L143">SetIsLast</a>
+				<h3 id="MockIManager.SetIsLast">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=5376:5434#L157">SetIsLast</a>
 					<a class="permalink" href="index.html#MockIManager.SetIsLast">&#xb6;</a>
 					
 					
@@ -3013,7 +3464,7 @@ SetIsLast mocks base method
 				
 			
 				
-				<h3 id="MockIManager.SetNextManager">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=5466:5539#L157">SetNextManager</a>
+				<h3 id="MockIManager.SetNextManager">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=5868:5941#L171">SetNextManager</a>
 					<a class="permalink" href="index.html#MockIManager.SetNextManager">&#xb6;</a>
 					
 					
@@ -3028,7 +3479,7 @@ SetNextManager mocks base method
 				
 			
 				
-				<h3 id="MockIManager.SetPrevManager">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=6003:6076#L171">SetPrevManager</a>
+				<h3 id="MockIManager.SetPrevManager">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=6405:6478#L185">SetPrevManager</a>
 					<a class="permalink" href="index.html#MockIManager.SetPrevManager">&#xb6;</a>
 					
 					
@@ -3043,7 +3494,7 @@ SetPrevManager mocks base method
 				
 			
 				
-				<h3 id="MockIManager.SetWaitGroup">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=6538:6610#L185">SetWaitGroup</a>
+				<h3 id="MockIManager.SetWaitGroup">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=6940:7012#L199">SetWaitGroup</a>
 					<a class="permalink" href="index.html#MockIManager.SetWaitGroup">&#xb6;</a>
 					
 					
@@ -3058,7 +3509,7 @@ SetWaitGroup mocks base method
 				
 			
 				
-				<h3 id="MockIManager.SetWorkersCounter">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=7065:7148#L199">SetWorkersCounter</a>
+				<h3 id="MockIManager.SetWorkersCounter">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=7467:7550#L213">SetWorkersCounter</a>
 					<a class="permalink" href="index.html#MockIManager.SetWorkersCounter">&#xb6;</a>
 					
 					
@@ -3073,7 +3524,7 @@ SetWorkersCounter mocks base method
 				
 			
 				
-				<h3 id="MockIManager.Start">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=7621:7677#L213">Start</a>
+				<h3 id="MockIManager.Start">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=8023:8079#L227">Start</a>
 					<a class="permalink" href="index.html#MockIManager.Start">&#xb6;</a>
 					
 					
@@ -3088,7 +3539,7 @@ Start mocks base method
 				
 			
 				
-				<h3 id="MockIManager.Statistic">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=8073:8126#L227">Statistic</a>
+				<h3 id="MockIManager.Statistic">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=8475:8528#L241">Statistic</a>
 					<a class="permalink" href="index.html#MockIManager.Statistic">&#xb6;</a>
 					
 					
@@ -3103,7 +3554,7 @@ Statistic mocks base method
 				
 			
 				
-				<h3 id="MockIManager.Stop">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=8526:8555#L241">Stop</a>
+				<h3 id="MockIManager.Stop">func (*MockIManager) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=8928:8957#L255">Stop</a>
 					<a class="permalink" href="index.html#MockIManager.Stop">&#xb6;</a>
 					
 					
@@ -3206,7 +3657,22 @@ MetricPeriod indicates an expected call of MetricPeriod
 				
 			
 				
-				<h3 id="MockIManagerMockRecorder.SetChanErr">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=3209:3286#L95">SetChanErr</a>
+				<h3 id="MockIManagerMockRecorder.Name">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=3149:3204#L95">Name</a>
+					<a class="permalink" href="index.html#MockIManagerMockRecorder.Name">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (mr *<a href="index.html#MockIManagerMockRecorder">MockIManagerMockRecorder</a>) Name() *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
+				<p>
+Name indicates an expected call of Name
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="MockIManagerMockRecorder.SetChanErr">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=3611:3688#L109">SetChanErr</a>
 					<a class="permalink" href="index.html#MockIManagerMockRecorder.SetChanErr">&#xb6;</a>
 					
 					
@@ -3221,7 +3687,7 @@ SetChanErr indicates an expected call of SetChanErr
 				
 			
 				
-				<h3 id="MockIManagerMockRecorder.SetChanIn">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=3706:3782#L109">SetChanIn</a>
+				<h3 id="MockIManagerMockRecorder.SetChanIn">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=4108:4184#L123">SetChanIn</a>
 					<a class="permalink" href="index.html#MockIManagerMockRecorder.SetChanIn">&#xb6;</a>
 					
 					
@@ -3236,7 +3702,7 @@ SetChanIn indicates an expected call of SetChanIn
 				
 			
 				
-				<h3 id="MockIManagerMockRecorder.SetChanOut">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=4205:4282#L123">SetChanOut</a>
+				<h3 id="MockIManagerMockRecorder.SetChanOut">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=4607:4684#L137">SetChanOut</a>
 					<a class="permalink" href="index.html#MockIManagerMockRecorder.SetChanOut">&#xb6;</a>
 					
 					
@@ -3251,7 +3717,7 @@ SetChanOut indicates an expected call of SetChanOut
 				
 			
 				
-				<h3 id="MockIManagerMockRecorder.SetHandler">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=4711:4788#L137">SetHandler</a>
+				<h3 id="MockIManagerMockRecorder.SetHandler">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=5113:5190#L151">SetHandler</a>
 					<a class="permalink" href="index.html#MockIManagerMockRecorder.SetHandler">&#xb6;</a>
 					
 					
@@ -3266,7 +3732,7 @@ SetHandler indicates an expected call of SetHandler
 				
 			
 				
-				<h3 id="MockIManagerMockRecorder.SetIsLast">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=5201:5277#L151">SetIsLast</a>
+				<h3 id="MockIManagerMockRecorder.SetIsLast">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=5603:5679#L165">SetIsLast</a>
 					<a class="permalink" href="index.html#MockIManagerMockRecorder.SetIsLast">&#xb6;</a>
 					
 					
@@ -3281,7 +3747,7 @@ SetIsLast indicates an expected call of SetIsLast
 				
 			
 				
-				<h3 id="MockIManagerMockRecorder.SetNextManager">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=5723:5804#L165">SetNextManager</a>
+				<h3 id="MockIManagerMockRecorder.SetNextManager">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=6125:6206#L179">SetNextManager</a>
 					<a class="permalink" href="index.html#MockIManagerMockRecorder.SetNextManager">&#xb6;</a>
 					
 					
@@ -3296,7 +3762,7 @@ SetNextManager indicates an expected call of SetNextManager
 				
 			
 				
-				<h3 id="MockIManagerMockRecorder.SetPrevManager">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=6260:6341#L179">SetPrevManager</a>
+				<h3 id="MockIManagerMockRecorder.SetPrevManager">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=6662:6743#L193">SetPrevManager</a>
 					<a class="permalink" href="index.html#MockIManagerMockRecorder.SetPrevManager">&#xb6;</a>
 					
 					
@@ -3311,7 +3777,7 @@ SetPrevManager indicates an expected call of SetPrevManager
 				
 			
 				
-				<h3 id="MockIManagerMockRecorder.SetWaitGroup">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=6788:6867#L193">SetWaitGroup</a>
+				<h3 id="MockIManagerMockRecorder.SetWaitGroup">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=7190:7269#L207">SetWaitGroup</a>
 					<a class="permalink" href="index.html#MockIManagerMockRecorder.SetWaitGroup">&#xb6;</a>
 					
 					
@@ -3326,7 +3792,7 @@ SetWaitGroup indicates an expected call of SetWaitGroup
 				
 			
 				
-				<h3 id="MockIManagerMockRecorder.SetWorkersCounter">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=7341:7425#L207">SetWorkersCounter</a>
+				<h3 id="MockIManagerMockRecorder.SetWorkersCounter">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=7743:7827#L221">SetWorkersCounter</a>
 					<a class="permalink" href="index.html#MockIManagerMockRecorder.SetWorkersCounter">&#xb6;</a>
 					
 					
@@ -3341,7 +3807,7 @@ SetWorkersCounter indicates an expected call of SetWorkersCounter
 				
 			
 				
-				<h3 id="MockIManagerMockRecorder.Start">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=7825:7897#L221">Start</a>
+				<h3 id="MockIManagerMockRecorder.Start">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=8227:8299#L235">Start</a>
 					<a class="permalink" href="index.html#MockIManagerMockRecorder.Start">&#xb6;</a>
 					
 					
@@ -3356,7 +3822,7 @@ Start indicates an expected call of Start
 				
 			
 				
-				<h3 id="MockIManagerMockRecorder.Statistic">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=8293:8353#L235">Statistic</a>
+				<h3 id="MockIManagerMockRecorder.Statistic">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=8695:8755#L249">Statistic</a>
 					<a class="permalink" href="index.html#MockIManagerMockRecorder.Statistic">&#xb6;</a>
 					
 					
@@ -3371,7 +3837,7 @@ Statistic indicates an expected call of Statistic
 				
 			
 				
-				<h3 id="MockIManagerMockRecorder.Stop">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=8647:8702#L247">Stop</a>
+				<h3 id="MockIManagerMockRecorder.Stop">func (*MockIManagerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/imanager_mock.go?s=9049:9104#L261">Stop</a>
 					<a class="permalink" href="index.html#MockIManagerMockRecorder.Stop">&#xb6;</a>
 					
 					
@@ -3488,12 +3954,12 @@ Name mocks base method
 				
 			
 				
-				<h3 id="MockIWorker.SetBorderCond">func (*MockIWorker) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iworker_mock.go?s=2318:2388#L72">SetBorderCond</a>
+				<h3 id="MockIWorker.SetBorderCond">func (*MockIWorker) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iworker_mock.go?s=2318:2405#L72">SetBorderCond</a>
 					<a class="permalink" href="index.html#MockIWorker.SetBorderCond">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (m *<a href="index.html#MockIWorker">MockIWorker</a>) SetBorderCond(arg0 <a href="../../../../../index.html">faces</a>.<a href="../index.html#ManagerType">ManagerType</a>, arg1 <a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a>)</pre>
+				<pre>func (m *<a href="index.html#MockIWorker">MockIWorker</a>) SetBorderCond(arg0 <a href="../../../../../../../../../index.html">faces</a>.<a href="../index.html#ManagerType">ManagerType</a>, arg1 <a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a>, arg2 <a href="../index.html">faces</a>.<a href="../index.html#Name">Name</a>)</pre>
 				<p>
 SetBorderCond mocks base method
 </p>
@@ -3503,7 +3969,7 @@ SetBorderCond mocks base method
 				
 			
 				
-				<h3 id="MockIWorker.Start">func (*MockIWorker) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iworker_mock.go?s=2797:2852#L84">Start</a>
+				<h3 id="MockIWorker.Start">func (*MockIWorker) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iworker_mock.go?s=2832:2887#L84">Start</a>
 					<a class="permalink" href="index.html#MockIWorker.Start">&#xb6;</a>
 					
 					
@@ -3518,7 +3984,7 @@ Start mocks base method
 				
 			
 				
-				<h3 id="MockIWorker.Stop">func (*MockIWorker) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iworker_mock.go?s=3241:3269#L98">Stop</a>
+				<h3 id="MockIWorker.Stop">func (*MockIWorker) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iworker_mock.go?s=3276:3304#L98">Stop</a>
 					<a class="permalink" href="index.html#MockIWorker.Stop">&#xb6;</a>
 					
 					
@@ -3606,12 +4072,12 @@ Name indicates an expected call of Name
 				
 			
 				
-				<h3 id="MockIWorkerMockRecorder.SetBorderCond">func (*MockIWorkerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iworker_mock.go?s=2519:2604#L78">SetBorderCond</a>
+				<h3 id="MockIWorkerMockRecorder.SetBorderCond">func (*MockIWorkerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iworker_mock.go?s=2542:2633#L78">SetBorderCond</a>
 					<a class="permalink" href="index.html#MockIWorkerMockRecorder.SetBorderCond">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (mr *<a href="index.html#MockIWorkerMockRecorder">MockIWorkerMockRecorder</a>) SetBorderCond(arg0, arg1 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
+				<pre>func (mr *<a href="index.html#MockIWorkerMockRecorder">MockIWorkerMockRecorder</a>) SetBorderCond(arg0, arg1, arg2 interface{}) *<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/">gomock</a>.<a href="http://127.0.0.1:6060/pkg/github.com/golang/mock/gomock/#Call">Call</a></pre>
 				<p>
 SetBorderCond indicates an expected call of SetBorderCond
 </p>
@@ -3621,7 +4087,7 @@ SetBorderCond indicates an expected call of SetBorderCond
 				
 			
 				
-				<h3 id="MockIWorkerMockRecorder.Start">func (*MockIWorkerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iworker_mock.go?s=3000:3071#L92">Start</a>
+				<h3 id="MockIWorkerMockRecorder.Start">func (*MockIWorkerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iworker_mock.go?s=3035:3106#L92">Start</a>
 					<a class="permalink" href="index.html#MockIWorkerMockRecorder.Start">&#xb6;</a>
 					
 					
@@ -3636,7 +4102,7 @@ Start indicates an expected call of Start
 				
 			
 				
-				<h3 id="MockIWorkerMockRecorder.Stop">func (*MockIWorkerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iworker_mock.go?s=3361:3415#L104">Stop</a>
+				<h3 id="MockIWorkerMockRecorder.Stop">func (*MockIWorkerMockRecorder) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/faces/mmock/iworker_mock.go?s=3396:3450#L104">Stop</a>
 					<a class="permalink" href="index.html#MockIWorkerMockRecorder.Stop">&#xb6;</a>
 					
 					
@@ -3662,7 +4128,7 @@ Stop indicates an expected call of Stop
 
 
 <div id="footer">
-Build version go1.15.1.<br>
+Build version go1.15.2.<br>
 Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
 the content of this page is licensed under the
 Creative Commons Attribution 3.0 License,
