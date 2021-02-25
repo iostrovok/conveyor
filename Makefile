@@ -171,3 +171,8 @@ docs-gen:
 	@mkdir -p ./docs
 	@$(LOADENV) go run ./console/docs_generator.go
 
+
+test-example:
+	@echo "======================================================================"
+	@echo "Run race test for workers"
+	cd $(LOCDIR)/example/test-1 && $(DIR) $(GODEBUG) go test -cover -race ./

@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/ptypes/timestamp"
+	"github.com/iostrovok/check"
 
 	"github.com/iostrovok/conveyor/faces"
 	"github.com/iostrovok/conveyor/protobuf/go/nodes"
@@ -50,6 +51,10 @@ type Manager struct {
 	tracer               faces.ITrace
 
 	workersCounter faces.IWorkersCounter
+
+	// need to use in test mode
+	testMode   bool
+	testObject *check.C
 }
 
 //WorkerManagerType ManagerType = "worker"
@@ -102,6 +107,12 @@ func (m *Manager) Statistic() *nodes.ManagerData {
 
 func (m *Manager) Name() faces.Name {
 	return m.name
+}
+
+func (m *Manager) SetTestMode(mode bool, testObject *check.C) faces.IManager {
+	m.testMode = mode
+	m.testObject = testObject
+	return m
 }
 
 func (m *Manager) SetWorkersCounter(wc faces.IWorkersCounter) faces.IManager {
@@ -282,9 +293,6 @@ func (m *Manager) Start(ctx context.Context) error {
 }
 
 func (m *Manager) checkCountWorkers() error {
-	if m.checkRun(false) || !m.in.IsActive() {
-		return nil
-	}
 
 	workersWantTo, err := m.workersCounter.Check(m.Statistic())
 	if err != nil {
@@ -341,6 +349,9 @@ func (m *Manager) addOneWorker() error {
 	if err != nil {
 		return err
 	}
+
+	// if it's test session
+	w.SetTestMode(m.testMode, m.testObject)
 
 	nextManagerName := faces.UnknownName
 	if m.next != nil {

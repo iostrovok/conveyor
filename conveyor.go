@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	"github.com/iostrovok/check"
 	"github.com/pkg/errors"
-
 
 	"github.com/iostrovok/conveyor/faces"
 	"github.com/iostrovok/conveyor/internalmanager"
@@ -72,6 +72,10 @@ type data struct {
 
 	defaultPriority int
 	uniqNames       []faces.Name
+
+	// need to use in test mode
+	testMode   bool
+	testObject *check.C
 }
 
 func New(chanLen int, chanType faces.ChanType, name string) faces.IConveyor {
@@ -116,6 +120,11 @@ func (c *Conveyor) Init(chanLen int, chanType faces.ChanType, name string) faces
 	return c
 }
 
+func (c *Conveyor) SetTestMode(mode bool, testObject *check.C) {
+	c.data.testMode = mode
+	c.data.testObject = testObject
+}
+
 // getItemFrommInput excavator IItem or create new
 func (c *Conveyor) getItemFrommInput(i faces.IInput) faces.IItem {
 	ctx, tr, val, priorityRef, skipToName := i.Values()
@@ -149,6 +158,20 @@ func (c *Conveyor) getItemFrommInput(i faces.IInput) faces.IItem {
 
 // Run creates the new item over interface and sends to conveyor.
 // If priority queue is used the default priority will be set up.
+func (c *Conveyor) RunTest(i faces.IInput, suffix string) {
+	it := c.getItemFrommInput(i)
+
+	// set test suffix
+	it.SetTestHandlerSuffix(suffix)
+
+	// marker before pushing to first channel
+	it.PushedToChannel(c.data.firstWorkerManager.Name())
+	it.Start()
+	c.data.inCh.ChanIn() <- it
+}
+
+// Run creates the new item over interface and sends to conveyor.
+// If priority queue is used the default priority will be set up.
 func (c *Conveyor) Run(i faces.IInput) {
 	it := c.getItemFrommInput(i)
 	// marker before pushing to first channel
@@ -158,9 +181,23 @@ func (c *Conveyor) Run(i faces.IInput) {
 }
 
 // RunRes creates the new item over interface, sends to conveyor and returns result.
-func (c *Conveyor) RunRes(i faces.IInput) (interface{}, error) {
-
+func (c *Conveyor) RunResTest(i faces.IInput, suffix string) (interface{}, error) {
 	it := c.getItemFrommInput(i)
+
+	// set test suffix
+	it.SetTestHandlerSuffix(suffix)
+
+	return c._runRes(it)
+}
+
+// RunRes creates the new item over interface, sends to conveyor and returns result.
+func (c *Conveyor) RunRes(i faces.IInput) (interface{}, error) {
+	it := c.getItemFrommInput(i)
+	return c._runRes(it)
+}
+
+func (c *Conveyor) _runRes(it faces.IItem) (interface{}, error) {
+
 	ctx := it.GetContext()
 
 	ch := internalmanager.AddId(it.GetID(), ctx)
@@ -499,7 +536,8 @@ func (c *Conveyor) AddFinalHandler(name faces.Name, minCount, maxCount int, hand
 		SetIsLast(true).
 		SetWaitGroup(c.data.finalGroup).
 		MetricPeriod(c.data.metricPeriodDuration).
-		SetWorkersCounter(c.data.workersCounter)
+		SetWorkersCounter(c.data.workersCounter).
+		SetTestMode(c.data.testMode, c.data.testObject)
 
 	in := queues.New(c.data.lengthChannel, c.data.chanType)
 	c.data.systemFinalManager.SetNextManager(c.data.userFinalManager).SetChanOut(in).SetChanErr(in)
@@ -526,7 +564,8 @@ func (c *Conveyor) addSystemFinalHandler() {
 		SetWaitGroup(c.data.finalGroup).
 		MetricPeriod(c.data.metricPeriodDuration).
 		SetWorkersCounter(c.data.workersCounter).
-		SetChanIn(c.data.outCh)
+		SetChanIn(c.data.outCh).
+		SetTestMode(c.data.testMode, c.data.testObject)
 }
 
 // AddHandler adds customer handler.
@@ -555,7 +594,8 @@ func (c *Conveyor) AddHandler(name faces.Name, minCount, maxCount int, handler f
 		SetChanErr(c.data.errCh).
 		SetWaitGroup(c.data.workerGroup).
 		MetricPeriod(c.data.metricPeriodDuration).
-		SetWorkersCounter(c.data.workersCounter)
+		SetWorkersCounter(c.data.workersCounter).
+		SetTestMode(c.data.testMode, c.data.testObject)
 
 	if c.data.lastWorkerManager != nil {
 		in := queues.New(c.data.lengthChannel, c.data.chanType)
@@ -594,7 +634,8 @@ func (c *Conveyor) AddErrorHandler(manageName faces.Name, minCount, maxCount int
 		SetHandler(handler).
 		SetWaitGroup(c.data.errorGroup).
 		MetricPeriod(c.data.metricPeriodDuration).
-		SetWorkersCounter(c.data.workersCounter)
+		SetWorkersCounter(c.data.workersCounter).
+		SetTestMode(c.data.testMode, c.data.testObject)
 
 	if c.data.lastErrorManager != nil {
 		in := queues.New(c.data.lengthChannel, c.data.chanType)

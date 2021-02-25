@@ -16,7 +16,10 @@ type IItem interface {
 	Set(data interface{})
 	CheckData()
 
+	// processing functions
 	GetContext() context.Context
+	SetLock()
+	SetUnlock()
 
 	AddError(err error)
 	GetError() error
@@ -50,4 +53,8 @@ type IItem interface {
 
 	SetLastHandler(handlerName Name)
 	GetLastHandler() Name
+
+	// Using for test mode only
+	GetTestHandlerSuffix() (suffix string)
+	SetTestHandlerSuffix(suffix string)
 }

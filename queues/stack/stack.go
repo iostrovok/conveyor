@@ -149,6 +149,10 @@ func (stack *Stack) runOut(ctx context.Context) {
 }
 
 func (stack *Stack) Info() *nodes.ChanData {
+
+	stack.RLock()
+	defer stack.RUnlock()
+
 	return &nodes.ChanData{
 		Type:            nodes.ChanType_CHAN_STACK,
 		IsExisted:       true,

@@ -5,6 +5,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/iostrovok/check"
+
 	"github.com/iostrovok/conveyor/protobuf/go/nodes"
 )
 
@@ -24,7 +26,7 @@ type Name string
 
 const (
 	UnknownName Name = "unknown"
-	ErrorName Name = "error"
+	ErrorName   Name = "error"
 )
 
 type IWorkersCounter interface {
@@ -58,11 +60,16 @@ type IManager interface {
 	Statistic() *nodes.ManagerData
 
 	Name() Name
+
+	// test mode
+	SetTestMode(mode bool, testObject *check.C) IManager
 }
 
 type IWorker interface {
 	Start(ctx context.Context) error
 	Stop()
+
+	SetTestMode(mode bool, testObject *check.C)
 
 	SetBorderCond(typ ManagerType, isLast bool, nextManagerName Name)
 	GetBorderCond() (Name, ManagerType, bool)
