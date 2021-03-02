@@ -7,7 +7,6 @@ package mmock
 import (
 	context "context"
 	gomock "github.com/golang/mock/gomock"
-	check "github.com/iostrovok/check"
 	faces "github.com/iostrovok/conveyor/faces"
 	nodes "github.com/iostrovok/conveyor/protobuf/go/nodes"
 	reflect "reflect"
@@ -207,17 +206,17 @@ func (mr *MockIManagerMockRecorder) SetPrevManager(arg0 interface{}) *gomock.Cal
 }
 
 // SetTestMode mocks base method
-func (m *MockIManager) SetTestMode(arg0 bool, arg1 *check.C) faces.IManager {
+func (m *MockIManager) SetTestMode(arg0 faces.ITestObject) faces.IManager {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SetTestMode", arg0, arg1)
+	ret := m.ctrl.Call(m, "SetTestMode", arg0)
 	ret0, _ := ret[0].(faces.IManager)
 	return ret0
 }
 
 // SetTestMode indicates an expected call of SetTestMode
-func (mr *MockIManagerMockRecorder) SetTestMode(arg0, arg1 interface{}) *gomock.Call {
+func (mr *MockIManagerMockRecorder) SetTestMode(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTestMode", reflect.TypeOf((*MockIManager)(nil).SetTestMode), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTestMode", reflect.TypeOf((*MockIManager)(nil).SetTestMode), arg0)
 }
 
 // SetWaitGroup mocks base method

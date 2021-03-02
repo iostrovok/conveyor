@@ -5,12 +5,12 @@ package workers
 
 import (
 	"context"
+	"github.com/iostrovok/conveyor/testobject"
 	"reflect"
 	"sync"
 	"sync/atomic"
 	"time"
 
-	"github.com/iostrovok/check"
 	"github.com/pkg/errors"
 
 	"github.com/iostrovok/conveyor/faces"
@@ -44,8 +44,7 @@ type Worker struct {
 	activeWorkers *int32
 
 	// need to use in test mode
-	testMode   bool
-	testObject *check.C
+	testObject faces.ITestObject
 }
 
 func NewWorker(id string, name faces.Name, in, out, errCh faces.IChan, giveBirth faces.GiveBirth,
@@ -69,6 +68,8 @@ func NewWorker(id string, name faces.Name, in, out, errCh faces.IChan, giveBirth
 
 		stopCh: make(chan struct{}, 2),
 		tracer: tr,
+
+		testObject: testobject.Empty(),
 	}, nil
 }
 
@@ -81,11 +82,10 @@ func (w *Worker) SetBorderCond(typ faces.ManagerType, isLast bool, nextManagerNa
 	w.typ = typ
 }
 
-func (w *Worker) SetTestMode(mode bool, testObject *check.C) {
+func (w *Worker) SetTestMode(testObject faces.ITestObject) {
 	w.Lock()
 	defer w.Unlock()
 
-	w.testMode = mode
 	w.testObject = testObject
 }
 
@@ -117,11 +117,68 @@ func (w *Worker) logTrace(format string, a ...interface{}) {
 	}
 }
 
+func (w *Worker) startHandler(ctx context.Context) error {
+
+	if w.testObject.IsTestMode() {
+		values := []reflect.Value{reflect.ValueOf(ctx), reflect.ValueOf(w.testObject.TestObject())}
+		st := reflect.TypeOf(w.handler)
+
+		if _, ok := st.MethodByName("StartTest_" + w.testObject.Suffix()); ok {
+			values := reflect.ValueOf(w.handler).MethodByName("StartTest_" + w.testObject.Suffix()).Call(values)
+			var err error
+			if !values[0].IsNil() {
+				err = values[0].Interface().(error)
+			}
+			return err
+		}
+
+		if _, ok := st.MethodByName("StartTest"); ok {
+			values := reflect.ValueOf(w.handler).MethodByName("StartTest").Call(values)
+			var err error
+			if !values[0].IsNil() {
+				err = values[0].Interface().(error)
+			}
+			return err
+		}
+	}
+
+	// simple start if not it's test mode
+	return w.handler.Start(ctx)
+}
+
 func (w *Worker) Start(ctx context.Context) error {
 
-	if err := w.handler.Start(ctx); err != nil {
+	if err := w.startHandler(ctx); err != nil {
 		return err
 	}
+
+	w.job(ctx)
+
+	return nil
+}
+
+func (w *Worker) stopHandler(ctx context.Context) {
+
+	if w.testObject.IsTestMode() {
+		values := []reflect.Value{reflect.ValueOf(ctx), reflect.ValueOf(w.testObject.TestObject())}
+		st := reflect.TypeOf(w.handler)
+
+		if _, ok := st.MethodByName("StopTest_" + w.testObject.Suffix()); ok {
+			reflect.ValueOf(w.handler).MethodByName("StopTest_" + w.testObject.Suffix()).Call(values)
+			return
+		}
+
+		if _, ok := st.MethodByName("StopTest"); ok {
+			reflect.ValueOf(w.handler).MethodByName("StopTest").Call(values)
+			return
+		}
+	}
+
+	// simple start if not it's test mode
+	w.handler.Stop(ctx)
+}
+
+func (w *Worker) job(ctx context.Context) {
 
 	w.wg.Add(1)
 	go func() {
@@ -135,7 +192,7 @@ func (w *Worker) Start(ctx context.Context) error {
 		w.isStarted = true
 		defer func() {
 			ticker.Stop()
-			w.handler.Stop(ctx)
+			w.stopHandler(ctx)
 			w.isStarted = false
 			w.wg.Done()
 		}()
@@ -169,8 +226,6 @@ func (w *Worker) Start(ctx context.Context) error {
 			}
 		}
 	}()
-
-	return nil
 }
 
 func (w *Worker) process(ctx context.Context, item faces.IItem) {
@@ -220,16 +275,16 @@ func doit(internalErr chan error, handler faces.IHandler, item faces.IItem) {
 	internalErr <- handler.Run(item)
 }
 
-func doitWithTest(internalErr chan error, handler interface{}, item faces.IItem, testObject *check.C) {
+func doitWithTest(internalErr chan error, handler faces.IHandler, item faces.IItem) {
 	defer func() {
 		if e := recover(); e != nil {
 			internalErr <- errors.Errorf("%+v", e)
 		}
 	}()
 
-	values := []reflect.Value{reflect.ValueOf(item), reflect.ValueOf(testObject)}
+	values := []reflect.Value{reflect.ValueOf(item), reflect.ValueOf(item.GetTestObject().TestObject())}
 
-	suffix := item.GetTestHandlerSuffix()
+	suffix := item.GetTestObject().Suffix()
 	st := reflect.TypeOf(handler)
 	if _, ok := st.MethodByName("RunTest_" + suffix); ok {
 		values := reflect.ValueOf(handler).MethodByName("RunTest_" + suffix).Call(values)
@@ -261,10 +316,10 @@ func (w *Worker) run(ctx context.Context, item faces.IItem) error {
 
 	internalErr := make(chan error, 1)
 
-	if w.testMode {
-		go doitWithTest(internalErr, w.handler, item, w.testObject)
-	} else {
+	if item.GetTestObject() == nil || !item.GetTestObject().IsTestMode() {
 		go doit(internalErr, w.handler, item)
+	} else {
+		go doitWithTest(internalErr, w.handler, item)
 	}
 
 	var err error

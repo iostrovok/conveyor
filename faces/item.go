@@ -55,6 +55,6 @@ type IItem interface {
 	GetLastHandler() Name
 
 	// Using for test mode only
-	GetTestHandlerSuffix() (suffix string)
-	SetTestHandlerSuffix(suffix string)
+	GetTestObject() ITestObject
+	SetTestObject(ITestObject)
 }

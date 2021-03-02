@@ -5,8 +5,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/iostrovok/check"
-
 	"github.com/iostrovok/conveyor/protobuf/go/nodes"
 )
 
@@ -62,14 +60,17 @@ type IManager interface {
 	Name() Name
 
 	// test mode
-	SetTestMode(mode bool, testObject *check.C) IManager
+	// testObject - object for checking tests
+	// startTestSuffix - suffix for start and stop workers methods
+	SetTestMode(testObject ITestObject) IManager
 }
 
 type IWorker interface {
 	Start(ctx context.Context) error
+
 	Stop()
 
-	SetTestMode(mode bool, testObject *check.C)
+	SetTestMode(testObject ITestObject)
 
 	SetBorderCond(typ ManagerType, isLast bool, nextManagerName Name)
 	GetBorderCond() (Name, ManagerType, bool)

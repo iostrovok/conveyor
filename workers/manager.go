@@ -11,8 +11,6 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/ptypes/timestamp"
-	"github.com/iostrovok/check"
-
 	"github.com/iostrovok/conveyor/faces"
 	"github.com/iostrovok/conveyor/protobuf/go/nodes"
 )
@@ -53,8 +51,7 @@ type Manager struct {
 	workersCounter faces.IWorkersCounter
 
 	// need to use in test mode
-	testMode   bool
-	testObject *check.C
+	testObject faces.ITestObject
 }
 
 //WorkerManagerType ManagerType = "worker"
@@ -109,8 +106,7 @@ func (m *Manager) Name() faces.Name {
 	return m.name
 }
 
-func (m *Manager) SetTestMode(mode bool, testObject *check.C) faces.IManager {
-	m.testMode = mode
+func (m *Manager) SetTestMode(testObject faces.ITestObject) faces.IManager {
 	m.testObject = testObject
 	return m
 }
@@ -351,7 +347,7 @@ func (m *Manager) addOneWorker() error {
 	}
 
 	// if it's test session
-	w.SetTestMode(m.testMode, m.testObject)
+	w.SetTestMode(m.testObject)
 
 	nextManagerName := faces.UnknownName
 	if m.next != nil {
@@ -359,6 +355,7 @@ func (m *Manager) addOneWorker() error {
 	}
 	w.SetBorderCond(m.typ, m.isLast, nextManagerName)
 	m.workers = append(m.workers, w)
+
 	return w.Start(m.ctx)
 }
 
