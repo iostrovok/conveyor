@@ -119,6 +119,7 @@ mock-gen:
 	$(LOADENV) ./bin/mockgen -package mmock github.com/iostrovok/conveyor/faces IManager > ./faces/mmock/imanager_mock.go
 	$(LOADENV) ./bin/mockgen -package mmock github.com/iostrovok/conveyor/faces IWorker > ./faces/mmock/iworker_mock.go
 	$(LOADENV) ./bin/mockgen -package mmock github.com/iostrovok/conveyor/faces IHandler > ./faces/mmock/ihandler_mock.go
+	$(LOADENV) ./bin/mockgen -package mmock github.com/iostrovok/conveyor/faces ITestObject > ./faces/mmock/itestobject_mock.go
 
 #################### Protobuf section
 
@@ -175,4 +176,4 @@ docs-gen:
 test-example:
 	@echo "======================================================================"
 	@echo "Run race test for workers"
-	cd $(LOCDIR)/example/test-1 && $(DIR) $(GODEBUG) go test -cover -race ./
+	cd $(LOCDIR)/example/example-test-simple && $(DIR) $(GODEBUG) go test -cover -race ./

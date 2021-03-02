@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/iostrovok/check"
 	"github.com/pkg/errors"
 
 	"github.com/iostrovok/conveyor/faces"
@@ -18,6 +17,7 @@ import (
 	"github.com/iostrovok/conveyor/protobuf/go/nodes"
 	"github.com/iostrovok/conveyor/queues"
 	"github.com/iostrovok/conveyor/slavenode"
+	"github.com/iostrovok/conveyor/testobject"
 	"github.com/iostrovok/conveyor/workers"
 	"github.com/iostrovok/conveyor/workerscounter"
 )
@@ -74,16 +74,20 @@ type data struct {
 	uniqNames       []faces.Name
 
 	// need to use in test mode
-	testMode   bool
-	testObject *check.C
+	testObject faces.ITestObject
 }
 
 func New(chanLen int, chanType faces.ChanType, name string) faces.IConveyor {
 	c := &Conveyor{}
-	return c.Init(chanLen, chanType, name)
+	return c.Init(chanLen, chanType, name, testobject.Empty())
 }
 
-func (c *Conveyor) Init(chanLen int, chanType faces.ChanType, name string) faces.IConveyor {
+func NewTest(chanLen int, chanType faces.ChanType, name string, testObject faces.ITestObject) faces.IConveyor {
+	c := &Conveyor{}
+	return c.Init(chanLen, chanType, name, testObject)
+}
+
+func (c *Conveyor) Init(chanLen int, chanType faces.ChanType, name string, testObject faces.ITestObject) faces.IConveyor {
 	if name == "" {
 		name = uuid.New().String()
 	}
@@ -109,6 +113,7 @@ func (c *Conveyor) Init(chanLen int, chanType faces.ChanType, name string) faces
 
 		uniqNames:       []faces.Name{},
 		defaultPriority: defaultPriority,
+		testObject:      testObject,
 	}
 
 	c.data.outCh = queues.New(chanLen, chanType)
@@ -118,11 +123,6 @@ func (c *Conveyor) Init(chanLen int, chanType faces.ChanType, name string) faces
 	c.addSystemFinalHandler()
 
 	return c
-}
-
-func (c *Conveyor) SetTestMode(mode bool, testObject *check.C) {
-	c.data.testMode = mode
-	c.data.testObject = testObject
 }
 
 // getItemFrommInput excavator IItem or create new
@@ -158,11 +158,11 @@ func (c *Conveyor) getItemFrommInput(i faces.IInput) faces.IItem {
 
 // Run creates the new item over interface and sends to conveyor.
 // If priority queue is used the default priority will be set up.
-func (c *Conveyor) RunTest(i faces.IInput, suffix string) {
+func (c *Conveyor) RunTest(i faces.IInput, testObject faces.ITestObject) {
 	it := c.getItemFrommInput(i)
 
 	// set test suffix
-	it.SetTestHandlerSuffix(suffix)
+	it.SetTestObject(testObject)
 
 	// marker before pushing to first channel
 	it.PushedToChannel(c.data.firstWorkerManager.Name())
@@ -181,11 +181,11 @@ func (c *Conveyor) Run(i faces.IInput) {
 }
 
 // RunRes creates the new item over interface, sends to conveyor and returns result.
-func (c *Conveyor) RunResTest(i faces.IInput, suffix string) (interface{}, error) {
+func (c *Conveyor) RunResTest(i faces.IInput, testObject faces.ITestObject) (interface{}, error) {
 	it := c.getItemFrommInput(i)
 
 	// set test suffix
-	it.SetTestHandlerSuffix(suffix)
+	it.SetTestObject(testObject)
 
 	return c._runRes(it)
 }
@@ -537,7 +537,7 @@ func (c *Conveyor) AddFinalHandler(name faces.Name, minCount, maxCount int, hand
 		SetWaitGroup(c.data.finalGroup).
 		MetricPeriod(c.data.metricPeriodDuration).
 		SetWorkersCounter(c.data.workersCounter).
-		SetTestMode(c.data.testMode, c.data.testObject)
+		SetTestMode(c.data.testObject)
 
 	in := queues.New(c.data.lengthChannel, c.data.chanType)
 	c.data.systemFinalManager.SetNextManager(c.data.userFinalManager).SetChanOut(in).SetChanErr(in)
@@ -565,7 +565,7 @@ func (c *Conveyor) addSystemFinalHandler() {
 		MetricPeriod(c.data.metricPeriodDuration).
 		SetWorkersCounter(c.data.workersCounter).
 		SetChanIn(c.data.outCh).
-		SetTestMode(c.data.testMode, c.data.testObject)
+		SetTestMode(c.data.testObject)
 }
 
 // AddHandler adds customer handler.
@@ -595,7 +595,7 @@ func (c *Conveyor) AddHandler(name faces.Name, minCount, maxCount int, handler f
 		SetWaitGroup(c.data.workerGroup).
 		MetricPeriod(c.data.metricPeriodDuration).
 		SetWorkersCounter(c.data.workersCounter).
-		SetTestMode(c.data.testMode, c.data.testObject)
+		SetTestMode(c.data.testObject)
 
 	if c.data.lastWorkerManager != nil {
 		in := queues.New(c.data.lengthChannel, c.data.chanType)
@@ -635,7 +635,7 @@ func (c *Conveyor) AddErrorHandler(manageName faces.Name, minCount, maxCount int
 		SetWaitGroup(c.data.errorGroup).
 		MetricPeriod(c.data.metricPeriodDuration).
 		SetWorkersCounter(c.data.workersCounter).
-		SetTestMode(c.data.testMode, c.data.testObject)
+		SetTestMode(c.data.testObject)
 
 	if c.data.lastErrorManager != nil {
 		in := queues.New(c.data.lengthChannel, c.data.chanType)

@@ -37,7 +37,8 @@ type Data struct {
 	handlerNameWithError faces.Name
 	priority             int
 
-	testSuffix string
+	// need to use in test mode
+	testObject faces.ITestObject
 }
 
 func New(ctx context.Context, tr faces.ITrace) faces.IItem {
@@ -88,18 +89,18 @@ func (i *Item) Init(ctxIn context.Context, tr faces.ITrace) faces.IItem {
 	return i
 }
 
-func (i *Item) GetTestHandlerSuffix() string {
+func (i *Item) GetTestObject() faces.ITestObject {
 	i.RLock()
 	defer i.RUnlock()
 
-	return i.data.testSuffix
+	return i.data.testObject
 }
 
-func (i *Item) SetTestHandlerSuffix(suffix string) {
+func (i *Item) SetTestObject(testObject faces.ITestObject) {
 	i.RLock()
 	defer i.RUnlock()
 
-	i.data.testSuffix = suffix
+	i.data.testObject = testObject
 }
 
 func (i *Item) CheckData() {

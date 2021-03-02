@@ -7,7 +7,6 @@ package mmock
 import (
 	context "context"
 	gomock "github.com/golang/mock/gomock"
-	check "github.com/iostrovok/check"
 	faces "github.com/iostrovok/conveyor/faces"
 	nodes "github.com/iostrovok/conveyor/protobuf/go/nodes"
 	reflect "reflect"
@@ -163,7 +162,7 @@ func (mr *MockIConveyorMockRecorder) RunRes(arg0 interface{}) *gomock.Call {
 }
 
 // RunResTest mocks base method
-func (m *MockIConveyor) RunResTest(arg0 faces.IInput, arg1 string) (interface{}, error) {
+func (m *MockIConveyor) RunResTest(arg0 faces.IInput, arg1 faces.ITestObject) (interface{}, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "RunResTest", arg0, arg1)
 	ret0, _ := ret[0].(interface{})
@@ -178,7 +177,7 @@ func (mr *MockIConveyorMockRecorder) RunResTest(arg0, arg1 interface{}) *gomock.
 }
 
 // RunTest mocks base method
-func (m *MockIConveyor) RunTest(arg0 faces.IInput, arg1 string) {
+func (m *MockIConveyor) RunTest(arg0 faces.IInput, arg1 faces.ITestObject) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "RunTest", arg0, arg1)
 }
@@ -225,18 +224,6 @@ func (m *MockIConveyor) SetName(arg0 string) faces.IConveyor {
 func (mr *MockIConveyorMockRecorder) SetName(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetName", reflect.TypeOf((*MockIConveyor)(nil).SetName), arg0)
-}
-
-// SetTestMode mocks base method
-func (m *MockIConveyor) SetTestMode(arg0 bool, arg1 *check.C) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetTestMode", arg0, arg1)
-}
-
-// SetTestMode indicates an expected call of SetTestMode
-func (mr *MockIConveyorMockRecorder) SetTestMode(arg0, arg1 interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTestMode", reflect.TypeOf((*MockIConveyor)(nil).SetTestMode), arg0, arg1)
 }
 
 // SetTracer mocks base method

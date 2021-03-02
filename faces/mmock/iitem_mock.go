@@ -244,18 +244,18 @@ func (mr *MockIItemMockRecorder) GetSkipToName() *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSkipToName", reflect.TypeOf((*MockIItem)(nil).GetSkipToName))
 }
 
-// GetTestHandlerSuffix mocks base method
-func (m *MockIItem) GetTestHandlerSuffix() string {
+// GetTestObject mocks base method
+func (m *MockIItem) GetTestObject() faces.ITestObject {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetTestHandlerSuffix")
-	ret0, _ := ret[0].(string)
+	ret := m.ctrl.Call(m, "GetTestObject")
+	ret0, _ := ret[0].(faces.ITestObject)
 	return ret0
 }
 
-// GetTestHandlerSuffix indicates an expected call of GetTestHandlerSuffix
-func (mr *MockIItemMockRecorder) GetTestHandlerSuffix() *gomock.Call {
+// GetTestObject indicates an expected call of GetTestObject
+func (mr *MockIItemMockRecorder) GetTestObject() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTestHandlerSuffix", reflect.TypeOf((*MockIItem)(nil).GetTestHandlerSuffix))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTestObject", reflect.TypeOf((*MockIItem)(nil).GetTestObject))
 }
 
 // LogTrace mocks base method
@@ -431,16 +431,16 @@ func (mr *MockIItemMockRecorder) SetSkipToName(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetSkipToName", reflect.TypeOf((*MockIItem)(nil).SetSkipToName), arg0)
 }
 
-// SetTestHandlerSuffix mocks base method
-func (m *MockIItem) SetTestHandlerSuffix(arg0 string) {
+// SetTestObject mocks base method
+func (m *MockIItem) SetTestObject(arg0 faces.ITestObject) {
 	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetTestHandlerSuffix", arg0)
+	m.ctrl.Call(m, "SetTestObject", arg0)
 }
 
-// SetTestHandlerSuffix indicates an expected call of SetTestHandlerSuffix
-func (mr *MockIItemMockRecorder) SetTestHandlerSuffix(arg0 interface{}) *gomock.Call {
+// SetTestObject indicates an expected call of SetTestObject
+func (mr *MockIItemMockRecorder) SetTestObject(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTestHandlerSuffix", reflect.TypeOf((*MockIItem)(nil).SetTestHandlerSuffix), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTestObject", reflect.TypeOf((*MockIItem)(nil).SetTestObject), arg0)
 }
 
 // SetUnlock mocks base method

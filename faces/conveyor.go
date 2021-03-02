@@ -4,8 +4,6 @@ import (
 	"context"
 	"time"
 
-	"github.com/iostrovok/check"
-
 	"github.com/iostrovok/conveyor/protobuf/go/nodes"
 )
 
@@ -35,9 +33,8 @@ type IConveyor interface {
 	RunRes(IInput) (interface{}, error)
 
 	// simple pushing in test mode
-	RunTest(i IInput, suffix string)
-	RunResTest(i IInput, suffix string) (interface{}, error)
-	SetTestMode(mode bool, testObject *check.C)
+	RunTest(i IInput, object ITestObject)
+	RunResTest(i IInput, object ITestObject) (interface{}, error)
 
 	SetDefaultPriority(defaultPriority int)
 	GetDefaultPriority() int

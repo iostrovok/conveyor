@@ -3,6 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/iostrovok/conveyor/testobject"
+	"sync/atomic"
 	"testing"
 	"time"
 
@@ -17,6 +19,15 @@ import (
 
 var total = 20
 var totalOnline = 5
+
+var CountMySimpleHandlerStop = new(int32)
+var CountMySimpleHandlerStopStopRockAndRoll = new(int32)
+
+var CountMySimpleHandlerStart = new(int32)
+var CountMySimpleHandlerStartStopRockAndRoll = new(int32)
+
+var countRunJazz = new(int32)
+var countRun = new(int32)
 
 const (
 	FirstHandler     faces.Name = "1th-handler"
@@ -53,7 +64,11 @@ func NewFinalHandler(_ faces.Name) (faces.IHandler, error) {
 	return &FinalHandler{}, nil
 }
 
-func (m *FinalHandler) Start(_ context.Context) error { return nil }
+func (m *FinalHandler) Start(_ context.Context) error {
+	fmt.Printf("Start!\n")
+	return nil
+}
+
 func (m *FinalHandler) Stop(_ context.Context) {
 	fmt.Printf("final handler: total proceesed %d from %d + 5\n", m.total, total)
 }
@@ -103,7 +118,7 @@ func (m *ErrHandler) Run(item faces.IItem) error {
 
 	1) It sleeps few second.
 	2) It may setup returns error. After that item is passing to error handler.
-	3) First handler may send item direct to fourth handler.
+	3) Jazz handler may send item direct to fourth handler.
 */
 type MySimpleHandler struct {
 	faces.EmptyHandler
@@ -124,6 +139,7 @@ func First(name faces.Name) (faces.IHandler, error) {
 		sleepSecond: 1,
 	}, nil
 }
+
 func Second(name faces.Name) (faces.IHandler, error) {
 	/*
 		if we want to setup single for all "second" workers connection to database or grpc, we may do it here.
@@ -157,23 +173,65 @@ func Fourth(name faces.Name) (faces.IHandler, error) {
 	}, nil
 }
 
-// does nothing
-func (m *MySimpleHandler) TickerRun(_ context.Context) {
-	fmt.Printf("MySimpleHandler: TickerRun: %s!\n", m.name)
-}
-
-// return 1 second
-func (m *MySimpleHandler) TickerDuration() time.Duration {
-	return time.Second * 1
-}
+//// does nothing
+//func (m *MySimpleHandler) TickerRun(_ context.Context) {
+//	fmt.Printf("MySimpleHandler: TickerRun: %s!\n", m.name)
+//}
+//
+//// return 1 second
+//func (m *MySimpleHandler) TickerDuration() time.Duration {
+//	return time.Second * 1
+//}
 
 func (m *MySimpleHandler) Start(_ context.Context) error {
+	/* does nothing */
+
+	// just debug message
+	fmt.Printf("Start!\n")
+
+	// just debug counter
+	atomic.AddInt32(CountMySimpleHandlerStart, 1)
+
 	return nil
 }
 
-func (m *MySimpleHandler) Stop(_ context.Context) { /* nothing */ }
+func (m *MySimpleHandler) StartTest_RockAndRoll(_ context.Context, testObject *C) error {
+	/* does nothing */
 
-func (m *MySimpleHandler) Run(item faces.IItem) error {
+	// just debug message
+	fmt.Printf("StartTest_RockAndRoll!\n")
+
+	// just debug counter
+	atomic.AddInt32(CountMySimpleHandlerStartStopRockAndRoll, 1)
+
+	// Check RockAndRoll case with testObject here
+	testObject.Assert(1, Equals, 1)
+	return nil
+}
+
+func (m *MySimpleHandler) Stop(_ context.Context) {
+	/* does nothing */
+
+	// just debug message
+	fmt.Printf("Stop!\n")
+
+	// just debug counter
+	atomic.AddInt32(CountMySimpleHandlerStop, 1)
+}
+
+func (m *MySimpleHandler) StopTest_RockAndRoll(_ context.Context, testObject *C) error {
+	// just debug message
+	fmt.Printf("StopTest_RockAndRoll!\n")
+	// just debug counter
+	atomic.AddInt32(CountMySimpleHandlerStopStopRockAndRoll, 1)
+
+	// Check RockAndRoll case with testObject here
+	testObject.Assert(1, Equals, 1)
+
+	return nil
+}
+
+func (m *MySimpleHandler) _run(item faces.IItem) error {
 
 	// increase internal counter
 	m.counter++
@@ -197,15 +255,23 @@ func (m *MySimpleHandler) Run(item faces.IItem) error {
 	return nil
 }
 
-func (m *MySimpleHandler) RunTest_First(item faces.IItem, testObject *C) error {
-	fmt.Printf("RunTest_First!")
+func (m *MySimpleHandler) Run(item faces.IItem) error {
 
-	/*
-		Check "First" case with testObject here
-	*/
+	atomic.AddInt32(countRun, 1)
+
+	return m._run(item)
+}
+
+func (m *MySimpleHandler) RunTest_Jazz(item faces.IItem, testObject *C) error {
+	// just debug message
+	fmt.Printf("RunTest_Jazz!\n")
+	// just debug counter
+	atomic.AddInt32(countRunJazz, 1)
+
+	// Check RockAndRoll case with testObject here
 	testObject.Assert(1, Equals, 1)
 
-	return m.Run(item)
+	return m._run(item)
 }
 
 // <<<<<<<<<<<<<<<<<<<< simple worked handler. END
@@ -257,10 +323,16 @@ func TestSuite(t *testing.T) { TestingT(t) }
 
 func (s *testSuite) TestSyntax(c *C) {
 
+	/*
+		Test object "RockAndRoll"
+		Used for Start and Stop methods only
+	*/
+	to := testobject.New(true, c, "RockAndRoll")
+
 	// create and build new conveyor
-	myMaster := conveyor.New(20, faces.ChanStack, "my-app")
-	myMaster.SetTestMode(true, c)
+	myMaster := conveyor.NewTest(20, faces.ChanStack, "my-app", to)
 	c.Assert(buildConveyor(myMaster), IsNil)
+	myMaster.Start(context.Background())
 
 	for i := 0; i < total; i++ {
 
@@ -268,13 +340,28 @@ func (s *testSuite) TestSyntax(c *C) {
 			Data(&MyMessage{msg: fmt.Sprintf("online item: %d", i), id: i}).
 			Priority(100)
 
-		res, err := myMaster.RunResTest(item, "First")
+		/*
+			 object "RockAndRoll"
+			Used for Start and Stop methods only
+		*/
+
+		res, err := myMaster.RunResTest(item, testobject.New(true, c, "Jazz"))
 		fmt.Printf("\nProccesed online: Result: %+v, Error: %+v\n", res, err)
 		if res.(*MyMessage).id%4 == 0 || res.(*MyMessage).id%5 == 0 {
 			c.Assert(err, NotNil)
 		} else {
 			c.Assert(err, IsNil)
 		}
-
 	}
+
+	myMaster.WaitAndStop()
+
+	c.Assert(atomic.LoadInt32(countRun), Equals, int32(0))
+	c.Assert(atomic.LoadInt32(countRunJazz) > 0, Equals, true)
+
+	c.Assert(atomic.LoadInt32(CountMySimpleHandlerStop), Equals, int32(0))
+	c.Assert(atomic.LoadInt32(CountMySimpleHandlerStopStopRockAndRoll) > 0, Equals, true)
+
+	c.Assert(atomic.LoadInt32(CountMySimpleHandlerStart), Equals, int32(0))
+	c.Assert(atomic.LoadInt32(CountMySimpleHandlerStartStopRockAndRoll) > 0, Equals, true)
 }

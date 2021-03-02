@@ -7,7 +7,6 @@ package mmock
 import (
 	context "context"
 	gomock "github.com/golang/mock/gomock"
-	check "github.com/iostrovok/check"
 	faces "github.com/iostrovok/conveyor/faces"
 	reflect "reflect"
 )
@@ -92,15 +91,15 @@ func (mr *MockIWorkerMockRecorder) SetBorderCond(arg0, arg1, arg2 interface{}) *
 }
 
 // SetTestMode mocks base method
-func (m *MockIWorker) SetTestMode(arg0 bool, arg1 *check.C) {
+func (m *MockIWorker) SetTestMode(arg0 faces.ITestObject) {
 	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetTestMode", arg0, arg1)
+	m.ctrl.Call(m, "SetTestMode", arg0)
 }
 
 // SetTestMode indicates an expected call of SetTestMode
-func (mr *MockIWorkerMockRecorder) SetTestMode(arg0, arg1 interface{}) *gomock.Call {
+func (mr *MockIWorkerMockRecorder) SetTestMode(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTestMode", reflect.TypeOf((*MockIWorker)(nil).SetTestMode), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetTestMode", reflect.TypeOf((*MockIWorker)(nil).SetTestMode), arg0)
 }
 
 // Start mocks base method
