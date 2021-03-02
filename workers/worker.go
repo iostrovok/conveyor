@@ -5,7 +5,6 @@ package workers
 
 import (
 	"context"
-	"fmt"
 	"github.com/iostrovok/conveyor/testobject"
 	"reflect"
 	"sync"
@@ -120,14 +119,9 @@ func (w *Worker) logTrace(format string, a ...interface{}) {
 
 func (w *Worker) startHandler(ctx context.Context) error {
 
-	fmt.Printf("\nWorker.startHandler: w.testObject.IsTestMode(): %t\n", w.testObject.IsTestMode())
-	fmt.Printf("\nWorker.startHandler: w.testObject.Suffix(): %s\n", w.testObject.Suffix())
-
 	if w.testObject.IsTestMode() {
 		values := []reflect.Value{reflect.ValueOf(ctx), reflect.ValueOf(w.testObject.TestObject())}
 		st := reflect.TypeOf(w.handler)
-
-		fmt.Printf("\nWorker.startHandler: .... %s\n", "StartTest_"+w.testObject.Suffix())
 
 		if _, ok := st.MethodByName("StartTest_" + w.testObject.Suffix()); ok {
 			values := reflect.ValueOf(w.handler).MethodByName("StartTest_" + w.testObject.Suffix()).Call(values)
@@ -137,8 +131,6 @@ func (w *Worker) startHandler(ctx context.Context) error {
 			}
 			return err
 		}
-
-		fmt.Printf("\nWorker.startHandler: .... %s\n", "StartTest")
 
 		if _, ok := st.MethodByName("StartTest"); ok {
 			values := reflect.ValueOf(w.handler).MethodByName("StartTest").Call(values)
