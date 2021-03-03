@@ -102,8 +102,7 @@ func (i *Item) SetTestObject(testObject faces.ITestObject) {
 	defer i.RUnlock()
 
 	if testObject == nil {
-		i.data.testObject = testobject.Empty()
-		return
+		testObject = testobject.Empty()
 	}
 
 	i.data.testObject = testObject

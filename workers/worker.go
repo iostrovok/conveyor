@@ -87,8 +87,7 @@ func (w *Worker) SetTestMode(testObject faces.ITestObject) {
 	defer w.Unlock()
 
 	if testObject == nil {
-		w.testObject = testobject.Empty()
-		return
+		testObject = testobject.Empty()
 	}
 
 	w.testObject = testObject
