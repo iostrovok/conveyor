@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/iostrovok/conveyor/faces"
+	"github.com/iostrovok/conveyor/testobject"
 )
 
 type Item struct {
@@ -99,6 +100,11 @@ func (i *Item) GetTestObject() faces.ITestObject {
 func (i *Item) SetTestObject(testObject faces.ITestObject) {
 	i.RLock()
 	defer i.RUnlock()
+
+	if testObject == nil {
+		i.data.testObject = testobject.Empty()
+		return
+	}
 
 	i.data.testObject = testObject
 }

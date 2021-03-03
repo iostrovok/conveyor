@@ -5,7 +5,6 @@ package workers
 
 import (
 	"context"
-	"github.com/iostrovok/conveyor/testobject"
 	"reflect"
 	"sync"
 	"sync/atomic"
@@ -14,6 +13,7 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/iostrovok/conveyor/faces"
+	"github.com/iostrovok/conveyor/testobject"
 )
 
 /*
@@ -85,6 +85,11 @@ func (w *Worker) SetBorderCond(typ faces.ManagerType, isLast bool, nextManagerNa
 func (w *Worker) SetTestMode(testObject faces.ITestObject) {
 	w.Lock()
 	defer w.Unlock()
+
+	if testObject == nil {
+		w.testObject = testobject.Empty()
+		return
+	}
 
 	w.testObject = testObject
 }
