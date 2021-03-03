@@ -5,6 +5,7 @@ package workers
 
 import (
 	"context"
+	"github.com/iostrovok/conveyor/testobject"
 	"strconv"
 	"sync"
 	"sync/atomic"
@@ -107,6 +108,10 @@ func (m *Manager) Name() faces.Name {
 }
 
 func (m *Manager) SetTestMode(testObject faces.ITestObject) faces.IManager {
+	if testObject == nil {
+		testObject = testobject.Empty()
+	}
+
 	m.testObject = testObject
 	return m
 }
