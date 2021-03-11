@@ -26,7 +26,6 @@ type Data struct {
 	cancel context.CancelFunc
 	tracer faces.ITrace
 	err    error
-	isDone bool
 
 	startTime      time.Time
 	localStartTime time.Time
@@ -109,7 +108,7 @@ func (i *Item) SetTestObject(testObject faces.ITestObject) {
 }
 
 func (i *Item) CheckData() {
-	i.Init(nil, nil)
+	i.Init(context.Background(), nil)
 }
 
 func (i *Item) GetID() int64 {
@@ -188,7 +187,7 @@ func (i *Item) Finish() {
 	defer i.Unlock()
 
 	if i.data.tracer != nil {
-		i.data.tracer.LazyPrintf(time.Now().Sub(i.data.startTime).String() + " : total")
+		i.data.tracer.LazyPrintf(time.Since(i.data.startTime).String() + " : total")
 		i.data.tracer.Flush()
 	}
 }
@@ -220,7 +219,7 @@ func (i *Item) LogTraceFinishTime(format string, a ...interface{}) {
 	defer i.Unlock()
 
 	if i.data.tracer != nil {
-		i.data.tracer.LazyPrintf(time.Now().Sub(i.data.localStartTime).String()+" : "+format, a...)
+		i.data.tracer.LazyPrintf(time.Since(i.data.localStartTime).String()+" : "+format, a...)
 		i.data.localStartTime = time.Now()
 	}
 }

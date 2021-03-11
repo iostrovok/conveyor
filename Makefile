@@ -56,7 +56,7 @@ tests-priorityqueue:
 	@echo "Run race test for queues/priorityqueue"
 	cd $(LOCDIR)/queues/priorityqueue && $(DIR) $(GODEBUG) go test -cover -race ./
 
-test: test-std test-stack tests-priorityqueue test-workers
+test: test-std test-stack tests-priorityqueue test-workers tests-top
 	@echo "======================================================================"
 	@echo "----"
 	@echo "Run race test for ./item/..."
@@ -70,6 +70,8 @@ test: test-std test-stack tests-priorityqueue test-workers
 	@echo "----"
 	@echo "Run race test for ./tracer/..."
 	cd $(LOCDIR)/tracer/ && $(DIR) $(GODEBUG) go test -cover -race ./
+
+tests-top:
 	@echo "----"
 	@echo "Run race test for ./"
 	cd $(LOCDIR)/ && $(DIR) $(GODEBUG) go test -cover -race ./

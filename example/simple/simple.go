@@ -109,7 +109,6 @@ type MySimpleHandler struct {
 
 	counter     int
 	sleepSecond int
-	id          string
 	name        faces.Name
 }
 

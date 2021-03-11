@@ -56,7 +56,7 @@ func (s *testSuite) TestNeedToSkip(c *C) {
 }
 
 func (s *testSuite) TestNillContex(c *C) {
-	item := New(nil, nil)
+	item := New(context.Background(), nil)
 	c.Assert(item, NotNil)
 }
 

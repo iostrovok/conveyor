@@ -58,13 +58,9 @@ func dialOption() []grpc.DialOption {
 type SlaveNode struct {
 	sync.RWMutex
 
-	conn                    *grpc.ClientConn
-	client                  nodes.MasterNodeClient
-	lastConnectError        error
-	host, clusterID, nodeID string
-
-	data    []string
-	isError bool
+	conn   *grpc.ClientConn
+	client nodes.MasterNodeClient
+	host   string
 }
 
 func New(host string) (*SlaveNode, error) {

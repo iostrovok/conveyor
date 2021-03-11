@@ -15,8 +15,6 @@ type Input struct {
 	tracer   faces.ITrace
 	priority *int
 	name     faces.Name
-
-	testSuffix string
 }
 
 func New() faces.IInput {

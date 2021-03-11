@@ -218,7 +218,7 @@ func (c *Conveyor) _runRes(it faces.IItem) (interface{}, error) {
 	}
 
 	// we never will be here
-	return nil, nil
+	//return nil, nil
 }
 
 // SetDefaultPriority sets the priority of items.
@@ -258,7 +258,9 @@ func (c *Conveyor) sendToMasterNode() {
 	}
 
 	// firstWorkerManager
-	c.data.slaveNode.Send(context.Background(), c.Statistic())
+	if _, err := c.data.slaveNode.Send(context.Background(), c.Statistic()); err != nil {
+		log.Printf("slaveNode.Send.err: %s\n", err.Error())
+	}
 
 	go func(ctx context.Context) {
 		for {
@@ -401,11 +403,15 @@ func (c *Conveyor) Start(ctx context.Context) error {
 
 	// adds default error manager if it's necessary
 	if c.data.firstErrorManager == nil {
-		c.AddErrorHandler(defaultErrorName, 1, 2, faces.MakeEmptyHandler)
+		if err := c.AddErrorHandler(defaultErrorName, 1, 2, faces.MakeEmptyHandler); err != nil {
+			return err
+		}
 	}
 
 	if c.data.userFinalManager == nil {
-		c.AddFinalHandler(defaultFinalName, 1, 2, faces.MakeEmptyHandler)
+		if err := c.AddFinalHandler(defaultFinalName, 1, 2, faces.MakeEmptyHandler); err != nil {
+			return err
+		}
 	}
 
 	c.data.Lock()
@@ -469,8 +475,6 @@ func (c *Conveyor) Stop() {
 		mg.Stop()
 		mg = mg.GetNextManager()
 	}
-
-	c.data.cancelContext()
 }
 
 // WaitAndStop waits while all handler are finished and exits.
@@ -494,7 +498,7 @@ func (c *Conveyor) WaitAndStop() {
 	// lastWorkerManager actions
 	if c.data.slaveNode != nil {
 		// ignore all errors
-		c.data.slaveNode.Send(context.Background(), c.Statistic())
+		_, _ = c.data.slaveNode.Send(context.Background(), c.Statistic())
 	}
 
 	c.data.cancelContext()
