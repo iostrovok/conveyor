@@ -1,7 +1,8 @@
+package tracer
+
 /*
 	Package supports the simple realization of ITrace.
 */
-package tracer
 
 import (
 	"fmt"
@@ -33,7 +34,7 @@ func (t *Trace) LazyPrintf(format string, a ...interface{}) {
 	t.data = append(t.data, fmt.Sprintf(format, a...))
 }
 
-// SetError sets that output has prefix "ERROR: "
+// SetError sets that output has prefix "ERROR: ".
 func (t *Trace) SetError() {
 	t.Lock()
 	defer t.Unlock()
@@ -48,7 +49,6 @@ func (t *Trace) Flush() {
 
 // ForceFlush prints collected data.
 func (t *Trace) ForceFlush() {
-
 	out := ""
 	t.Lock()
 	if len(t.data) > 0 {

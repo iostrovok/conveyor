@@ -331,7 +331,7 @@ func (s *testSuite) TestSyntax(c *C) {
 	myMaster := conveyor.NewTest(20, faces.ChanStack, "my-app", to)
 	c.Assert(buildConveyor(myMaster), IsNil)
 	err := myMaster.Start(context.Background())
-	c.Assert(err, NotNil)
+	c.Assert(err, IsNil)
 
 	for i := 0; i < total; i++ {
 

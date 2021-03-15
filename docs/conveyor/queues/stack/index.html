@@ -7,15 +7,15 @@
 
   <title>stack - Go Documentation Server</title>
 
-<link type="text/css" rel="stylesheet" href="../../../lib/godoc/style.css">
+<link type="text/css" rel="stylesheet" href="../../../../../../../../lib/godoc/style.css">
 
 <script>window.initFuncs = [];</script>
-<script src="../../../lib/godoc/jquery.js" defer></script>
+<script src="../../../../../../../../lib/godoc/jquery.js" defer></script>
 
 
 
 <script>var goVersion = "go1.15.2";</script>
-<script src="../../../lib/godoc/godocs.js" defer></script>
+<script src="../../../../../../../../lib/godoc/godocs.js" defer></script>
 </head>
 <body>
 
@@ -93,10 +93,7 @@
 			</div>
 			<div class="expanded">
 				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
-				<p>
-The package support the stack queue LIFO (or FILO) for using them in conveyor.
-</p>
-
+				
 				
 			</div>
 		</div>
@@ -127,7 +124,7 @@ The package support the stack queue LIFO (or FILO) for using them in conveyor.
 				<dd><a href="index.html#Stack">type Stack</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#Init">func Init(limit int, ctx context.Context) *Stack</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#Init">func Init(ctx context.Context, limit int) *Stack</a></dd>
 				
 				
 					
@@ -181,14 +178,14 @@ The package support the stack queue LIFO (or FILO) for using them in conveyor.
 		
 			
 			
-			<h2 id="New">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=532:564#L29">New</a>
+			<h2 id="New">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=497:529#L23">New</a>
 				<a class="permalink" href="index.html#New">&#xb6;</a>
 				
 				
 			</h2>
-			<pre>func New(length <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>) <a href="../../../../faces/index.html">faces</a>.<a href="../../faces/index.html#IChan">IChan</a></pre>
+			<pre>func New(length <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>) <a href="../../../../../../faces/index.html">faces</a>.<a href="../../faces/index.html#IChan">IChan</a></pre>
 			<p>
-Create a new stack
+Create a new stack.
 </p>
 
 			
@@ -198,7 +195,7 @@ Create a new stack
 		
 			
 			
-			<h2 id="IStack">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=232:325#L8">IStack</a>
+			<h2 id="IStack">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=221:314#L3">IStack</a>
 				<a class="permalink" href="index.html#IStack">&#xb6;</a>
 				
 				
@@ -224,7 +221,7 @@ Create a new stack
 		
 			
 			
-			<h2 id="Stack">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=327:508#L14">Stack</a>
+			<h2 id="Stack">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=316:472#L9">Stack</a>
 				<a class="permalink" href="index.html#Stack">&#xb6;</a>
 				
 				
@@ -246,12 +243,12 @@ Create a new stack
 
 			
 				
-				<h3 id="Init">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=613:661#L33">Init</a>
+				<h3 id="Init">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=578:626#L27">Init</a>
 					<a class="permalink" href="index.html#Init">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func Init(limit <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>, ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>) *<a href="index.html#Stack">Stack</a></pre>
+				<pre>func Init(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, limit <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>) *<a href="index.html#Stack">Stack</a></pre>
 				
 				
 				
@@ -259,38 +256,38 @@ Create a new stack
 
 			
 				
-				<h3 id="Stack.ChanIn">func (*Stack) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=1404:1445#L78">ChanIn</a>
+				<h3 id="Stack.ChanIn">func (*Stack) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=1386:1427#L71">ChanIn</a>
 					<a class="permalink" href="index.html#Stack.ChanIn">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (stack *<a href="index.html#Stack">Stack</a>) ChanIn() <a href="../../../../faces/index.html">faces</a>.<a href="../../faces/index.html#MainCh">MainCh</a></pre>
+				<pre>func (stack *<a href="index.html#Stack">Stack</a>) ChanIn() <a href="../../../../../../faces/index.html">faces</a>.<a href="../../faces/index.html#MainCh">MainCh</a></pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="Stack.ChanOut">func (*Stack) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=1470:1512#L82">ChanOut</a>
+				<h3 id="Stack.ChanOut">func (*Stack) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=1452:1494#L75">ChanOut</a>
 					<a class="permalink" href="index.html#Stack.ChanOut">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (stack *<a href="index.html#Stack">Stack</a>) ChanOut() <a href="../../../../faces/index.html">faces</a>.<a href="../../faces/index.html#MainCh">MainCh</a></pre>
+				<pre>func (stack *<a href="index.html#Stack">Stack</a>) ChanOut() <a href="../../../../../../faces/index.html">faces</a>.<a href="../../faces/index.html#MainCh">MainCh</a></pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="Stack.Close">func (*Stack) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=1025:1052#L57">Close</a>
+				<h3 id="Stack.Close">func (*Stack) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=990:1017#L50">Close</a>
 					<a class="permalink" href="index.html#Stack.Close">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func (stack *<a href="index.html#Stack">Stack</a>) Close()</pre>
 				<p>
-Close()
+Close().
 </p>
 
 				
@@ -298,14 +295,14 @@ Close()
 				
 			
 				
-				<h3 id="Stack.Count">func (*Stack) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=1157:1188#L64">Count</a>
+				<h3 id="Stack.Count">func (*Stack) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=1123:1154#L57">Count</a>
 					<a class="permalink" href="index.html#Stack.Count">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func (stack *<a href="index.html#Stack">Stack</a>) Count() <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a></pre>
 				<p>
-Returns the number of items in the stack
+Returns the number of items in the stack.
 </p>
 
 				
@@ -313,26 +310,26 @@ Returns the number of items in the stack
 				
 			
 				
-				<h3 id="Stack.Info">func (*Stack) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=2318:2360#L141">Info</a>
+				<h3 id="Stack.Info">func (*Stack) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=2293:2335#L134">Info</a>
 					<a class="permalink" href="index.html#Stack.Info">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (stack *<a href="index.html#Stack">Stack</a>) Info() *<a href="../../../../protobuf/go/nodes/index.html">nodes</a>.<a href="../../protobuf/go/nodes/index.html#ChanData">ChanData</a></pre>
+				<pre>func (stack *<a href="index.html#Stack">Stack</a>) Info() *<a href="../../../../../../protobuf/go/nodes/index.html">nodes</a>.<a href="../../protobuf/go/nodes/index.html#ChanData">ChanData</a></pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="Stack.IsActive">func (*Stack) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=1225:1260#L69">IsActive</a>
+				<h3 id="Stack.IsActive">func (*Stack) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=1211:1246#L62">IsActive</a>
 					<a class="permalink" href="index.html#Stack.IsActive">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func (stack *<a href="index.html#Stack">Stack</a>) IsActive() <a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a></pre>
 				<p>
-IsActive
+IsActive is a simple getter.
 </p>
 
 				
@@ -340,14 +337,14 @@ IsActive
 				
 			
 				
-				<h3 id="Stack.Len">func (*Stack) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=1344:1373#L74">Len</a>
+				<h3 id="Stack.Len">func (*Stack) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=1331:1360#L67">Len</a>
 					<a class="permalink" href="index.html#Stack.Len">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func (stack *<a href="index.html#Stack">Stack</a>) Len() <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a></pre>
 				<p>
-Returns the max available number items in the stack
+Returns the max available number items in the stack.
 </p>
 
 				
@@ -355,12 +352,12 @@ Returns the max available number items in the stack
 				
 			
 				
-				<h3 id="Stack.Push">func (*Stack) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=946:988#L52">Push</a>
+				<h3 id="Stack.Push">func (*Stack) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/stack/stack.go?s=910:952#L45">Push</a>
 					<a class="permalink" href="index.html#Stack.Push">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (stack *<a href="index.html#Stack">Stack</a>) Push(item <a href="../../../../faces/index.html">faces</a>.<a href="../../faces/index.html#IItem">IItem</a>)</pre>
+				<pre>func (stack *<a href="index.html#Stack">Stack</a>) Push(item <a href="../../../../../../faces/index.html">faces</a>.<a href="../../faces/index.html#IItem">IItem</a>)</pre>
 				
 				
 				

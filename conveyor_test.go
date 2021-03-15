@@ -1,4 +1,4 @@
-package conveyor
+package conveyor_test
 
 import (
 	. "github.com/iostrovok/check"

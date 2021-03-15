@@ -1,7 +1,9 @@
-// Just for fun - simple script which grabs documentation from "godoc" local server
 package main
 
 /*
+
+	Just for fun - simple script which grabs documentation from "godoc" local server
+
 	Simple script for testing go-log & go-log/event
 */
 
@@ -20,10 +22,11 @@ import (
 	"time"
 )
 
-var rg = regexp.MustCompile(`(href|src)="(../)+`)
+const (
+	reducePathLen = 2
+)
 
 func filepathDir() string {
-
 	dir := os.Getenv("CURDIR")
 	if dir == "" {
 		log.Fatal("empty CURDIR")
@@ -38,7 +41,6 @@ func filepathDir() string {
 }
 
 func main() {
-
 	curDir := filepathDir()
 	docFullDir := filepath.Join(curDir, "docs")
 	goModFile := filepath.Join(curDir, "go.mod")
@@ -47,6 +49,7 @@ func main() {
 	if err := os.RemoveAll(docFullDir); err != nil {
 		log.Printf("rm error: %v\n", err)
 	}
+
 	if err := os.RemoveAll(tmpDir); err != nil {
 		log.Printf("rm error: %v\n", err)
 	}
@@ -55,6 +58,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	defer file.Close()
 
 	module := ""
@@ -64,6 +68,7 @@ func main() {
 		if strings.HasPrefix(line, "module ") {
 			tmp := strings.Split(line, " ")
 			module = tmp[1]
+
 			break
 		}
 	}
@@ -107,7 +112,8 @@ func main() {
 		log.Fatalf("mv error: %v\n", err)
 	}
 
-	if err := os.Rename(filepath.Join(tmpDir, "pkg", module+".html"), filepath.Join(docFullDir, pkgName, "index.html")); err != nil {
+	if err := os.Rename(filepath.Join(tmpDir, "pkg", module+".html"),
+		filepath.Join(docFullDir, pkgName, "index.html")); err != nil {
 		log.Fatalf("mv error: %v\n", err)
 	}
 
@@ -122,9 +128,11 @@ func main() {
 	cleanAllFiles(curDir, docFullDir, pkgName)
 }
 
-func cleanOneFile(path, pkgName string, info os.FileInfo) error {
+func cleanOneFile(path, pkgName string) error {
+	// rg is the constant variable
+	rg := regexp.MustCompile(`(href|src)="(../)+`)
 
-	level := len(strings.Split(path, "/")) - 2
+	level := len(strings.Split(path, "/")) - reducePathLen
 
 	file, err := os.Open(path)
 	if err != nil {
@@ -138,11 +146,12 @@ func cleanOneFile(path, pkgName string, info os.FileInfo) error {
 		res := rg.FindAllString(line, -1)
 		if len(res) == 0 {
 			out += line + "\n"
+
 			continue
 		}
 
 		for _, oldSrc := range res {
-			newSrc := strings.Trim(oldSrc, "../") + strings.Repeat("../", level)
+			newSrc := strings.TrimPrefix(strings.TrimSuffix(oldSrc, "../"), "../") + strings.Repeat("../", level)
 			line = strings.Replace(line, oldSrc, newSrc, 1)
 		}
 		out += line + "\n"
@@ -161,10 +170,10 @@ func cleanOneFile(path, pkgName string, info os.FileInfo) error {
 }
 
 func cleanAllFiles(curDir, docFullDir, pkgName string) {
-
-	err := filepath.Walk(docFullDir, func(path string, info os.FileInfo, err error) error {
+	f := func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			log.Fatalf("prevent panic by handling failure accessing a path %q: %v\n", path, err)
+
 			return err
 		}
 
@@ -173,12 +182,12 @@ func cleanAllFiles(curDir, docFullDir, pkgName string) {
 		}
 
 		path = strings.Replace(path, curDir+"/", "", 1)
-
 		log.Printf("visited file or dir: \x1b[35m%q\x1b[0m\n", path)
-		return cleanOneFile(path, pkgName, info)
-	})
 
-	if err != nil {
+		return cleanOneFile(path, pkgName)
+	}
+
+	if err := filepath.Walk(docFullDir, f); err != nil {
 		log.Fatalf("error walking the path %q: %v\n", docFullDir, err)
 	}
 }

@@ -1,7 +1,8 @@
+package workers
+
 /*
 	Internal package. Package realizes the IWorker interface.
 */
-package workers
 
 import (
 	"context"
@@ -16,24 +17,27 @@ import (
 	"github.com/iostrovok/conveyor/testobject"
 )
 
-/*
-	....
-*/
+const (
+	workerStopChLength = 2
+	hoursInYear        = 24 * 356 * 100
+)
 
 type Worker struct {
 	sync.RWMutex
 
+	isLast        bool
+	isStarted     bool
+	globalStop    bool
+	id            string
+	activeWorkers *int32
+
+	stopCh chan struct{}
+	wg     *sync.WaitGroup
+
 	name    faces.Name
-	id      string
 	in, out faces.IChan
 	errCh   faces.IChan
 
-	isStarted  bool
-	globalStop bool
-	stopCh     chan struct{}
-	wg         *sync.WaitGroup
-
-	isLast          bool
 	typ             faces.ManagerType
 	nextManagerName faces.Name
 
@@ -41,15 +45,12 @@ type Worker struct {
 	handler   faces.IHandler
 	tracer    faces.ITrace
 
-	activeWorkers *int32
-
 	// need to use in test mode
 	testObject faces.ITestObject
 }
 
 func NewWorker(id string, name faces.Name, in, out, errCh faces.IChan, giveBirth faces.GiveBirth,
 	wg *sync.WaitGroup, tr faces.ITrace, activeWorkers *int32) (faces.IWorker, error) {
-
 	handler, err := giveBirth(name)
 	if err != nil {
 		return nil, err
@@ -66,7 +67,7 @@ func NewWorker(id string, name faces.Name, in, out, errCh faces.IChan, giveBirth
 		wg:            wg,
 		activeWorkers: activeWorkers,
 
-		stopCh: make(chan struct{}, 2),
+		stopCh: make(chan struct{}, workerStopChLength),
 		tracer: tr,
 
 		testObject: testobject.Empty(),
@@ -115,13 +116,14 @@ func (w *Worker) Stop() {
 	}
 }
 
-func (w *Worker) logTrace(format string, a ...interface{}) {
+func (w *Worker) logf(format string, a ...interface{}) {
 	if w.tracer != nil {
 		w.tracer.LazyPrintf(format, a...)
 	}
 }
 
 func (w *Worker) startHandler(ctx context.Context) error {
+	var err error
 
 	if w.testObject.IsTestMode() {
 		values := []reflect.Value{reflect.ValueOf(ctx), reflect.ValueOf(w.testObject.TestObject())}
@@ -129,19 +131,21 @@ func (w *Worker) startHandler(ctx context.Context) error {
 
 		if _, ok := st.MethodByName("StartTest_" + w.testObject.Suffix()); ok {
 			values := reflect.ValueOf(w.handler).MethodByName("StartTest_" + w.testObject.Suffix()).Call(values)
-			var err error
+
 			if !values[0].IsNil() {
 				err = values[0].Interface().(error)
 			}
+
 			return err
 		}
 
 		if _, ok := st.MethodByName("StartTest"); ok {
 			values := reflect.ValueOf(w.handler).MethodByName("StartTest").Call(values)
-			var err error
+
 			if !values[0].IsNil() {
 				err = values[0].Interface().(error)
 			}
+
 			return err
 		}
 	}
@@ -151,7 +155,6 @@ func (w *Worker) startHandler(ctx context.Context) error {
 }
 
 func (w *Worker) Start(ctx context.Context) error {
-
 	if err := w.startHandler(ctx); err != nil {
 		return err
 	}
@@ -162,18 +165,19 @@ func (w *Worker) Start(ctx context.Context) error {
 }
 
 func (w *Worker) stopHandler(ctx context.Context) {
-
 	if w.testObject.IsTestMode() {
 		values := []reflect.Value{reflect.ValueOf(ctx), reflect.ValueOf(w.testObject.TestObject())}
 		st := reflect.TypeOf(w.handler)
 
 		if _, ok := st.MethodByName("StopTest_" + w.testObject.Suffix()); ok {
 			reflect.ValueOf(w.handler).MethodByName("StopTest_" + w.testObject.Suffix()).Call(values)
+
 			return
 		}
 
 		if _, ok := st.MethodByName("StopTest"); ok {
 			reflect.ValueOf(w.handler).MethodByName("StopTest").Call(values)
+
 			return
 		}
 	}
@@ -183,17 +187,14 @@ func (w *Worker) stopHandler(ctx context.Context) {
 }
 
 func (w *Worker) job(ctx context.Context) {
-
 	w.wg.Add(1)
-	go func() {
 
-		dur := w.handler.TickerDuration()
-		if dur == time.Duration(0) {
-			dur = time.Hour * 24 * 355 * 100 // 100 years by default
-		}
-		ticker := time.NewTicker(dur)
+	dur := w.handler.TickerDuration()
+	if dur == time.Duration(0) {
+		dur = time.Hour * hoursInYear // 100 years by default
+	}
 
-		w.isStarted = true
+	go func(ticker *time.Ticker) {
 		defer func() {
 			ticker.Stop()
 			w.stopHandler(ctx)
@@ -201,7 +202,8 @@ func (w *Worker) job(ctx context.Context) {
 			w.wg.Done()
 		}()
 
-		w.logTrace("%s is started", w.id)
+		w.isStarted = true
+		w.logf("%s is started", w.id)
 
 		for {
 			if w.globalStop {
@@ -210,55 +212,62 @@ func (w *Worker) job(ctx context.Context) {
 
 			select {
 			case <-ctx.Done(): // global context
-				w.logTrace("%s is stopped by global context", w.id)
+				w.logf("%s is stopped by global context", w.id)
+
 				return
 			case <-w.stopCh:
-				w.logTrace("%s is stopped by message", w.id)
+				w.logf("%s is stopped by message", w.id)
+
 				return
 			case <-ticker.C:
-				w.logTrace("%s ticker is running", w.id)
+				w.logf("%s ticker is running", w.id)
 				w.handler.TickerRun(ctx)
 			case item, ok := <-w.in.ChanOut():
 				if !ok {
-					w.logTrace("%s channel in is close", w.id)
+					w.logf("%s channel in is close", w.id)
+
 					return
 				}
+
 				item.ReceivedFromChannel()
 				item.BeforeProcess(w.name)
-				item.LogTraceFinishTime("[%s] time in chan", w.name)
+				item.LogTraceFinishTimef("[%s] time in chan", w.name)
 				w.process(ctx, item)
 			}
 		}
-	}()
+	}(time.NewTicker(dur))
 }
 
 func (w *Worker) process(ctx context.Context, item faces.IItem) {
-
 	// set up which handler was last.
 	item.SetLastHandler(w.name)
 
 	// check that item should be skipped
 	find, err := item.NeedToSkip(w)
-
 	if err != nil {
-		//
 		// no more handlers after that. Fix error.
 		logError(w.name, err, item)
 		item.AfterProcess(w.name, err)
+
 		if !w.isLast && w.typ != faces.FinalManagerType {
 			item.PushedToChannel(faces.ErrorName)
 		}
+
 		pushToNotNilChan(w.errCh, item)
+
 		return
 	}
 
 	if find {
 		item.AfterProcess(w.name, err)
+
 		// needed handler is not found
 		if !w.isLast && w.typ != faces.FinalManagerType {
 			item.PushedToChannel(w.nextManagerName)
 		}
+
 		pushToNotNilChan(w.out, item)
+
 		return
 	}
 
@@ -286,27 +295,31 @@ func doitWithTest(internalErr chan error, handler faces.IHandler, item faces.IIt
 		}
 	}()
 
+	var err error
+
 	values := []reflect.Value{reflect.ValueOf(item), reflect.ValueOf(item.GetTestObject().TestObject())}
 
 	suffix := item.GetTestObject().Suffix()
 	st := reflect.TypeOf(handler)
+
 	if _, ok := st.MethodByName("RunTest_" + suffix); ok {
 		values := reflect.ValueOf(handler).MethodByName("RunTest_" + suffix).Call(values)
-		var err error
+
 		if !values[0].IsNil() {
 			err = values[0].Interface().(error)
 		}
 		internalErr <- err
+
 		return
 	}
 
 	if _, ok := st.MethodByName("RunTest"); ok {
 		values := reflect.ValueOf(handler).MethodByName("RunTest").Call(values)
-		var err error
 		if !values[0].IsNil() {
 			err = values[0].Interface().(error)
 		}
 		internalErr <- err
+
 		return
 	}
 
@@ -314,7 +327,6 @@ func doitWithTest(internalErr chan error, handler faces.IHandler, item faces.IIt
 }
 
 func (w *Worker) run(ctx context.Context, item faces.IItem) error {
-
 	atomic.AddInt32(w.activeWorkers, 1)
 	defer atomic.AddInt32(w.activeWorkers, -1)
 
@@ -329,34 +341,36 @@ func (w *Worker) run(ctx context.Context, item faces.IItem) error {
 	var err error
 	select {
 	case <-ctx.Done():
-		w.globalStop = true
-		item.Cancel()
 		err = errors.New(w.id + " processing is stopped by global context")
+
+		// whole process is stopped. Factor doesn't work more.
+		w.globalStop = true
+
+		// stops current item on conveyor
+		item.Cancel()
 	case <-item.GetContext().Done():
-		// TODO it's not obviously, customer handler should check it.
+		// it's not obviously, customer handler should check it.
 		err = errors.New(w.id + " processing is stopped by item context")
-	case err = <-internalErr:
-		/* nothing */
+	case err = <-internalErr: /* does nothing */
 	}
 
 	return err
 }
 
-// logError fix log/debug/trace
+// logError fix log/debug/trace.
 func logError(name faces.Name, err error, item faces.IItem) {
-
 	if err == nil {
-		item.LogTraceFinishTime("[%s] success", name)
+		item.LogTraceFinishTimef("[%s] success", name)
+
 		return
 	}
 
-	item.LogTraceFinishTime("[%s] has an error", name)
+	item.LogTraceFinishTimef("[%s] has an error", name)
 	item.SetHandlerError(name)
 	item.AddError(err)
 }
 
 func (w *Worker) debriefingOfFlight(err error, item faces.IItem) {
-
 	switch w.typ {
 	case faces.FinalManagerType:
 		if !w.isLast {
@@ -366,7 +380,7 @@ func (w *Worker) debriefingOfFlight(err error, item faces.IItem) {
 	case faces.ErrorManagerType:
 		item.PushedToChannel(faces.ErrorName)
 		pushToNotNilChan(w.out, item)
-	default: //  faces.WorkerManagerType
+	case faces.WorkerManagerType:
 		if err == nil {
 			item.PushedToChannel(w.nextManagerName)
 			pushToNotNilChan(w.out, item)

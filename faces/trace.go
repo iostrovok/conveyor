@@ -1,11 +1,14 @@
 package faces
 
-/*
-	....
-*/
+// File describes the trace interface.
 
-const EmptySkipName Name = ""
-const SkipAll Name = "###SKIP_EVERYTHING_BY_THE_END"
+const (
+	// EmptySkipName is constant for skipped handlers.
+	EmptySkipName Name = ""
+
+	// SkipAll is constant to skip all rest handlers.
+	SkipAll Name = "###SKIP_EVERYTHING_BY_THE_END"
+)
 
 type ITrace interface {
 	// LazyPrintf evaluates its arguments with fmt.Sprintf each time the
@@ -16,9 +19,9 @@ type ITrace interface {
 	// SetError declares that this trace resulted in an error.
 	SetError()
 
-	// Flush will call at the end on cycle
+	// Flush will call at the end on cycle.
 	Flush()
 
-	// Flush will call at the end on cycle
+	// Flush will call at the end on cycle.
 	ForceFlush()
 }

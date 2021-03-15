@@ -1,8 +1,11 @@
-package stack
+package stack_test
+
+// 	Test package for stack.
 
 import (
 	"context"
-	"math/rand"
+	"crypto/rand"
+	"math/big"
 	"sync"
 	"testing"
 	"time"
@@ -13,11 +16,8 @@ import (
 	_ "github.com/golang/mock/mockgen/model"
 
 	"github.com/iostrovok/conveyor/item"
+	"github.com/iostrovok/conveyor/queues/stack"
 )
-
-func init() {
-	rand.Seed(time.Now().Unix())
-}
 
 type testSuite struct{}
 
@@ -25,11 +25,13 @@ var _ = Suite(&testSuite{})
 
 func TestService(t *testing.T) { TestingT(t) }
 
-func (s *testSuite) TestStepBystep(c *C) {
+const (
+	lastID = 100
+)
 
-	lastId := 100
-	st := Init(lastId+10, context.Background())
-	for i := 0; i < lastId; i++ {
+func (s *testSuite) TestStepBystep(c *C) {
+	st := stack.Init(context.Background(), lastID+10)
+	for i := 0; i < lastID; i++ {
 		it := item.New(context.Background(), nil)
 		it.SetID(int64(i))
 		st.ChanIn() <- it
@@ -37,27 +39,25 @@ func (s *testSuite) TestStepBystep(c *C) {
 
 	success, total := readTestData(st)
 
-	c.Assert(total, Equals, lastId)
+	c.Assert(total, Equals, lastID)
 	c.Logf("success: %d, total: %d\n", success, total)
 	c.Assert(float32(success) > 0.95*float32(total), Equals, true)
 }
 
 func (s *testSuite) TestInTheSameTime(c *C) {
-
-	lastId := 100
-	st := Init(lastId+10, context.Background())
+	st := stack.Init(context.Background(), lastID+10)
 
 	wg := &sync.WaitGroup{}
 	wg.Add(2)
 	go func() {
 		defer wg.Done()
-		for i := 0; i < lastId; i++ {
+		for i := 0; i < lastID; i++ {
 			it := item.New(context.Background(), nil)
 			it.SetID(int64(i))
 			st.ChanIn() <- it
-			time.Sleep(time.Duration(rand.Intn(5)) * time.Millisecond)
+			k, _ := rand.Int(rand.Reader, big.NewInt(5))
+			time.Sleep(time.Duration(k.Int64()) * time.Millisecond)
 		}
-
 	}()
 
 	success, total := 0, 0
@@ -75,6 +75,7 @@ func (s *testSuite) TestInTheSameTime(c *C) {
 				id := int(it.GetID())
 				if last == -1 {
 					last = id
+
 					continue
 				}
 
@@ -83,7 +84,8 @@ func (s *testSuite) TestInTheSameTime(c *C) {
 				}
 
 				last = id
-				time.Sleep(time.Duration(rand.Intn(100)) * time.Millisecond)
+				k, _ := rand.Int(rand.Reader, big.NewInt(100))
+				time.Sleep(time.Duration(k.Int64()) * time.Millisecond)
 
 			case <-time.After(5 * time.Second):
 				return
@@ -93,12 +95,12 @@ func (s *testSuite) TestInTheSameTime(c *C) {
 
 	wg.Wait()
 
-	c.Assert(total, Equals, lastId)
+	c.Assert(total, Equals, lastID)
 	c.Logf("success: %d, total: %d\n", success, total)
 	c.Assert(float32(success) >= 0.90*float32(total), Equals, true)
 }
 
-func readTestData(st *Stack) (int, int) {
+func readTestData(st *stack.Stack) (int, int) {
 	success := 0
 	last := -1
 	total := 0
@@ -113,6 +115,7 @@ func readTestData(st *Stack) (int, int) {
 			id := int(it.GetID())
 			if last == -1 {
 				last = id
+
 				continue
 			}
 
@@ -126,6 +129,4 @@ func readTestData(st *Stack) (int, int) {
 			return success, total
 		}
 	}
-
-	return success, total
 }

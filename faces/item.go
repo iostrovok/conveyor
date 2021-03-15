@@ -31,8 +31,8 @@ type IItem interface {
 	GetSkipNames() []Name
 	NeedToSkip(worker IWorker) (bool, error)
 
-	LogTraceFinishTime(format string, a ...interface{})
-	LogTrace(format string, a ...interface{})
+	LogTraceFinishTimef(format string, a ...interface{})
+	LogTracef(format string, a ...interface{})
 
 	Start()
 	Cancel()
