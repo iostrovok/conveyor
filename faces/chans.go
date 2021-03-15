@@ -1,16 +1,17 @@
 package faces
 
+// File describes the chan interface.
+
 import (
 	"github.com/iostrovok/conveyor/protobuf/go/nodes"
 )
 
-/*
-	File describes the chan interface.
-
-*/
-
-type MainCh chan IItem
-type ChanType nodes.ChanType
+type (
+	// MainCh is a global type.
+	MainCh chan IItem
+	// ChanType is a global type.
+	ChanType nodes.ChanType
+)
 
 const (
 	ChanStdGo        = ChanType(nodes.ChanType_CHAN_STD_GO)

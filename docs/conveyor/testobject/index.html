@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#375EAB">
 
-  <title>workerscounter - Go Documentation Server</title>
+  <title>testobject - Go Documentation Server</title>
 
 <link type="text/css" rel="stylesheet" href="../../../../../../lib/godoc/style.css">
 
@@ -43,7 +43,7 @@
 
 
   <h1>
-    Package workerscounter
+    Package testobject
     <span class="text-muted"></span>
   </h1>
 
@@ -77,7 +77,7 @@
 		
 		<div id="short-nav">
 			<dl>
-			<dd><code>import "github.com/iostrovok/conveyor/workerscounter"</code></dd>
+			<dd><code>import "github.com/iostrovok/conveyor/testobject"</code></dd>
 			</dl>
 			<dl>
 			<dd><a href="index.html#pkg-overview" class="overviewLink">Overview</a></dd>
@@ -94,7 +94,7 @@
 			<div class="expanded">
 				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
 				<p>
-WorkersCounter rules the number of current worked handlers.
+Package realizes the IItem interface.
 </p>
 
 				
@@ -115,15 +115,24 @@ WorkersCounter rules the number of current worked handlers.
 			
 			
 				
-				<dd><a href="index.html#NewWorkersCounter">func NewWorkersCounter() faces.IWorkersCounter</a></dd>
+				<dd><a href="index.html#Empty">func Empty() faces.ITestObject</a></dd>
+			
+				
+				<dd><a href="index.html#New">func New(mode bool, object *check.C, suffix string) faces.ITestObject</a></dd>
 			
 			
 				
-				<dd><a href="index.html#WorkersCounter">type WorkersCounter</a></dd>
+				<dd><a href="index.html#TestObject">type TestObject</a></dd>
 				
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#WorkersCounter.Check">func (m *WorkersCounter) Check(mc *nodes.ManagerData) (*nodes.ManagerAction, error)</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#TestObject.IsTestMode">func (ob *TestObject) IsTestMode() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#TestObject.Suffix">func (ob *TestObject) Suffix() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#TestObject.TestObject">func (ob *TestObject) TestObject() *check.C</a></dd>
 				
 			
 			
@@ -137,7 +146,7 @@ WorkersCounter rules the number of current worked handlers.
 			<p>
 			<span style="font-size:90%">
 			
-				<a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workerscounter/workerscounter.go">workerscounter.go</a>
+				<a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/testobject/testobject.go">testobject.go</a>
 			
 			</span>
 			</p>
@@ -152,12 +161,25 @@ WorkersCounter rules the number of current worked handlers.
 		
 			
 			
-			<h2 id="NewWorkersCounter">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workerscounter/workerscounter.go?s=234:280#L6">NewWorkersCounter</a>
-				<a class="permalink" href="index.html#NewWorkersCounter">&#xb6;</a>
+			<h2 id="Empty">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/testobject/testobject.go?s=242:272#L10">Empty</a>
+				<a class="permalink" href="index.html#Empty">&#xb6;</a>
 				
 				
 			</h2>
-			<pre>func NewWorkersCounter() <a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#IWorkersCounter">IWorkersCounter</a></pre>
+			<pre>func Empty() <a href="../../../faces/index.html">faces</a>.<a href="../faces/index.html#ITestObject">ITestObject</a></pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="New">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/testobject/testobject.go?s=327:396#L17">New</a>
+				<a class="permalink" href="index.html#New">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func New(mode <a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a>, object *<a href="../../../../../../check/index.html">check</a>.<a href="../../check/index.html#C">C</a>, suffix <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a>) <a href="../faces/index.html">faces</a>.<a href="../faces/index.html#ITestObject">ITestObject</a></pre>
 			
 			
 			
@@ -166,13 +188,15 @@ WorkersCounter rules the number of current worked handlers.
 		
 			
 			
-			<h2 id="WorkersCounter">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workerscounter/workerscounter.go?s=202:232#L3">WorkersCounter</a>
-				<a class="permalink" href="index.html#WorkersCounter">&#xb6;</a>
+			<h2 id="TestObject">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/testobject/testobject.go?s=154:240#L2">TestObject</a>
+				<a class="permalink" href="index.html#TestObject">&#xb6;</a>
 				
 				
 			</h2>
 			
-			<pre>type WorkersCounter struct {
+			<pre>type TestObject struct {
+    <a href="http://127.0.0.1:6060/pkg/sync/">sync</a>.<a href="http://127.0.0.1:6060/pkg/sync/#RWMutex">RWMutex</a>
+    <span class="comment">// contains filtered or unexported fields</span>
 }
 </pre>
 
@@ -188,12 +212,36 @@ WorkersCounter rules the number of current worked handlers.
 
 			
 				
-				<h3 id="WorkersCounter.Check">func (*WorkersCounter) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/workerscounter/workerscounter.go?s=471:554#L19">Check</a>
-					<a class="permalink" href="index.html#WorkersCounter.Check">&#xb6;</a>
+				<h3 id="TestObject.IsTestMode">func (*TestObject) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/testobject/testobject.go?s=488:527#L26">IsTestMode</a>
+					<a class="permalink" href="index.html#TestObject.IsTestMode">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (m *<a href="index.html#WorkersCounter">WorkersCounter</a>) Check(mc *<a href="../../../../../protobuf/go/nodes/index.html">nodes</a>.<a href="../protobuf/go/nodes/index.html#ManagerData">ManagerData</a>) (*<a href="../protobuf/go/nodes/index.html">nodes</a>.<a href="../protobuf/go/nodes/index.html#ManagerAction">ManagerAction</a>, <a href="http://127.0.0.1:6060/pkg/builtin/#error">error</a>)</pre>
+				<pre>func (ob *<a href="index.html#TestObject">TestObject</a>) IsTestMode() <a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestObject.Suffix">func (*TestObject) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/testobject/testobject.go?s=615:652#L33">Suffix</a>
+					<a class="permalink" href="index.html#TestObject.Suffix">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (ob *<a href="index.html#TestObject">TestObject</a>) Suffix() <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="TestObject.TestObject">func (*TestObject) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/testobject/testobject.go?s=548:591#L29">TestObject</a>
+					<a class="permalink" href="index.html#TestObject.TestObject">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (ob *<a href="index.html#TestObject">TestObject</a>) TestObject() *<a href="../../../../check/index.html">check</a>.<a href="../../check/index.html#C">C</a></pre>
 				
 				
 				

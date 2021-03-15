@@ -28,6 +28,8 @@ const (
 	defaultPriority             = 0
 )
 
+const DefaultMetricPeriodDuration = 10 * time.Second
+
 type Conveyor struct {
 	data *data
 }
@@ -79,32 +81,34 @@ type data struct {
 
 func New(chanLen int, chanType faces.ChanType, name string) faces.IConveyor {
 	c := &Conveyor{}
+
 	return c.Init(chanLen, chanType, name, testobject.Empty())
 }
 
 func NewTest(chanLen int, chanType faces.ChanType, name string, testObject faces.ITestObject) faces.IConveyor {
 	c := &Conveyor{}
+
 	return c.Init(chanLen, chanType, name, testObject)
 }
 
-func (c *Conveyor) Init(chanLen int, chanType faces.ChanType, name string, testObject faces.ITestObject) faces.IConveyor {
+func (c *Conveyor) Init(chLen int, chType faces.ChanType, name string, testObject faces.ITestObject) faces.IConveyor {
 	if name == "" {
 		name = uuid.New().String()
 	}
 
-	if chanLen < 1 {
-		chanLen = 1
+	if chLen < 1 {
+		chLen = 1
 	}
 
 	c.data = &data{
 		clusterID:            name + "-" + strconv.FormatInt(time.Now().Unix(), 10),
 		name:                 name,
-		lengthChannel:        chanLen,
-		chanType:             chanType,
+		lengthChannel:        chLen,
+		chanType:             chType,
 		workerGroup:          &sync.WaitGroup{},
 		errorGroup:           &sync.WaitGroup{},
 		finalGroup:           &sync.WaitGroup{},
-		metricPeriodDuration: 10 * time.Second,
+		metricPeriodDuration: DefaultMetricPeriodDuration,
 
 		itemID: new(int64),
 
@@ -116,16 +120,16 @@ func (c *Conveyor) Init(chanLen int, chanType faces.ChanType, name string, testO
 		testObject:      testObject,
 	}
 
-	c.data.outCh = queues.New(chanLen, chanType)
-	c.data.inCh = queues.New(chanLen, chanType)
-	c.data.errCh = queues.New(chanLen, chanType)
+	c.data.outCh = queues.New(chLen, chType)
+	c.data.inCh = queues.New(chLen, chType)
+	c.data.errCh = queues.New(chLen, chType)
 
 	c.addSystemFinalHandler()
 
 	return c
 }
 
-// getItemFrommInput excavator IItem or create new
+// getItemFrommInput excavator IItem or create new.
 func (c *Conveyor) getItemFrommInput(i faces.IInput) faces.IItem {
 	ctx, tr, val, priorityRef, skipToName := i.Values()
 
@@ -193,11 +197,11 @@ func (c *Conveyor) RunResTest(i faces.IInput, testObject faces.ITestObject) (int
 // RunRes creates the new item over interface, sends to conveyor and returns result.
 func (c *Conveyor) RunRes(i faces.IInput) (interface{}, error) {
 	it := c.getItemFrommInput(i)
+
 	return c._runRes(it)
 }
 
 func (c *Conveyor) _runRes(it faces.IItem) (interface{}, error) {
-
 	ctx := it.GetContext()
 
 	ch := internalmanager.AddId(it.GetID(), ctx)
@@ -209,22 +213,20 @@ func (c *Conveyor) _runRes(it faces.IItem) (interface{}, error) {
 
 	select {
 	case <-ctx.Done():
+
 		return nil, errors.New("context is canceled in RunRes")
 	case item, ok := <-ch:
 		if !ok || item == nil {
 			return nil, errors.New("unexpected error: result channel is closed")
 		}
+
 		return item.Get(), item.GetError()
 	}
-
-	// we never will be here
-	return nil, nil
 }
 
 // SetDefaultPriority sets the priority of items.
-//
 // It makes sense if priority queue is used.
-// If priority is not set up it equals the 0 (defaultPriority constant)
+// If priority is not set up it equals the 0 (defaultPriority constant).
 func (c *Conveyor) SetDefaultPriority(defaultPriority int) {
 	c.data.defaultPriority = defaultPriority
 }
@@ -240,39 +242,38 @@ func (c *Conveyor) GetDefaultPriority() int {
 }
 
 // SetMasterNode sets the internet address  master node.
-// Master node allow to get information online about current conveyor
-// see more information github.com/iostrovok/conveyormaster
+// Master node allow to get information online about current conveyor.
+// see more information github.com/iostrovok/conveyormaster.
 func (c *Conveyor) SetMasterNode(addr string, masterNodePeriod time.Duration) {
 	c.data.masterNodeAddress = addr
 	c.data.masterNodePeriod = masterNodePeriod
 	if c.data.masterNodePeriod == 0 {
-		c.data.masterNodePeriod = 60 * time.Second
+		c.data.masterNodePeriod = time.Minute
 	}
 }
 
 // StartConnectMasterNode tries to connect to mater node with timeout.
 func (c *Conveyor) sendToMasterNode() {
-
 	if c.data.slaveNode == nil {
 		return
 	}
 
 	// firstWorkerManager
-	c.data.slaveNode.Send(context.Background(), c.Statistic())
+	if _, err := c.data.slaveNode.Send(context.Background(), c.Statistic()); err != nil {
+		log.Printf("slaveNode.Send.err: %s\n", err.Error())
+	}
 
 	go func(ctx context.Context) {
 		for {
-
 			select {
 			case <-ctx.Done():
 				return
 			case <-time.After(c.data.masterNodePeriod):
+				// TODO: result will use to update configuration online
 				_, err := c.data.slaveNode.Send(ctx, c.Statistic())
 				if err != nil {
 					log.Printf("slaveNode.Send.err: %s\n", err.Error())
 				}
-				// TODO: result will use to update configuration online
-				// fmt.Printf("slaveNode.Send.res: %+v\n", res)
 			}
 		}
 	}(c.data.stopContext)
@@ -291,6 +292,7 @@ func (c *Conveyor) runMasterNode() {
 			c.data.Unlock()
 
 			c.sendToMasterNode()
+
 			return
 		}
 
@@ -300,35 +302,39 @@ func (c *Conveyor) runMasterNode() {
 				sn, err := slavenode.New(c.data.masterNodeAddress)
 				if err == nil {
 					c.data.Lock()
-					c.logTrace("success connection to master node")
+					c.logTracef("success connection to master node")
 					c.data.slaveNode = sn
 					c.data.Unlock()
 
 					c.sendToMasterNode()
+
 					return
 				}
-				c.logTrace("error connection to master node: %s", err.Error())
+				c.logTracef("error connection to master node: %s", err.Error())
 			case <-ctx.Done():
+
 				return
 			}
 		}
 	}(c.data.stopContext)
 }
 
-// SetWorkersCounter sets up the tracer with IWorkersCounter interface
+// SetWorkersCounter sets up the tracer with IWorkersCounter interface.
 // WorkersCounter rules the number of current worked handlers.
 func (c *Conveyor) SetWorkersCounter(wc faces.IWorkersCounter) faces.IConveyor {
 	c.data.workersCounter = wc
+
 	return c
 }
 
-// SetName is a simple setter for name property
+// SetName is a simple setter for name property.
 func (c *Conveyor) SetName(name string) faces.IConveyor {
 	c.data.name = name
+
 	return c
 }
 
-// GetName is a simple getter for name property
+// GetName is a simple getter for name property.
 func (c *Conveyor) GetName() string {
 	return c.data.name
 }
@@ -339,16 +345,14 @@ func (c *Conveyor) flushTrace() {
 	}
 }
 
-func (c *Conveyor) logTrace(format string, a ...interface{}) faces.IConveyor {
+func (c *Conveyor) logTracef(format string, a ...interface{}) {
 	if c.data.tracer != nil {
 		c.data.tracer.LazyPrintf(format, a...)
 	}
-	return c
 }
 
-// SetTracer sets up the tracer with ITrace interface
+// SetTracer sets up the tracer with ITrace interface.
 func (c *Conveyor) SetTracer(tr faces.ITrace, duration time.Duration) faces.IConveyor {
-
 	c.data.Lock()
 	defer c.data.Unlock()
 
@@ -361,7 +365,7 @@ func (c *Conveyor) SetTracer(tr faces.ITrace, duration time.Duration) faces.ICon
 }
 
 // MetricPeriod sets up the period between metric evaluations.
-// By default 10 second
+// By default 10 second.
 func (c *Conveyor) MetricPeriod(duration time.Duration) faces.IConveyor {
 	c.data.metricPeriodDuration = duration
 
@@ -389,23 +393,27 @@ func (c *Conveyor) startGroup(manager faces.IManager) error {
 		}
 		manager = manager.GetNextManager()
 	}
+
 	return nil
 }
 
-// Start starts the conveyor
+// Start starts the conveyor.
 func (c *Conveyor) Start(ctx context.Context) error {
-
 	if c.data.isRun {
 		return nil
 	}
 
 	// adds default error manager if it's necessary
 	if c.data.firstErrorManager == nil {
-		c.AddErrorHandler(defaultErrorName, 1, 2, faces.MakeEmptyHandler)
+		if err := c.AddErrorHandler(defaultErrorName, 1, 2, faces.MakeEmptyHandler); err != nil {
+			return err
+		}
 	}
 
 	if c.data.userFinalManager == nil {
-		c.AddFinalHandler(defaultFinalName, 1, 2, faces.MakeEmptyHandler)
+		if err := c.AddFinalHandler(defaultFinalName, 1, 2, faces.MakeEmptyHandler); err != nil {
+			return err
+		}
 	}
 
 	c.data.Lock()
@@ -424,7 +432,9 @@ func (c *Conveyor) Start(ctx context.Context) error {
 	c.data.stopContext, c.data.cancelContext = context.WithCancel(ctx)
 
 	// start all groups
-	for _, first := range []faces.IManager{c.data.systemFinalManager, c.data.firstErrorManager, c.data.firstWorkerManager} {
+	for _, first := range []faces.IManager{
+		c.data.systemFinalManager, c.data.firstErrorManager, c.data.firstWorkerManager,
+	} {
 		if err := c.startGroup(first); err != nil {
 			return err
 		}
@@ -469,14 +479,11 @@ func (c *Conveyor) Stop() {
 		mg.Stop()
 		mg = mg.GetNextManager()
 	}
-
-	c.data.cancelContext()
 }
 
 // WaitAndStop waits while all handler are finished and exits.
 // Processing of items will not be interrupted.
 func (c *Conveyor) WaitAndStop() {
-
 	if !c.data.isRun {
 		return
 	}
@@ -494,7 +501,7 @@ func (c *Conveyor) WaitAndStop() {
 	// lastWorkerManager actions
 	if c.data.slaveNode != nil {
 		// ignore all errors
-		c.data.slaveNode.Send(context.Background(), c.Statistic())
+		_, _ = c.data.slaveNode.Send(context.Background(), c.Statistic())
 	}
 
 	c.data.cancelContext()
@@ -520,7 +527,7 @@ func (c *Conveyor) AddFinalHandler(name faces.Name, minCount, maxCount int, hand
 	c.data.Lock()
 	defer c.data.Unlock()
 
-	c.logTrace("AddFinalHandler")
+	c.logTracef("AddFinalHandler")
 
 	if err := c.checkUniqName(name); err != nil {
 		return err
@@ -531,7 +538,14 @@ func (c *Conveyor) AddFinalHandler(name faces.Name, minCount, maxCount int, hand
 		name = faces.Name(c.data.name + "-" + strconv.Itoa(c.data.managerCounter))
 	}
 
-	c.data.userFinalManager = workers.NewManager(name, faces.FinalManagerType, c.data.lengthChannel, minCount, maxCount, c.data.tracer).
+	c.data.userFinalManager = workers.NewManager(
+		name,
+		faces.FinalManagerType,
+		c.data.lengthChannel,
+		minCount,
+		maxCount,
+		c.data.tracer,
+	).
 		SetHandler(handler).
 		SetIsLast(true).
 		SetWaitGroup(c.data.finalGroup).
@@ -551,14 +565,19 @@ func (c *Conveyor) addSystemFinalHandler() {
 	c.data.Lock()
 	defer c.data.Unlock()
 
-	c.logTrace("AddOwnFinalHandler")
+	c.logTracef("AddOwnFinalHandler")
 
 	c.data.managerCounter++
 	c.data.uniqNames = append(c.data.uniqNames, defaultFinalName)
 
 	handler := internalmanager.Init()
 
-	c.data.systemFinalManager = workers.NewManager(defaultFinalName, faces.FinalManagerType, c.data.lengthChannel, 1, 2, c.data.tracer).
+	c.data.systemFinalManager = workers.NewManager(
+		defaultFinalName,
+		faces.FinalManagerType,
+		c.data.lengthChannel,
+		1, 2, c.data.tracer,
+	).
 		SetHandler(handler).
 		SetIsLast(false).
 		SetWaitGroup(c.data.finalGroup).
@@ -571,14 +590,12 @@ func (c *Conveyor) addSystemFinalHandler() {
 // AddHandler adds customer handler.
 // Parameter name should be unique.
 // minCount should be less or equal the maxCount and great than zero.
-//
 // The order of adding handlers are important. The handlers are called in the same order as they were added.
 func (c *Conveyor) AddHandler(name faces.Name, minCount, maxCount int, handler faces.GiveBirth) error {
-
 	c.data.Lock()
 	defer c.data.Unlock()
 
-	c.logTrace("AddHandler %s", name)
+	c.logTracef("AddHandler %s", name)
 	if name == "" {
 		return errors.New("handler name can not be empty")
 	}
@@ -615,11 +632,10 @@ func (c *Conveyor) AddHandler(name faces.Name, minCount, maxCount int, handler f
 // Multiple custom error handlers are allowed.
 // If custom error handler returned error the conveyor logs the error but doesn't process.
 func (c *Conveyor) AddErrorHandler(manageName faces.Name, minCount, maxCount int, handler faces.GiveBirth) error {
-
 	c.data.Lock()
 	defer c.data.Unlock()
 
-	c.logTrace("AddErrorHandler %s", manageName)
+	c.logTracef("AddErrorHandler %s", manageName)
 	if manageName == "" {
 		return errors.New("error handler name can not be empty")
 	}
@@ -630,7 +646,13 @@ func (c *Conveyor) AddErrorHandler(manageName faces.Name, minCount, maxCount int
 
 	c.data.managerCounter++
 
-	next := workers.NewManager(manageName, faces.ErrorManagerType, c.data.lengthChannel, minCount, maxCount, c.data.tracer).
+	next := workers.NewManager(
+		manageName,
+		faces.ErrorManagerType,
+		c.data.lengthChannel,
+		minCount, maxCount,
+		c.data.tracer,
+	).
 		SetHandler(handler).
 		SetWaitGroup(c.data.errorGroup).
 		MetricPeriod(c.data.metricPeriodDuration).
@@ -658,6 +680,7 @@ func managerStatistic(managers ...faces.IManager) []*nodes.ManagerData {
 			out = append(out, manager.Statistic())
 		}
 	}
+
 	return out
 }
 

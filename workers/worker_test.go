@@ -1,9 +1,10 @@
-package workers
+package workers_test
 
 import (
+	"testing"
+
 	_ "github.com/golang/mock/mockgen/model"
 	. "github.com/iostrovok/check"
-	"testing"
 )
 
 type testSuite struct{}

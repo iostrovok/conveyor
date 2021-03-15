@@ -18,7 +18,6 @@ import (
 // common section
 
 var total = 20
-var totalOnline = 5
 
 var CountMySimpleHandlerStop = new(int32)
 var CountMySimpleHandlerStopStopRockAndRoll = new(int32)
@@ -125,7 +124,6 @@ type MySimpleHandler struct {
 
 	counter     int
 	sleepSecond int
-	id          string
 	name        faces.Name
 }
 
@@ -332,7 +330,8 @@ func (s *testSuite) TestSyntax(c *C) {
 	// create and build new conveyor
 	myMaster := conveyor.NewTest(20, faces.ChanStack, "my-app", to)
 	c.Assert(buildConveyor(myMaster), IsNil)
-	myMaster.Start(context.Background())
+	err := myMaster.Start(context.Background())
+	c.Assert(err, IsNil)
 
 	for i := 0; i < total; i++ {
 

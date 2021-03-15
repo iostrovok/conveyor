@@ -1,3 +1,5 @@
+package queues
+
 /*
 	Package supports the IChan interface and provides 3 simples realization of them.
 
@@ -5,7 +7,6 @@
 	- priority queues
 	- stack, LIFO
 */
-package queues
 
 import (
 	"github.com/iostrovok/conveyor/faces"

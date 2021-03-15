@@ -1,11 +1,6 @@
-/*
-	The package support the stack queue LIFO (or FILO) for using them in conveyor.
-*/
 package stack
 
-/*
-
- */
+// 	The package support the stack queue LIFO (or FILO) for using them in conveyor.
 
 import (
 	"context"
@@ -24,24 +19,22 @@ type IStack interface {
 type Stack struct {
 	sync.RWMutex
 
-	current int
-	limit   int
-	last    int
-	chIn    faces.MainCh
-	chOut   faces.MainCh
-	body    []faces.IItem
-	cond    chan struct{}
+	limit int
+	last  int
+	chIn  faces.MainCh
+	chOut faces.MainCh
+	body  []faces.IItem
+	cond  chan struct{}
 
 	isActive bool
 }
 
-// Create a new stack
+// Create a new stack.
 func New(length int) faces.IChan {
-	return Init(length, context.Background())
+	return Init(context.Background(), length)
 }
 
-func Init(limit int, ctx context.Context) *Stack {
-
+func Init(ctx context.Context, limit int) *Stack {
 	stack := &Stack{
 		chIn:  make(faces.MainCh, 1),
 		chOut: make(faces.MainCh, 1),
@@ -63,26 +56,26 @@ func (stack *Stack) Push(item faces.IItem) {
 	stack.chIn <- item
 }
 
-// Close()
+// Close().
 func (stack *Stack) Close() {
 	stack.Lock()
 	defer stack.Unlock()
 	close(stack.chIn)
 }
 
-// Returns the number of items in the stack
+// Returns the number of items in the stack.
 func (stack *Stack) Count() int {
 	return stack.last
 }
 
-// IsActive
+// IsActive is a simple getter.
 func (stack *Stack) IsActive() bool {
 	return stack.isActive
 }
 
-// Returns the max available number items in the stack
+// Returns the max available number items in the stack.
 func (stack *Stack) Len() int {
-	return int(stack.limit)
+	return stack.limit
 }
 
 func (stack *Stack) ChanIn() faces.MainCh {
@@ -101,6 +94,7 @@ func (stack *Stack) runIn(ctx context.Context) {
 		case x, ok := <-stack.chIn:
 			if !ok {
 				close(stack.cond)
+
 				return
 			}
 
@@ -113,8 +107,7 @@ func (stack *Stack) runIn(ctx context.Context) {
 			select {
 			case <-ctx.Done():
 				return
-			case stack.cond <- struct{}{}:
-				// nothing
+			case stack.cond <- struct{}{}: // nothing
 			}
 		}
 	}
@@ -128,6 +121,7 @@ func (stack *Stack) runOut(ctx context.Context) {
 		case _, ok := <-stack.cond:
 			if !ok {
 				close(stack.chOut)
+
 				return
 			}
 
@@ -140,8 +134,7 @@ func (stack *Stack) runOut(ctx context.Context) {
 				select {
 				case <-ctx.Done():
 					return
-				case stack.chOut <- x:
-					// nothing
+				case stack.chOut <- x: // nothing
 				}
 			}
 		}
@@ -149,7 +142,6 @@ func (stack *Stack) runOut(ctx context.Context) {
 }
 
 func (stack *Stack) Info() *nodes.ChanData {
-
 	stack.RLock()
 	defer stack.RUnlock()
 

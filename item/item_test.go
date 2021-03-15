@@ -1,23 +1,26 @@
-package item
+package item_test
 
 import (
 	"context"
-	"github.com/golang/mock/gomock"
-	"github.com/iostrovok/conveyor/faces/mmock"
 	"math/rand"
 	"testing"
 	"time"
 
+	"github.com/golang/mock/gomock"
 	. "github.com/iostrovok/check"
+	"github.com/pkg/errors"
 
 	"github.com/iostrovok/conveyor/faces"
-	//"github.com/iostrovok/conveyor/faces/mmock"
+	"github.com/iostrovok/conveyor/faces/mmock"
+	"github.com/iostrovok/conveyor/item"
 )
 
 const (
 	NameOne faces.Name = "NameOne"
 	NameTwo faces.Name = "NameTwo"
 )
+
+var err = errors.New(item.LastHandlerErrorNote)
 
 func init() {
 	rand.Seed(time.Now().Unix())
@@ -33,41 +36,39 @@ func MockIWorkerMocker(t *testing.T, name faces.Name, typ faces.ManagerType, isL
 	ctrl := gomock.NewController(t)
 	m := mmock.NewMockIWorker(ctrl)
 	m.EXPECT().GetBorderCond().Return(NameOne, typ, isLast).AnyTimes()
+
 	return m
 }
 
 func (s *testSuite) TestNeedToSkip(c *C) {
+	it := item.New(context.Background(), nil)
+	it.SetSkipToName(NameOne)
 
-	item := New(context.Background(), nil)
-	item.SetSkipToName(NameOne)
+	checkResult(c, it, MockIWorkerMocker(c.T(), NameOne, faces.WorkerManagerType, false), false)
+	checkResult(c, it, MockIWorkerMocker(c.T(), NameOne, faces.FinalManagerType, false), false)
+	checkResult(c, it, MockIWorkerMocker(c.T(), NameOne, faces.ErrorManagerType, false), false)
 
-	checkResult(c, item, MockIWorkerMocker(c.T(), NameOne, faces.WorkerManagerType, false), false, nil)
-	checkResult(c, item, MockIWorkerMocker(c.T(), NameOne, faces.FinalManagerType, false), false, nil)
-	checkResult(c, item, MockIWorkerMocker(c.T(), NameOne, faces.ErrorManagerType, false), false, nil)
+	it.SetSkipToName(NameTwo)
+	checkResult(c, it, MockIWorkerMocker(c.T(), NameOne, faces.WorkerManagerType, false), true)
 
-	item.SetSkipToName(NameTwo)
-	checkResult(c, item, MockIWorkerMocker(c.T(), NameOne, faces.WorkerManagerType, false), true, nil)
+	it.SetSkipToName(faces.EmptySkipName)
+	checkResult(c, it, MockIWorkerMocker(c.T(), NameOne, faces.WorkerManagerType, false), false)
+	checkResult(c, it, MockIWorkerMocker(c.T(), NameOne, faces.FinalManagerType, false), false)
+	checkResult(c, it, MockIWorkerMocker(c.T(), NameOne, faces.ErrorManagerType, false), false)
+	checkResult(c, it, MockIWorkerMocker(c.T(), NameOne, faces.WorkerManagerType, false), false)
 
-	item.SetSkipToName(faces.EmptySkipName)
-	checkResult(c, item, MockIWorkerMocker(c.T(), NameOne, faces.WorkerManagerType, false), false, nil)
-	checkResult(c, item, MockIWorkerMocker(c.T(), NameOne, faces.FinalManagerType, false), false, nil)
-	checkResult(c, item, MockIWorkerMocker(c.T(), NameOne, faces.ErrorManagerType, false), false, nil)
-	checkResult(c, item, MockIWorkerMocker(c.T(), NameOne, faces.WorkerManagerType, false), false, nil)
+	checkResult(c, it, MockIWorkerMocker(c.T(), NameOne, faces.WorkerManagerType, true), false)
 }
 
 func (s *testSuite) TestNillContex(c *C) {
-	item := New(nil, nil)
-	c.Assert(item, NotNil)
+	it := item.New(context.Background(), nil)
+	c.Assert(it, NotNil)
 }
 
-func checkResult(c *C, item faces.IItem, w faces.IWorker, needSkip bool, errIn error) {
+func checkResult(c *C, item faces.IItem, w faces.IWorker, needSkip bool) {
 	skip, err := item.NeedToSkip(w)
 
-	if errIn == nil {
-		c.Assert(err, IsNil)
-		c.Assert(skip, Equals, needSkip)
-	} else {
-		c.Assert(err, NotNil)
-	}
+	c.Assert(err, IsNil)
+	c.Assert(skip, Equals, needSkip)
 
 }

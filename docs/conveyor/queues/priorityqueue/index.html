@@ -7,15 +7,15 @@
 
   <title>priorityqueue - Go Documentation Server</title>
 
-<link type="text/css" rel="stylesheet" href="../../../lib/godoc/style.css">
+<link type="text/css" rel="stylesheet" href="../../../../../../../../lib/godoc/style.css">
 
 <script>window.initFuncs = [];</script>
-<script src="../../../lib/godoc/jquery.js" defer></script>
+<script src="../../../../../../../../lib/godoc/jquery.js" defer></script>
 
 
 
 <script>var goVersion = "go1.15.2";</script>
-<script src="../../../lib/godoc/godocs.js" defer></script>
+<script src="../../../../../../../../lib/godoc/godocs.js" defer></script>
 </head>
 <body>
 
@@ -93,14 +93,7 @@
 			</div>
 			<div class="expanded">
 				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
-				<p>
-The package support the priority queue for using them in conveyor.
-</p>
-<p>
-Items with the same priority has FIFO order.
-Realisation has 2-element delay on empty channel because it uses standard GO channel.
-</p>
-
+				
 				
 			</div>
 		</div>
@@ -119,9 +112,6 @@ Realisation has 2-element delay on empty channel because it uses standard GO cha
 			
 			
 				
-				<dd><a href="index.html#InsertToBody">func InsertToBody(array *[]faces.IItem, item faces.IItem, last int)</a></dd>
-			
-				
 				<dd><a href="index.html#New">func New(length int) faces.IChan</a></dd>
 			
 				
@@ -137,7 +127,7 @@ Realisation has 2-element delay on empty channel because it uses standard GO cha
 				<dd><a href="index.html#PQ">type PQ</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#Init">func Init(limit int, ctx context.Context) *PQ</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#Init">func Init(ctx context.Context, limit int) *PQ</a></dd>
 				
 				
 					
@@ -197,27 +187,14 @@ Realisation has 2-element delay on empty channel because it uses standard GO cha
 		
 			
 			
-			<h2 id="InsertToBody">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=3704:3771#L211">InsertToBody</a>
-				<a class="permalink" href="index.html#InsertToBody">&#xb6;</a>
-				
-				
-			</h2>
-			<pre>func InsertToBody(array *[]<a href="../../../../../../faces/index.html">faces</a>.<a href="../../faces/index.html#IItem">IItem</a>, item <a href="../../faces/index.html">faces</a>.<a href="../../faces/index.html#IItem">IItem</a>, last <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>)</pre>
-			
-			
-			
-
-		
-			
-			
-			<h2 id="New">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=669:701#L30">New</a>
+			<h2 id="New">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=667:699#L34">New</a>
 				<a class="permalink" href="index.html#New">&#xb6;</a>
 				
 				
 			</h2>
-			<pre>func New(length <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>) <a href="../../../../faces/index.html">faces</a>.<a href="../../faces/index.html#IChan">IChan</a></pre>
+			<pre>func New(length <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>) <a href="../../../../../../faces/index.html">faces</a>.<a href="../../faces/index.html#IChan">IChan</a></pre>
 			<p>
-Create a new stack
+Create a new stack.
 </p>
 
 			
@@ -226,14 +203,14 @@ Create a new stack
 		
 			
 			
-			<h2 id="PrintBody">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=1302:1353#L60">PrintBody</a>
+			<h2 id="PrintBody">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=1297:1348#L65">PrintBody</a>
 				<a class="permalink" href="index.html#PrintBody">&#xb6;</a>
 				
 				
 			</h2>
-			<pre>func PrintBody(body []<a href="../../../../faces/index.html">faces</a>.<a href="../../faces/index.html#IItem">IItem</a>, last <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a></pre>
+			<pre>func PrintBody(body []<a href="../../../../../../faces/index.html">faces</a>.<a href="../../faces/index.html#IItem">IItem</a>, last <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>) <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a></pre>
 			<p>
-PrintBody is helper for tests, don&#39;t use it for production :)
+PrintBody is helper for tests, don&#39;t use it for production.
 </p>
 
 			
@@ -243,7 +220,7 @@ PrintBody is helper for tests, don&#39;t use it for production :)
 		
 			
 			
-			<h2 id="IPQ">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=375:465#L9">IPQ</a>
+			<h2 id="IPQ">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=397:487#L14">IPQ</a>
 				<a class="permalink" href="index.html#IPQ">&#xb6;</a>
 				
 				
@@ -269,7 +246,7 @@ PrintBody is helper for tests, don&#39;t use it for production :)
 		
 			
 			
-			<h2 id="PQ">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=467:645#L15">PQ</a>
+			<h2 id="PQ">type <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=489:642#L20">PQ</a>
 				<a class="permalink" href="index.html#PQ">&#xb6;</a>
 				
 				
@@ -291,12 +268,12 @@ PrintBody is helper for tests, don&#39;t use it for production :)
 
 			
 				
-				<h3 id="Init">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=750:795#L34">Init</a>
+				<h3 id="Init">func <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=748:793#L38">Init</a>
 					<a class="permalink" href="index.html#Init">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func Init(limit <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>, ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>) *<a href="index.html#PQ">PQ</a></pre>
+				<pre>func Init(ctx <a href="http://127.0.0.1:6060/pkg/context/">context</a>.<a href="http://127.0.0.1:6060/pkg/context/#Context">Context</a>, limit <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a>) *<a href="index.html#PQ">PQ</a></pre>
 				
 				
 				
@@ -304,14 +281,14 @@ PrintBody is helper for tests, don&#39;t use it for production :)
 
 			
 				
-				<h3 id="PQ.Body">func (*PQ) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=1600:1634#L72">Body</a>
+				<h3 id="PQ.Body">func (*PQ) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=1596:1630#L77">Body</a>
 					<a class="permalink" href="index.html#PQ.Body">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (pq *<a href="index.html#PQ">PQ</a>) Body() []<a href="../../../../faces/index.html">faces</a>.<a href="../../faces/index.html#IItem">IItem</a></pre>
+				<pre>func (pq *<a href="index.html#PQ">PQ</a>) Body() []<a href="../../../../../../faces/index.html">faces</a>.<a href="../../faces/index.html#IItem">IItem</a></pre>
 				<p>
-Body()
+Body().
 </p>
 
 				
@@ -319,38 +296,38 @@ Body()
 				
 			
 				
-				<h3 id="PQ.ChanIn">func (*PQ) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=2093:2128#L104">ChanIn</a>
+				<h3 id="PQ.ChanIn">func (*PQ) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=2089:2124#L110">ChanIn</a>
 					<a class="permalink" href="index.html#PQ.ChanIn">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (pq *<a href="index.html#PQ">PQ</a>) ChanIn() <a href="../../../../faces/index.html">faces</a>.<a href="../../faces/index.html#MainCh">MainCh</a></pre>
+				<pre>func (pq *<a href="index.html#PQ">PQ</a>) ChanIn() <a href="../../../../../../faces/index.html">faces</a>.<a href="../../faces/index.html#MainCh">MainCh</a></pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="PQ.ChanOut">func (*PQ) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=2150:2186#L108">ChanOut</a>
+				<h3 id="PQ.ChanOut">func (*PQ) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=2146:2182#L114">ChanOut</a>
 					<a class="permalink" href="index.html#PQ.ChanOut">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (pq *<a href="index.html#PQ">PQ</a>) ChanOut() <a href="../../../../faces/index.html">faces</a>.<a href="../../faces/index.html#MainCh">MainCh</a></pre>
+				<pre>func (pq *<a href="index.html#PQ">PQ</a>) ChanOut() <a href="../../../../../../faces/index.html">faces</a>.<a href="../../faces/index.html#MainCh">MainCh</a></pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="PQ.Close">func (*PQ) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=1756:1777#L83">Close</a>
+				<h3 id="PQ.Close">func (*PQ) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=1754:1775#L89">Close</a>
 					<a class="permalink" href="index.html#PQ.Close">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func (pq *<a href="index.html#PQ">PQ</a>) Close()</pre>
 				<p>
-Close()
+Close().
 </p>
 
 				
@@ -358,14 +335,14 @@ Close()
 				
 			
 				
-				<h3 id="PQ.Count">func (*PQ) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=1873:1898#L90">Count</a>
+				<h3 id="PQ.Count">func (*PQ) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=1872:1897#L96">Count</a>
 					<a class="permalink" href="index.html#PQ.Count">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func (pq *<a href="index.html#PQ">PQ</a>) Count() <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a></pre>
 				<p>
-Returns the number of items in the stack
+Returns the number of items in the stack.
 </p>
 
 				
@@ -373,26 +350,26 @@ Returns the number of items in the stack
 				
 			
 				
-				<h3 id="PQ.Info">func (*PQ) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=5098:5134#L286">Info</a>
+				<h3 id="PQ.Info">func (*PQ) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=4515:4551#L265">Info</a>
 					<a class="permalink" href="index.html#PQ.Info">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (pq *<a href="index.html#PQ">PQ</a>) Info() *<a href="../../../../protobuf/go/nodes/index.html">nodes</a>.<a href="../../protobuf/go/nodes/index.html#ChanData">ChanData</a></pre>
+				<pre>func (pq *<a href="index.html#PQ">PQ</a>) Info() *<a href="../../../../../../protobuf/go/nodes/index.html">nodes</a>.<a href="../../protobuf/go/nodes/index.html#ChanData">ChanData</a></pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="PQ.IsActive">func (*PQ) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=1932:1961#L95">IsActive</a>
+				<h3 id="PQ.IsActive">func (*PQ) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=1932:1961#L101">IsActive</a>
 					<a class="permalink" href="index.html#PQ.IsActive">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func (pq *<a href="index.html#PQ">PQ</a>) IsActive() <a href="http://127.0.0.1:6060/pkg/builtin/#bool">bool</a></pre>
 				<p>
-IsActive
+IsActive.
 </p>
 
 				
@@ -400,14 +377,14 @@ IsActive
 				
 			
 				
-				<h3 id="PQ.Len">func (*PQ) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=2042:2065#L100">Len</a>
+				<h3 id="PQ.Len">func (*PQ) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=2043:2066#L106">Len</a>
 					<a class="permalink" href="index.html#PQ.Len">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func (pq *<a href="index.html#PQ">PQ</a>) Len() <a href="http://127.0.0.1:6060/pkg/builtin/#int">int</a></pre>
 				<p>
-Returns the max available number items in the stack
+Returns the max available number items in the stack.
 </p>
 
 				
@@ -415,14 +392,14 @@ Returns the max available number items in the stack
 				
 			
 				
-				<h3 id="PQ.Print">func (*PQ) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=1137:1165#L53">Print</a>
+				<h3 id="PQ.Print">func (*PQ) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=1133:1161#L57">Print</a>
 					<a class="permalink" href="index.html#PQ.Print">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func (pq *<a href="index.html#PQ">PQ</a>) Print() <a href="http://127.0.0.1:6060/pkg/builtin/#string">string</a></pre>
 				<p>
-Print is helper for tests, don&#39;t use it for production :)
+Print is helper for tests, don&#39;t use it for production.
 </p>
 
 				
@@ -430,12 +407,12 @@ Print is helper for tests, don&#39;t use it for production :)
 				
 			
 				
-				<h3 id="PQ.Push">func (*PQ) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=1686:1722#L78">Push</a>
+				<h3 id="PQ.Push">func (*PQ) <a href="http://127.0.0.1:6060/src/github.com/iostrovok/conveyor/queues/priorityqueue/pq.go?s=1683:1719#L84">Push</a>
 					<a class="permalink" href="index.html#PQ.Push">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (pq *<a href="index.html#PQ">PQ</a>) Push(item <a href="../../../../faces/index.html">faces</a>.<a href="../../faces/index.html#IItem">IItem</a>)</pre>
+				<pre>func (pq *<a href="index.html#PQ">PQ</a>) Push(item <a href="../../../../../../faces/index.html">faces</a>.<a href="../../faces/index.html#IItem">IItem</a>)</pre>
 				
 				
 				

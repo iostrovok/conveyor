@@ -1,7 +1,6 @@
-/*
-	The package support queue with standard GO-channels for using them in conveyor.
-*/
 package std
+
+// 	The package support queue with standard GO-channels for using them in conveyor.
 
 import (
 	"github.com/iostrovok/conveyor/faces"

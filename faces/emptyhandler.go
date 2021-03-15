@@ -26,27 +26,28 @@ Example:
 */
 type EmptyHandler struct{}
 
-var MakeEmptyHandler GiveBirth = func(name Name) (IHandler, error) {
+// MakeEmptyHandler is a constructor for EmptyHandler.
+func MakeEmptyHandler(_ Name) (IHandler, error) {
 	return &EmptyHandler{}, nil
 }
 
-// Start does nothing
+// Start does nothing.
 func (m *EmptyHandler) Start(_ context.Context) error {
 	return nil
 }
 
-// Stop does nothing
+// Stop does nothing.
 func (m *EmptyHandler) Stop(_ context.Context) { /* nothing */ }
 
-// Run does nothing
+// Run does nothing.
 func (m *EmptyHandler) Run(_ IItem) error {
 	return nil
 }
 
-// does nothing
+// It does nothing by default.
 func (m *EmptyHandler) TickerRun(ctx context.Context) { /* nothing */ }
 
-// return 0
+// returns 0 by default.
 func (m *EmptyHandler) TickerDuration() time.Duration {
 	return time.Duration(0)
 }

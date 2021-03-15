@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// GiveBirth return new handler. Type Name is string which was passed with AddHandler(...)
+// GiveBirth return new handler. Type Name is string which was passed with AddHandler(...).
 type GiveBirth func(name Name) (IHandler, error)
 
 type IHandler interface {

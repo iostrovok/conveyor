@@ -1,9 +1,12 @@
-package queues
+package queues_test
 
 import (
+	"testing"
+
 	_ "github.com/golang/mock/mockgen/model"
 	. "github.com/iostrovok/check"
-	"testing"
+
+	_ "github.com/iostrovok/conveyor/queues"
 )
 
 type testSuite struct{}
