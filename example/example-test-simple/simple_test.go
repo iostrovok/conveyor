@@ -3,32 +3,32 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/iostrovok/conveyor/testobject"
 	"sync/atomic"
 	"testing"
 	"time"
 
 	. "github.com/iostrovok/check"
+
 	"github.com/iostrovok/conveyor"
 	"github.com/iostrovok/conveyor/faces"
 	"github.com/iostrovok/conveyor/input"
 	"github.com/iostrovok/conveyor/item"
+	"github.com/iostrovok/conveyor/testobject"
 )
 
 // common section
 
-var total = 20
-
-var CountMySimpleHandlerStop = new(int32)
-var CountMySimpleHandlerStopStopRockAndRoll = new(int32)
-
-var CountMySimpleHandlerStart = new(int32)
-var CountMySimpleHandlerStartStopRockAndRoll = new(int32)
-
-var countRunJazz = new(int32)
-var countRun = new(int32)
+var (
+	CountMySimpleHandlerStop                 = new(int32)
+	CountMySimpleHandlerStopStopRockAndRoll  = new(int32)
+	CountMySimpleHandlerStart                = new(int32)
+	CountMySimpleHandlerStartStopRockAndRoll = new(int32)
+	countRunJazz                             = new(int32)
+	countRun                                 = new(int32)
+)
 
 const (
+	total                       = 20
 	FirstHandler     faces.Name = "1th-handler"
 	SecondHandler    faces.Name = "2th-handler"
 	ThirdHandler     faces.Name = "3th-handler"

@@ -1,10 +1,11 @@
-package testobject
+package testobject_test
 
 import (
-	. "github.com/iostrovok/check"
 	"testing"
 
-	//"github.com/iostrovok/conveyor/faces/mmock"
+	. "github.com/iostrovok/check"
+
+	_ "github.com/iostrovok/conveyor/testobject"
 )
 
 type testSuite struct{}

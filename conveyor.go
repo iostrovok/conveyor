@@ -2,6 +2,7 @@ package conveyor
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"strconv"
 	"sync"
@@ -215,12 +216,12 @@ func (c *Conveyor) _runRes(it faces.IItem) (interface{}, error) {
 	case <-ctx.Done():
 
 		return nil, errors.New("context is canceled in RunRes")
-	case item, ok := <-ch:
-		if !ok || item == nil {
+	case it, ok := <-ch:
+		if !ok || it == nil {
 			return nil, errors.New("unexpected error: result channel is closed")
 		}
 
-		return item.Get(), item.GetError()
+		return it.Get(), it.GetError()
 	}
 }
 
@@ -411,9 +412,10 @@ func (c *Conveyor) Start(ctx context.Context) error {
 	}
 
 	if c.data.userFinalManager == nil {
-		if err := c.AddFinalHandler(defaultFinalName, 1, 2, faces.MakeEmptyHandler); err != nil {
-			return err
-		}
+		// does nothing. System final manager is already added in Init();
+		//if err := c.AddFinalHandler(defaultFinalName, 1, 2, faces.MakeEmptyHandler); err != nil {
+		//	return err
+		//}
 	}
 
 	c.data.Lock()
@@ -511,7 +513,7 @@ func (c *Conveyor) WaitAndStop() {
 func (c *Conveyor) checkUniqName(manageName faces.Name) error {
 	for _, n := range c.data.uniqNames {
 		if n == manageName {
-			return errors.New("not uniq handler name '" + string(manageName) + "'")
+			return errors.WithStack(errors.New("not uniq handler name '" + string(manageName) + "'"))
 		}
 	}
 
@@ -526,6 +528,8 @@ func (c *Conveyor) checkUniqName(manageName faces.Name) error {
 func (c *Conveyor) AddFinalHandler(name faces.Name, minCount, maxCount int, handler faces.GiveBirth) error {
 	c.data.Lock()
 	defer c.data.Unlock()
+
+	fmt.Printf("\n\nAddFinalHandler!!!!!!!!!\n\n")
 
 	c.logTracef("AddFinalHandler")
 

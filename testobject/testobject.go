@@ -1,13 +1,15 @@
-/*
-	Package realizes the IItem interface.
-*/
 package testobject
 
 import (
+	"sync"
+
 	"github.com/iostrovok/check"
 	"github.com/iostrovok/conveyor/faces"
-	"sync"
 )
+
+/*
+	Package realizes the ITestObject interface.
+*/
 
 type TestObject struct {
 	sync.RWMutex
@@ -21,6 +23,7 @@ func Empty() faces.ITestObject {
 	ob := &TestObject{
 		mode: false,
 	}
+
 	return ob
 }
 
@@ -30,12 +33,14 @@ func New(mode bool, object *check.C, suffix string) faces.ITestObject {
 		object: object,
 		suffix: suffix,
 	}
+
 	return ob
 }
 
 func (ob *TestObject) IsTestMode() bool {
 	return ob.mode
 }
+
 func (ob *TestObject) TestObject() *check.C {
 	return ob.object
 }

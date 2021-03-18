@@ -33,12 +33,12 @@ func main() {
 
 	// set up simple handler
 	if err := myMaster.AddHandler("handler", 2, 6, Handler); err != nil {
-		log.Fatal(err)
+		log.Fatalf("%+v", err)
 	}
 
 	// start our conveyor
 	if err := myMaster.Start(context.Background()); err != nil {
-		log.Fatal(err)
+		log.Fatalf("%+v", err)
 	}
 
 	for i := 0; i < 100; i++ {

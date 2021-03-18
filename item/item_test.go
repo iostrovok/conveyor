@@ -70,5 +70,4 @@ func checkResult(c *C, item faces.IItem, w faces.IWorker, needSkip bool) {
 
 	c.Assert(err, IsNil)
 	c.Assert(skip, Equals, needSkip)
-
 }
