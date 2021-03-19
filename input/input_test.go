@@ -1,8 +1,11 @@
-package input
+package input_test
 
 import (
-	. "github.com/iostrovok/check"
 	"testing"
+
+	. "github.com/iostrovok/check"
+
+	_ "github.com/iostrovok/conveyor/input"
 )
 
 type testSuite struct{}

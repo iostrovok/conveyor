@@ -10,35 +10,41 @@ import (
 	"github.com/iostrovok/conveyor/input"
 )
 
-// >>>>>>>>>>>>>>>>>>>> simple worker handler START
+const chanLength = 20
+
+// >>>>>>>>>>>>>>>>>>>> simple worker handler START.
+
+// MySimpleHandler is a handler.
 type MySimpleHandler struct {
 	faces.EmptyHandler
 	name faces.Name
 }
 
-func Handler(name faces.Name) (faces.IHandler, error) {
+func handler(name faces.Name) (faces.IHandler, error) {
 	return &MySimpleHandler{name: name}, nil
 }
 
+// Run is interface method.
 func (m *MySimpleHandler) Run(item faces.IItem) error {
 	fmt.Printf("MySimpleHandler %s => %d]: %s\n", m.name, item.GetID(), item.Get().(string))
+
 	return nil
 }
 
-// <<<<<<<<<<<<<<<<<<<< simple worked handler. END
+// <<<<<<<<<<<<<<<<<<<< simple worked handler. END.
 
 func main() {
 	// create new conveyor
-	myMaster := conveyor.New(20, faces.ChanStdGo, "my-app")
+	myMaster := conveyor.New(chanLength, faces.ChanStdGo, "my-app")
 
 	// set up simple handler
-	if err := myMaster.AddHandler("handler", 2, 6, Handler); err != nil {
-		log.Fatal(err)
+	if err := myMaster.AddHandler("handler", 2, 6, handler); err != nil {
+		log.Fatalf("%+v", err)
 	}
 
 	// start our conveyor
 	if err := myMaster.Start(context.Background()); err != nil {
-		log.Fatal(err)
+		log.Fatalf("%+v", err)
 	}
 
 	for i := 0; i < 100; i++ {

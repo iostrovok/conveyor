@@ -1,5 +1,5 @@
 /*
-	Internal package. Package provides a handler for support online processing.
+Package internalmanager is an internal package. Package provides a handler for support online processing.
 */
 package internalmanager
 
@@ -11,17 +11,19 @@ import (
 	"github.com/iostrovok/conveyor/faces"
 )
 
+const defaultResultChLen = 2
+
 type oneResult struct {
 	ch  chan faces.IItem
 	ctx context.Context
 }
 
-type Map struct {
+type myMap struct {
 	sync.RWMutex
 	data map[int64]*oneResult
 }
 
-func (m *Map) LoadAndDelete(id int64) (*oneResult, bool) {
+func (m *myMap) LoadAndDelete(id int64) (*oneResult, bool) {
 	m.Lock()
 	defer m.Unlock()
 
@@ -29,17 +31,18 @@ func (m *Map) LoadAndDelete(id int64) (*oneResult, bool) {
 	if find {
 		delete(m.data, id)
 	}
+
 	return out, find
 }
 
-func (m *Map) Store(id int64, res *oneResult) {
+func (m *myMap) Store(id int64, res *oneResult) {
 	m.Lock()
 	defer m.Unlock()
 
 	m.data[id] = res
 }
 
-func (m *Map) Range(f func(key int64, res *oneResult) bool) {
+func (m *myMap) Range(f func(key int64, res *oneResult) bool) {
 	m.Lock()
 	defer m.Unlock()
 
@@ -50,53 +53,60 @@ func (m *Map) Range(f func(key int64, res *oneResult) bool) {
 	}
 }
 
-// global vars
-var allResults *Map
+// global vars.
+var allResults *myMap
 
+// SystemFinalHandler implements the final manager with support the online processing.
 type SystemFinalHandler struct {
 	faces.EmptyHandler // defines unused methods
 }
 
 func init() {
-	allResults = &Map{
+	allResults = &myMap{
 		data: map[int64]*oneResult{},
 	}
 }
 
+// Init returns the SystemFinalHandler init method.
 func Init() faces.GiveBirth {
 	return func(name faces.Name) (faces.IHandler, error) {
 		return &SystemFinalHandler{}, nil
 	}
 }
 
-func AddId(id int64, ctx context.Context) chan faces.IItem {
+// AddID adds new item to waiting of result.
+func AddID(ctx context.Context, id int64) chan faces.IItem {
 	if ctx == nil {
 		ctx = context.Background()
 	}
 
-	ch := make(chan faces.IItem, 2)
+	ch := make(chan faces.IItem, defaultResultChLen)
 	res := &oneResult{
 		ch:  ch,
 		ctx: ctx,
 	}
 
 	allResults.Store(id, res)
+
 	return ch
 }
 
+// Start is an interface method.
 func (m *SystemFinalHandler) Start(_ context.Context) error {
 	return nil
 }
 
+// Stop is an interface method.
 func (m *SystemFinalHandler) Stop(_ context.Context) {
 	closeFunc := func(key int64, res *oneResult) bool {
 		close(res.ch)
 		res.ch = nil
+
 		return true
 	}
 
 	allResults.Range(closeFunc)
-	allResults = &Map{
+	allResults = &myMap{
 		data: map[int64]*oneResult{},
 	}
 }
@@ -105,7 +115,7 @@ func runOne(res *oneResult, item faces.IItem) {
 	select {
 	case res.ch <- item: /* nothing */
 	case <-res.ctx.Done(): /* nothing */
-	case <-time.After(60 * time.Second): /* nothing */
+	case <-time.After(time.Minute): /* nothing */
 	default: /* nothing */
 	}
 
@@ -114,8 +124,9 @@ func runOne(res *oneResult, item faces.IItem) {
 	res.ch = nil
 }
 
+// Run is an interface method.
+// Check the uniq id of item and returns the result if it's necessary.
 func (m *SystemFinalHandler) Run(item faces.IItem) error {
-
 	id := item.GetID()
 	if value, loaded := allResults.LoadAndDelete(id); loaded {
 		go runOne(value, item)

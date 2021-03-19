@@ -12,25 +12,43 @@ import (
 	....
 */
 
+// ManagerType is a global type for define the manager position inside of conveyor.
 type ManagerType string
 
 const (
+	// WorkerManagerType is a simple handler.
 	WorkerManagerType ManagerType = "worker"
-	ErrorManagerType  ManagerType = "error"
-	FinalManagerType  ManagerType = "final"
+	// ErrorManagerType is a manager which gets all defective parts.
+	ErrorManagerType ManagerType = "error"
+	// FinalManagerType is a manager in th end of conveyor. "Test of the quality".
+	FinalManagerType ManagerType = "final"
 )
 
+// Name is a global type for define the name of manager.
 type Name string
 
 const (
+	// UnknownName is a simple default name.
 	UnknownName Name = "unknown"
-	ErrorName   Name = "error"
+
+	// ErrorName is a simple default name for error handler.
+	ErrorName Name = "error"
 )
 
+/*
+IWorkersCounter realizes the interface to rule the numbers of workers for each manage.
+It gets the current information about workers and in/out channels for a manager
+and returns action for increase or decrease numbers of workers.
+
+See simple realization in workerscounter directory.
+*/
 type IWorkersCounter interface {
 	Check(mc *nodes.ManagerData) (*nodes.ManagerAction, error)
 }
 
+/*
+IManager is an interface to rule the workers for single handler.
+*/
 type IManager interface {
 	SetHandler(handler GiveBirth) IManager
 
@@ -65,6 +83,9 @@ type IManager interface {
 	SetTestMode(testObject ITestObject) IManager
 }
 
+/*
+IWorker is an interface to support using one handler from IManager.
+*/
 type IWorker interface {
 	Start(ctx context.Context) error
 

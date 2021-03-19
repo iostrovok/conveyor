@@ -1,8 +1,7 @@
-package tracer
-
 /*
-	Package supports the simple realization of ITrace.
+Package tracer supports the simple realization of ITrace.
 */
+package tracer
 
 import (
 	"fmt"
@@ -13,6 +12,7 @@ import (
 	"github.com/iostrovok/conveyor/faces"
 )
 
+// Trace is an implementation of faces.ITrace Interface .
 type Trace struct {
 	sync.RWMutex
 
@@ -20,7 +20,8 @@ type Trace struct {
 	isError bool
 }
 
-func NewTrace() faces.ITrace {
+// New is a constructor.
+func New() faces.ITrace {
 	return &Trace{
 		data: make([]string, 0),
 	}

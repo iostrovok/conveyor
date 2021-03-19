@@ -1,6 +1,5 @@
+// Package item implements the faces.IItem interface.
 package item
-
-// Package realizes the IItem interface.
 
 import (
 	"context"
@@ -13,14 +12,17 @@ import (
 	"github.com/iostrovok/conveyor/testobject"
 )
 
-const LastHandlerErrorNote = "it is the last handler: skipped name can't be processed"
+const lastHandlerErrorNote = "it is the last handler: skipped name can't be processed"
 
+// Item implements the faces.IItem interface.
 type Item struct {
 	sync.RWMutex
 
 	data *Data
 }
 
+// Data is internal item's storage.
+// It exits as property of Item for OOP/inheritance goals.
 type Data struct {
 	id     int64
 	data   interface{}
@@ -43,6 +45,7 @@ type Data struct {
 	testObject faces.ITestObject
 }
 
+// New is a constructor.
 func New(ctx context.Context, tr faces.ITrace) faces.IItem {
 	item := &Item{}
 	item.Init(ctx, tr)
@@ -50,14 +53,12 @@ func New(ctx context.Context, tr faces.ITrace) faces.IItem {
 	return item
 }
 
-func (i *Item) SetLock() {
-	i.Lock()
+// InitEmpty makes empty item.
+func (i *Item) InitEmpty() {
+	i.Init(context.Background(), nil)
 }
 
-func (i *Item) SetUnlock() {
-	i.Unlock()
-}
-
+// Init is full constructor for accurate configuration.
 func (i *Item) Init(ctxIn context.Context, tr faces.ITrace) faces.IItem {
 	if i.data != nil {
 		return i
@@ -91,6 +92,17 @@ func (i *Item) Init(ctxIn context.Context, tr faces.ITrace) faces.IItem {
 	return i
 }
 
+// SetLock is a interface function.
+func (i *Item) SetLock() {
+	i.Lock()
+}
+
+// SetUnlock is a interface function.
+func (i *Item) SetUnlock() {
+	i.Unlock()
+}
+
+// GetTestObject is a interface function. It's a simple getter.
 func (i *Item) GetTestObject() faces.ITestObject {
 	i.RLock()
 	defer i.RUnlock()
@@ -98,6 +110,8 @@ func (i *Item) GetTestObject() faces.ITestObject {
 	return i.data.testObject
 }
 
+// SetTestObject is a interface function. It's a setter.
+// It sets up the Empty test object if it gets nil input parameter.
 func (i *Item) SetTestObject(testObject faces.ITestObject) {
 	i.RLock()
 	defer i.RUnlock()
@@ -109,10 +123,7 @@ func (i *Item) SetTestObject(testObject faces.ITestObject) {
 	i.data.testObject = testObject
 }
 
-func (i *Item) CheckData() {
-	i.Init(context.Background(), nil)
-}
-
+// GetID is a interface function. It's a simple getter.
 func (i *Item) GetID() int64 {
 	i.RLock()
 	defer i.RUnlock()
@@ -120,6 +131,7 @@ func (i *Item) GetID() int64 {
 	return i.data.id
 }
 
+// SetID is a simple setter.
 func (i *Item) SetID(id int64) {
 	i.Lock()
 	defer i.Unlock()
@@ -127,6 +139,7 @@ func (i *Item) SetID(id int64) {
 	i.data.id = id
 }
 
+// Get is a interface function. It's a simple getter.
 func (i *Item) Get() interface{} {
 	i.RLock()
 	defer i.RUnlock()
@@ -134,6 +147,7 @@ func (i *Item) Get() interface{} {
 	return i.data.data
 }
 
+// Set is a simple setter. It sets up the data of item.
 func (i *Item) Set(data interface{}) {
 	i.Lock()
 	defer i.Unlock()
@@ -141,6 +155,7 @@ func (i *Item) Set(data interface{}) {
 	i.data.data = data
 }
 
+// AddError fix error in item and push to logger if it's possible.
 func (i *Item) AddError(err error) {
 	i.Lock()
 	defer i.Unlock()
@@ -152,6 +167,7 @@ func (i *Item) AddError(err error) {
 	}
 }
 
+// GetError is a interface function. It's a simple getter.
 func (i *Item) GetError() error {
 	i.RLock()
 	defer i.RUnlock()
@@ -159,6 +175,7 @@ func (i *Item) GetError() error {
 	return i.data.err
 }
 
+// CleanError just removes error from item.
 func (i *Item) CleanError() {
 	i.Lock()
 	defer i.Unlock()
@@ -166,6 +183,7 @@ func (i *Item) CleanError() {
 	i.data.err = nil
 }
 
+// GetContext is a interface function. It's a simple getter.
 func (i *Item) GetContext() context.Context {
 	i.RLock()
 	defer i.RUnlock()
@@ -267,7 +285,7 @@ func (i *Item) GetLastHandler() faces.Name {
 	return i.data.lastHandler
 }
 
-// SetHandlerError set the last handler name which processed the item.
+// SetLastHandler sets the last handler name which processed the item.
 func (i *Item) SetLastHandler(handlerName faces.Name) {
 	i.Lock()
 	defer i.Unlock()
@@ -275,19 +293,19 @@ func (i *Item) SetLastHandler(handlerName faces.Name) {
 	i.data.lastHandler = handlerName
 }
 
-// PushedToChannel it should be redefined.
+// PushedToChannel does nothing. It should be redefined.
 func (i *Item) PushedToChannel(_ faces.Name) {
 }
 
-// ReceivedFromChannel it should be redefined.
+// ReceivedFromChannel does nothing. It should be redefined.
 func (i *Item) ReceivedFromChannel() {
 }
 
-// BeforeProcess it should be redefined.
+// BeforeProcess does nothing. It should be redefined.
 func (i *Item) BeforeProcess(_ faces.Name) {
 }
 
-// AfterProcess it should be redefined.
+// AfterProcess does nothing. It should be redefined.
 func (i *Item) AfterProcess(_ faces.Name, _ error) {
 }
 
@@ -360,7 +378,7 @@ func (i *Item) NeedToSkip(worker faces.IWorker) (bool, error) {
 
 	if isLast && typ == faces.WorkerManagerType {
 		// no more handlers after that. Fix error.
-		return false, errors.WithMessage(errors.New(LastHandlerErrorNote), "skipped name is "+string(i.data.skipToName))
+		return false, errors.WithMessage(errors.New(lastHandlerErrorNote), "skipped name is "+string(i.data.skipToName))
 	}
 
 	return true, nil

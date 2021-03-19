@@ -8,8 +8,6 @@ import (
 
 	"github.com/golang/mock/gomock"
 	. "github.com/iostrovok/check"
-	"github.com/pkg/errors"
-
 	"github.com/iostrovok/conveyor/faces"
 	"github.com/iostrovok/conveyor/faces/mmock"
 	"github.com/iostrovok/conveyor/item"
@@ -19,8 +17,6 @@ const (
 	NameOne faces.Name = "NameOne"
 	NameTwo faces.Name = "NameTwo"
 )
-
-var err = errors.New(item.LastHandlerErrorNote)
 
 func init() {
 	rand.Seed(time.Now().Unix())
@@ -70,5 +66,4 @@ func checkResult(c *C, item faces.IItem, w faces.IWorker, needSkip bool) {
 
 	c.Assert(err, IsNil)
 	c.Assert(skip, Equals, needSkip)
-
 }

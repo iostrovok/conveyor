@@ -1,6 +1,5 @@
+// Package stack supports the stack queues LIFO (or FILO) for using them in conveyor.
 package stack
-
-// 	The package support the stack queue LIFO (or FILO) for using them in conveyor.
 
 import (
 	"context"
@@ -10,12 +9,7 @@ import (
 	"github.com/iostrovok/conveyor/protobuf/go/nodes"
 )
 
-type IStack interface {
-	Len() int32
-	ChanIn() chan interface{}
-	ChanOut() chan interface{}
-}
-
+// Stack is main package object.
 type Stack struct {
 	sync.RWMutex
 
@@ -29,11 +23,12 @@ type Stack struct {
 	isActive bool
 }
 
-// Create a new stack.
+// New is a constructor, creates a new stack.
 func New(length int) faces.IChan {
 	return Init(context.Background(), length)
 }
 
+// Init is full constructor for accurate configuration.
 func Init(ctx context.Context, limit int) *Stack {
 	stack := &Stack{
 		chIn:  make(faces.MainCh, 1),
@@ -52,18 +47,19 @@ func Init(ctx context.Context, limit int) *Stack {
 	return stack
 }
 
+// Push adds item to queue.
 func (stack *Stack) Push(item faces.IItem) {
 	stack.chIn <- item
 }
 
-// Close().
+// Close stops the queue.
 func (stack *Stack) Close() {
 	stack.Lock()
 	defer stack.Unlock()
 	close(stack.chIn)
 }
 
-// Returns the number of items in the stack.
+// Count returns the number of items in the stack.
 func (stack *Stack) Count() int {
 	return stack.last
 }
@@ -73,15 +69,17 @@ func (stack *Stack) IsActive() bool {
 	return stack.isActive
 }
 
-// Returns the max available number items in the stack.
+// Len returns the max available number items in the stack.
 func (stack *Stack) Len() int {
 	return stack.limit
 }
 
+// ChanIn return reference to input channel.
 func (stack *Stack) ChanIn() faces.MainCh {
 	return stack.chIn
 }
 
+// ChanOut return reference to output channel.
 func (stack *Stack) ChanOut() faces.MainCh {
 	return stack.chOut
 }
@@ -141,6 +139,7 @@ func (stack *Stack) runOut(ctx context.Context) {
 	}
 }
 
+// Info returns the information about current stage of queue.
 func (stack *Stack) Info() *nodes.ChanData {
 	stack.RLock()
 	defer stack.RUnlock()

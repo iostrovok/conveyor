@@ -56,10 +56,14 @@ func main() {
 
 	file, err := os.Open(goModFile)
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 
-	defer file.Close()
+	defer func() {
+		if err := file.Close(); err != nil {
+			panic(err)
+		}
+	}()
 
 	module := ""
 	scanner := bufio.NewScanner(file)
@@ -74,7 +78,9 @@ func main() {
 	}
 
 	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
+		log.Printf("scanner error: %v\n", err)
+
+		return
 	}
 
 	_, pkgName := filepath.Split(module)
@@ -105,20 +111,28 @@ func main() {
 	wg.Wait()
 
 	if err := os.Mkdir(docFullDir, 0777); err != nil {
-		log.Fatalf("mkdir error: %v\n", err)
+		log.Printf("mkdir error: %v\n", err)
+
+		return
 	}
 
 	if err := os.Rename(filepath.Join(tmpDir, "pkg", module), filepath.Join(docFullDir, pkgName)); err != nil {
-		log.Fatalf("mv error: %v\n", err)
+		log.Printf("mv error: %v\n", err)
+
+		return
 	}
 
 	if err := os.Rename(filepath.Join(tmpDir, "pkg", module+".html"),
 		filepath.Join(docFullDir, pkgName, "index.html")); err != nil {
-		log.Fatalf("mv error: %v\n", err)
+		log.Printf("mv error: %v\n", err)
+
+		return
 	}
 
 	if err := os.Rename(filepath.Join(tmpDir, "lib"), filepath.Join(docFullDir, "lib")); err != nil {
-		log.Fatalf("mv error: %v\n", err)
+		log.Printf("mv error: %v\n", err)
+
+		return
 	}
 
 	if err := os.RemoveAll(tmpDir); err != nil {
@@ -161,7 +175,9 @@ func cleanOneFile(path, pkgName string) error {
 		return err
 	}
 
-	file.Close()
+	if err := file.Close(); err != nil {
+		panic(err)
+	}
 
 	out = strings.ReplaceAll(out, ` href="`+pkgName+"/", ` href="`)
 	out = strings.ReplaceAll(out, ` href="`+pkgName+`.html`, ` href="index.html`)

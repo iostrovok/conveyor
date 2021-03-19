@@ -1,7 +1,11 @@
+/*
+Package conveyor implements a conveyor for process items step by step.
+*/
 package conveyor
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"strconv"
 	"sync"
@@ -28,8 +32,11 @@ const (
 	defaultPriority             = 0
 )
 
+// DefaultMetricPeriodDuration set up by default default for send/print metric.
 const DefaultMetricPeriodDuration = 10 * time.Second
 
+// Conveyor is main top structure supported the faces.IConveyor interface.
+// It is exported to possibility of debug in outside applications.
 type Conveyor struct {
 	data *data
 }
@@ -79,18 +86,21 @@ type data struct {
 	testObject faces.ITestObject
 }
 
+// New is a simple constructor.
 func New(chanLen int, chanType faces.ChanType, name string) faces.IConveyor {
 	c := &Conveyor{}
 
 	return c.Init(chanLen, chanType, name, testobject.Empty())
 }
 
+// NewTest is full constructor for accurate configuration in test mode.
 func NewTest(chanLen int, chanType faces.ChanType, name string, testObject faces.ITestObject) faces.IConveyor {
 	c := &Conveyor{}
 
 	return c.Init(chanLen, chanType, name, testObject)
 }
 
+// Init is full constructor for accurate configuration.
 func (c *Conveyor) Init(chLen int, chType faces.ChanType, name string, testObject faces.ITestObject) faces.IConveyor {
 	if name == "" {
 		name = uuid.New().String()
@@ -113,7 +123,7 @@ func (c *Conveyor) Init(chLen int, chType faces.ChanType, name string, testObjec
 		itemID: new(int64),
 
 		// default IWorkersCounter
-		workersCounter: workerscounter.NewWorkersCounter(),
+		workersCounter: workerscounter.New(),
 
 		uniqNames:       []faces.Name{},
 		defaultPriority: defaultPriority,
@@ -145,7 +155,7 @@ func (c *Conveyor) getItemFrommInput(i faces.IInput) faces.IItem {
 	var it faces.IItem
 	if v, ok := val.(faces.IItem); ok {
 		it = v
-		it.CheckData()
+		it.InitEmpty()
 	} else {
 		it = item.New(ctx, tr)
 	}
@@ -160,7 +170,7 @@ func (c *Conveyor) getItemFrommInput(i faces.IInput) faces.IItem {
 	return it
 }
 
-// Run creates the new item over interface and sends to conveyor.
+// RunTest creates the new item over interface and sends to conveyor.
 // If priority queue is used the default priority will be set up.
 func (c *Conveyor) RunTest(i faces.IInput, testObject faces.ITestObject) {
 	it := c.getItemFrommInput(i)
@@ -184,7 +194,7 @@ func (c *Conveyor) Run(i faces.IInput) {
 	c.data.inCh.ChanIn() <- it
 }
 
-// RunRes creates the new item over interface, sends to conveyor and returns result.
+// RunResTest creates the new item over interface, sends to conveyor and returns result.
 func (c *Conveyor) RunResTest(i faces.IInput, testObject faces.ITestObject) (interface{}, error) {
 	it := c.getItemFrommInput(i)
 
@@ -204,7 +214,8 @@ func (c *Conveyor) RunRes(i faces.IInput) (interface{}, error) {
 func (c *Conveyor) _runRes(it faces.IItem) (interface{}, error) {
 	ctx := it.GetContext()
 
-	ch := internalmanager.AddId(it.GetID(), ctx)
+	// it adds id to the latest system handler which will wait for result, get it and return to channel.
+	ch := internalmanager.AddID(ctx, it.GetID())
 
 	// marker before pushing to first channel
 	it.PushedToChannel(c.data.firstWorkerManager.Name())
@@ -215,12 +226,12 @@ func (c *Conveyor) _runRes(it faces.IItem) (interface{}, error) {
 	case <-ctx.Done():
 
 		return nil, errors.New("context is canceled in RunRes")
-	case item, ok := <-ch:
-		if !ok || item == nil {
+	case it, ok := <-ch:
+		if !ok || it == nil {
 			return nil, errors.New("unexpected error: result channel is closed")
 		}
 
-		return item.Get(), item.GetError()
+		return it.Get(), it.GetError()
 	}
 }
 
@@ -231,6 +242,8 @@ func (c *Conveyor) SetDefaultPriority(defaultPriority int) {
 	c.data.defaultPriority = defaultPriority
 }
 
+// DefaultPriority returns the current default priority.
+// The current default priority is used if a priority is not set up for item.
 func (c *Conveyor) DefaultPriority() int {
 	return c.data.defaultPriority
 }
@@ -279,40 +292,38 @@ func (c *Conveyor) sendToMasterNode() {
 	}(c.data.stopContext)
 }
 
+func (c *Conveyor) initMasterNode() error {
+	sn, err := slavenode.New(c.data.masterNodeAddress)
+	if err == nil {
+		c.logTracef("success connection to master node")
+		c.data.Lock()
+		c.data.slaveNode = sn
+		c.data.Unlock()
+		c.sendToMasterNode()
+	} else {
+		c.logTracef("error connection to master node: %s", err.Error())
+	}
+
+	return err
+}
+
 func (c *Conveyor) runMasterNode() {
 	if c.data.masterNodeAddress == "" {
 		return
 	}
 
 	go func(ctx context.Context) {
-		sn, err := slavenode.New(c.data.masterNodeAddress)
-		if err == nil {
-			c.data.Lock()
-			c.data.slaveNode = sn
-			c.data.Unlock()
-
-			c.sendToMasterNode()
-
+		if err := c.initMasterNode(); err == nil {
 			return
 		}
 
 		for {
 			select {
 			case <-time.After(c.data.masterNodePeriod):
-				sn, err := slavenode.New(c.data.masterNodeAddress)
-				if err == nil {
-					c.data.Lock()
-					c.logTracef("success connection to master node")
-					c.data.slaveNode = sn
-					c.data.Unlock()
-
-					c.sendToMasterNode()
-
+				if err := c.initMasterNode(); err == nil {
 					return
 				}
-				c.logTracef("error connection to master node: %s", err.Error())
 			case <-ctx.Done():
-
 				return
 			}
 		}
@@ -410,12 +421,6 @@ func (c *Conveyor) Start(ctx context.Context) error {
 		}
 	}
 
-	if c.data.userFinalManager == nil {
-		if err := c.AddFinalHandler(defaultFinalName, 1, 2, faces.MakeEmptyHandler); err != nil {
-			return err
-		}
-	}
-
 	c.data.Lock()
 	defer c.data.Unlock()
 
@@ -444,21 +449,23 @@ func (c *Conveyor) Start(ctx context.Context) error {
 	c.runMasterNode()
 
 	if c.data.tracer != nil {
-		go func(ctx context.Context) {
-			for {
-				select {
-				case <-ctx.Done():
-					return
-				case <-time.After(c.data.tracerPeriodDuration):
-					if c.data.tracer != nil {
-						c.data.tracer.Flush()
-					}
-				}
-			}
-		}(c.data.stopContext)
+		go c.tracerFlush(c.data.stopContext)
 	}
 
 	return nil
+}
+
+func (c *Conveyor) tracerFlush(ctx context.Context) {
+	for {
+		select {
+		case <-ctx.Done():
+			return
+		case <-time.After(c.data.tracerPeriodDuration):
+			if c.data.tracer != nil {
+				c.data.tracer.Flush()
+			}
+		}
+	}
 }
 
 // Stop stops the conveyor.
@@ -511,7 +518,7 @@ func (c *Conveyor) WaitAndStop() {
 func (c *Conveyor) checkUniqName(manageName faces.Name) error {
 	for _, n := range c.data.uniqNames {
 		if n == manageName {
-			return errors.New("not uniq handler name '" + string(manageName) + "'")
+			return errors.WithStack(errors.New("not uniq handler name '" + string(manageName) + "'"))
 		}
 	}
 
@@ -526,6 +533,8 @@ func (c *Conveyor) checkUniqName(manageName faces.Name) error {
 func (c *Conveyor) AddFinalHandler(name faces.Name, minCount, maxCount int, handler faces.GiveBirth) error {
 	c.data.Lock()
 	defer c.data.Unlock()
+
+	fmt.Printf("\n\nAddFinalHandler!!!!!!!!!\n\n")
 
 	c.logTracef("AddFinalHandler")
 

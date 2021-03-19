@@ -1,3 +1,6 @@
+/*
+Package faces implements the full list of Interfaces.
+*/
 package faces
 
 import (
@@ -11,6 +14,7 @@ import (
 	....
 */
 
+// IInput is interface for support input data to conveyor.
 type IInput interface {
 	Context(ctx context.Context) IInput // by default the context.Background()
 	Trace(tr ITrace) IInput             // nil is by default
@@ -23,6 +27,7 @@ type IInput interface {
 	Ctx() context.Context
 }
 
+// IConveyor is interface for support the conveyor.
 type IConveyor interface {
 	Start(ctx context.Context) error
 	Stop()

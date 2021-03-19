@@ -1,10 +1,9 @@
 package conveyor_test
 
 import (
-	. "github.com/iostrovok/check"
-
 	_ "github.com/golang/mock/gomock"
 	_ "github.com/golang/mock/mockgen/model"
+	. "github.com/iostrovok/check"
 )
 
 type testSuite struct{}

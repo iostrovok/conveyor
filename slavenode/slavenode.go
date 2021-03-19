@@ -1,5 +1,5 @@
 /*
-	The package support the slave mode and sends statistic to master node.
+Package slavenode support the slave mode and sends statistic to master node.
 */
 package slavenode
 
@@ -14,25 +14,28 @@ import (
 	"github.com/iostrovok/conveyor/protobuf/go/nodes"
 )
 
-// Max Size of message for Lambda client
-const maxMsgSize = 10 * 1024 * 1024 // max message size 10 MB
+// Max Size of message for Lambda client.
+const (
+	maxMsgSize     = 10 * 1024 * 1024 // max message size 10 MB
+	defaultTime    = 10 * time.Second
+	defaultTimeout = 30 * time.Second
+)
 
 func dialOption() []grpc.DialOption {
-
 	kp := keepalive.ClientParameters{
 		/*
 			After a duration of this time if the client doesn't see any activity it
 			pings the server to see if the transport is still alive.
 			If set below 10s, a minimum value of 10s will be used instead.
 		*/
-		Time: 10 * time.Second,
+		Time: defaultTime,
 
 		/*
 			After having pinged for keepalive check, the client waits for a duration
 			of Timeout and if no activity is seen even after that the connection is
 			closed.
 		*/
-		Timeout: 30 * time.Second,
+		Timeout: defaultTimeout,
 
 		/*
 			If true, client sends keepalive pings even with no active RPCs. If false,
@@ -55,6 +58,7 @@ func dialOption() []grpc.DialOption {
 	return options
 }
 
+// SlaveNode is main package object.
 type SlaveNode struct {
 	sync.RWMutex
 
@@ -63,8 +67,8 @@ type SlaveNode struct {
 	host   string
 }
 
+// New is a constructor.
 func New(host string) (*SlaveNode, error) {
-
 	s := &SlaveNode{
 		host: host,
 	}
@@ -84,6 +88,7 @@ func (s *SlaveNode) connection() error {
 	return err
 }
 
+// Send sends data to master node(s).
 func (s *SlaveNode) Send(ctx context.Context, request *nodes.SlaveNodeInfoRequest) (*nodes.SimpleResult, error) {
 	return s.client.UpdateNodeInfo(ctx, request)
 }

@@ -82,18 +82,6 @@ func (mr *MockIItemMockRecorder) Cancel() *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Cancel", reflect.TypeOf((*MockIItem)(nil).Cancel))
 }
 
-// CheckData mocks base method
-func (m *MockIItem) CheckData() {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "CheckData")
-}
-
-// CheckData indicates an expected call of CheckData
-func (mr *MockIItemMockRecorder) CheckData() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CheckData", reflect.TypeOf((*MockIItem)(nil).CheckData))
-}
-
 // CleanError mocks base method
 func (m *MockIItem) CleanError() {
 	m.ctrl.T.Helper()
@@ -258,24 +246,19 @@ func (mr *MockIItemMockRecorder) GetTestObject() *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTestObject", reflect.TypeOf((*MockIItem)(nil).GetTestObject))
 }
 
-// LogTrace mocks base method
-func (m *MockIItem) LogTracef(arg0 string, arg1 ...interface{}) {
+// InitEmpty mocks base method
+func (m *MockIItem) InitEmpty() {
 	m.ctrl.T.Helper()
-	varargs := []interface{}{arg0}
-	for _, a := range arg1 {
-		varargs = append(varargs, a)
-	}
-	m.ctrl.Call(m, "LogTracef", varargs...)
+	m.ctrl.Call(m, "InitEmpty")
 }
 
-// LogTrace indicates an expected call of LogTrace
-func (mr *MockIItemMockRecorder) LogTrace(arg0 interface{}, arg1 ...interface{}) *gomock.Call {
+// InitEmpty indicates an expected call of InitEmpty
+func (mr *MockIItemMockRecorder) InitEmpty() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{arg0}, arg1...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LogTracef", reflect.TypeOf((*MockIItem)(nil).LogTracef), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "InitEmpty", reflect.TypeOf((*MockIItem)(nil).InitEmpty))
 }
 
-// LogTraceFinishTime mocks base method
+// LogTraceFinishTimef mocks base method
 func (m *MockIItem) LogTraceFinishTimef(arg0 string, arg1 ...interface{}) {
 	m.ctrl.T.Helper()
 	varargs := []interface{}{arg0}
@@ -285,11 +268,28 @@ func (m *MockIItem) LogTraceFinishTimef(arg0 string, arg1 ...interface{}) {
 	m.ctrl.Call(m, "LogTraceFinishTimef", varargs...)
 }
 
-// LogTraceFinishTime indicates an expected call of LogTraceFinishTime
-func (mr *MockIItemMockRecorder) LogTraceFinishTime(arg0 interface{}, arg1 ...interface{}) *gomock.Call {
+// LogTraceFinishTimef indicates an expected call of LogTraceFinishTimef
+func (mr *MockIItemMockRecorder) LogTraceFinishTimef(arg0 interface{}, arg1 ...interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{arg0}, arg1...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LogTraceFinishTimef", reflect.TypeOf((*MockIItem)(nil).LogTraceFinishTimef), varargs...)
+}
+
+// LogTracef mocks base method
+func (m *MockIItem) LogTracef(arg0 string, arg1 ...interface{}) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{arg0}
+	for _, a := range arg1 {
+		varargs = append(varargs, a)
+	}
+	m.ctrl.Call(m, "LogTracef", varargs...)
+}
+
+// LogTracef indicates an expected call of LogTracef
+func (mr *MockIItemMockRecorder) LogTracef(arg0 interface{}, arg1 ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{arg0}, arg1...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LogTracef", reflect.TypeOf((*MockIItem)(nil).LogTracef), varargs...)
 }
 
 // NeedToSkip mocks base method

@@ -6,6 +6,8 @@ import (
 	"log"
 	"time"
 
+	"github.com/pkg/errors"
+
 	"github.com/iostrovok/conveyor"
 	"github.com/iostrovok/conveyor/faces"
 	"github.com/iostrovok/conveyor/input"
@@ -13,49 +15,61 @@ import (
 	"github.com/iostrovok/conveyor/tracer"
 )
 
-var total = 20
-var totalOnline = 5
+var (
+	total       = 20
+	totalOnline = 5
+)
 
 const (
-	FirstHandler     faces.Name = "1th-handler"
-	SecondHandler    faces.Name = "2th-handler"
-	ThirdHandler     faces.Name = "3th-handler"
-	FourthHandler    faces.Name = "4th-handler"
-	ErrorHandler     faces.Name = "error-user-handler"
+	chanLength              = 20
+	defaultPriority         = 100
+	defaultStatisticTimeOut = 10 * time.Second
+	defaultTracerTimeOut    = 5 * time.Second
+	defaultMetricTimeOut    = 3 * time.Second
+
+	// FirstHandler is a name for first handler.
+	FirstHandler faces.Name = "1th-handler"
+	// SecondHandler is a name for second handler.
+	SecondHandler faces.Name = "2th-handler"
+	// ThirdHandler is a name for third handler.
+	ThirdHandler faces.Name = "3th-handler"
+	// FourthHandler is a name for fourth handler.
+	FourthHandler faces.Name = "4th-handler"
+	// ErrorHandler is a name for error handler.
+	ErrorHandler faces.Name = "error-user-handler"
+	// FinalHandlerName is a name for final handler.
 	FinalHandlerName faces.Name = "final-user-handler"
 )
 
+// MyMessage implements the one part on conveyor.
 type MyMessage struct {
 	item.Item
-
 	msg string
 	id  int
 }
 
-func (m *MyMessage) PushedToChannel(label faces.Name) {
-	//fmt.Printf("\n\nPushedToChannel %s!!!!!!!!\n\n", string(label)+"channel")
-}
-func (m *MyMessage) ReceivedFromChannel() {
-	//fmt.Printf("\n\nReceivedFromChannel !!!!!!!!\n\n")
-}
-
 // >>>>>>>>>>>>>>>>>>>> simple final handler. START
 
+// FinalHandler is a simple final handler.
 type FinalHandler struct {
 	faces.EmptyHandler
-
 	total int
 }
 
+// NewFinalHandler is a constructor.
 func NewFinalHandler(_ faces.Name) (faces.IHandler, error) {
 	return &FinalHandler{}, nil
 }
 
+// Start is interface function.
 func (m *FinalHandler) Start(_ context.Context) error { return nil }
+
+// Stop is interface function.
 func (m *FinalHandler) Stop(_ context.Context) {
 	fmt.Printf("final handler: total proceesed %d from %d + 5\n", m.total, total)
 }
 
+// Run is interface function.
 func (m *FinalHandler) Run(item faces.IItem) error {
 	/*
 		It gets each item as after success, as with error.
@@ -73,19 +87,20 @@ func (m *FinalHandler) Run(item faces.IItem) error {
 
 // >>>>>>>>>>>>>>>>>>>> simple error handler. START
 
+// ErrHandler is a simple error handler.
 type ErrHandler struct {
 	faces.EmptyHandler
-
 	name faces.Name
 }
 
+// NewErrHandler is s constructor.
 func NewErrHandler(name faces.Name) (faces.IHandler, error) {
 	return &ErrHandler{
 		name: name,
 	}, nil
 }
 
-
+// Run is interface function.
 func (m *ErrHandler) Run(item faces.IItem) error {
 	msg := item.Get().(*MyMessage)
 	fmt.Printf("ErrHandler => %d]: %d ==> %s\n", item.GetID(), msg.id, msg.msg)
@@ -104,6 +119,8 @@ func (m *ErrHandler) Run(item faces.IItem) error {
 	2) It may setup returns error. After that item is passing to error handler.
 	3) First handler may send item direct to fourth handler.
 */
+
+// MySimpleHandler implements of simple handler.
 type MySimpleHandler struct {
 	faces.EmptyHandler
 
@@ -112,6 +129,7 @@ type MySimpleHandler struct {
 	name        faces.Name
 }
 
+// First is s constructor.
 func First(name faces.Name) (faces.IHandler, error) {
 	/*
 		if we want to setup single for all "first" workers connection to database or grpc, we may do it here.
@@ -122,6 +140,8 @@ func First(name faces.Name) (faces.IHandler, error) {
 		sleepSecond: 1,
 	}, nil
 }
+
+// Second is s constructor.
 func Second(name faces.Name) (faces.IHandler, error) {
 	/*
 		if we want to setup single for all "second" workers connection to database or grpc, we may do it here.
@@ -133,6 +153,7 @@ func Second(name faces.Name) (faces.IHandler, error) {
 	}, nil
 }
 
+// Third is s constructor.
 func Third(name faces.Name) (faces.IHandler, error) {
 	/*
 		if we want to setup single for all "third" workers connection to database or grpc, we may do it here.
@@ -144,6 +165,7 @@ func Third(name faces.Name) (faces.IHandler, error) {
 	}, nil
 }
 
+// Fourth is s constructor.
 func Fourth(name faces.Name) (faces.IHandler, error) {
 	/*
 		if we want to setup single for all "fourth" workers connection to database or grpc, we may do it here.
@@ -155,24 +177,26 @@ func Fourth(name faces.Name) (faces.IHandler, error) {
 	}, nil
 }
 
-// does nothing
+// TickerRun does nothing. Just for print info about action.
 func (m *MySimpleHandler) TickerRun(_ context.Context) {
 	fmt.Printf("MySimpleHandler: TickerRun: %s!\n", m.name)
 }
 
-// return 1 second
+// TickerDuration return 1 second.
 func (m *MySimpleHandler) TickerDuration() time.Duration {
-	return time.Second * 1
+	return time.Second
 }
 
+// Start is interface function.
 func (m *MySimpleHandler) Start(_ context.Context) error {
 	return nil
 }
 
+// Stop is interface function.
 func (m *MySimpleHandler) Stop(_ context.Context) { /* nothing */ }
 
+// Run is interface function.
 func (m *MySimpleHandler) Run(item faces.IItem) error {
-
 	// increase internal counter
 	m.counter++
 
@@ -183,7 +207,7 @@ func (m *MySimpleHandler) Run(item faces.IItem) error {
 
 	// should it do something special-1?
 	if item.GetID()%4 == 0 {
-		return fmt.Errorf("%s marked the items with error", m.name)
+		return errors.New(string(m.name) + " marked the items with error")
 	}
 
 	// should it do something special-2?
@@ -199,19 +223,19 @@ func (m *MySimpleHandler) Run(item faces.IItem) error {
 
 func main() {
 	// create new conveyor
-	myMaster := conveyor.New(20, faces.ChanStack, "my-app")
+	myMaster := conveyor.New(chanLength, faces.ChanStack, "my-app")
 
 	// set up default tracer and period for collected metric to with tracer
-	myMaster.SetTracer(tracer.NewTrace(), time.Second*5).MetricPeriod(3 * time.Second)
+	myMaster.SetTracer(tracer.New(), defaultTracerTimeOut).MetricPeriod(defaultMetricTimeOut)
 
 	// do we want to remote control? make it here
-	//myMaster.SetMasterNode("127.0.0.1:5101", 2*time.Second)
+	// myMaster.SetMasterNode("127.0.0.1:5101", 2*time.Second)
 
 	// optional method to trace process.
 	go func() {
 		for {
 			fmt.Printf("Statistic...........: %+v\n", myMaster.Statistic())
-			time.Sleep(10 * time.Second)
+			time.Sleep(defaultStatisticTimeOut)
 		}
 	}()
 
@@ -244,11 +268,11 @@ func main() {
 
 	// start our conveyor
 	if err := myMaster.Start(context.Background()); err != nil {
-		log.Fatal(tracer.NewTrace())
+		log.Fatal(tracer.New())
 	}
 
 	for i := 0; i < total; i++ {
-		tr := tracer.NewTrace()
+		tr := tracer.New()
 		tr.LazyPrintf("item N %d", i)
 
 		item := input.New().Trace(tr).
@@ -259,12 +283,11 @@ func main() {
 	}
 
 	for i := total; i < totalOnline+total; i++ {
-
 		// process one message "online" with reading result
 
 		item := input.New().
-			Data(&MyMessage{msg: fmt.Sprintf("online item: %d", 100)}).
-			Priority(100)
+			Data(&MyMessage{msg: fmt.Sprintf("online item: %d", defaultPriority)}).
+			Priority(defaultPriority)
 
 		res, err := myMaster.RunRes(item)
 		fmt.Printf("\nProccesed online: Result: %+v, Error: %+v\n", res, err)
