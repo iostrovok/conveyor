@@ -1,8 +1,7 @@
-package workers
-
 /*
-	Internal package. Package realizes the IWorker interface.
+Package workers is an internal package. Package realizes the IManager interface.
 */
+package workers
 
 import (
 	"context"
@@ -22,6 +21,7 @@ const (
 	hoursInYear        = 24 * 356 * 100
 )
 
+// Worker is an implementation of faces.IWorker Interface .
 type Worker struct {
 	sync.RWMutex
 
@@ -49,6 +49,7 @@ type Worker struct {
 	testObject faces.ITestObject
 }
 
+// NewWorker is constructor.
 func NewWorker(id string, name faces.Name, in, out, errCh faces.IChan, giveBirth faces.GiveBirth,
 	wg *sync.WaitGroup, tr faces.ITrace, activeWorkers *int32) (faces.IWorker, error) {
 	handler, err := giveBirth(name)
@@ -74,6 +75,7 @@ func NewWorker(id string, name faces.Name, in, out, errCh faces.IChan, giveBirth
 	}, nil
 }
 
+// SetBorderCond is a setter. It sets up the condition to stop, start the worker and log the info about next manager.
 func (w *Worker) SetBorderCond(typ faces.ManagerType, isLast bool, nextManagerName faces.Name) {
 	w.Lock()
 	defer w.Unlock()
@@ -83,6 +85,7 @@ func (w *Worker) SetBorderCond(typ faces.ManagerType, isLast bool, nextManagerNa
 	w.typ = typ
 }
 
+// SetTestMode is a simple setter. It attaches the testObject.
 func (w *Worker) SetTestMode(testObject faces.ITestObject) {
 	w.Lock()
 	defer w.Unlock()
@@ -94,22 +97,27 @@ func (w *Worker) SetTestMode(testObject faces.ITestObject) {
 	w.testObject = testObject
 }
 
+// GetBorderCond is a getter. It returns the condition to stop, start the worker and log the info about next manager.
 func (w *Worker) GetBorderCond() (faces.Name, faces.ManagerType, bool) {
 	return w.name, w.typ, w.isLast
 }
 
+// IsLast is a simple getter. It returns flag "is Manager last".
 func (w *Worker) IsLast() bool {
 	return w.isLast
 }
 
+// Name is a simple getter. It returns Manager name.
 func (w *Worker) Name() faces.Name {
 	return w.name
 }
 
+// ID is a simple getter. It returns Worker ID.
 func (w *Worker) ID() string {
 	return w.id
 }
 
+// Stop stops the worker.
 func (w *Worker) Stop() {
 	if w.isStarted {
 		w.stopCh <- struct{}{}
@@ -123,37 +131,41 @@ func (w *Worker) logf(format string, a ...interface{}) {
 }
 
 func (w *Worker) startHandler(ctx context.Context) error {
+	if !w.testObject.IsTestMode() {
+		// simple start if not it's test mode
+		return w.handler.Start(ctx)
+	}
+
 	var err error
 
-	if w.testObject.IsTestMode() {
-		values := []reflect.Value{reflect.ValueOf(ctx), reflect.ValueOf(w.testObject.TestObject())}
-		st := reflect.TypeOf(w.handler)
+	values := []reflect.Value{reflect.ValueOf(ctx), reflect.ValueOf(w.testObject.TestObject())}
+	st := reflect.TypeOf(w.handler)
 
-		if _, ok := st.MethodByName("StartTest_" + w.testObject.Suffix()); ok {
-			values := reflect.ValueOf(w.handler).MethodByName("StartTest_" + w.testObject.Suffix()).Call(values)
+	if _, ok := st.MethodByName(faces.StartTestHandlerPrefix + w.testObject.Suffix()); ok {
+		res := reflect.ValueOf(w.handler).MethodByName(faces.StartTestHandlerPrefix + w.testObject.Suffix()).Call(values)
 
-			if !values[0].IsNil() {
-				err = values[0].Interface().(error)
-			}
-
-			return err
+		if len(res) > 0 && !res[0].IsNil() {
+			err = res[0].Interface().(error)
 		}
 
-		if _, ok := st.MethodByName("StartTest"); ok {
-			values := reflect.ValueOf(w.handler).MethodByName("StartTest").Call(values)
+		return err
+	}
 
-			if !values[0].IsNil() {
-				err = values[0].Interface().(error)
-			}
+	if _, ok := st.MethodByName(faces.StartTestHandlerPrefix); ok {
+		res := reflect.ValueOf(w.handler).MethodByName(faces.StartTestHandlerPrefix).Call(values)
 
-			return err
+		if len(res) > 0 && !res[0].IsNil() {
+			err = res[0].Interface().(error)
 		}
+
+		return err
 	}
 
 	// simple start if not it's test mode
-	return w.handler.Start(ctx)
+	return nil
 }
 
+// Start runs the worker.
 func (w *Worker) Start(ctx context.Context) error {
 	if err := w.startHandler(ctx); err != nil {
 		return err
@@ -169,14 +181,14 @@ func (w *Worker) stopHandler(ctx context.Context) {
 		values := []reflect.Value{reflect.ValueOf(ctx), reflect.ValueOf(w.testObject.TestObject())}
 		st := reflect.TypeOf(w.handler)
 
-		if _, ok := st.MethodByName("StopTest_" + w.testObject.Suffix()); ok {
-			reflect.ValueOf(w.handler).MethodByName("StopTest_" + w.testObject.Suffix()).Call(values)
+		if _, ok := st.MethodByName(faces.StopTestHandlerPrefix + w.testObject.Suffix()); ok {
+			reflect.ValueOf(w.handler).MethodByName(faces.StopTestHandlerPrefix + w.testObject.Suffix()).Call(values)
 
 			return
 		}
 
-		if _, ok := st.MethodByName("StopTest"); ok {
-			reflect.ValueOf(w.handler).MethodByName("StopTest").Call(values)
+		if _, ok := st.MethodByName(faces.StopTestHandlerPrefix); ok {
+			reflect.ValueOf(w.handler).MethodByName(faces.StopTestHandlerPrefix).Call(values)
 
 			return
 		}
@@ -302,21 +314,20 @@ func doitWithTest(internalErr chan error, handler faces.IHandler, item faces.IIt
 	suffix := item.GetTestObject().Suffix()
 	st := reflect.TypeOf(handler)
 
-	if _, ok := st.MethodByName("RunTest_" + suffix); ok {
-		values := reflect.ValueOf(handler).MethodByName("RunTest_" + suffix).Call(values)
-
-		if !values[0].IsNil() {
-			err = values[0].Interface().(error)
+	if _, ok := st.MethodByName(faces.RunTestHandlerPrefix + suffix); ok {
+		res := reflect.ValueOf(handler).MethodByName(faces.RunTestHandlerPrefix + suffix).Call(values)
+		if len(res) > 0 && !res[0].IsNil() {
+			err = res[0].Interface().(error)
 		}
 		internalErr <- err
 
 		return
 	}
 
-	if _, ok := st.MethodByName("RunTest"); ok {
-		values := reflect.ValueOf(handler).MethodByName("RunTest").Call(values)
-		if !values[0].IsNil() {
-			err = values[0].Interface().(error)
+	if _, ok := st.MethodByName(faces.RunTestHandlerPrefix); ok {
+		res := reflect.ValueOf(handler).MethodByName(faces.RunTestHandlerPrefix).Call(values)
+		if len(res) > 0 && !res[0].IsNil() {
+			err = res[0].Interface().(error)
 		}
 		internalErr <- err
 

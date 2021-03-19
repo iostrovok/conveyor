@@ -59,7 +59,11 @@ func main() {
 		panic(err)
 	}
 
-	defer file.Close()
+	defer func() {
+		if err := file.Close(); err != nil {
+			panic(err)
+		}
+	}()
 
 	module := ""
 	scanner := bufio.NewScanner(file)
@@ -171,7 +175,9 @@ func cleanOneFile(path, pkgName string) error {
 		return err
 	}
 
-	file.Close()
+	if err := file.Close(); err != nil {
+		panic(err)
+	}
 
 	out = strings.ReplaceAll(out, ` href="`+pkgName+"/", ` href="`)
 	out = strings.ReplaceAll(out, ` href="`+pkgName+`.html`, ` href="index.html`)

@@ -1,4 +1,4 @@
-package main
+package main_test
 
 import (
 	"context"
@@ -8,6 +8,7 @@ import (
 	"time"
 
 	. "github.com/iostrovok/check"
+	"github.com/pkg/errors"
 
 	"github.com/iostrovok/conveyor"
 	"github.com/iostrovok/conveyor/faces"
@@ -45,10 +46,11 @@ type MyMessage struct {
 }
 
 func (m *MyMessage) PushedToChannel(label faces.Name) {
-	//fmt.Printf("\n\nPushedToChannel %s!!!!!!!!\n\n", string(label)+"channel")
+	// fmt.Printf("\n\nPushedToChannel %s!!!!!!!!\n\n", string(label)+"channel")
 }
+
 func (m *MyMessage) ReceivedFromChannel() {
-	//fmt.Printf("\n\nReceivedFromChannel !!!!!!!!\n\n")
+	// fmt.Printf("\n\nReceivedFromChannel !!!!!!!!\n\n")
 }
 
 // >>>>>>>>>>>>>>>>>>>> simple final handler. START
@@ -64,7 +66,6 @@ func NewFinalHandler(_ faces.Name) (faces.IHandler, error) {
 }
 
 func (m *FinalHandler) Start(_ context.Context) error {
-	fmt.Printf("Start!\n")
 	return nil
 }
 
@@ -193,17 +194,18 @@ func (m *MySimpleHandler) Start(_ context.Context) error {
 	return nil
 }
 
-func (m *MySimpleHandler) StartTest_RockAndRoll(_ context.Context, testObject *C) error {
+func (m *MySimpleHandler) StartTestRockAndRoll(_ context.Context, testObject *C) error {
 	/* does nothing */
 
 	// just debug message
-	fmt.Printf("StartTest_RockAndRoll!\n")
+	fmt.Printf("StartTestRockAndRoll!\n")
 
 	// just debug counter
 	atomic.AddInt32(CountMySimpleHandlerStartStopRockAndRoll, 1)
 
 	// Check RockAndRoll case with testObject here
 	testObject.Assert(1, Equals, 1)
+
 	return nil
 }
 
@@ -217,9 +219,9 @@ func (m *MySimpleHandler) Stop(_ context.Context) {
 	atomic.AddInt32(CountMySimpleHandlerStop, 1)
 }
 
-func (m *MySimpleHandler) StopTest_RockAndRoll(_ context.Context, testObject *C) error {
+func (m *MySimpleHandler) StopTestRockAndRoll(_ context.Context, testObject *C) error {
 	// just debug message
-	fmt.Printf("StopTest_RockAndRoll!\n")
+	fmt.Printf("StopTestRockAndRoll!\n")
 	// just debug counter
 	atomic.AddInt32(CountMySimpleHandlerStopStopRockAndRoll, 1)
 
@@ -230,7 +232,6 @@ func (m *MySimpleHandler) StopTest_RockAndRoll(_ context.Context, testObject *C)
 }
 
 func (m *MySimpleHandler) _run(item faces.IItem) error {
-
 	// increase internal counter
 	m.counter++
 
@@ -241,7 +242,7 @@ func (m *MySimpleHandler) _run(item faces.IItem) error {
 
 	// should it do something special-1?
 	if msg.id%4 == 0 {
-		return fmt.Errorf("%s marked the items with error", m.name)
+		return errors.New(string(m.name) + " marked the items with error")
 	}
 
 	// should it do something special-2?
@@ -254,15 +255,14 @@ func (m *MySimpleHandler) _run(item faces.IItem) error {
 }
 
 func (m *MySimpleHandler) Run(item faces.IItem) error {
-
 	atomic.AddInt32(countRun, 1)
 
 	return m._run(item)
 }
 
-func (m *MySimpleHandler) RunTest_Jazz(item faces.IItem, testObject *C) error {
+func (m *MySimpleHandler) RunTestJazz(item faces.IItem, testObject *C) error {
 	// just debug message
-	fmt.Printf("RunTest_Jazz!\n")
+	fmt.Printf("RunTestJazz!\n")
 	// just debug counter
 	atomic.AddInt32(countRunJazz, 1)
 
@@ -275,7 +275,6 @@ func (m *MySimpleHandler) RunTest_Jazz(item faces.IItem, testObject *C) error {
 // <<<<<<<<<<<<<<<<<<<< simple worked handler. END
 
 func buildConveyor(myMaster faces.IConveyor) error {
-
 	// set up our error handler
 	if err := myMaster.AddErrorHandler(ErrorHandler, 2, 6, NewErrHandler); err != nil {
 		return err
@@ -309,10 +308,9 @@ func buildConveyor(myMaster faces.IConveyor) error {
 	}
 
 	return nil
-
 }
 
-// test section
+// test section.
 type testSuite struct{}
 
 var _ = Suite(&testSuite{})
@@ -320,7 +318,6 @@ var _ = Suite(&testSuite{})
 func TestSuite(t *testing.T) { TestingT(t) }
 
 func (s *testSuite) TestSyntax(c *C) {
-
 	/*
 		Test object "RockAndRoll"
 		Used for Start and Stop methods only
@@ -334,7 +331,6 @@ func (s *testSuite) TestSyntax(c *C) {
 	c.Assert(err, IsNil)
 
 	for i := 0; i < total; i++ {
-
 		item := input.New().
 			Data(&MyMessage{msg: fmt.Sprintf("online item: %d", i), id: i}).
 			Priority(100)

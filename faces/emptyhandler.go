@@ -44,10 +44,10 @@ func (m *EmptyHandler) Run(_ IItem) error {
 	return nil
 }
 
-// It does nothing by default.
+// TickerRun does nothing by default.
 func (m *EmptyHandler) TickerRun(ctx context.Context) { /* nothing */ }
 
-// returns 0 by default.
+// TickerDuration returns 0 by default.
 func (m *EmptyHandler) TickerDuration() time.Duration {
 	return time.Duration(0)
 }

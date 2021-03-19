@@ -1,8 +1,7 @@
-package workers
-
 /*
-	Internal package. Package realizes the IManager interface.
+Package workers is an internal package. Package realizes the IManager interface.
 */
+package workers
 
 import (
 	"context"
@@ -23,6 +22,7 @@ const (
 	defaultMetricPeriodInSecond = 10 * time.Second
 )
 
+// Manager is an implementation of faces.IManager Interface .
 type Manager struct {
 	sync.RWMutex
 
@@ -66,6 +66,7 @@ type Manager struct {
 	FinalManagerType  ManagerType = "final"
 */
 
+// NewManager is a constructor.
 func NewManager(name faces.Name, typ faces.ManagerType, lengthCh, minC, maxC int, tr faces.ITrace) faces.IManager {
 	return &Manager{
 		typ:                  typ,
@@ -82,6 +83,7 @@ func NewManager(name faces.Name, typ faces.ManagerType, lengthCh, minC, maxC int
 	}
 }
 
+// Statistic returns data about manager condition.
 func (m *Manager) Statistic() *nodes.ManagerData {
 	m.RLock()
 	defer m.RUnlock()
@@ -110,10 +112,12 @@ func (m *Manager) Statistic() *nodes.ManagerData {
 	return out
 }
 
+// Name is a simple getter. It returns Manager name.
 func (m *Manager) Name() faces.Name {
 	return m.name
 }
 
+// SetTestMode is a simple setter. It attaches the testObject.
 func (m *Manager) SetTestMode(testObject faces.ITestObject) faces.IManager {
 	if testObject == nil {
 		testObject = testobject.Empty()
@@ -124,12 +128,14 @@ func (m *Manager) SetTestMode(testObject faces.ITestObject) faces.IManager {
 	return m
 }
 
+// SetWorkersCounter is a simple setter.
 func (m *Manager) SetWorkersCounter(wc faces.IWorkersCounter) faces.IManager {
 	m.workersCounter = wc
 
 	return m
 }
 
+// SetWaitGroup is a simple setter.
 func (m *Manager) SetWaitGroup(wg *sync.WaitGroup) faces.IManager {
 	wg.Add(1)
 	m.wgGlobal = wg
@@ -137,20 +143,24 @@ func (m *Manager) SetWaitGroup(wg *sync.WaitGroup) faces.IManager {
 	return m
 }
 
+// GetNextManager is a simple getter. It returns next Manager or nil.
 func (m *Manager) GetNextManager() faces.IManager {
 	return m.next
 }
 
+// SetNextManager is a simple setter.
 func (m *Manager) SetNextManager(next faces.IManager) faces.IManager {
 	m.next = next
 
 	return m
 }
 
+// GetPrevManager is a simple getter. It returns previous Manager or nil.
 func (m *Manager) GetPrevManager() faces.IManager {
 	return m.previous
 }
 
+// SetPrevManager is a simple setter.
 func (m *Manager) SetPrevManager(previous faces.IManager) faces.IManager {
 	m.previous = previous
 
@@ -168,6 +178,7 @@ func (m *Manager) setDataToWorkers() {
 	}
 }
 
+// SetIsLast is a setter. It set up isLast flag to manager and all it's workers.
 func (m *Manager) SetIsLast(isLast bool) faces.IManager {
 	m.Lock()
 	m.isLast = isLast
@@ -178,42 +189,48 @@ func (m *Manager) SetIsLast(isLast bool) faces.IManager {
 	return m
 }
 
+// IsLast is a simple getter. It returns flag "is Manager last".
 func (m *Manager) IsLast() bool {
 	return m.isLast
 }
 
-// The period between metric evaluations.
-// By default 10 second.
+// MetricPeriod is a simple setter.
+// It sets up the period between metric evaluations. By default 10 second.
 func (m *Manager) MetricPeriod(duration time.Duration) faces.IManager {
 	m.metricPeriodDuration = duration
 
 	return m
 }
 
+// SetHandler is a simple setter.
 func (m *Manager) SetHandler(handler faces.GiveBirth) faces.IManager {
 	m.handler = handler
 
 	return m
 }
 
+// SetChanIn is a simple setter.
 func (m *Manager) SetChanIn(in faces.IChan) faces.IManager {
 	m.in = in
 
 	return m
 }
 
+// SetChanOut is a simple setter.
 func (m *Manager) SetChanOut(out faces.IChan) faces.IManager {
 	m.out = out
 
 	return m
 }
 
+// SetChanErr is a simple setter.
 func (m *Manager) SetChanErr(errCh faces.IChan) faces.IManager {
 	m.errCh = errCh
 
 	return m
 }
 
+// Stop stops all workers.
 func (m *Manager) Stop() {
 	m.Lock()
 	defer m.Unlock()
@@ -296,6 +313,7 @@ func (m *Manager) waitingGlobalStopAndClose() {
 	}
 }
 
+// Start runs workers and metrics.
 func (m *Manager) Start(ctx context.Context) error {
 	if m.checkRun() {
 		return nil

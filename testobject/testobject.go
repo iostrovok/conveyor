@@ -1,3 +1,6 @@
+/*
+Package testobject realizes the ITestObject interface.
+*/
 package testobject
 
 import (
@@ -7,10 +10,7 @@ import (
 	"github.com/iostrovok/conveyor/faces"
 )
 
-/*
-	Package realizes the ITestObject interface.
-*/
-
+// TestObject is an implementation of faces.ITestObject Interface .
 type TestObject struct {
 	sync.RWMutex
 
@@ -19,6 +19,7 @@ type TestObject struct {
 	suffix string
 }
 
+// Empty is a constructor of empty test object.
 func Empty() faces.ITestObject {
 	ob := &TestObject{
 		mode: false,
@@ -27,6 +28,7 @@ func Empty() faces.ITestObject {
 	return ob
 }
 
+// New is a constructor.
 func New(mode bool, object *check.C, suffix string) faces.ITestObject {
 	ob := &TestObject{
 		mode:   mode,
@@ -37,14 +39,17 @@ func New(mode bool, object *check.C, suffix string) faces.ITestObject {
 	return ob
 }
 
+// IsTestMode is a simple getter.
 func (ob *TestObject) IsTestMode() bool {
 	return ob.mode
 }
 
+// TestObject is a simple getter.
 func (ob *TestObject) TestObject() *check.C {
 	return ob.object
 }
 
+// Suffix is a simple getter.
 func (ob *TestObject) Suffix() string {
 	return ob.suffix
 }

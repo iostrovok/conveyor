@@ -1,12 +1,11 @@
-package queues
-
 /*
-	Package supports the IChan interface and provides 3 simples realization of them.
+Package queues implements the IChan interface and provides 3 simples realization of them.
 
-	- standard GO channel FIFO, the fastest realization
-	- priority queues
-	- stack, LIFO
+- standard GO channel FIFO, the fastest realization
+- priority queues
+- stack, LIFO
 */
+package queues
 
 import (
 	"github.com/iostrovok/conveyor/faces"
@@ -15,6 +14,7 @@ import (
 	"github.com/iostrovok/conveyor/queues/std"
 )
 
+// New is a wrapper over selected type of queues.
 func New(lengthChannel int, chanType faces.ChanType) faces.IChan {
 	switch chanType {
 	case faces.ChanStdGo:

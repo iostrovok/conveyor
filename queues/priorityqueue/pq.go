@@ -1,11 +1,11 @@
-package priorityqueue
-
 /*
-	The package support the priority queue for using them in conveyor.
+Package priorityqueue supports the priority queues for using them in conveyor.
 
-	Items with the same priority has FIFO order.
-	Realisation has 2-element delay on empty channel because it uses standard GO channel.
+Items with the same priority has FIFO order.
+Realization has 2-element delay on empty channel because it uses standard GO channel.
+
 */
+package priorityqueue
 
 import (
 	"context"
@@ -21,12 +21,7 @@ const (
 	half = 2
 )
 
-type IPQ interface {
-	Len() int32
-	ChanIn() chan interface{}
-	ChanOut() chan interface{}
-}
-
+// PQ is main package structure.
 type PQ struct {
 	sync.RWMutex
 
@@ -40,11 +35,12 @@ type PQ struct {
 	isActive bool
 }
 
-// Create a new stack.
+// New is a constructor, creates a new stack.
 func New(length int) faces.IChan {
 	return Init(context.Background(), length)
 }
 
+// Init is full constructor for accurate configuration.
 func Init(ctx context.Context, limit int) *PQ {
 	stack := &PQ{
 		chIn:  make(faces.MainCh, 1),
@@ -83,7 +79,7 @@ func PrintBody(body []faces.IItem, last int) string {
 	return strings.Join(out, "\n")
 }
 
-// Body().
+// Body is debug function.
 func (pq *PQ) Body() []faces.IItem {
 	pq.Lock()
 	defer pq.Unlock()
@@ -91,36 +87,39 @@ func (pq *PQ) Body() []faces.IItem {
 	return pq.body
 }
 
+// Push adds item to queue.
 func (pq *PQ) Push(item faces.IItem) {
 	pq.chIn <- item
 }
 
-// Close().
+// Close stops the queue.
 func (pq *PQ) Close() {
 	pq.Lock()
 	defer pq.Unlock()
 	close(pq.chIn)
 }
 
-// Returns the number of items in the stack.
+// Count returns the number of items in the stack.
 func (pq *PQ) Count() int {
 	return pq.last
 }
 
-// IsActive.
+// IsActive is a simple getter.
 func (pq *PQ) IsActive() bool {
 	return pq.isActive
 }
 
-// Returns the max available number items in the stack.
+// Len returns the max available number items in the stack.
 func (pq *PQ) Len() int {
 	return pq.limit
 }
 
+// ChanIn return reference to input channel.
 func (pq *PQ) ChanIn() faces.MainCh {
 	return pq.chIn
 }
 
+// ChanOut return reference to output channel.
 func (pq *PQ) ChanOut() faces.MainCh {
 	return pq.chOut
 }
@@ -272,6 +271,7 @@ func insertToArray(array *[]faces.IItem, item faces.IItem, position int) {
 	(*array)[position] = item
 }
 
+// Info returns the information about current stage of queue.
 func (pq *PQ) Info() *nodes.ChanData {
 	return &nodes.ChanData{
 		Type:            nodes.ChanType_CHAN_PRIORITY_QUEUE,

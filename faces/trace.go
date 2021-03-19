@@ -10,6 +10,9 @@ const (
 	SkipAll Name = "###SKIP_EVERYTHING_BY_THE_END"
 )
 
+/*
+ITrace is an interface to support outside loggers.
+*/
 type ITrace interface {
 	// LazyPrintf evaluates its arguments with fmt.Sprintf each time the
 	// /debug/requests page is rendered. Any memory referenced by a will be

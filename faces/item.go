@@ -4,17 +4,14 @@ import (
 	"context"
 )
 
-/*
-	....
-*/
-
+// IItem is interface for support the single part on conveyor.
 type IItem interface {
 	GetID() int64
 	SetID(id int64)
 
 	Get() (data interface{})
 	Set(data interface{})
-	CheckData()
+	InitEmpty()
 
 	// processing functions
 	GetContext() context.Context
