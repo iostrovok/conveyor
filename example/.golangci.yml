@@ -485,8 +485,9 @@ linters-settings:
 
 linters:
   disable-list:
-    - maligned
+    - gochecknoglobals
   enable-list:
+    - maligned
     - asciicheck
     - bodyclose
     - deadcode
@@ -498,7 +499,6 @@ linters:
     - exportloopref
     - funlen
     - gci
-    - gochecknoglobals
     - gochecknoinits
     - gocognit
     - goconst
