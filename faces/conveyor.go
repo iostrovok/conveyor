@@ -62,4 +62,7 @@ type IConveyor interface {
 	SetMasterNode(addr string, masterNodePeriod time.Duration)
 
 	DefaultPriority() int
+
+	// Simple getter
+	WorkBench() IWorkBench
 }

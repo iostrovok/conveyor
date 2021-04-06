@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"time"
 
 	"github.com/iostrovok/conveyor"
 	"github.com/iostrovok/conveyor/faces"
@@ -27,7 +28,9 @@ func handler(name faces.Name) (faces.IHandler, error) {
 // Run is interface method.
 func (m *MySimpleHandler) Run(item faces.IItem) error {
 	fmt.Printf("MySimpleHandler %s => %d]: %s\n", m.name, item.GetID(), item.Get().(string))
-
+	// make you job here >>>>>>>
+	time.Sleep(5 * time.Millisecond)
+	// make you job here <<<<<<<
 	return nil
 }
 
@@ -37,7 +40,7 @@ func main() {
 	// create new conveyor
 	myMaster := conveyor.New(chanLength, faces.ChanStdGo, "my-app")
 
-	// set up simple handler
+	// set up first simple handler
 	if err := myMaster.AddHandler("handler", 2, 6, handler); err != nil {
 		log.Fatalf("%+v", err)
 	}

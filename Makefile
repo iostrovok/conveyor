@@ -56,7 +56,14 @@ tests-priorityqueue:
 	@echo "Run race test for queues/priorityqueue"
 	cd $(LOCDIR)/queues/priorityqueue && $(DIR) $(GODEBUG) go test -cover -race ./
 
-test: test-std test-stack tests-priorityqueue test-workers tests-top test-common test-example
+tests-queues: test-std test-stack tests-priorityqueue
+
+tests-workbench:
+	@echo "======================================================================"
+	@echo "Run race test for workbench"
+	cd $(LOCDIR)/workbench && $(DIR) $(GODEBUG) go test -cover -race ./
+
+test: tests-queues test-workers tests-top test-common test-example
 
 test-common:
 	@echo "======================================================================"
@@ -116,6 +123,7 @@ clean-cache:
 
 
 mock-gen:
+	$(LOADENV) ./bin/mockgen -package mmock github.com/iostrovok/conveyor/faces IWorkBench > ./faces/mmock/iworkbench_mock.go
 	$(LOADENV) ./bin/mockgen -package mmock github.com/iostrovok/conveyor/faces IConveyor > ./faces/mmock/iconveyor_mock.go
 	$(LOADENV) ./bin/mockgen -package mmock github.com/iostrovok/conveyor/faces IChan > ./faces/mmock/ichan_mock.go
 	$(LOADENV) ./bin/mockgen -package mmock github.com/iostrovok/conveyor/faces IInput> ./faces/mmock/iinput_mock.go

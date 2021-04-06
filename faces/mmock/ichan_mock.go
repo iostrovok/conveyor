@@ -131,7 +131,7 @@ func (mr *MockIChanMockRecorder) Len() *gomock.Call {
 }
 
 // Push mocks base method
-func (m *MockIChan) Push(arg0 faces.IItem) {
+func (m *MockIChan) Push(arg0 int) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "Push", arg0)
 }

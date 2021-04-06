@@ -22,6 +22,7 @@ import (
 	"github.com/iostrovok/conveyor/queues"
 	"github.com/iostrovok/conveyor/slavenode"
 	"github.com/iostrovok/conveyor/testobject"
+	"github.com/iostrovok/conveyor/workbench"
 	"github.com/iostrovok/conveyor/workers"
 	"github.com/iostrovok/conveyor/workerscounter"
 )
@@ -52,11 +53,14 @@ type data struct {
 	itemID    *int64
 	isRun     bool
 
-	lengthChannel int
-	chanType      faces.ChanType
-	errCh         faces.IChan
-	inCh          faces.IChan
-	outCh         faces.IChan
+	// storage for items
+	workBench faces.IWorkBench
+
+	workBranchLength int
+	chanType         faces.ChanType
+	errCh            faces.IChan
+	inCh             faces.IChan
+	outCh            faces.IChan
 
 	managerCounter     int
 	userFinalManager   faces.IManager // outside final manager
@@ -87,33 +91,34 @@ type data struct {
 }
 
 // New is a simple constructor.
-func New(chanLen int, chanType faces.ChanType, name string) faces.IConveyor {
+func New(workBranchLength int, chanType faces.ChanType, name string) faces.IConveyor {
 	c := &Conveyor{}
 
-	return c.Init(chanLen, chanType, name, testobject.Empty())
+	return c.Init(workBranchLength, chanType, name, testobject.Empty())
 }
 
 // NewTest is full constructor for accurate configuration in test mode.
-func NewTest(chanLen int, chanType faces.ChanType, name string, testObject faces.ITestObject) faces.IConveyor {
+func NewTest(workBranchLength int, chanType faces.ChanType, name string, testObject faces.ITestObject) faces.IConveyor {
 	c := &Conveyor{}
 
-	return c.Init(chanLen, chanType, name, testObject)
+	return c.Init(workBranchLength, chanType, name, testObject)
 }
 
 // Init is full constructor for accurate configuration.
-func (c *Conveyor) Init(chLen int, chType faces.ChanType, name string, testObject faces.ITestObject) faces.IConveyor {
+func (c *Conveyor) Init(workBranchLength int, chType faces.ChanType, name string, testObject faces.ITestObject) faces.IConveyor {
 	if name == "" {
 		name = uuid.New().String()
 	}
 
-	if chLen < 1 {
-		chLen = 1
+	if workBranchLength < 1 {
+		workBranchLength = 1
 	}
 
 	c.data = &data{
+		workBench:            workbench.New(workBranchLength),
 		clusterID:            name + "-" + strconv.FormatInt(time.Now().Unix(), 10),
 		name:                 name,
-		lengthChannel:        chLen,
+		workBranchLength:     workBranchLength,
 		chanType:             chType,
 		workerGroup:          &sync.WaitGroup{},
 		errorGroup:           &sync.WaitGroup{},
@@ -130,9 +135,9 @@ func (c *Conveyor) Init(chLen int, chType faces.ChanType, name string, testObjec
 		testObject:      testObject,
 	}
 
-	c.data.outCh = queues.New(chLen, chType)
-	c.data.inCh = queues.New(chLen, chType)
-	c.data.errCh = queues.New(chLen, chType)
+	c.data.outCh = queues.New(c.data.workBench, chType)
+	c.data.inCh = queues.New(c.data.workBench, chType)
+	c.data.errCh = queues.New(c.data.workBench, chType)
 
 	c.addSystemFinalHandler()
 
@@ -181,7 +186,7 @@ func (c *Conveyor) RunTest(i faces.IInput, testObject faces.ITestObject) {
 	// marker before pushing to first channel
 	it.PushedToChannel(c.data.firstWorkerManager.Name())
 	it.Start()
-	c.data.inCh.ChanIn() <- it
+	c.data.inCh.ChanIn() <- c.WorkBench().Add(it)
 }
 
 // Run creates the new item over interface and sends to conveyor.
@@ -191,7 +196,7 @@ func (c *Conveyor) Run(i faces.IInput) {
 	// marker before pushing to first channel
 	it.PushedToChannel(c.data.firstWorkerManager.Name())
 	it.Start()
-	c.data.inCh.ChanIn() <- it
+	c.data.inCh.ChanIn() <- c.WorkBench().Add(it)
 }
 
 // RunResTest creates the new item over interface, sends to conveyor and returns result.
@@ -220,11 +225,10 @@ func (c *Conveyor) _runRes(it faces.IItem) (interface{}, error) {
 	// marker before pushing to first channel
 	it.PushedToChannel(c.data.firstWorkerManager.Name())
 	it.Start()
-	c.data.inCh.ChanIn() <- it
+	c.data.inCh.ChanIn() <- c.WorkBench().Add(it)
 
 	select {
 	case <-ctx.Done():
-
 		return nil, errors.New("context is canceled in RunRes")
 	case it, ok := <-ch:
 		if !ok || it == nil {
@@ -550,7 +554,8 @@ func (c *Conveyor) AddFinalHandler(name faces.Name, minCount, maxCount int, hand
 	c.data.userFinalManager = workers.NewManager(
 		name,
 		faces.FinalManagerType,
-		c.data.lengthChannel,
+		c.data.workBench,
+		c.data.workBranchLength,
 		minCount,
 		maxCount,
 		c.data.tracer,
@@ -562,7 +567,7 @@ func (c *Conveyor) AddFinalHandler(name faces.Name, minCount, maxCount int, hand
 		SetWorkersCounter(c.data.workersCounter).
 		SetTestMode(c.data.testObject)
 
-	in := queues.New(c.data.lengthChannel, c.data.chanType)
+	in := queues.New(c.data.workBench, c.data.chanType)
 	c.data.systemFinalManager.SetNextManager(c.data.userFinalManager).SetChanOut(in).SetChanErr(in)
 	c.data.userFinalManager.SetPrevManager(c.data.systemFinalManager).SetChanIn(in)
 
@@ -584,7 +589,8 @@ func (c *Conveyor) addSystemFinalHandler() {
 	c.data.systemFinalManager = workers.NewManager(
 		defaultFinalName,
 		faces.FinalManagerType,
-		c.data.lengthChannel,
+		c.data.workBench,
+		c.data.workBranchLength,
 		1, 2, c.data.tracer,
 	).
 		SetHandler(handler).
@@ -615,7 +621,10 @@ func (c *Conveyor) AddHandler(name faces.Name, minCount, maxCount int, handler f
 
 	c.data.managerCounter++
 
-	next := workers.NewManager(name, faces.WorkerManagerType, c.data.lengthChannel, minCount, maxCount, c.data.tracer).
+	next := workers.NewManager(
+		name, faces.WorkerManagerType, c.data.workBench,
+		c.data.workBranchLength, minCount, maxCount, c.data.tracer,
+	).
 		SetHandler(handler).
 		SetChanErr(c.data.errCh).
 		SetWaitGroup(c.data.workerGroup).
@@ -624,7 +633,7 @@ func (c *Conveyor) AddHandler(name faces.Name, minCount, maxCount int, handler f
 		SetTestMode(c.data.testObject)
 
 	if c.data.lastWorkerManager != nil {
-		in := queues.New(c.data.lengthChannel, c.data.chanType)
+		in := queues.New(c.data.workBench, c.data.chanType)
 		c.data.lastWorkerManager.SetNextManager(next).SetChanOut(in)
 		next.SetPrevManager(c.data.lastWorkerManager).SetChanIn(in)
 	}
@@ -658,7 +667,8 @@ func (c *Conveyor) AddErrorHandler(manageName faces.Name, minCount, maxCount int
 	next := workers.NewManager(
 		manageName,
 		faces.ErrorManagerType,
-		c.data.lengthChannel,
+		c.data.workBench,
+		c.data.workBranchLength,
 		minCount, maxCount,
 		c.data.tracer,
 	).
@@ -669,7 +679,7 @@ func (c *Conveyor) AddErrorHandler(manageName faces.Name, minCount, maxCount int
 		SetTestMode(c.data.testObject)
 
 	if c.data.lastErrorManager != nil {
-		in := queues.New(c.data.lengthChannel, c.data.chanType)
+		in := queues.New(c.data.workBench, c.data.chanType)
 		c.data.lastErrorManager.SetNextManager(next).SetChanOut(in).SetChanErr(in)
 		next.SetPrevManager(c.data.lastErrorManager).SetChanIn(in)
 	}
@@ -732,4 +742,9 @@ func (c *Conveyor) Statistic() *nodes.SlaveNodeInfoRequest {
 	}
 
 	return out
+}
+
+// WorkBench is a simple getter
+func (c *Conveyor) WorkBench() faces.IWorkBench {
+	return c.data.workBench
 }

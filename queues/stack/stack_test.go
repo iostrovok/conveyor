@@ -5,6 +5,8 @@ package stack_test
 import (
 	"context"
 	"crypto/rand"
+	"github.com/iostrovok/conveyor/faces"
+	"github.com/iostrovok/conveyor/workbench"
 	"math/big"
 	"sync"
 	"testing"
@@ -30,14 +32,15 @@ const (
 )
 
 func (s *testSuite) TestStepBystep(c *C) {
+	wb := workbench.New(1000)
 	st := stack.Init(context.Background(), lastID+10)
 	for i := 0; i < lastID; i++ {
 		it := item.New(context.Background(), nil)
 		it.SetID(int64(i))
-		st.ChanIn() <- it
+		st.ChanIn() <- wb.Add(it)
 	}
 
-	success, total := readTestData(st)
+	success, total := readTestData(wb, st)
 
 	c.Assert(total, Equals, lastID)
 	c.Logf("success: %d, total: %d\n", success, total)
@@ -46,7 +49,7 @@ func (s *testSuite) TestStepBystep(c *C) {
 
 func (s *testSuite) TestInTheSameTime(c *C) {
 	st := stack.Init(context.Background(), lastID+10)
-
+	wb := workbench.New(1000)
 	wg := &sync.WaitGroup{}
 	wg.Add(2)
 	go func() {
@@ -54,7 +57,7 @@ func (s *testSuite) TestInTheSameTime(c *C) {
 		for i := 0; i < lastID; i++ {
 			it := item.New(context.Background(), nil)
 			it.SetID(int64(i))
-			st.ChanIn() <- it
+			st.ChanIn() <- wb.Add(it)
 			k, _ := rand.Int(rand.Reader, big.NewInt(5))
 			time.Sleep(time.Duration(k.Int64()) * time.Millisecond)
 		}
@@ -66,11 +69,16 @@ func (s *testSuite) TestInTheSameTime(c *C) {
 		defer wg.Done()
 		for {
 			select {
-			case it, ok := <-st.ChanOut():
+			case i, ok := <-st.ChanOut():
 				if !ok {
 					return
 				}
 				total++
+
+				it, err := wb.Get(i)
+				if err != nil {
+					continue
+				}
 
 				id := int(it.GetID())
 				if last == -1 {
@@ -100,19 +108,25 @@ func (s *testSuite) TestInTheSameTime(c *C) {
 	c.Assert(float32(success) >= 0.90*float32(total), Equals, true)
 }
 
-func readTestData(st *stack.Stack) (int, int) {
+func readTestData(wb faces.IWorkBench, st *stack.Stack) (int, int) {
 	success := 0
 	last := -1
 	total := 0
 	for {
 		select {
-		case it, ok := <-st.ChanOut():
+		case i, ok := <-st.ChanOut():
 			if !ok {
 				return success, total
 			}
 			total++
 
+			it, err := wb.Get(i)
+			if err != nil {
+				continue
+			}
+
 			id := int(it.GetID())
+
 			if last == -1 {
 				last = id
 

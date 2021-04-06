@@ -101,7 +101,6 @@ func (m *SystemFinalHandler) Stop(_ context.Context) {
 	closeFunc := func(key int64, res *oneResult) bool {
 		close(res.ch)
 		res.ch = nil
-
 		return true
 	}
 
@@ -116,7 +115,6 @@ func runOne(res *oneResult, item faces.IItem) {
 	case res.ch <- item: /* nothing */
 	case <-res.ctx.Done(): /* nothing */
 	case <-time.After(time.Minute): /* nothing */
-	default: /* nothing */
 	}
 
 	// Out of sight, out of mind
@@ -127,6 +125,7 @@ func runOne(res *oneResult, item faces.IItem) {
 // Run is an interface method.
 // Check the uniq id of item and returns the result if it's necessary.
 func (m *SystemFinalHandler) Run(item faces.IItem) error {
+
 	id := item.GetID()
 	if value, loaded := allResults.LoadAndDelete(id); loaded {
 		go runOne(value, item)

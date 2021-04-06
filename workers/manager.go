@@ -26,6 +26,9 @@ const (
 type Manager struct {
 	sync.RWMutex
 
+	// global storage for items
+	workBench faces.IWorkBench
+
 	minCount, maxCount int
 	workerCounter      int
 	lengthChannel      int
@@ -67,7 +70,7 @@ type Manager struct {
 */
 
 // NewManager is a constructor.
-func NewManager(name faces.Name, typ faces.ManagerType, lengthCh, minC, maxC int, tr faces.ITrace) faces.IManager {
+func NewManager(name faces.Name, typ faces.ManagerType, wb faces.IWorkBench, lengthCh, minC, maxC int, tr faces.ITrace) faces.IManager {
 	return &Manager{
 		typ:                  typ,
 		name:                 name,
@@ -80,6 +83,7 @@ func NewManager(name faces.Name, typ faces.ManagerType, lengthCh, minC, maxC int
 		metricPeriodDuration: defaultMetricPeriodInSecond,
 		tracer:               tr,
 		activeWorkers:        new(int32),
+		workBench:            wb,
 	}
 }
 
@@ -393,7 +397,7 @@ func (m *Manager) addOneWorker() error {
 
 	m.logf("addOneWorker: %s", workerName)
 
-	w, err := NewWorker(workerName, m.name, m.in, m.out, m.errCh, m.handler, m.wgLocal, m.tracer, m.activeWorkers)
+	w, err := NewWorker(workerName, m.name, m.workBench, m.in, m.out, m.errCh, m.handler, m.wgLocal, m.tracer, m.activeWorkers)
 	if err != nil {
 		return err
 	}

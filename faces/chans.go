@@ -8,7 +8,7 @@ import (
 
 type (
 	// MainCh is a global type.
-	MainCh chan IItem
+	MainCh chan int
 
 	// ChanType is a global type.
 	ChanType nodes.ChanType
@@ -27,14 +27,20 @@ const (
 
 // IChan is interface for support queue oin conveyor.
 type IChan interface {
-	// Return
-	ChanIn() MainCh
-	ChanOut() MainCh
-	Push(IItem)
 
+	// ChanIn returns reference to input channel.
+	ChanIn() MainCh
+	// ChanOut returns reference to output channel.
+	ChanOut() MainCh
+
+	// Push adds item index to queue.
+	Push(int)
 	Close()
 	IsActive() bool
+	// Count returns the number of items in the stack channel.
 	Count() int
+	// Len returns the max available number items in the stack channel.
 	Len() int
+
 	Info() *nodes.ChanData
 }
