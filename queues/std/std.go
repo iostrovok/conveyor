@@ -20,9 +20,9 @@ func New(length int) faces.IChan {
 	}
 }
 
-// Push adds item to queue.
-func (c *Chan) Push(item faces.IItem) {
-	c.ch <- item
+// Push adds item index to queue.
+func (c *Chan) Push(i int) {
+	c.ch <- i
 }
 
 // IsActive is a simple getter.
@@ -30,22 +30,22 @@ func (c *Chan) IsActive() bool {
 	return c.isActive
 }
 
-// Len returns the max available number items in the stack.
+// Len returns the max available number items in the stack channel.
 func (c *Chan) Len() int {
 	return cap(c.ch)
 }
 
-// ChanIn return reference to input channel.
+// ChanIn returns reference to input channel.
 func (c *Chan) ChanIn() faces.MainCh {
 	return c.ch
 }
 
-// ChanOut return reference to output channel.
+// ChanOut returns reference to output channel.
 func (c *Chan) ChanOut() faces.MainCh {
 	return c.ch
 }
 
-// Count returns the number of items in the stack.
+// Count returns the number of items in the stack channel.
 func (c *Chan) Count() int {
 	return len(c.ch)
 }

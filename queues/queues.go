@@ -2,8 +2,8 @@
 Package queues implements the IChan interface and provides 3 simples realization of them.
 
 - standard GO channel FIFO, the fastest realization
-- priority queues
 - stack, LIFO
+- priority queues
 */
 package queues
 
@@ -15,14 +15,17 @@ import (
 )
 
 // New is a wrapper over selected type of queues.
-func New(lengthChannel int, chanType faces.ChanType) faces.IChan {
+func New(wb faces.IWorkBench, chanType faces.ChanType) faces.IChan {
+
+	lengthChannel := wb.Len() + 1
+
 	switch chanType {
 	case faces.ChanStdGo:
 		return std.New(lengthChannel)
 	case faces.ChanStack:
 		return stack.New(lengthChannel)
 	case faces.ChaPriorityQueue:
-		return priorityqueue.New(lengthChannel)
+		return priorityqueue.New(wb, lengthChannel)
 	}
 
 	return nil

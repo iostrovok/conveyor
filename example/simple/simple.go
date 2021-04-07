@@ -16,8 +16,8 @@ import (
 )
 
 var (
-	total       = 20
-	totalOnline = 5
+	total       = 50
+	totalOnline = 10
 )
 
 const (
@@ -179,7 +179,7 @@ func Fourth(name faces.Name) (faces.IHandler, error) {
 
 // TickerRun does nothing. Just for print info about action.
 func (m *MySimpleHandler) TickerRun(_ context.Context) {
-	fmt.Printf("MySimpleHandler: TickerRun: %s!\n", m.name)
+	//fmt.Printf("MySimpleHandler: TickerRun: %s!\n", m.name)
 }
 
 // TickerDuration return 1 second.
@@ -212,8 +212,8 @@ func (m *MySimpleHandler) Run(item faces.IItem) error {
 
 	// should it do something special-2?
 	if item.GetID()%5 == 0 && m.name == FirstHandler {
-		fmt.Printf("Global ID: %d. setSkipToName: %s\n", item.GetID(), FirstHandler)
-		item.SetSkipToName(FirstHandler)
+			fmt.Printf("Global ID: %d. setSkipToName: %s\n", item.GetID(), FourthHandler)
+		item.SetSkipToName(FourthHandler)
 	}
 
 	return nil
@@ -281,6 +281,12 @@ func main() {
 
 		myMaster.Run(item)
 	}
+
+
+	fmt.Printf("\n\n-------------------------------\n\n")
+	fmt.Printf("START ONLINE\n")
+	fmt.Printf("\n\n-------------------------------\n\n")
+
 
 	for i := total; i < totalOnline+total; i++ {
 		// process one message "online" with reading result

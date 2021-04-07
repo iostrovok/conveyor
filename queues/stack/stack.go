@@ -17,7 +17,7 @@ type Stack struct {
 	last  int
 	chIn  faces.MainCh
 	chOut faces.MainCh
-	body  []faces.IItem
+	body  []int
 	cond  chan struct{}
 
 	isActive bool
@@ -35,10 +35,14 @@ func Init(ctx context.Context, limit int) *Stack {
 		chOut: make(faces.MainCh, 1),
 		limit: limit,
 		last:  0,
-		body:  make([]faces.IItem, limit+1, limit+1),
+		body:  make([]int, limit+1, limit+1),
 		cond:  make(chan struct{}, limit+1),
 
 		isActive: true,
+	}
+
+	for i := range stack.body {
+		stack.body[i] = -1
 	}
 
 	go stack.runIn(ctx)
@@ -47,9 +51,9 @@ func Init(ctx context.Context, limit int) *Stack {
 	return stack
 }
 
-// Push adds item to queue.
-func (stack *Stack) Push(item faces.IItem) {
-	stack.chIn <- item
+// Push adds item index to queue.
+func (stack *Stack) Push(i int) {
+	stack.chIn <- i
 }
 
 // Close stops the queue.
@@ -59,7 +63,7 @@ func (stack *Stack) Close() {
 	close(stack.chIn)
 }
 
-// Count returns the number of items in the stack.
+// Count returns the number of items in the stack channel.
 func (stack *Stack) Count() int {
 	return stack.last
 }
@@ -69,17 +73,17 @@ func (stack *Stack) IsActive() bool {
 	return stack.isActive
 }
 
-// Len returns the max available number items in the stack.
+// Len returns the max available number items in the stack channel.
 func (stack *Stack) Len() int {
 	return stack.limit
 }
 
-// ChanIn return reference to input channel.
+// ChanIn returns reference to input channel.
 func (stack *Stack) ChanIn() faces.MainCh {
 	return stack.chIn
 }
 
-// ChanOut return reference to output channel.
+// ChanOut returns reference to output channel.
 func (stack *Stack) ChanOut() faces.MainCh {
 	return stack.chOut
 }
@@ -126,9 +130,10 @@ func (stack *Stack) runOut(ctx context.Context) {
 			stack.Lock()
 			stack.last--
 			x := stack.body[stack.last]
+			stack.body[stack.last] = -1
 			stack.Unlock()
 
-			if x != nil {
+			if x > -1 {
 				select {
 				case <-ctx.Done():
 					return

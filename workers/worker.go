@@ -25,6 +25,9 @@ const (
 type Worker struct {
 	sync.RWMutex
 
+	// global storage for items
+	workBench faces.IWorkBench
+
 	isLast        bool
 	isStarted     bool
 	globalStop    bool
@@ -50,7 +53,7 @@ type Worker struct {
 }
 
 // NewWorker is constructor.
-func NewWorker(id string, name faces.Name, in, out, errCh faces.IChan, giveBirth faces.GiveBirth,
+func NewWorker(id string, name faces.Name, wb faces.IWorkBench, in, out, errCh faces.IChan, giveBirth faces.GiveBirth,
 	wg *sync.WaitGroup, tr faces.ITrace, activeWorkers *int32) (faces.IWorker, error) {
 	handler, err := giveBirth(name)
 	if err != nil {
@@ -72,6 +75,8 @@ func NewWorker(id string, name faces.Name, in, out, errCh faces.IChan, giveBirth
 		tracer: tr,
 
 		testObject: testobject.Empty(),
+
+		workBench: wb,
 	}, nil
 }
 
@@ -234,23 +239,37 @@ func (w *Worker) job(ctx context.Context) {
 			case <-ticker.C:
 				w.logf("%s ticker is running", w.id)
 				w.handler.TickerRun(ctx)
-			case item, ok := <-w.in.ChanOut():
+			case i, ok := <-w.in.ChanOut():
 				if !ok {
 					w.logf("%s channel in is close", w.id)
 
 					return
 				}
 
-				item.ReceivedFromChannel()
-				item.BeforeProcess(w.name)
-				item.LogTraceFinishTimef("[%s] time in chan", w.name)
-				w.process(ctx, item)
+				if item, err := w.workBench.Get(i); err == nil {
+					item.ReceivedFromChannel()
+					item.BeforeProcess(w.name)
+					item.LogTraceFinishTimef("[%s] time in chan", w.name)
+					nextCh, nextName := w.process(ctx, i, item)
+					if nextName != "" {
+						item.PushedToChannel(nextName)
+					}
+
+					// send to next manager or return index to workBench
+					if nextCh != nil {
+						nextCh.Push(i)
+					} else {
+						w.workBench.Clean(i)
+					}
+				} else {
+					w.logf("%s gets error for %d workBench.Get: %s", w.id, i, err.Error())
+				}
 			}
 		}
 	}(time.NewTicker(dur))
 }
 
-func (w *Worker) process(ctx context.Context, item faces.IItem) {
+func (w *Worker) process(ctx context.Context, index int, item faces.IItem) (faces.IChan, faces.Name) {
 	// set up which handler was last.
 	item.SetLastHandler(w.name)
 
@@ -262,12 +281,13 @@ func (w *Worker) process(ctx context.Context, item faces.IItem) {
 		item.AfterProcess(w.name, err)
 
 		if !w.isLast && w.typ != faces.FinalManagerType {
-			item.PushedToChannel(faces.ErrorName)
+			//item.PushedToChannel(faces.ErrorName)
+			return w.errCh, faces.ErrorName
 		}
 
-		pushToNotNilChan(w.errCh, item)
+		//pushToNotNilChan(w.errCh, index)
 
-		return
+		return w.errCh, ""
 	}
 
 	if find {
@@ -275,19 +295,23 @@ func (w *Worker) process(ctx context.Context, item faces.IItem) {
 
 		// needed handler is not found
 		if !w.isLast && w.typ != faces.FinalManagerType {
-			item.PushedToChannel(w.nextManagerName)
+			//item.PushedToChannel(w.nextManagerName)
+
+			return w.out, w.nextManagerName
 		}
 
-		pushToNotNilChan(w.out, item)
+		//pushToNotNilChan(w.out, index)
 
-		return
+		return w.out, ""
 	}
 
 	// main action
 	err = w.run(ctx, item)
 	logError(w.name, err, item)
 	item.AfterProcess(w.name, err)
-	w.debriefingOfFlight(err, item)
+	return w.checkDebriefingOfFlight(err)
+
+	//w.debriefingOfFlight(err, item)
 }
 
 func doit(internalErr chan error, handler faces.IHandler, item faces.IItem) {
@@ -381,29 +405,21 @@ func logError(name faces.Name, err error, item faces.IItem) {
 	item.AddError(err)
 }
 
-func (w *Worker) debriefingOfFlight(err error, item faces.IItem) {
+func (w *Worker) checkDebriefingOfFlight(err error) (faces.IChan, faces.Name) {
 	switch w.typ {
 	case faces.FinalManagerType:
 		if !w.isLast {
-			item.PushedToChannel(w.nextManagerName)
-			pushToNotNilChan(w.out, item)
+			return w.out, w.nextManagerName
 		}
 	case faces.ErrorManagerType:
-		item.PushedToChannel(faces.ErrorName)
-		pushToNotNilChan(w.out, item)
+		return w.out, faces.ErrorName
 	case faces.WorkerManagerType:
 		if err == nil {
-			item.PushedToChannel(w.nextManagerName)
-			pushToNotNilChan(w.out, item)
+			return w.out, w.nextManagerName
 		} else {
-			item.PushedToChannel(faces.ErrorName)
-			pushToNotNilChan(w.errCh, item)
+			return w.errCh, faces.ErrorName
 		}
 	}
-}
 
-func pushToNotNilChan(ch faces.IChan, item faces.IItem) {
-	if ch != nil {
-		ch.Push(item)
-	}
+	return nil, ""
 }

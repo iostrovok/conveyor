@@ -29,28 +29,34 @@ type PQ struct {
 	last  int
 	chIn  faces.MainCh
 	chOut faces.MainCh
-	body  []faces.IItem
+	body  []int
 	cond  chan struct{}
+	wb    faces.IWorkBench
 
 	isActive bool
 }
 
 // New is a constructor, creates a new stack.
-func New(length int) faces.IChan {
-	return Init(context.Background(), length)
+func New(wb faces.IWorkBench, length int) faces.IChan {
+	return Init(context.Background(), wb, length)
 }
 
 // Init is full constructor for accurate configuration.
-func Init(ctx context.Context, limit int) *PQ {
+func Init(ctx context.Context, wb faces.IWorkBench, limit int) *PQ {
 	stack := &PQ{
 		chIn:  make(faces.MainCh, 1),
 		chOut: make(faces.MainCh, 1),
 		limit: limit,
 		last:  0,
-		body:  make([]faces.IItem, limit+1, limit+1),
+		body:  make([]int, limit+1, limit+1),
 		cond:  make(chan struct{}, limit-1),
 
 		isActive: true,
+		wb:       wb,
+	}
+
+	for i := range stack.body {
+		stack.body[i] = -1
 	}
 
 	go stack.runIn(ctx)
@@ -64,32 +70,29 @@ func (pq *PQ) Print() string {
 	pq.Lock()
 	defer pq.Unlock()
 
-	return PrintBody(pq.body, pq.last)
-}
-
-// PrintBody is helper for tests, don't use it for production.
-func PrintBody(body []faces.IItem, last int) string {
-	out := make([]string, last)
-	for i := 0; i < last; i++ {
-		item := body[i]
-		out[i] = strconv.Itoa(i) + "] " + strconv.FormatInt(item.GetID(), 10) + " => " +
-			strconv.Itoa(item.GetPriority())
+	out := make([]string, pq.last)
+	for i := 0; i < pq.last; i++ {
+		item, err := pq.wb.Get(pq.body[i])
+		if err == nil {
+			out[i] = strconv.Itoa(i) + "] " + strconv.FormatInt(item.GetID(), 10) + " => " +
+				strconv.Itoa(item.GetPriority())
+		}
 	}
 
 	return strings.Join(out, "\n")
 }
 
 // Body is debug function.
-func (pq *PQ) Body() []faces.IItem {
+func (pq *PQ) Body() []int {
 	pq.Lock()
 	defer pq.Unlock()
 
 	return pq.body
 }
 
-// Push adds item to queue.
-func (pq *PQ) Push(item faces.IItem) {
-	pq.chIn <- item
+// Push adds item index to queue.
+func (pq *PQ) Push(i int) {
+	pq.chIn <- i
 }
 
 // Close stops the queue.
@@ -99,7 +102,7 @@ func (pq *PQ) Close() {
 	close(pq.chIn)
 }
 
-// Count returns the number of items in the stack.
+// Count returns the number of items in the stack channel.
 func (pq *PQ) Count() int {
 	return pq.last
 }
@@ -109,22 +112,22 @@ func (pq *PQ) IsActive() bool {
 	return pq.isActive
 }
 
-// Len returns the max available number items in the stack.
+// Len returns the max available number items in the stack channel.
 func (pq *PQ) Len() int {
 	return pq.limit
 }
 
-// ChanIn return reference to input channel.
+// ChanIn returns reference to input channel.
 func (pq *PQ) ChanIn() faces.MainCh {
 	return pq.chIn
 }
 
-// ChanOut return reference to output channel.
+// ChanOut returns reference to output channel.
 func (pq *PQ) ChanOut() faces.MainCh {
 	return pq.chOut
 }
 
-// Pop the top item of the stack and return it.
+// runIn gets the item index and save it in queue
 func (pq *PQ) runIn(ctx context.Context) {
 	for {
 		select {
@@ -151,7 +154,7 @@ func (pq *PQ) runIn(ctx context.Context) {
 	}
 }
 
-// Pop the top item of the stack and return it.
+// runOut pops the top item of the queue and returns it.
 func (pq *PQ) runOut(ctx context.Context) {
 	sent := 0
 	for {
@@ -168,9 +171,10 @@ func (pq *PQ) runOut(ctx context.Context) {
 			pq.Lock()
 			pq.last--
 			x := pq.body[pq.last]
+			pq.body[pq.last] = 1 // just clean
 			pq.Unlock()
 
-			if x != nil {
+			if x > -1 {
 				sent++
 				select {
 				case <-ctx.Done():
@@ -183,7 +187,7 @@ func (pq *PQ) runOut(ctx context.Context) {
 }
 
 // Pop the top item of the stack and return it.
-func (pq *PQ) insert(x faces.IItem) {
+func (pq *PQ) insert(x int) {
 	pq.Lock()
 	defer func() {
 		pq.last++
@@ -196,9 +200,9 @@ func (pq *PQ) insert(x faces.IItem) {
 		return
 	}
 
-	p := x.GetPriority()
+	p := pq.wb.GetPriority(x)
 	if pq.last == 1 {
-		if pq.body[0].GetPriority() >= p {
+		if pq.wb.GetPriority(0) >= p {
 			pq.body[0], pq.body[1] = x, pq.body[0]
 		} else {
 			pq.body[1] = x
@@ -207,19 +211,19 @@ func (pq *PQ) insert(x faces.IItem) {
 		return
 	}
 
-	if pq.body[0].GetPriority() >= p {
+	if pq.wb.GetPriority(0) >= p {
 		insertToArray(&(pq.body), x, 0)
 
 		return
 	}
 
-	if pq.body[pq.last-1].GetPriority() <= p {
+	if pq.wb.GetPriority(pq.last-1) <= p {
 		pq.body[pq.last] = x
 
 		return
 	}
 
-	position := findPosition(pq.body, x.GetPriority(), pq.last)
+	position := findPosition(pq.wb, pq.wb.GetPriority(x), pq.last)
 	if position == pq.last {
 		pq.body[pq.last] = x
 	} else {
@@ -228,47 +232,48 @@ func (pq *PQ) insert(x faces.IItem) {
 }
 
 // findPosition is a simple binary search.
-func findPosition(array []faces.IItem, priority int, last int) int {
-	last--
+func findPosition(wb faces.IWorkBench, priority int, lastItemIndex int) int {
+	lastItemIndex--
 
-	if priority >= array[last].GetPriority() {
-		return last + 1
+	if priority >= wb.GetPriority(lastItemIndex) {
+		return lastItemIndex + 1
 	}
 
-	if priority <= array[0].GetPriority() {
+	if priority <= wb.GetPriority(0) {
 		return 0
 	}
 
 	first, mid := 0, 0
 
 forLoop:
-	for first <= last {
-		mid = (first + last) / half // half == 2
+	for first <= lastItemIndex {
+		mid = (first + lastItemIndex) / half // half == 2
 
+		p := wb.GetPriority(mid)
 		switch {
-		case array[mid].GetPriority() == priority:
+		case p == priority:
 			break forLoop
-		case array[mid].GetPriority() < priority:
+		case p < priority:
 			first = mid + 1
 		default:
-			last = mid - 1
+			lastItemIndex = mid - 1
 		}
 	}
 
 	// adjust for not equally priority
-	if array[mid].GetPriority() < priority {
+	if wb.GetPriority(mid) < priority {
 		return mid + 1
 	}
 
 	return mid
 }
 
-func insertToArray(array *[]faces.IItem, item faces.IItem, position int) {
+func insertToArray(array *[]int, itemIndex int, position int) {
 	// shift values
 	copy((*array)[position+1:], (*array)[position:])
 
 	// insert value
-	(*array)[position] = item
+	(*array)[position] = itemIndex
 }
 
 // Info returns the information about current stage of queue.

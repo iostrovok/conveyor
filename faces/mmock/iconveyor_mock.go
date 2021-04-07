@@ -305,3 +305,17 @@ func (mr *MockIConveyorMockRecorder) WaitAndStop() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WaitAndStop", reflect.TypeOf((*MockIConveyor)(nil).WaitAndStop))
 }
+
+// WorkBench mocks base method
+func (m *MockIConveyor) WorkBench() faces.IWorkBench {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "WorkBench")
+	ret0, _ := ret[0].(faces.IWorkBench)
+	return ret0
+}
+
+// WorkBench indicates an expected call of WorkBench
+func (mr *MockIConveyorMockRecorder) WorkBench() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WorkBench", reflect.TypeOf((*MockIConveyor)(nil).WorkBench))
+}
