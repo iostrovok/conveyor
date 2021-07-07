@@ -51,6 +51,11 @@ type IItem interface {
 	SetLastHandler(handlerName Name)
 	GetLastHandler() Name
 
+	// Stopped sets up that item should only be processed by the Final or Error Handlers
+	Stopped()
+	// IsStopped indicates that item should only be processed by the Final or Error Handlers
+	IsStopped() bool
+
 	// Using for test mode only
 	GetTestObject() ITestObject
 	SetTestObject(ITestObject)
