@@ -367,10 +367,15 @@ func (w *Worker) run(ctx context.Context, item faces.IItem) error {
 
 	internalErr := make(chan error, 1)
 
-	if item.GetTestObject() == nil || !item.GetTestObject().IsTestMode() {
-		go doit(internalErr, w.handler, item)
+	if item.IsStopped() && w.typ == faces.WorkerManagerType {
+		// IsStopped indicates that item should only be processed by the Final or Error Handlers
+		internalErr <- nil
 	} else {
-		go doitWithTest(internalErr, w.handler, item)
+		if item.GetTestObject() == nil || !item.GetTestObject().IsTestMode() {
+			go doit(internalErr, w.handler, item)
+		} else {
+			go doitWithTest(internalErr, w.handler, item)
+		}
 	}
 
 	var err error

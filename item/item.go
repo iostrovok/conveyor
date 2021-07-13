@@ -37,6 +37,7 @@ type Data struct {
 	lastHandler faces.Name
 	skipToName  faces.Name
 	skipNames   []faces.Name
+	stopped     bool
 
 	handlerNameWithError faces.Name
 	priority             int
@@ -283,6 +284,22 @@ func (i *Item) GetLastHandler() faces.Name {
 	defer i.RUnlock()
 
 	return i.data.lastHandler
+}
+
+// Stopped sets up that item should only be processed by the Final or Error Handlers
+func (i *Item) Stopped() {
+	i.Lock()
+	defer i.Unlock()
+
+	i.data.stopped = true
+}
+
+// IsStopped indicates that item should only be processed by the Final or Error Handlers
+func (i *Item) IsStopped() bool {
+	i.RLock()
+	defer i.RUnlock()
+
+	return i.data.stopped
 }
 
 // SetLastHandler sets the last handler name which processed the item.
