@@ -314,20 +314,20 @@ func (w *Worker) process(ctx context.Context, index int, item faces.IItem) (face
 	//w.debriefingOfFlight(err, item)
 }
 
-func doit(internalErr chan error, handler faces.IHandler, item faces.IItem) {
+func doit(internalErr chan error, handler faces.IHandler, workerName string, item faces.IItem) {
 	defer func() {
 		if e := recover(); e != nil {
-			internalErr <- errors.Errorf("%+v", e)
+			internalErr <- errors.Errorf("%s: %+v", workerName, e)
 		}
 	}()
 
 	internalErr <- handler.Run(item)
 }
 
-func doitWithTest(internalErr chan error, handler faces.IHandler, item faces.IItem) {
+func doitWithTest(internalErr chan error, handler faces.IHandler, workerName string, item faces.IItem) {
 	defer func() {
 		if e := recover(); e != nil {
-			internalErr <- errors.Errorf("%+v", e)
+			internalErr <- errors.Errorf("%s: %+v", workerName, e)
 		}
 	}()
 
@@ -372,9 +372,9 @@ func (w *Worker) run(ctx context.Context, item faces.IItem) error {
 		internalErr <- nil
 	} else {
 		if item.GetTestObject() == nil || !item.GetTestObject().IsTestMode() {
-			go doit(internalErr, w.handler, item)
+			go doit(internalErr, w.handler, w.Name(), item)
 		} else {
-			go doitWithTest(internalErr, w.handler, item)
+			go doitWithTest(internalErr, w.handler, w.Name(), item)
 		}
 	}
 
