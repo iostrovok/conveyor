@@ -314,7 +314,7 @@ func (w *Worker) process(ctx context.Context, index int, item faces.IItem) (face
 	//w.debriefingOfFlight(err, item)
 }
 
-func doit(internalErr chan error, handler faces.IHandler, workerName string, item faces.IItem) {
+func doit(internalErr chan error, handler faces.IHandler, workerName faces.Name, item faces.IItem) {
 	defer func() {
 		if e := recover(); e != nil {
 			internalErr <- errors.Errorf("%s: %+v", workerName, e)
@@ -324,7 +324,7 @@ func doit(internalErr chan error, handler faces.IHandler, workerName string, ite
 	internalErr <- handler.Run(item)
 }
 
-func doitWithTest(internalErr chan error, handler faces.IHandler, workerName string, item faces.IItem) {
+func doitWithTest(internalErr chan error, handler faces.IHandler, workerName faces.Name, item faces.IItem) {
 	defer func() {
 		if e := recover(); e != nil {
 			internalErr <- errors.Errorf("%s: %+v", workerName, e)
