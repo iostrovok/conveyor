@@ -258,6 +258,20 @@ func (mr *MockIItemMockRecorder) InitEmpty() *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "InitEmpty", reflect.TypeOf((*MockIItem)(nil).InitEmpty))
 }
 
+// IsStopped mocks base method
+func (m *MockIItem) IsStopped() bool {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "IsStopped")
+	ret0, _ := ret[0].(bool)
+	return ret0
+}
+
+// IsStopped indicates an expected call of IsStopped
+func (mr *MockIItemMockRecorder) IsStopped() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IsStopped", reflect.TypeOf((*MockIItem)(nil).IsStopped))
+}
+
 // LogTraceFinishTimef mocks base method
 func (m *MockIItem) LogTraceFinishTimef(arg0 string, arg1 ...interface{}) {
 	m.ctrl.T.Helper()
@@ -465,4 +479,16 @@ func (m *MockIItem) Start() {
 func (mr *MockIItemMockRecorder) Start() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Start", reflect.TypeOf((*MockIItem)(nil).Start))
+}
+
+// Stopped mocks base method
+func (m *MockIItem) Stopped() {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "Stopped")
+}
+
+// Stopped indicates an expected call of Stopped
+func (mr *MockIItemMockRecorder) Stopped() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Stopped", reflect.TypeOf((*MockIItem)(nil).Stopped))
 }
