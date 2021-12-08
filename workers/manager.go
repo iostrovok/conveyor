@@ -393,7 +393,7 @@ func (m *Manager) addOneWorker() error {
 	m.workerCounter++
 	workerName := string(m.name) + "-" + strconv.Itoa(m.workerCounter)
 
-	m.logf("addOneWorker: %s", workerName)
+	//m.logf("addOneWorker: %s", workerName)
 
 	w, err := NewWorker(workerName, m.name, m.workBench, m.in, m.out, m.errCh, m.handler, m.wgLocal, m.tracer, m.activeWorkers)
 	if err != nil {
