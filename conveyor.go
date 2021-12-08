@@ -605,7 +605,7 @@ func (c *Conveyor) AddHandler(name faces.Name, minCount, maxCount int, handler f
 	c.data.Lock()
 	defer c.data.Unlock()
 
-	c.logTracef("AddHandler %s", name)
+	//c.logTracef("AddHandler %s", name)
 	if name == "" {
 		return errors.New("handler name can not be empty")
 	}
@@ -648,7 +648,7 @@ func (c *Conveyor) AddErrorHandler(manageName faces.Name, minCount, maxCount int
 	c.data.Lock()
 	defer c.data.Unlock()
 
-	c.logTracef("AddErrorHandler %s", manageName)
+	//c.logTracef("AddErrorHandler %s", manageName)
 	if manageName == "" {
 		return errors.New("error handler name can not be empty")
 	}
