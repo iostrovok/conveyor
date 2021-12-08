@@ -5,7 +5,6 @@ package conveyor
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"strconv"
 	"sync"
@@ -537,10 +536,6 @@ func (c *Conveyor) checkUniqName(manageName faces.Name) error {
 func (c *Conveyor) AddFinalHandler(name faces.Name, minCount, maxCount int, handler faces.GiveBirth) error {
 	c.data.Lock()
 	defer c.data.Unlock()
-
-	fmt.Printf("\n\nAddFinalHandler!!!!!!!!!\n\n")
-
-	c.logTracef("AddFinalHandler")
 
 	if err := c.checkUniqName(name); err != nil {
 		return err

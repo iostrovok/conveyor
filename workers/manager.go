@@ -323,8 +323,6 @@ func (m *Manager) Start(ctx context.Context) error {
 		return nil
 	}
 
-	m.logf("[%s] is started", m.name)
-
 	m.ctx = ctx
 
 	if len(m.workers) >= m.minCount {

@@ -187,5 +187,5 @@ docs-gen:
 
 test-example:
 	@echo "======================================================================"
-	@echo "Run race test for workers"
+	@echo "Run race test for example"
 	cd $(LOCDIR)/example/example-test-simple && $(DIR) $(GODEBUG) go test -cover -race ./

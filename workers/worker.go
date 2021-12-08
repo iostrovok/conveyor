@@ -220,8 +220,6 @@ func (w *Worker) job(ctx context.Context) {
 		}()
 
 		w.isStarted = true
-		w.logf("%s is started", w.id)
-
 		for {
 			if w.globalStop {
 				return
