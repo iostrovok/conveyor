@@ -57,7 +57,7 @@ func NewWorker(id string, name faces.Name, wb faces.IWorkBench, in, out, errCh f
 	wg *sync.WaitGroup, tr faces.ITrace, activeWorkers *int32) (faces.IWorker, error) {
 	handler, err := giveBirth(name)
 	if err != nil {
-		return nil, err
+		return nil, errors.Wrapf(err, "NewWorker.giveBirth for %s", name)
 	}
 
 	return &Worker{

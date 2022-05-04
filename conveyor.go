@@ -521,7 +521,7 @@ func (c *Conveyor) WaitAndStop() {
 func (c *Conveyor) checkUniqName(manageName faces.Name) error {
 	for _, n := range c.data.uniqNames {
 		if n == manageName {
-			return errors.WithStack(errors.New("not uniq handler name '" + string(manageName) + "'"))
+			return errors.New("not uniq handler name '" + string(manageName) + "'")
 		}
 	}
 
