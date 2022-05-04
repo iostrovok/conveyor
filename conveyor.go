@@ -420,7 +420,7 @@ func (c *Conveyor) Start(ctx context.Context) error {
 	// adds default error manager if it's necessary
 	if c.data.firstErrorManager == nil {
 		if err := c.AddErrorHandler(defaultErrorName, 1, 2, faces.MakeEmptyHandler); err != nil {
-			return err
+			return errors.Wrapf(err, "Manager.AddErrorHandler for %s", defaultErrorName)
 		}
 	}
 
@@ -444,7 +444,7 @@ func (c *Conveyor) Start(ctx context.Context) error {
 		c.data.systemFinalManager, c.data.firstErrorManager, c.data.firstWorkerManager,
 	} {
 		if err := c.startGroup(first); err != nil {
-			return err
+			return errors.Wrapf(err, "Manager.startGroup for %s", first.Name())
 		}
 	}
 

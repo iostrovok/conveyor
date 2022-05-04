@@ -5,6 +5,7 @@ package workers
 
 import (
 	"context"
+	"github.com/pkg/errors"
 	"strconv"
 	"sync"
 	"sync/atomic"
@@ -332,7 +333,7 @@ func (m *Manager) Start(ctx context.Context) error {
 	// init workers
 	for i := len(m.workers); i < m.minCount; i++ {
 		if err := m.addOneWorker(); err != nil {
-			return err
+			return errors.Wrapf(err, "Manager.Start for %s", m.name)
 		}
 	}
 
